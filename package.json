@@ -1,0 +1,57 @@
+{
+  "name": "zero-ui",
+  "version": "1.0.0",
+  "description": "react ui components",
+  "main": "dist/lib/index",
+  "types": "dist/lib/index",
+  "scripts": {
+    "test": "cross-env NODE_ENV=test jest --config=jest.config.js --runInBand",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.dev.js",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
+    "ci": "cross-env NODE_ENV=test JEST_JUNIT_OUTPUT=./test-results/jest/results.xml jest --config=jest.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lalalazero/ZEROUI.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lalalazero/ZEROUI/issues"
+  },
+  "homepage": "https://github.com/lalalazero/ZEROUI#readme",
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.3.3",
+    "@types/jest": "^24.0.15",
+    "@types/react": "^16.8.23",
+    "@types/react-dom": "^16.8.4",
+    "@types/react-test-renderer": "^16.8.3",
+    "awesome-typescript-loader": "^5.2.1",
+    "babel-jest": "^24.8.0",
+    "cross-env": "^5.2.0",
+    "css-loader": "^3.1.0",
+    "csstype": "^2.6.6",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^24.8.0",
+    "jest-junit": "^7.0.0",
+    "node-sass": "^4.12.0",
+    "react-test-renderer": "^16.8.6",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "svg-sprite-loader": "^4.1.6",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.5.2",
+    "webpack": "4.29.6",
+    "webpack-cli": "3.2.3",
+    "webpack-dev-server": "^3.7.2"
+  },
+  "dependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  }
+}

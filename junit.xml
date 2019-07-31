@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="9" failures="0" time="6.41">
+  <testsuite name="icon 测试" errors="0" failures="0" skipped="0" timestamp="2019-07-31T14:01:44" time="3.954" tests="3">
+    <testcase classname="icon 测试 name = wechat" name="icon 测试 name = wechat" time="0.014">
+    </testcase>
+    <testcase classname="icon 测试 onClick event" name="icon 测试 onClick event" time="0.047">
+    </testcase>
+    <testcase classname="icon 测试 onClick event, jest.fn() 测试" name="icon 测试 onClick event, jest.fn() 测试" time="0.004">
+    </testcase>
+  </testsuite>
+  <testsuite name="classnames 测试" errors="0" failures="0" skipped="0" timestamp="2019-07-31T14:01:48" time="0.32" tests="4">
+    <testcase classname="classnames 测试 接受1个 classname" name="classnames 测试 接受1个 classname" time="0.002">
+    </testcase>
+    <testcase classname="classnames 测试 接受2个 classnames" name="classnames 测试 接受2个 classnames" time="0">
+    </testcase>
+    <testcase classname="classnames 测试 接受 undefined" name="classnames 测试 接受 undefined" time="0.001">
+    </testcase>
+    <testcase classname="classnames 测试 什么都不传" name="classnames 测试 什么都不传" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="button 测试" errors="0" failures="0" skipped="0" timestamp="2019-07-31T14:01:48" time="0.479" tests="1">
+    <testcase classname="button 测试 是个div" name="button 测试 是个div" time="0.003">
+    </testcase>
+  </testsuite>
+  <testsuite name="我的第一个测试" errors="0" failures="0" skipped="0" timestamp="2019-07-31T14:01:49" time="0.356" tests="1">
+    <testcase classname="我的第一个测试 ok" name="我的第一个测试 ok" time="0.002">
+    </testcase>
+  </testsuite>
+</testsuites>
