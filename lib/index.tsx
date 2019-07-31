@@ -12,4 +12,5 @@ ReactDOM.render(
             onMouseEnter={() => { console.log('enter') }}
             onMouseLeave={() => { console.log('leave') }}
         ></Icon>
+        <Icon name="alipay"></Icon>
     </div>, document.querySelector('#root'))
