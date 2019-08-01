@@ -1,9 +1,12 @@
 {
-  "name": "zero-ui",
-  "version": "1.0.0",
+  "name": "zeroui000",
+  "version": "0.0.2",
   "description": "react ui components",
   "main": "dist/lib/index",
   "types": "dist/lib/index",
+  "files": [
+    "/dist/**/*"
+  ],
   "scripts": {
     "test": "cross-env NODE_ENV=test jest --config=jest.config.js --runInBand",
     "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.dev.js",
@@ -14,7 +17,7 @@
     "type": "git",
     "url": "git+https://github.com/lalalazero/ZEROUI.git"
   },
-  "author": "",
+  "author": "lalalazero",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/lalalazero/ZEROUI/issues"
