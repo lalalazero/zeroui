@@ -1,7 +1,7 @@
 const path = require('path')
 module.exports = {
     entry: {
-        ZeroUI: './lib/index.tsx'
+        index: './lib/index.tsx'
     },
     output: {
         path: path.resolve(__dirname, 'dist/lib'),
