@@ -20,6 +20,7 @@ const Dialog: React.FunctionComponent<Props> = (props) => {
     }
     const onClickMask: React.MouseEventHandler = e => {
         if(props.maskClosable){
+            console.log('click mask...')
             props.onClose(e)
         }
     }
