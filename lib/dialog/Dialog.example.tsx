@@ -1,5 +1,7 @@
 import React, {ReactEventHandler, useState} from 'react'
 import Dialog from './Dialog'
+import './Dialog.example.scss'
+
 const DialogExample: React.FunctionComponent = () => {
     const [x, setX] = useState(false)
     const [y, setY] = useState(false)

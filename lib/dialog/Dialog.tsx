@@ -1,4 +1,5 @@
-import React, {Fragment, ReactElement} from 'react';
+import React, {Fragment,  ReactElement} from 'react';
+import ReactDOM from 'react-dom'
 import { Icon } from '../index'
 import { scopedClassMaker } from '../classes'
 import './Dialog.scss'
@@ -24,23 +25,22 @@ const Dialog: React.FunctionComponent<Props> = (props) => {
             props.onClose(e)
         }
     }
-    return (
-        props.visible ? <Fragment>
-            <div className={sc('mask')} onClick={onClickMask}></div>
-            <div className={sc('')}>
-                <div className={sc('close')} onClick={onClickClose}>
-                    <Icon name="alipay"></Icon>
-                </div>
-                <header className={sc('header')}>提示</header>
-                <main className={sc('main')}>
-                    { props.children }
-                </main>
-                <footer className={sc('footer')}>
-                    { props.buttons }
-                </footer>
+    const x = props.visible ? <Fragment>
+        <div className={sc('mask')} onClick={onClickMask}></div>
+        <div className={sc('')}>
+            <div className={sc('close')} onClick={onClickClose}>
+                <Icon name="alipay"></Icon>
             </div>
-        </Fragment> : null
-    )
+            <header className={sc('header')}>提示</header>
+            <main className={sc('main')}>
+                { props.children }
+            </main>
+            <footer className={sc('footer')}>
+                { props.buttons }
+            </footer>
+        </div>
+    </Fragment> : null
+    return ReactDOM.createPortal(x, document.body)
 }
 
 Dialog.defaultProps = {
