@@ -1,4 +1,4 @@
-import React, {Fragment,  ReactElement} from 'react';
+import React, {Fragment, ReactElement} from 'react';
 import ReactDOM from 'react-dom'
 import { Icon } from '../index'
 import { scopedClassMaker } from '../classes'
@@ -6,7 +6,7 @@ import './Dialog.scss'
 
 interface Props {
     visible: boolean,
-    buttons: Array<ReactElement>,
+    buttons?: Array<ReactElement>,
     onClose: React.MouseEventHandler,
     maskClosable?: boolean
 }
@@ -46,4 +46,18 @@ const Dialog: React.FunctionComponent<Props> = (props) => {
 Dialog.defaultProps = {
     maskClosable: true
 }
+
+const alert = (content:string) => {
+    const close = () => {
+        ReactDOM.render(React.cloneElement(component, { visible: false }), div)
+        ReactDOM.unmountComponentAtNode(div)
+        div.remove()
+    }
+    const component = <Dialog onClose={close} visible={true}>{ content }</Dialog>
+    const div = document.createElement('div')
+    document.body.appendChild(div)
+    ReactDOM.render(component, div)
+}
+
+export { alert }
 export default Dialog

@@ -1,5 +1,5 @@
 import React, {ReactEventHandler, useState} from 'react'
-import Dialog from './Dialog'
+import Dialog, { alert } from './Dialog'
 import './Dialog.example.scss'
 
 const DialogExample: React.FunctionComponent = () => {
@@ -9,7 +9,10 @@ const DialogExample: React.FunctionComponent = () => {
     const onCloseModal2: ReactEventHandler = e => setY(false)
     return (
         <div>
-            <div style={{ position:'relative' ,border: '1px solid red', zIndex: 999, color: 'red' }}>
+            <div>
+                <button onClick={() => alert('xxxx alert content')}>alert</button>
+            </div>
+            <div>
                 <h2>example dialog 1</h2>
                 <button onClick={() => setX(!x)}>点我</button>
                 <Dialog visible={x} buttons={
