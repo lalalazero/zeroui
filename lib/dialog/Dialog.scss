@@ -1,8 +1,7 @@
 .zeroUI-dialog {
   background: white;
   position: fixed;
-  width: 10em;
-  height: 10em;
+  min-width: 15em;
   border-radius: 4px;
   top: 50%;
   left: 50%;
@@ -14,5 +13,32 @@
     width: 100%;
     height: 100%;
     background: fade_out(black, 0.5);
+  }
+  &-header {
+    font-size: 22px;
+    padding: 8px 16px;
+    border-bottom: 1px solid gray;
+  }
+  &-main {
+    min-height: 6em;
+    padding: 8px 16px;
+  }
+  &-footer {
+    border-top: 1px solid gray;
+  }
+  &-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: white;
+    border: 1px solid red;
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 4px;
+    //transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
   }
 }
