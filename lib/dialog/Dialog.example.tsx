@@ -1,5 +1,5 @@
 import React, {ReactEventHandler, useState} from 'react'
-import Dialog, { alert } from './Dialog'
+import Dialog, { alert, confirm, modal } from './Dialog'
 import './Dialog.example.scss'
 
 const DialogExample: React.FunctionComponent = () => {
@@ -7,10 +7,27 @@ const DialogExample: React.FunctionComponent = () => {
     const [y, setY] = useState(false)
     const onCloseModal: ReactEventHandler = e => setX(false)
     const onCloseModal2: ReactEventHandler = e => setY(false)
+    const yesCallback = () => { console.log('yes callback..')}
+    const noCallback = () => { console.log('no callback..')}
+    const modalContent = <button
+        onClick={() => {console.log('modal button clicked.')}}>
+        button
+    </button>
     return (
         <div>
             <div>
+                <button onClick={() => modal(modalContent)}>
+                    modal
+                </button>
+            </div>
+            <div>
                 <button onClick={() => alert('xxxx alert content')}>alert</button>
+            </div>
+            <div>
+                <button onClick={() => confirm('confirm', yesCallback, noCallback)}>confirm</button>
+            </div>
+            <div>
+                <button onClick={() => confirm('confirm22222')}>confirm222</button>
             </div>
             <div>
                 <h2>example dialog 1</h2>

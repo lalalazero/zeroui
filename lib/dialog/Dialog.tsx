@@ -1,4 +1,4 @@
-import React, {Fragment, ReactElement} from 'react';
+import React, {Fragment, ReactElement, ReactFragment, ReactNode} from 'react';
 import ReactDOM from 'react-dom'
 import { Icon } from '../index'
 import { scopedClassMaker } from '../classes'
@@ -59,5 +59,45 @@ const alert = (content:string) => {
     ReactDOM.render(component, div)
 }
 
-export { alert }
+const confirm = (content:string, yes?: ()=>void, no?: ()=>void) => {
+    const close = () => {
+        ReactDOM.render(React.cloneElement(component, { visible: false }), div)
+        ReactDOM.unmountComponentAtNode(div)
+        div.remove()
+    }
+    const onYes = () => {
+        close()
+        yes && yes()
+    }
+    const onNo = () => {
+        close()
+        no && no()
+    }
+    const component = <Dialog onClose={close}
+                              visible={true}
+                              buttons={[<button key="1" onClick={onYes}>yes</button>,
+                                  <button key="2" onClick={onNo}>no</button>]}>
+        confirm ====> { content }
+    </Dialog>
+    const div = document.createElement('div')
+    document.body.appendChild(div)
+    ReactDOM.render(component, div)
+}
+// ReactElement 只能是标签 ReactNode 可以是字符串
+const modal = (content: ReactNode | ReactFragment) => {
+    const close = () => {
+        ReactDOM.render(React.cloneElement(component, { visible: false }), div)
+        ReactDOM.unmountComponentAtNode(div)
+        div.remove()
+    }
+    const component = <Dialog onClose={close}
+                              visible={true}>
+        { content }
+    </Dialog>
+    const div = document.createElement('div')
+    document.body.appendChild(div)
+    ReactDOM.render(component, div)
+}
+
+export { alert, confirm, modal }
 export default Dialog
