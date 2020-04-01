@@ -1,4 +1,4 @@
-import React, {Fragment, ReactElement, ReactFragment, ReactNode} from 'react';
+import React, {Fragment, ReactElement, ReactNode} from 'react';
 import ReactDOM from 'react-dom'
 import { Icon } from '../index'
 import { scopedClassMaker } from '../classes'
@@ -46,57 +46,45 @@ const Dialog: React.FunctionComponent<Props> = (props) => {
 Dialog.defaultProps = {
     maskClosable: true
 }
-
-const alert = (content:string) => {
+// ReactElement 只能是标签 ReactNode 可以是字符串
+const modal = (content: ReactNode, buttons?: Array<ReactElement>, afterClose?: Function) => {
     const close = () => {
+        console.log('close modal..')
         ReactDOM.render(React.cloneElement(component, { visible: false }), div)
         ReactDOM.unmountComponentAtNode(div)
         div.remove()
     }
-    const component = <Dialog onClose={close} visible={true}>{ content }</Dialog>
+    const component = <Dialog onClose={() => {
+        close(); afterClose && afterClose()
+    }} buttons={buttons}
+                              visible={true}>{ content }</Dialog>
     const div = document.createElement('div')
     document.body.appendChild(div)
     ReactDOM.render(component, div)
+    return close
+}
+
+const alert = (content:string) => {
+    let button = <button key="1" onClick={() => close()}>ok</button>
+    const close = modal(content, [button])
 }
 
 const confirm = (content:string, yes?: ()=>void, no?: ()=>void) => {
-    const close = () => {
-        ReactDOM.render(React.cloneElement(component, { visible: false }), div)
-        ReactDOM.unmountComponentAtNode(div)
-        div.remove()
-    }
     const onYes = () => {
         close()
         yes && yes()
     }
+
     const onNo = () => {
         close()
         no && no()
     }
-    const component = <Dialog onClose={close}
-                              visible={true}
-                              buttons={[<button key="1" onClick={onYes}>yes</button>,
-                                  <button key="2" onClick={onNo}>no</button>]}>
-        confirm ====> { content }
-    </Dialog>
-    const div = document.createElement('div')
-    document.body.appendChild(div)
-    ReactDOM.render(component, div)
-}
-// ReactElement 只能是标签 ReactNode 可以是字符串
-const modal = (content: ReactNode | ReactFragment) => {
-    const close = () => {
-        ReactDOM.render(React.cloneElement(component, { visible: false }), div)
-        ReactDOM.unmountComponentAtNode(div)
-        div.remove()
-    }
-    const component = <Dialog onClose={close}
-                              visible={true}>
-        { content }
-    </Dialog>
-    const div = document.createElement('div')
-    document.body.appendChild(div)
-    ReactDOM.render(component, div)
+    let buttons = [
+        <button key="1" onClick={onYes}>yes</button>,
+        <button key="2" onClick={onNo}>no</button>
+    ]
+    const close = modal(content, buttons)
+
 }
 
 export { alert, confirm, modal }
