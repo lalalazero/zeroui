@@ -1,15 +1,28 @@
-import React from 'react'
+import React, {ReactElement} from 'react'
 import {scopedClassMaker} from "../classes";
+import './Layout.scss'
+import Sider from "./Sider";
 
 const scopedClassName = scopedClassMaker('zeroUI-layout')
 const sc = scopedClassName
 
-interface Props extends React.HTMLAttributes<HTMLElement> {}
+interface Props extends React.HTMLAttributes<HTMLElement> {
+    children: ReactElement | Array<ReactElement>
+}
 
 const Layout: React.FunctionComponent<Props> = (props) => {
     const { className, ...rest } = props
+    console.log(props.children)
+    let hasSider = false
+    if ((props.children as Array<ReactElement>).length) {
+        (props.children as Array<ReactElement>).map(node => {
+            if (node.type === Sider) hasSider = true
+        })
+    }
+    let classNames = className || ''
+    classNames += hasSider ? ' zeroUI-layout-has-sider' : ''
     return (
-        <div className={[sc(''), className].join(' ')} {...rest}>{ props.children }</div>
+        <div className={sc('', { className: classNames })} {...rest}>{ props.children }</div>
     )
 }
 

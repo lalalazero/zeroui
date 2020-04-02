@@ -1,0 +1,21 @@
+.zeroUI-layout {
+  border: 1px solid blue;
+  display: flex;
+  flex-direction: column;
+  &-content {
+    flex-grow: 1;
+    border: 1px solid green;
+  }
+  &.zeroUI-layout-has-sider {
+    background: lightpink;
+    flex-direction: row;
+    .zeroUI-layout {
+      background: lightblue;
+      flex-direction: column;
+    }
+  }
+  & & {
+    flex-grow: 1;
+    flex-direction: row;
+  }
+}
