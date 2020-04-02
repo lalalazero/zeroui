@@ -12,13 +12,13 @@ interface Props extends React.HTMLAttributes<HTMLElement> {
 
 const Layout: React.FunctionComponent<Props> = (props) => {
     const { className, ...rest } = props
-    console.log(props.children)
-    let hasSider = false
-    if ((props.children as Array<ReactElement>).length) {
-        (props.children as Array<ReactElement>).map(node => {
-            if (node.type === Sider) hasSider = true
-        })
-    }
+
+    const childrenArr = (props.children as Array<ReactElement>)
+
+    const hasSider = childrenArr.length &&
+        childrenArr.reduce((result, node) =>
+        result || node.type === Sider
+    , false)
     let classNames = className || ''
     classNames += hasSider ? ' zeroUI-layout-has-sider' : ''
     return (
