@@ -4,9 +4,12 @@ import {scopedClassMaker} from "../classes";
 const scopedClassName = scopedClassMaker('zeroUI-layout')
 const sc = scopedClassName
 
-const Layout: React.FunctionComponent = (props) => {
+interface Props extends React.HTMLAttributes<HTMLElement> {}
+
+const Layout: React.FunctionComponent<Props> = (props) => {
+    const { className, ...rest } = props
     return (
-        <div className={sc('')}>{ props.children }</div>
+        <div className={[sc(''), className].join(' ')} {...rest}>{ props.children }</div>
     )
 }
 
