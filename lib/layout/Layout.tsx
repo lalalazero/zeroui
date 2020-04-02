@@ -15,14 +15,12 @@ const Layout: React.FunctionComponent<Props> = (props) => {
 
     const childrenArr = (props.children as Array<ReactElement>)
 
-    const hasSider = childrenArr.length &&
+    const hasSider = !!(childrenArr.length &&
         childrenArr.reduce((result, node) =>
         result || node.type === Sider
-    , false)
-    let classNames = className || ''
-    classNames += hasSider ? ' zeroUI-layout-has-sider' : ''
+    , false))
     return (
-        <div className={sc('', { className: classNames })} {...rest}>{ props.children }</div>
+        <div className={sc({ hasSider }, className )} {...rest}>{ props.children }</div>
     )
 }
 

@@ -1,14 +1,24 @@
-interface Options {
-    className: string | undefined
+interface classSwitchs {
+    [k: string]: boolean
+    // 比如
+    // hasSider: true
+    // active: false
 }
 function scopedClassMaker(prefix: string, ) {
-    return function x(name?:string, options?: Options) {
-        let result = [prefix, name].filter(Boolean).join('-')
-        if(options && options.className) {
-            return [result, options.className].filter(Boolean).join(' ')
+    return function (cls:string | classSwitchs, userClsName?:string) {
+        let classArray = []
+        if (typeof cls === 'string' && cls) {
+            classArray.push(cls)
+        } else if(cls === '') {
+            classArray.push('')
+        } else {
+            classArray.push('')
+            let clsArr = Object.entries(cls).filter(kv => kv[1]).map(kv => kv[0])
+            classArray.push(...clsArr)
         }
-
-        return result
+        let prefixedClassArray = classArray.map(cls => cls ? prefix + '-' + cls : prefix)
+        let allCls = [...prefixedClassArray, userClsName]
+        return allCls.filter(Boolean).join(' ')
     }
 }
 
