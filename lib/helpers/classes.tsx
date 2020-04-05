@@ -1,3 +1,4 @@
+
 interface classSwitchs {
     [k: string]: boolean
     // 比如
