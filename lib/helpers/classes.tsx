@@ -1,3 +1,4 @@
+import camel2dot from "dot-snake-camel-case-convertor";
 
 interface classSwitchs {
     [k: string]: boolean
@@ -15,6 +16,7 @@ function scopedClassMaker(prefix: string, ) {
         } else {
             classArray.push('')
             let clsArr = Object.entries(cls).filter(kv => kv[1]).map(kv => kv[0])
+            clsArr = clsArr.map(cls => camel2dot(cls))
             classArray.push(...clsArr)
         }
         let prefixedClassArray = classArray.map(cls => cls ? prefix + '-' + cls : prefix)
