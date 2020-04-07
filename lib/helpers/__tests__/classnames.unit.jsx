@@ -1,4 +1,4 @@
-import classnames from '../classnames'
+import classnames from '../classes'
 describe('classnames 测试', () => {
     it('接受1个 classname', () => {
         const result = classnames('a')
