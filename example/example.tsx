@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { HashRouter as Router, Route, NavLink } from 'react-router-dom'
+import {HashRouter as Router, Route, NavLink, Link} from 'react-router-dom'
 import IconExample from './icon/Icon.example'
 import ButtonExample from './button/Button.example'
 import DialogExample from './dialog/Dialog.example'
@@ -54,7 +54,7 @@ ReactDOM.render(
             <Footer className='example-footer'>
                 <p>
                     {/*<img src={logo} className="logo" alt="logo"/>*/}
-                    <NavLink to="https://github.com/lalalazero">lalalazero</NavLink><span>{' '}implemented with React hooks and typescript</span>
+                    <a href="https://github.com/lalalazero">lalalazero</a><span>{' '}implemented with React hooks and typescript</span>
                 </p>
             </Footer>
         </Layout>
