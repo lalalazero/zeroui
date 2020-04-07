@@ -1,5 +1,7 @@
 import React from 'react'
-import Button from '../../components/button/Button'
+
+import { Button } from '../../components'
+
 const ButtonExample:React.FunctionComponent = () =>{
     return (
         <div>

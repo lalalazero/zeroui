@@ -1,6 +1,8 @@
 import React, {ReactEventHandler, useState} from 'react'
-import Dialog, { alert, confirm, modal } from '../../components/dialog/Dialog'
+import { Dialog, message } from '../../components'
 import './Dialog.example.scss'
+
+const { alert, confirm, modal } = message
 
 const DialogExample: React.FunctionComponent = () => {
     const [x, setX] = useState(false)

@@ -1,10 +1,6 @@
 import React from 'react'
 
-import Layout from "../../components/layout/Layout";
-import Header from "../../components/layout/Header";
-import Sider from "../../components/layout/Sider";
-import Footer from "../../components/layout/Footer";
-import Content from '../../components/layout/Content'
+import { Layout, Header, Sider, Footer, Content } from "../../components";
 
 export default function () {
     return (

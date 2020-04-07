@@ -86,5 +86,5 @@ const confirm = (content:string, yes?: ()=>void, no?: ()=>void) => {
 
 }
 
-export { alert, confirm, modal }
+export { alert, modal, confirm }
 export default Dialog
