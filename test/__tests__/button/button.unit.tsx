@@ -1,6 +1,6 @@
 import React from 'react'
 import renderer from 'react-test-renderer';
-import Button from '../../../lib/Button'
+import Button from '../../../lib/button/Button'
 
 describe('button 测试', () => {
     it('是个div',()=>{
