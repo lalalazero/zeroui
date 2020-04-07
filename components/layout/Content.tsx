@@ -1,5 +1,5 @@
 import React from 'react'
-import {scopedClassMaker} from "../helpers/classes";
+import {scopedClassMaker} from "../_util/classes";
 
 const scopedClassName = scopedClassMaker('zeroUI-layout')
 const sc = scopedClassName

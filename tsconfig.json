@@ -23,7 +23,7 @@
     "noUnusedLocals": true
   },
   "include": [
-    "lib/**/*",
+    "components/**/*"
   ],
   "exclude": [
     "node_modules",

@@ -1,7 +1,7 @@
 import React from 'react'
 import renderer from 'react-test-renderer';
 import { mount } from 'enzyme'
-import Icon from '../Icon'
+import Icon from '../../../components/icon/Icon'
 describe('icon 测试', () => {
     it('name = wechat', () => {
         const icon = renderer.create(<Icon name="wechat"></Icon>)

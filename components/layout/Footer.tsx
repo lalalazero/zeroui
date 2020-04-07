@@ -1,16 +1,16 @@
 import React from 'react'
-import {scopedClassMaker} from "../helpers/classes";
+import {scopedClassMaker} from "../_util/classes";
 
 const scopedClassName = scopedClassMaker('zeroUI-layout')
 const sc = scopedClassName
 
 interface Props extends React.HTMLAttributes<HTMLElement> {}
 
-const Header: React.FunctionComponent<Props> = (props) => {
+const Footer: React.FunctionComponent<Props> = (props) => {
     const { className, ...rest } = props
     return (
-        <div className={sc('header', className)} {...rest}>{ props.children }</div>
+        <div className={sc('footer', className)} {...rest}>{ props.children }</div>
     )
 }
 
-export default Header
+export default Footer

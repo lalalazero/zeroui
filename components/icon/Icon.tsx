@@ -1,7 +1,7 @@
 import React from 'react'
 import './importIcons'
 import './Icon.scss'
-import { scopedClassMaker } from '../helpers/classes'
+import { scopedClassMaker } from '../_util/classes'
 
 const scopedClassName = scopedClassMaker('zeroUI-icon')
 const sc = scopedClassName

@@ -1,7 +1,7 @@
 import React, {Fragment, ReactElement, ReactNode} from 'react';
 import ReactDOM from 'react-dom'
 import Icon from '../icon/Icon'
-import { scopedClassMaker } from '../helpers/classes'
+import { scopedClassMaker } from '../_util/classes'
 import './Dialog.scss'
 
 interface Props {

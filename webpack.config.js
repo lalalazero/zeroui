@@ -1,10 +1,10 @@
 const path = require('path')
 module.exports = {
     entry: {
-        index: './lib/index.tsx'
+        index: './components/index.tsx'
     },
     output: {
-        path: path.resolve(__dirname, 'dist/lib'),
+        path: path.resolve(__dirname, 'dist/components'),
         library: 'ZeroUI',
         libraryTarget: 'umd',
     },
