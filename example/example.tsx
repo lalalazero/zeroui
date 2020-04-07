@@ -5,6 +5,7 @@ import IconExample from './icon/Icon.example'
 import ButtonExample from './button/Button.example'
 import DialogExample from './dialog/Dialog.example'
 import LayoutExample from './layout/Layout.example'
+import ColorExample from './color/Color.example'
 import './example.scss'
 import logo from './logo.png'
 
@@ -21,6 +22,11 @@ ReactDOM.render(
             </Header>
             <Layout className='example-main'>
                 <Sider className='example-sider'>
+                    <ul>
+                        <li>
+                            <NavLink to="/color">色彩搭配</NavLink>
+                        </li>
+                    </ul>
                     <p><span>组件</span></p>
                     <ul>
                         <li>
@@ -42,10 +48,14 @@ ReactDOM.render(
                     <Route path="/button" component={ButtonExample}></Route>
                     <Route path="/dialog" component={DialogExample}></Route>
                     <Route path="/layout" component={LayoutExample}></Route>
+                    <Route path="/color" component={ColorExample}></Route>
                 </Content>
             </Layout>
             <Footer className='example-footer'>
-                <p>zeroUI component footer</p>
+                <p>
+                    {/*<img src={logo} className="logo" alt="logo"/>*/}
+                    <NavLink to="https://github.com/lalalazero">lalalazero</NavLink><span>{' '}implemented with React hooks and typescript</span>
+                </p>
             </Footer>
         </Layout>
 

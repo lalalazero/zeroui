@@ -8,29 +8,34 @@
 ul,ol {
   list-style: none;
 }
+
 a {
   color: #000;
   text-decoration: none;
   font-weight: 300;
 }
+
 .example-layout {
   min-height: 100vh;
+}
+.logo {
+  margin: 8px;
+  display: inline-block;
+  vertical-align: middle;
+  height: 48px;
+  width: 48px;
 }
 
 .example-header {
   box-shadow: 0 2px 8px $box-shadow-color;
   padding-left: $padding-left;
-  .logo {
-    margin: 8px;
-    display: inline-block;
-    vertical-align: middle;
-    height: 48px;
-    width: 48px;
-  }
+
+
 }
 
 .example-main {
   padding-top: 40px;
+  padding-bottom: 20px;
 }
 
 .example-sider {
@@ -65,9 +70,20 @@ a {
 }
 
 .example-content {
-  padding: 10px 20px;
+  padding: 20px 40px;
 }
 
 .example-footer {
-  height: 48px;
+  //text-align: center;
+  font-weight: 300;
+  height: 64px;
+  line-height: 64px;
+  box-shadow: -3px -3px 8px $box-shadow-color;
+  background: #000;
+  padding-left: $padding-left;
+  color: white;
+  a {
+    color: white;
+    text-decoration: underline;
+  }
 }
