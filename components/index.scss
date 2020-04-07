@@ -7,3 +7,41 @@
     box-sizing: border-box;
   }
 }
+
+$padding-left: 20px;
+$lighten-border: 1px solid lighten(#ccc, 10%);
+$box-shadow-color: #f0f1f2;
+
+// 中性色
+$title-text-color-white-bg: lighten(black, 85%);
+$primary-text-color-white-bg: lighten(black, 65%);
+$second-primary-text-color-white-bg: lighten(black, 45%);
+$disabled-color-white-bg: lighten(black, 25%);
+$border-color-white-bg: lighten(black, 15%);
+$dividers-color-white-bg: lighten(black, 6%);
+$background-color-white-bg: lighten(black, 4%);
+$table-header-color-white-bg: lighten(black, 2%);
+
+// 功能色
+$green-6: #52c41a;
+$gold-6: #faad14;
+$red-5: #ff4d4f;
+
+// cyan 明青色系
+$cyan-6: #13c2c2;
+$cyan-1: #e6fffb;
+$cyan-5: #36cfc9;
+$cyan-7: #08979c;
+
+//品牌色
+$brand-color: $cyan-6;
+$selected-background: $cyan-1;
+$hover-color: $cyan-5;
+$normal-color: $cyan-6;
+$click-color: $cyan-7;
+
+//功能色
+$func-link-color: $cyan-6;
+$func-success-color: $green-6;
+$func-warn-color: $gold-6;
+$func-error-color: $red-5;

@@ -1,0 +1,73 @@
+@import "../components/index";
+
+*,*::before,*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+ul,ol {
+  list-style: none;
+}
+a {
+  color: #000;
+  text-decoration: none;
+  font-weight: 300;
+}
+.example-layout {
+  min-height: 100vh;
+}
+
+.example-header {
+  box-shadow: 0 2px 8px $box-shadow-color;
+  padding-left: $padding-left;
+  .logo {
+    margin: 8px;
+    display: inline-block;
+    vertical-align: middle;
+    height: 48px;
+    width: 48px;
+  }
+}
+
+.example-main {
+  padding-top: 40px;
+}
+
+.example-sider {
+  width: 290px;
+  border-right: $lighten-border;
+  p {
+    padding: 0 $padding-left;
+    span {
+      font-weight: 300;
+      padding-bottom: 10px;
+      border-bottom: $lighten-border;
+      display: inline-block;
+      width: 100%;
+      color: darken(#ccc, 0.5);
+    }
+  }
+  ul {
+    margin-top: 10px;
+  }
+  li {
+    a {
+      text-decoration: none;
+      width: 100%;
+      padding: 10px 10px 10px $padding-left;
+      display: block;
+      &:hover {
+        background: $selected-background;
+        color: $hover-color;
+      }
+    }
+  }
+}
+
+.example-content {
+  padding: 10px 20px;
+}
+
+.example-footer {
+  height: 48px;
+}

@@ -21,6 +21,9 @@
     // "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "noUnusedLocals": true
+//    "typeRoots": [
+//      "./components/types/custom.d.ts"
+//    ]
   },
   "include": [
     "components/**/*"

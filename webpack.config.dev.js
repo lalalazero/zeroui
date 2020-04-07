@@ -5,10 +5,14 @@ module.exports = Object.assign({}, base, {
     entry: {
         index: "./example/example.tsx"
     },
+    // output: {
+    //   publicPath: ''
+    // },
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'ZeroUI - React',
+            title: 'ZEROUI',
             template: './example/example.html',
+            favicon: './example/favicon_32x32.png'
         })
     ],
 
