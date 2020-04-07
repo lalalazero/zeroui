@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { HashRouter as Router, Route, Link } from 'react-router-dom'
-import IconExample from './components/icon/Icon.example'
-import ButtonExample from './components/button/Button.example'
-import DialogExample from './components/dialog/Dialog.example'
-import LayoutExample from './components/layout/Layout.example'
+import IconExample from './icon/Icon.example'
+import ButtonExample from './button/Button.example'
+import DialogExample from './dialog/Dialog.example'
+import LayoutExample from './layout/Layout.example'
 
 
 ReactDOM.render(

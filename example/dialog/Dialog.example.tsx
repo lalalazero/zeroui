@@ -1,5 +1,5 @@
 import React, {ReactEventHandler, useState} from 'react'
-import Dialog, { alert, confirm, modal } from './Dialog'
+import Dialog, { alert, confirm, modal } from '../../components/dialog/Dialog'
 import './Dialog.example.scss'
 
 const DialogExample: React.FunctionComponent = () => {
