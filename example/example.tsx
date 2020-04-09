@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {HashRouter as Router, Route, NavLink, Link} from 'react-router-dom'
+import {HashRouter as Router, Route, NavLink } from 'react-router-dom'
 import IconExample from './icon/Icon.example'
-import ButtonExample from './button/Button.example'
+import ButtonDemo from './button'
 import DialogExample from './dialog/Dialog.example'
 import LayoutExample from './layout/Layout.example'
 import ColorExample from './color/Color.example'
@@ -45,7 +45,7 @@ ReactDOM.render(
                 </Sider>
                 <Content className='example-content'>
                     <Route path="/icon" component={IconExample}></Route>
-                    <Route path="/button" component={ButtonExample}></Route>
+                    <Route path="/button" component={ButtonDemo}></Route>
                     <Route path="/dialog" component={DialogExample}></Route>
                     <Route path="/layout" component={LayoutExample}></Route>
                     <Route path="/color" component={ColorExample}></Route>

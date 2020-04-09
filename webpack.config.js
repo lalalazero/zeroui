@@ -33,21 +33,10 @@ module.exports = {
             {
                 test: /\.s([ac])ss$/,
                 use: ['style-loader', 'css-loader', 'sass-loader']
-                // use: [
-                //     devMode ? 'style-loader' : {
-                //         loader: MiniCssExtractPlugin.loader,
-                //         options: {
-
-                //         }
-                //     },
-                //     'css-loader',
-                //     {
-                //         loader: "sass-loader",
-                //         options: {
-                //             includePaths: [path.resolve(__dirname, 'stylesheets', 'include')]
-                //         }
-                //     }
-                // ]
+            },
+            {
+                test: /\.md$/,
+                use: 'raw-loader'
             }
         ]
     }
