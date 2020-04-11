@@ -6,7 +6,6 @@ const ButtonExample:React.FunctionComponent = () =>{
     return (
         <div>
             <Button></Button>
-            button example
         </div>
     )
 }
