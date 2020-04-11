@@ -1,5 +1,4 @@
-import classnames from '../../../components/_util/classes'
-import { scopedClassMaker } from '../../../components/_util/classes'
+import classnames, { scopedClassMaker }  from '../../../components/_util/classes'
 
 describe('classnames 测试', () => {
     it('接受1个 classname', () => {
