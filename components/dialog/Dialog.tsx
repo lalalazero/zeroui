@@ -4,7 +4,7 @@ import Icon from '../icon/Icon'
 import { scopedClassMaker } from '../_util/classes'
 import './Dialog.scss'
 
-interface Props {
+export interface DialogProps {
     visible: boolean,
     buttons?: Array<ReactElement>,
     onClose: React.MouseEventHandler,
@@ -14,7 +14,7 @@ interface Props {
 const scopedClassName = scopedClassMaker('zeroUI-dialog')
 const sc = scopedClassName
 
-const Dialog: React.FunctionComponent<Props> = (props) => {
+const Dialog: React.FunctionComponent<DialogProps> = (props) => {
     const onClickClose: React.MouseEventHandler = e => {
         props.onClose(e)
     }
