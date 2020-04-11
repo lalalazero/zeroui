@@ -43,12 +43,14 @@ ReactDOM.render(
                         </li>
                     </ul>
                 </Sider>
-                <Content className='example-content'>
-                    <Route path="/icon" component={IconExample}></Route>
-                    <Route path="/button" component={ButtonDemo}></Route>
-                    <Route path="/dialog" component={DialogExample}></Route>
-                    <Route path="/layout" component={LayoutExample}></Route>
-                    <Route path="/color" component={ColorExample}></Route>
+                <Content className='example-content-wrapper'>
+                    <div className='example-content'>
+                        <Route path="/icon" component={IconExample}></Route>
+                        <Route path="/button" component={ButtonDemo}></Route>
+                        <Route path="/dialog" component={DialogExample}></Route>
+                        <Route path="/layout" component={LayoutExample}></Route>
+                        <Route path="/color" component={ColorExample}></Route>
+                    </div>
                 </Content>
             </Layout>
             <Footer className='example-footer'>

@@ -69,9 +69,16 @@ a {
   }
 }
 
-.example-content {
-  padding: 20px 40px;
+.example-content-wrapper {
+  padding: 10px 20px;
+  .example-content {
+    //border: 1px solid red;
+    width: 80%;
+    margin: 0 auto;
+  }
 }
+
+
 
 .example-footer {
   //text-align: center;

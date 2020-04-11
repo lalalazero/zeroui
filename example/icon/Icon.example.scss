@@ -1,0 +1,35 @@
+@import "../../components/index";
+
+.icon-example {
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    max-column-count: 4;
+    li {
+      padding: 10px;
+      border-radius: 4px;
+      text-align: center;
+      width: 120px;
+      height: 90px;
+      margin-bottom: 20px;
+      svg {
+        font-size: 1.5em;
+      }
+      span {
+        font-size: 0.8em;
+        color: $second-primary-text-color-white-bg;
+      }
+      &:hover {
+        background: $cyan-8;
+        transform: scale(1.1);
+        transition: transform 300ms;
+        svg {
+          fill: white;
+        }
+        span {
+          color: white;
+        }
+      }
+    }
+  }
+}
