@@ -1,33 +1,19 @@
-import React, {FunctionComponent, useState} from 'react'
-import Highlight, { defaultProps } from "prism-react-renderer";
-
+import React, {FunctionComponent} from 'react'
 import ButtonExample from './Button.example'
+import DemoCard from "../DemoCard";
 
 // @ts-ignore
 import code from '!!raw-loader!./button.md';
 
 const ButtonDemo:FunctionComponent = () => {
-    const [codeVisible, setCodeVisible] = useState(false)
+    const description='按钮有五种类型：主按钮、次按钮、虚线按钮、危险按钮和链接按钮。主按钮在同一个操作区域最多出现一次。'
     return (
         <div>
-            <ButtonExample></ButtonExample>
-            <button onClick={() => setCodeVisible(!codeVisible)}>click to show code</button>
-            {
-                codeVisible && (
-                    <Highlight {...defaultProps} code={code} language="jsx">
-                        {({className, style, tokens, getLineProps, getTokenProps}) => (
-                            <pre className={className} style={style}>
-                                {tokens.map((line, i) => (
-                                    <div {...getLineProps({line, key: i})}>
-                                        {line.map((token, key) => (
-                                            <span {...getTokenProps({token, key})} />
-                                        ))}
-                                    </div>
-                                ))}
-                            </pre>
-                        )}
-                    </Highlight>)
-            }
+            <DemoCard code={code}
+                      subject={'按钮类型'}
+                      description={description}>
+                <ButtonExample/>
+            </DemoCard>
         </div>
     )
 
