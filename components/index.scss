@@ -56,3 +56,73 @@ $func-link-color: $cyan-6;
 $func-success-color: $green-6;
 $func-warn-color: $gold-6;
 $func-error-color: $red-5;
+
+// 从 zeroview 拷贝过来的全局 scss 变量
+$--button-height: 32px;
+$--font-size: 14px;
+$--button-bg: #fff;
+$--primary-color: #2d8cf0;
+$--button-active-bg: #eee;
+$--border-radius: 4px;
+$--color: #333;
+$--border-color: #999;
+$--border-color-hover: #666;
+$active-color: rgb(24, 144, 255);
+$active-color-light: rgba(24,144,255,0.1);
+$active-bg: #e6f7ff;
+
+$--success-color: #19be6b;
+$--warn-color: #f90;
+$--error-color: #ed4014;
+$--info-color: #2db7f5;
+
+$height: 32px;
+$border-color: #999;
+$border-color-hover: #666;
+$border-color-1: #ccc;
+$border-color-ant-design: #ebedf0;
+$border-radius: 4px;
+$font-size: 12px;
+$box-shadow-color: rgba(10, 7, 7, 0.5);
+$error-color: #f1453d;
+
+$bg-white: #fff;
+$bg-black: #000;
+$bg-gray-light: #ccc;
+
+$disabled-color: lighten(gray, 20%);
+
+$toast-bg: rgba(0, 0, 0, 0.75);
+$font-size: 14px;
+$toast-height: 40px;
+$animation-duration: 300ms;
+
+$table-border-color: rgb(232,232,232);
+$table-strip-color: #fafafa;
+$table-row-hover-color: rgb(230, 247, 255);
+
+%box-shadow {
+  box-shadow: 0 0 6px 0 #ccc;
+}
+%pos-center {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+%text-ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+$spinAnimation: spin 2s infinite linear;
+
