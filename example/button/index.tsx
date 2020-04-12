@@ -3,6 +3,7 @@ import Highlight, { defaultProps } from "prism-react-renderer";
 
 import ButtonExample from './Button.example'
 
+// @ts-ignore
 import code from '!!raw-loader!./button.md';
 
 const ButtonDemo:FunctionComponent = () => {
@@ -25,7 +26,7 @@ const ButtonDemo:FunctionComponent = () => {
                                 ))}
                             </pre>
                         )}
-                   </Highlight>)
+                    </Highlight>)
             }
         </div>
     )

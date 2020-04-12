@@ -1,0 +1,59 @@
+@import "../index";
+
+.zeroUI-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: $--font-size;
+  height: $--button-height;
+  padding: 0 1em;
+  vertical-align: middle;
+  border-radius: $--border-radius;
+  border: 1px solid $--border-color;
+  background: $--button-bg;
+  &:hover {
+    border-color: $--border-color-hover;
+  }
+  &:active {
+    background: $--button-active-bg;
+  }
+  &:focus {
+    outline: none;
+  }
+  > .zeroUI-icon {
+    order: 1;
+    margin-right: 0.3em;
+  }
+  &-content {
+    order: 2;
+  }
+  &.zeroUI-icon-right {
+    > .zeroUI-button-content {
+      order: 1;
+    }
+    > .zeroUI-icon {
+      order: 2;
+      margin-left: 0.3em;
+      margin-right: 0;
+    }
+  }
+  .loading {
+    animation: $spinAnimation;
+  }
+  &-primary {
+    background: $--primary-color;
+    border: none;
+    color: white;
+  }
+  &-dashed {
+    border-style: dashed;
+  }
+  &-text {
+    border: none;
+  }
+  &-danger {
+    background: $--error-color;
+    color: white;
+    border: none;
+  }
+}

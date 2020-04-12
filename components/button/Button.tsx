@@ -1,9 +1,43 @@
 import React from 'react';
+import { scopedClassMaker } from '../_util/classes'
+import { Icon } from '../index'
+import './Button.scss'
+import {tuple} from "../_util/type";
 
-function Button() {
+const scopedClassName = scopedClassMaker('zeroUI-button')
+const sc = scopedClassName
+
+const ButtonTypes = tuple('normal', 'primary', 'dashed',
+    'text', 'danger');
+export type ButtonType = typeof ButtonTypes[number];
+
+export interface ButtonProps {
+    type?: ButtonType,
+    icon?: string,
+    position?: string,
+    loading?:boolean,
+    className?:string
+}
+
+const Button:React.FunctionComponent<ButtonProps> = props => {
+    const { type, icon, loading, className, ...restProps } = props
+    const clsSwithes = type ? { [type]: true } : ''
     return (
-        <div>button2</div>
+        <button className={sc(clsSwithes, className)} { ...restProps }>
+            {
+                loading? <Icon name='loading'></Icon> : ''
+            }
+            {
+                icon ? <Icon name={icon}></Icon> : ''
+            }
+            <div className={sc('content')}>
+                { props.children }
+            </div>
+        </button>
     )
 }
 
+Button.defaultProps = {
+    type: 'normal'
+}
 export default Button
