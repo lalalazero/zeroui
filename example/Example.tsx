@@ -6,7 +6,8 @@ import ButtonDemo from './button'
 import DialogExample from './dialog/Dialog.example'
 import LayoutExample from './layout/Layout.example'
 import ColorExample from './color/Color.example'
-import './example.scss'
+import './Example.scss'
+// @ts-ignore
 import logo from './logo.png'
 
 import { Layout, Header, Content, Footer, Sider } from '../components'
