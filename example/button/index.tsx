@@ -11,8 +11,9 @@ const ButtonDemo:FunctionComponent = () => {
         <div>
             <DemoCard code={code}
                       subject={'按钮类型'}
-                      description={description}>
-                <ButtonExample/>
+                      description={description}
+                      demo={ButtonExample}>
+                {/*<ButtonExample/>*/}
             </DemoCard>
         </div>
     )
