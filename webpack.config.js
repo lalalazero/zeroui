@@ -36,7 +36,10 @@ module.exports = {
             },
             {
                 test: /\.md$/,
-                use: 'raw-loader'
+                loader: require.resolve('./markdown-loader/index.js'),
+                // include: [
+                //     path.resolve(__dirname, 'example/**/'),
+                //   ]
             }
         ]
     }

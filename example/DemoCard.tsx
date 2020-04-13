@@ -6,11 +6,13 @@ export interface DemoCardProps {
     code: string,
     subject: string,
     description: string,
-    demo: React.FunctionComponent
+    demo: string,
 }
 
 const DemoCard:React.FunctionComponent<DemoCardProps> = props => {
     const { code, subject, description, demo } = props
+    console.log('demoCard....demo')
+    console.log(demo)
     const [ codeVisible, setVisible ] = useState(false)
     const [ toggleSpanText, setText ] = useState('< >')
     const toggleCode = () => {
@@ -20,7 +22,7 @@ const DemoCard:React.FunctionComponent<DemoCardProps> = props => {
     return (
         <div className="demo-card">
             {
-                demo({})
+                props.children
             }
             <p>{ subject }</p>
             <p>{ description }</p>

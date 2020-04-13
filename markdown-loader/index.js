@@ -1,0 +1,51 @@
+const md = require('markdown-it')()
+function jsxFence(tokens, idx, options, env, self) {
+    let token = tokens[idx]
+    if(token.info === 'jsx') {
+        return `<code>${token.content}</code>`
+    }
+  };
+  
+md.renderer.rules['fence'] = jsxFence
+
+function stripSubject(content) {
+    const result = content.match(/<(h2)>([\s\S]+)<\/\1>/);
+    return result && result[2] ? result[2].trim() : '';
+}
+
+function stripDescription(content) {
+    const result = content.match(/<(p)>([\s\S]+)<\/\1>/);
+    return result && result[2] ? result[2].trim() : '';
+}
+
+function stripDemo(content) {
+    const result = content.match(/<(code)>([\s\S]+)<\/\1>/);
+    return result && result[2] ? result[2].trim() : '';
+}
+
+function stripExampleCode(content) {
+    let demo = stripDemo(content)
+    let index = demo.indexOf('export default')
+    let name = demo.substring(index + 'export default'.length + 1)
+    let code = demo.substring(0, index)
+    return code + `\nReactDOM.render(<${name} />, MountNode)`
+}
+
+
+function render(resource) {
+    console.log('被调用了')
+    let content = md.render(resource)
+    let subject = stripSubject(content)
+    let desc = stripDescription(content)
+    let demo = stripDemo(content)
+    let code = stripExampleCode(content)
+    let xxx = {
+        subject,
+        desc,
+        demo,
+        code,
+    }
+    return `export default ${JSON.stringify(xxx)}`
+}
+
+module.exports = render

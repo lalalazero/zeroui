@@ -1,19 +1,25 @@
 import React, {FunctionComponent} from 'react'
-import ButtonExample from './Button.example'
 import DemoCard from "../DemoCard";
 
 // @ts-ignore
-import code from '!!raw-loader!./button.md';
+
+import * as content  from './基础类型.md'
+
+const { code, demo, desc, subject } = content.default
+console.log(code)
+console.log(desc)
+console.log(subject)
+console.log(typeof demo)
+console.log(demo)
 
 const ButtonDemo:FunctionComponent = () => {
-    const description='按钮有五种类型：主按钮、次按钮、虚线按钮、危险按钮和链接按钮。主按钮在同一个操作区域最多出现一次。'
     return (
         <div>
             <DemoCard code={code}
-                      subject={'按钮类型'}
-                      description={description}
-                      demo={ButtonExample}>
-                {/*<ButtonExample/>*/}
+                      subject={subject}
+                      description={desc}
+                      demo={demo}
+                      >
             </DemoCard>
         </div>
     )
