@@ -5,7 +5,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, 'dist/components'),
-        library: 'ZeroUI',
+        library: 'zero-ui-react',
         libraryTarget: 'umd',
     },
     resolve: {

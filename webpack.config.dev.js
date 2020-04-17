@@ -10,7 +10,7 @@ module.exports = Object.assign({}, base, {
     // },
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'ZEROUI',
+            title: 'Zero-UI-React',
             template: './example/example.html',
             favicon: './example/favicon_32x32.png'
         })
