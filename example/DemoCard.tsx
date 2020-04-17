@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import HighLightCode from './HighLightCode'
 import './DemoCard.scss'
 
@@ -11,19 +11,19 @@ export interface DemoCardProps {
 
 const DemoCard:React.FunctionComponent<DemoCardProps> = props => {
     const { code, subject, description, demo } = props
-    console.log('demoCard....demo')
-    console.log(demo)
     const [ codeVisible, setVisible ] = useState(false)
     const [ toggleSpanText, setText ] = useState('< >')
     const toggleCode = () => {
         setVisible(!codeVisible)
         setText(() => codeVisible ? '</>' : '< >')
     }
+    useEffect(()=>{
+        console.log('eval 执行。。。', demo)
+        // eval(demo)
+    },[])
     return (
         <div className="demo-card">
-            {
-                props.children
-            }
+            <div id="xxx"></div>
             <p>{ subject }</p>
             <p>{ description }</p>
             <div onClick={toggleCode}>{ toggleSpanText }</div>

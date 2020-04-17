@@ -28,17 +28,20 @@ function stripExampleCode(content) {
     let index = demo.indexOf('export default')
     let name = demo.substring(index + 'export default'.length + 1)
     let code = demo.substring(0, index)
-    return code + `\nReactDOM.render(<${name} />, MountNode)`
+    let x = code + `\nReactDOM.render(<${name} />, MountNode)`
+    let y = code + `\nReactDOM.render(<${name} />, document.getElementById('xxx'))`
+    return {
+        code: x,
+        demo: y
+    }
 }
 
-
 function render(resource) {
-    console.log('被调用了')
     let content = md.render(resource)
     let subject = stripSubject(content)
     let desc = stripDescription(content)
-    let demo = stripDemo(content)
-    let code = stripExampleCode(content)
+    let { code, demo } = stripExampleCode(content)
+    
     let xxx = {
         subject,
         desc,
