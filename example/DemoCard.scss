@@ -1,3 +1,52 @@
+$border-color: lighten(black, 90%);
+
 .demo-card {
-  border: 1px solid;
+  border: 1px solid $border-color;
+  & .zeroUI-icon {
+    width: 1em;
+    height: 1em;
+    margin: 0 5px;
+    
+  }
+}
+.demo-subject {
+  border-top: 1px solid $border-color;
+  position: relative;
+  > span {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    height: 32px;
+    line-height: 32px;
+    margin-top: -16px;
+    background: white;
+    font-weight: 500;
+    padding: 0 6px;
+  }
+}
+.demo-live {
+  padding: 25px 15px;
+}
+.demo-desc {
+  padding: 30px 15px 20px 15px;
+  font-size: 14px;
+  color: lighten(black, 30%);
+}
+.demo-action {
+  color: darken($border-color, 20);
+  border-top: 1px dashed $border-color;
+  padding: 10px 0;
+  text-align: center;
+  & .zeroUI-icon {
+    vertical-align: middle;
+    fill: darken($border-color, 20);
+  }
+  &.code-visible {
+    border-bottom: 1px dashed $border-color;
+  }
+}
+.demo-code {
+  & > .prism-code {
+    padding: 30px 15px;
+  }
 }

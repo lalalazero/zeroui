@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, ReactNode } from 'react'
 import HighLightCode from './HighLightCode'
+import { Icon } from '../components'
 import './DemoCard.scss'
 
 export interface DemoCardProps {
@@ -12,24 +13,26 @@ export interface DemoCardProps {
 const DemoCard: React.FunctionComponent<DemoCardProps> = props => {
     const { code, subject, description, children } = props
     const [codeVisible, setVisible] = useState(false)
-    const [toggleSpanText, setText] = useState('< >')
     const toggleCode = () => {
         setVisible(!codeVisible)
-        setText(() => codeVisible ? '</>' : '< >')
+        setCodeIcon(codeVisible ? <Icon name='code-open'></Icon> : <Icon name='code-close'></Icon>)
     }
+    const [codeIcon, setCodeIcon] = useState<ReactNode>(<Icon name='code-open'></Icon>)
     return (
         <div className="demo-card">
-            <div id="xxx">
+            <div className='demo-live'>
                 {
                     children
                 }
             </div>
-            <p>{subject}</p>
-            <p>{description}</p>
-            <div onClick={toggleCode}>{toggleSpanText}</div>
-            <div>
+            <p className='demo-subject'><span>{subject}<Icon name="edit"></Icon></span></p>
+            <p className='demo-desc'>{description}</p>
+            <div className={codeVisible ? 'demo-action code-visible' : 'demo-action'}
+                onClick={toggleCode}><span><Icon name="copy"></Icon></span><span>{codeIcon}</span></div>
+            <div className='demo-code'>
                 {
-                    codeVisible ? <HighLightCode code={code}></HighLightCode> : ''
+                    codeVisible ? <HighLightCode
+                        code={code}></HighLightCode> : ''
                 }
             </div>
         </div>

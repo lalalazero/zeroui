@@ -2,14 +2,18 @@ import React from 'react'
 import copy from 'copy-to-clipboard';
 import { Icon } from '../../components'
 import './Icon.example.scss'
-const IconExample:React.FunctionComponent = () =>{
+const IconExample: React.FunctionComponent = () => {
     const ICONS = [
         'like',
+        'edit',
+        'copy',
         'info',
         'error',
         'loading',
         'alipay',
         'wechat',
+        'code-open',
+        'code-close',
         'left',
         'right',
         'down',
@@ -21,7 +25,7 @@ const IconExample:React.FunctionComponent = () =>{
         'next-double',
         'prev-double'
     ]
-    const onClick = (name:string):void => {
+    const onClick = (name: string): void => {
         const text = `<Icon name="${name}"></Icon>`
         copy(text)
         window.confirm(text + ' copied!')
@@ -31,7 +35,7 @@ const IconExample:React.FunctionComponent = () =>{
             <p>内置的图标，点击可复制使用</p>
             <ul>
                 {
-                    ICONS.map(name => (<li key={name} onClick={()=>onClick(name)}><Icon name={name}></Icon><br/><span>{name}</span></li>))
+                    ICONS.map(name => (<li key={name} onClick={() => onClick(name)}><Icon name={name}></Icon><br /><span>{name}</span></li>))
                 }
             </ul>
         </div>
