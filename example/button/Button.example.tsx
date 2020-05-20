@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Button } from '../../components'
 
-const ButtonExample:React.FunctionComponent = () =>{
+const ButtonExample = () => {
     return (
         <div>
             <Button>基本</Button>

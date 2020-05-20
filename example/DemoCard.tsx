@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState } from 'react'
 import HighLightCode from './HighLightCode'
 import './DemoCard.scss'
 
@@ -9,24 +9,24 @@ export interface DemoCardProps {
     demo: string,
 }
 
-const DemoCard:React.FunctionComponent<DemoCardProps> = props => {
-    const { code, subject, description, demo } = props
-    const [ codeVisible, setVisible ] = useState(false)
-    const [ toggleSpanText, setText ] = useState('< >')
+const DemoCard: React.FunctionComponent<DemoCardProps> = props => {
+    const { code, subject, description, children } = props
+    const [codeVisible, setVisible] = useState(false)
+    const [toggleSpanText, setText] = useState('< >')
     const toggleCode = () => {
         setVisible(!codeVisible)
         setText(() => codeVisible ? '</>' : '< >')
     }
-    useEffect(()=>{
-        console.log('eval 执行。。。', demo)
-        // eval(demo)
-    },[])
     return (
         <div className="demo-card">
-            <div id="xxx"></div>
-            <p>{ subject }</p>
-            <p>{ description }</p>
-            <div onClick={toggleCode}>{ toggleSpanText }</div>
+            <div id="xxx">
+                {
+                    children
+                }
+            </div>
+            <p>{subject}</p>
+            <p>{description}</p>
+            <div onClick={toggleCode}>{toggleSpanText}</div>
             <div>
                 {
                     codeVisible ? <HighLightCode code={code}></HighLightCode> : ''
@@ -36,4 +36,4 @@ const DemoCard:React.FunctionComponent<DemoCardProps> = props => {
     )
 }
 
-export  default DemoCard
+export default DemoCard
