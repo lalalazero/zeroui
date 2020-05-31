@@ -1,6 +1,10 @@
 import React from 'react'
 
 import { Button } from '../../components'
+import DemoCard from '../DemoCard'
+// @ts-ignore
+import * as content from './01-基础类型.md'
+const { code, demo, desc, subject } = content.default
 
 const ButtonExample = () => {
     return (
@@ -14,4 +18,15 @@ const ButtonExample = () => {
     )
 }
 
-export default ButtonExample
+export default function () {
+    return (
+        <DemoCard
+            code={code}
+            subject={subject}
+            description={desc}
+            demo={demo}
+        >
+            <ButtonExample />
+        </DemoCard>
+    )
+}
