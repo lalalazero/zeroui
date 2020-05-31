@@ -23,7 +23,8 @@ const IconExample: React.FunctionComponent = () => {
         'filled-down',
         'download',
         'next-double',
-        'prev-double'
+        'prev-double',
+        'search'
     ]
     const onClick = (name: string): void => {
         const text = `<Icon name="${name}"></Icon>`

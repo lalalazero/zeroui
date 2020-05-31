@@ -27,7 +27,7 @@
   &-content {
     order: 2;
   }
-  &.zeroUI-icon-right {
+  &-right {
     > .zeroUI-button-content {
       order: 1;
     }
@@ -44,6 +44,9 @@
     background: $--primary-color;
     border: none;
     color: white;
+    > .zeroUI-icon {
+      fill: white;
+    }
   }
   &-dashed {
     border-style: dashed;
@@ -56,4 +59,10 @@
     color: white;
     border: none;
   }
+  &-circle {
+    border-radius: 50%;
+    width: $--button-height;
+    padding: 0;
+  }
+  
 }

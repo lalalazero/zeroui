@@ -1,17 +1,23 @@
 import camel2dot from "dot-snake-camel-case-convertor";
 
 interface classSwitchs {
-    [k: string]: boolean
-    // 比如
-    // hasSider: true
-    // active: false
+    [k: string]: any
 }
+
+function makeClassSwitchs(obj: { [k: string]: any }, otherOptions?: classSwitchs) {
+    let switchObj: classSwitchs = otherOptions || {}
+    Object.keys(obj).forEach(key => {
+        if (obj[key]) { switchObj[obj[key]] = true }
+    })
+    return switchObj
+}
+
 function scopedClassMaker(prefix: string, ) {
-    return function (cls:string | classSwitchs, userClsName?:string) {
+    return function (cls: string | classSwitchs, userClsName?: string) {
         let classArray = []
         if (typeof cls === 'string' && cls) {
             classArray.push(cls)
-        } else if(cls === '') {
+        } else if (cls === '') {
             classArray.push('')
         } else {
             classArray.push('')
@@ -30,4 +36,4 @@ function classnames(...names: (string | undefined)[]) {
 }
 
 export default classnames;
-export { scopedClassMaker }
+export { scopedClassMaker, makeClassSwitchs }
