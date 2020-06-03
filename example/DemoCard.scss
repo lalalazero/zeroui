@@ -54,7 +54,13 @@ $border-color: lighten(black, 90%);
 .demo-code {
   & > .prism-code {
     padding: 30px 15px;
+    max-width: 100%;
+    & > .token-line {
+      max-width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+    }
   }
-  overflow: scroll;
+  // overflow: scroll;
   background: rgb(246, 248, 250);
 }
