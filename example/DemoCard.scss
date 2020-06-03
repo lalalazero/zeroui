@@ -32,11 +32,11 @@ $border-color: lighten(black, 90%);
   padding: 30px 15px 20px 15px;
   font-size: 14px;
   color: lighten(black, 30%);
-  // > code {
-  //   background: #ddd;
-  //   padding: 2px 4px;
-  //   border-radius: 4px;
-  // }
+  > code {
+    background: lighten(#ddd, 5%);
+    padding: 4px;
+    border-radius: 4px;
+  }
 }
 .demo-action {
   color: darken($border-color, 20);

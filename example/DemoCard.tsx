@@ -26,7 +26,7 @@ const DemoCard: React.FunctionComponent<DemoCardProps> = props => {
                 }
             </div>
             <p className='demo-subject'><span>{subject}<Icon name="edit"></Icon></span></p>
-            <p className='demo-desc'>{description}</p>
+            <p className='demo-desc' dangerouslySetInnerHTML={{__html: description}}></p>
             <div className={codeVisible ? 'demo-action code-visible' : 'demo-action'}
                 onClick={toggleCode}><span><Icon name="copy"></Icon></span><span>{codeIcon}</span></div>
             <div className='demo-code'>

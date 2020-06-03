@@ -2,7 +2,7 @@ const md = require('markdown-it')()
 function jsxFence(tokens, idx, options, env, self) {
     let token = tokens[idx]
     if(token.info === 'jsx') {
-        return `<code>${token.content}</code>`
+        return `<codeToken> ${token.content} </codeToken>`
     }
   };
   
@@ -19,7 +19,7 @@ function stripDescription(content) {
 }
 
 function stripDemo(content) {
-    const result = content.match(/<(code)>([\s\S]+)<\/\1>/);
+    const result = content.match(/<(codeToken)>([\s\S]+)<\/\1>/);
     return result && result[2] ? result[2].trim() : '';
 }
 
