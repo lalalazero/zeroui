@@ -1,5 +1,21 @@
 @import "../index";
 
+@mixin  btn-mask {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  bottom: -1px;
+  left: -1px;
+  z-index: 1;
+  background: #fff;
+  border-radius: inherit;
+  opacity: .45;
+  -webkit-transition: opacity .2s;
+  transition: opacity .2s;
+  content: '';
+  pointer-events: none;
+}
+
 .zeroUI-button {
   display: inline-flex;
   justify-content: center;
@@ -24,6 +40,7 @@
 
   &:hover:not([disabled]) {
     border-color: $--primary-color;
+    cursor: pointer;
   }
   &:active:not([disabled]) {
     background: $--button-active-bg;
@@ -54,19 +71,7 @@
       animation: $spinAnimation;
     }
     &::before {
-      position: absolute;
-      top: -1px;
-      right: -1px;
-      bottom: -1px;
-      left: -1px;
-      z-index: 1;
-      background: #fff;
-      border-radius: inherit;
-      opacity: .45;
-      -webkit-transition: opacity .2s;
-      transition: opacity .2s;
-      content: '';
-      pointer-events: none;
+      @include btn-mask();
     }
   }
   &-primary:not([disabled]) {
@@ -113,4 +118,33 @@
     }
     background-color: $btn-disabled-color;
   }
+  &-ghost {
+    background-color: transparent !important;
+    &.zeroUI-button {
+      color: white;
+      border-color: white;
+      &:hover {
+        color: $--primary-color;
+      }
+      &-primary {
+        border: 1px solid $--primary-color;
+        color: $--primary-color;
+        &:hover {
+          color: $hover-color;
+          border-color: $hover-color;
+        }
+      }
+      &-danger {
+        border: 1px solid $--error-color;
+        color: $--error-color;
+        position: relative;
+        &:hover {
+          color: #ff7875;
+          border-color: #ff7875;
+        }
+      }
+    }
+    
+  }
+  
 }

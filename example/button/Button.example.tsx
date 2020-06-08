@@ -9,6 +9,7 @@ import * as content3 from './03-按钮大小.md'
 import * as content4 from './04-加载中状态.md'
 import * as content5 from './05-不可用状态.md'
 import * as content6 from './06-按钮组.md'
+import * as content7 from './07-幽灵按钮.md'
 
 const ButtonExample01 = () => {
     return (
@@ -71,7 +72,7 @@ const ButtonExample03 = () => {
                 <Button icon="search" type="primary" size="small">Search</Button>
                 <Button icon='search' position="right" size="small">Search</Button>
             </div>
-            
+
         </div>
     )
 }
@@ -91,19 +92,19 @@ const ButtonExample04 = () => {
 const ButtonExample05 = () => {
     return (
         <div className="space-button">
-            <div>   
+            <div>
                 <Button type="primary">主要</Button>
                 <Button disabled type="primary">主要(禁用态)</Button>
             </div>
-            <div>   
+            <div>
                 <Button>基本</Button>
                 <Button disabled>基本(禁用态)</Button>
             </div>
-            <div>   
+            <div>
                 <Button type="dashed">虚线</Button>
                 <Button type="dashed" disabled>虚线(禁用态)</Button>
             </div>
-            <div>   
+            <div>
                 <Button type="text">无边框</Button>
                 <Button disabled type="text">无边框(禁用态)</Button>
             </div>
@@ -131,6 +132,18 @@ const ButtonExample06 = () => {
                 <Button icon="download" type="primary"></Button>
                 <Button icon="like" type="primary"></Button>
             </ButtonGroup>
+        </div>
+    )
+}
+
+const ButtonExample07 = () => {
+    return (
+        <div className="space-button" style={{ background: '#ccc', padding: '20px 0' }}>
+            <Button ghost type="primary">主要</Button>
+            <Button ghost>基本</Button>
+            <Button ghost type="dashed">虚线</Button>
+            <Button ghost type="text">无边框</Button>
+            <Button ghost type="danger">危险</Button>
         </div>
     )
 }
@@ -196,7 +209,16 @@ const Card06 = (
         <ButtonExample06 />
     </DemoCard>
 )
-
+const Card07 = (
+    <DemoCard
+        code={content7.default.code}
+        subject={content7.default.subject}
+        description={content7.default.desc}
+        demo={content7.default.demo}
+    >
+        <ButtonExample07 />
+    </DemoCard>
+)
 
 
 export default function () {
@@ -208,6 +230,7 @@ export default function () {
             {Card04}
             {Card05}
             {Card06}
+            {Card07}
         </div>
     )
 }
