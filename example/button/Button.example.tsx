@@ -11,6 +11,7 @@ import * as content5 from './05-不可用状态.md'
 import * as content6 from './06-按钮组.md'
 import * as content7 from './07-幽灵按钮.md'
 import * as content8 from './08-块级按钮.md'
+import * as apiContent from './api.md'
 
 const ButtonExample01 = () => {
     return (
@@ -256,14 +257,20 @@ const Card08 = (
 export default function () {
     return (
         <div className='zeroUI-button-example'>
-            {Card01}
-            {Card02}
-            {Card03}
-            {Card04}
-            {Card05}
-            {Card06}
-            {Card07}
-            {Card08}
+            <div>
+                {Card01}
+                {Card02}
+                {Card03}
+                {Card04}
+                {Card05}
+                {Card06}
+                {Card07}
+                {Card08}
+            </div>
+            <div className='api-container'>
+                <div dangerouslySetInnerHTML={{ __html: apiContent.default.apiContent }}></div>
+            </div>
+
         </div>
     )
 }

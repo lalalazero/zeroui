@@ -1,11 +1,11 @@
 const md = require('markdown-it')()
 function jsxFence(tokens, idx, options, env, self) {
     let token = tokens[idx]
-    if(token.info === 'jsx') {
+    if (token.info === 'jsx') {
         return `<codeToken> ${token.content} </codeToken>`
     }
-  };
-  
+};
+
 md.renderer.rules['fence'] = jsxFence
 
 function stripSubject(content) {
@@ -38,10 +38,16 @@ function stripExampleCode(content) {
 
 function render(resource) {
     let content = md.render(resource)
+    if (content.indexOf('table') >= 0 && content.indexOf('API') >= 0) {
+        let yyy = {
+            apiContent: content
+        }
+        return `export default ${JSON.stringify(yyy)}`
+    }
     let subject = stripSubject(content)
     let desc = stripDescription(content)
     let { code, demo } = stripExampleCode(content)
-    
+
     let xxx = {
         subject,
         desc,
