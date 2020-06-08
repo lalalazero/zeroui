@@ -1,11 +1,12 @@
 import Icon from './icon/Icon'
+
 import Dialog, { confirm, modal, alert } from './dialog/Dialog'
-import Button from './button/Button'
 import Layout from './layout/Layout'
 import Content from "./layout/Content"
 import Header from "./layout/Header"
 import Footer from "./layout/Footer"
 import Sider from "./layout/Sider"
+import { Button, ButtonGroup } from './button/index'
 
 import './index.scss'
 
@@ -16,6 +17,7 @@ const message = {
 }
 
 export {
-    Icon, Dialog, Button, Layout, Content, Header, Footer,
-    Sider, message
+    Icon, Dialog, Layout, Content, Header, Footer,
+    Sider, message, Button, ButtonGroup
 }
+

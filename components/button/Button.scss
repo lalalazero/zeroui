@@ -23,7 +23,7 @@
   }
 
   &:hover:not([disabled]) {
-    border-color: $--border-color-hover;
+    border-color: $--primary-color;
   }
   &:active:not([disabled]) {
     background: $--button-active-bg;
@@ -75,6 +75,9 @@
     color: white;
     > .zeroUI-icon {
       fill: white;
+    }
+    &:hover {
+      background-color: lighten($--primary-color, 5%);
     }
   }
   &-dashed {

@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { Button } from '../../components'
+import { Button, ButtonGroup } from '../../components'
 import DemoCard from '../DemoCard'
 import './Button.example.scss'
 import * as content1 from './01-基础类型.md'
@@ -8,10 +8,11 @@ import * as content2 from './02-图标按钮.md'
 import * as content3 from './03-按钮大小.md'
 import * as content4 from './04-加载中状态.md'
 import * as content5 from './05-不可用状态.md'
+import * as content6 from './06-按钮组.md'
 
 const ButtonExample01 = () => {
     return (
-        <div>
+        <div className="space-button">
             <Button>基本</Button>
             <Button type="primary">主要</Button>
             <Button type="dashed">虚线</Button>
@@ -22,7 +23,7 @@ const ButtonExample01 = () => {
 }
 const ButtonExample02 = () => {
     return (
-        <div>
+        <div className="space-button">
             <Button icon="search" shape="circle" type="primary"></Button>
             <Button icon='search' shape='circle'></Button>
             <Button icon="search" type="primary">Search</Button>
@@ -33,7 +34,7 @@ const ButtonExample02 = () => {
 
 const ButtonExample03 = () => {
     return (
-        <div>
+        <div className="space-button">
             <p>大尺寸按钮</p>
             <div>
                 <Button size="large">基本</Button>
@@ -78,7 +79,7 @@ const ButtonExample03 = () => {
 
 const ButtonExample04 = () => {
     return (
-        <div>
+        <div className="space-button">
             <Button loading>Loading</Button>
             <Button type="primary" loading position="right">Loading</Button>
             <Button loading shape="circle"></Button>
@@ -89,7 +90,7 @@ const ButtonExample04 = () => {
 
 const ButtonExample05 = () => {
     return (
-        <div>
+        <div className="space-button">
             <div>   
                 <Button type="primary">主要</Button>
                 <Button disabled type="primary">主要(禁用态)</Button>
@@ -106,6 +107,30 @@ const ButtonExample05 = () => {
                 <Button type="text">无边框</Button>
                 <Button disabled type="text">无边框(禁用态)</Button>
             </div>
+        </div>
+    )
+}
+
+const ButtonExample06 = () => {
+    return (
+        <div className="space-button-group">
+            <ButtonGroup>
+                <Button>取消</Button>
+                <Button>确定</Button>
+            </ButtonGroup>
+            <ButtonGroup>
+                <Button disabled>左</Button>
+                <Button disabled>中</Button>
+                <Button disabled>右</Button>
+            </ButtonGroup>
+            <ButtonGroup>
+                <Button icon="left" type="primary">上一页</Button>
+                <Button icon="right" type="primary" position="right">下一页</Button>
+            </ButtonGroup>
+            <ButtonGroup>
+                <Button icon="download" type="primary"></Button>
+                <Button icon="like" type="primary"></Button>
+            </ButtonGroup>
         </div>
     )
 }
@@ -161,6 +186,16 @@ const Card05 = (
         <ButtonExample05 />
     </DemoCard>
 )
+const Card06 = (
+    <DemoCard
+        code={content6.default.code}
+        subject={content6.default.subject}
+        description={content6.default.desc}
+        demo={content6.default.demo}
+    >
+        <ButtonExample06 />
+    </DemoCard>
+)
 
 
 
@@ -172,6 +207,7 @@ export default function () {
             {Card03}
             {Card04}
             {Card05}
+            {Card06}
         </div>
     )
 }
