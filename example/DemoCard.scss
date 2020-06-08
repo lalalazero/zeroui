@@ -3,12 +3,12 @@ $border-color: lighten(black, 90%);
 .demo-card {
   border: 1px solid $border-color;
   margin: 10px ;
-  & .zeroUI-icon {
-    width: 1em;
-    height: 1em;
-    margin: 0 5px;
+  // & .zeroUI-icon {
+  //   width: 1em;
+  //   height: 1em;
+  //   margin: 0 5px;
     
-  }
+  // }
 }
 .demo-subject {
   border-top: 1px solid $border-color;
@@ -46,6 +46,7 @@ $border-color: lighten(black, 90%);
   & .zeroUI-icon {
     vertical-align: middle;
     fill: darken($border-color, 20);
+    margin: 0 5px;
   }
   &.code-visible {
     border-bottom: 1px dashed $border-color;

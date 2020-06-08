@@ -10,8 +10,9 @@ const sc = scopedClassName
 const ButtonTypes = tuple('normal', 'primary', 'dashed',
     'text', 'danger');
 export type ButtonType = typeof ButtonTypes[number];
-export type ButtonShape = 'circle' | 'round'
+export type ButtonShape = 'circle'
 export type ButtonPosition = 'left' | 'right'
+export type ButtonSize = 'large' | 'small' | 'default'
 
 export interface ButtonProps {
     type?: ButtonType,
@@ -19,12 +20,19 @@ export interface ButtonProps {
     position?: ButtonPosition,
     loading?: boolean,
     className?: string,
-    shape?: ButtonShape
+    shape?: ButtonShape,
+    size?: ButtonSize
 }
 
 const Button: React.FunctionComponent<ButtonProps> = props => {
-    const { type, icon, loading, className, shape, position, ...restProps } = props
-    const clsSwithes = makeClassSwitchs({ type, shape, position })
+    const { type, icon, loading, className, shape, position, size, ...restProps } = props
+    const clsSwithes = makeClassSwitchs({ type, shape, position, size, 
+        'circleLarge': {
+            useKey: shape === 'circle' && size === 'large'
+        }, 
+        'circleSmall': { 
+            useKey: shape === 'circle' && size === 'small' 
+        }})
     return (
         <button className={sc(clsSwithes, className)} {...restProps}>
             {
@@ -42,7 +50,6 @@ const Button: React.FunctionComponent<ButtonProps> = props => {
 
 Button.defaultProps = {
     type: 'normal',
-    shape: 'round',
     position: 'left'
 }
 export default Button

@@ -1,14 +1,26 @@
 import camel2dot from "dot-snake-camel-case-convertor";
 
+interface Obj {
+    useKey: boolean
+}
+
 interface classSwitchs {
-    [k: string]: any
+    [k: string]: Obj | any
 }
 
 function makeClassSwitchs(obj: { [k: string]: any }, otherOptions?: classSwitchs) {
     let switchObj: classSwitchs = otherOptions || {}
-    Object.keys(obj).forEach(key => {
-        if (obj[key]) { switchObj[obj[key]] = true }
-    })
+    let keyList = Object.keys(obj)
+    for(let i = 0; i < keyList.length; i++) {
+        let key = keyList[i]
+        if (obj[key]) {
+            if (obj[key].hasOwnProperty('useKey')) {
+                switchObj[key] = obj[key].useKey
+                continue
+            }
+            switchObj[obj[key]] = true
+        }
+    }
     return switchObj
 }
 

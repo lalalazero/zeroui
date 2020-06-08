@@ -58,8 +58,6 @@ $func-warn-color: $gold-6;
 $func-error-color: $red-5;
 
 // 从 zeroview 拷贝过来的全局 scss 变量
-$--button-height: 32px;
-$--font-size: 14px;
 $--button-bg: #fff;
 $--primary-color: $brand-color;
 $--button-active-bg: #eee;
@@ -93,7 +91,6 @@ $bg-gray-light: #ccc;
 $disabled-color: lighten(gray, 20%);
 
 $toast-bg: rgba(0, 0, 0, 0.75);
-$font-size: 14px;
 $toast-height: 40px;
 $animation-duration: 300ms;
 
@@ -126,3 +123,24 @@ $table-row-hover-color: rgb(230, 247, 255);
 
 $spinAnimation: spin 2s infinite linear;
 
+// 抄 antd 的变量设计
+
+$font-size-base: 14px;
+$font-size-lg: $font-size-base + 2px;
+$font-size-sm: 12px;
+
+// vertical paddings
+$padding-lg: 24px; // containers
+$padding-md: 16px; // small containers and buttons
+$padding-sm: 12px; // Form controls and items
+$padding-xs: 8px; // small items
+
+$btn-height-base: 32px;
+$btn-height-lg: 40px;
+$btn-height-sm: 24px;
+
+$btn-padding-base: 0 $padding-md - 1px;
+$btn-font-size-lg: $font-size-lg;
+$btn-font-size-sm: $font-size-base;
+$btn-padding-lg: $btn-padding-base;
+$btn-padding-sm: 0 $padding-xs - 1px;

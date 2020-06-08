@@ -4,13 +4,24 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  font-size: $--font-size;
-  height: $--button-height;
+  font-size: $font-size-base;
+  height: $btn-height-base;
   padding: 0 1em;
   vertical-align: middle;
   border-radius: $--border-radius;
   border: 1px solid $--border-color;
   background: $--button-bg;
+
+  &-large {
+    height: $btn-height-lg;
+    font-size: $font-size-lg;
+  }
+
+  &-small {
+    height: $btn-height-sm;
+    font-size: $font-size-sm;
+  }
+
   &:hover {
     border-color: $--border-color-hover;
   }
@@ -22,7 +33,7 @@
   }
   > .zeroUI-icon {
     order: 1;
-    margin-right: 0.3em;
+    margin-right: 4px;
   }
   &-content {
     order: 2;
@@ -33,7 +44,7 @@
     }
     > .zeroUI-icon {
       order: 2;
-      margin-left: 0.3em;
+      margin-left: 4px;
       margin-right: 0;
     }
   }
@@ -60,9 +71,17 @@
     border: none;
   }
   &-circle {
-    border-radius: 50%;
-    width: $--button-height;
     padding: 0;
+    border-radius: 50%;
+    width: $btn-height-base;
+    > .zeroUI-icon {
+      margin: 0;
+    }
+    &-large {
+      width: $btn-height-lg;
+    }
+    &-small {
+      width: $btn-height-sm;
+    }
   }
-  
 }
