@@ -48,8 +48,26 @@
       margin-right: 0;
     }
   }
-  .loading {
-    animation: $spinAnimation;
+  &-loading {
+    position: relative;
+    > .zeroUI-icon {
+      animation: $spinAnimation;
+    }
+    &::before {
+      position: absolute;
+      top: -1px;
+      right: -1px;
+      bottom: -1px;
+      left: -1px;
+      z-index: 1;
+      background: #fff;
+      border-radius: inherit;
+      opacity: .45;
+      -webkit-transition: opacity .2s;
+      transition: opacity .2s;
+      content: '';
+      pointer-events: none;
+    }
   }
   &-primary {
     background: $--primary-color;

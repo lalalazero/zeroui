@@ -6,6 +6,7 @@ import './Button.example.scss'
 import * as content1 from './01-基础类型.md'
 import * as content2 from './02-图标按钮.md'
 import * as content3 from './03-按钮大小.md'
+import * as content4 from './04-加载中状态.md'
 
 const ButtonExample01 = () => {
     return (
@@ -74,6 +75,18 @@ const ButtonExample03 = () => {
 }
 
 
+const ButtonExample04 = () => {
+    return (
+        <div>
+            <Button loading>Loading</Button>
+            <Button type="primary" loading position="right">Loading</Button>
+            <Button loading shape="circle"></Button>
+            <Button loading type="primary" shape="circle"></Button>
+        </div>
+    )
+}
+
+
 const Card01 = (
     <DemoCard
         code={content1.default.code}
@@ -104,6 +117,17 @@ const Card03 = (
         <ButtonExample03 />
     </DemoCard>
 )
+const Card04 = (
+    <DemoCard
+        code={content4.default.code}
+        subject={content4.default.subject}
+        description={content4.default.desc}
+        demo={content4.default.demo}
+    >
+        <ButtonExample04 />
+    </DemoCard>
+)
+
 
 
 export default function () {
@@ -112,6 +136,7 @@ export default function () {
             {Card01}
             {Card02}
             {Card03}
+            {Card04}
         </div>
     )
 }
