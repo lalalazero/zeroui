@@ -41,6 +41,7 @@
   &:hover:not([disabled]) {
     border-color: $--primary-color;
     cursor: pointer;
+    color: $--primary-color;
   }
   &:active:not([disabled]) {
     background: $--button-active-bg;
@@ -83,6 +84,7 @@
     }
     &:hover {
       background-color: lighten($--primary-color, 5%);
+      color: white;
     }
   }
   &-dashed {
@@ -95,6 +97,10 @@
     background: $--error-color;
     color: white;
     border: none;
+    &:hover {
+      background: #ff7875;
+      color: white;
+    }
   }
   &-circle {
     padding: 0;
@@ -123,9 +129,6 @@
     &.zeroUI-button {
       color: white;
       border-color: white;
-      &:hover {
-        color: $--primary-color;
-      }
       &-primary {
         border: 1px solid $--primary-color;
         color: $--primary-color;
@@ -145,6 +148,12 @@
       }
     }
     
+  }
+
+  &-block {
+    &.zeroUI-button {
+      width: 100%;
+    }
   }
   
 }

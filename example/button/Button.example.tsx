@@ -10,6 +10,7 @@ import * as content4 from './04-加载中状态.md'
 import * as content5 from './05-不可用状态.md'
 import * as content6 from './06-按钮组.md'
 import * as content7 from './07-幽灵按钮.md'
+import * as content8 from './08-块级按钮.md'
 
 const ButtonExample01 = () => {
     return (
@@ -147,6 +148,27 @@ const ButtonExample07 = () => {
         </div>
     )
 }
+const ButtonExample08 = () => {
+    return (
+        <div className="space-button">
+            <div>
+                <Button block type="primary">主要</Button>
+            </div>
+            <div>
+                <Button block>基本</Button>
+            </div>
+            <div>
+                <Button block type="dashed">虚线</Button>
+            </div>
+            <div>
+                <Button block type="text">无边框</Button>
+            </div>
+            <div>
+                <Button block type="danger">危险</Button>
+            </div>
+        </div>
+    )
+}
 
 
 const Card01 = (
@@ -219,6 +241,16 @@ const Card07 = (
         <ButtonExample07 />
     </DemoCard>
 )
+const Card08 = (
+    <DemoCard
+        code={content8.default.code}
+        subject={content8.default.subject}
+        description={content8.default.desc}
+        demo={content8.default.demo}
+    >
+        <ButtonExample08 />
+    </DemoCard>
+)
 
 
 export default function () {
@@ -231,6 +263,7 @@ export default function () {
             {Card05}
             {Card06}
             {Card07}
+            {Card08}
         </div>
     )
 }
