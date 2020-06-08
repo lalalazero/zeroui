@@ -22,13 +22,17 @@ export interface ButtonProps {
     className?: string,
     shape?: ButtonShape,
     size?: ButtonSize,
+    disabled?: boolean
 }
 
 const Button: React.FunctionComponent<ButtonProps> = props => {
-    const { type, icon, loading, className, shape, position, size, ...restProps } = props
+    const { type, icon, loading, className, shape, position, size, disabled, ...restProps } = props
     const clsSwithes = makeClassSwitchs({ type, shape, position, size, 
         'loading': {
             useKey: loading
+        },
+        'disabled': {
+            useKey: disabled
         },
         'circleLarge': {
             useKey: shape === 'circle' && size === 'large'
@@ -37,8 +41,9 @@ const Button: React.FunctionComponent<ButtonProps> = props => {
             useKey: shape === 'circle' && size === 'small' 
         }
     })
+    const nativeProps = { disabled, ...restProps }
     return (
-        <button className={sc(clsSwithes, className)} {...restProps}>
+        <button className={sc(clsSwithes, className)}  {...nativeProps}>
             {
                 loading ? <Icon name='loading'></Icon> : ''
             }

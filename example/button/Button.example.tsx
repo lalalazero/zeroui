@@ -7,6 +7,7 @@ import * as content1 from './01-基础类型.md'
 import * as content2 from './02-图标按钮.md'
 import * as content3 from './03-按钮大小.md'
 import * as content4 from './04-加载中状态.md'
+import * as content5 from './05-不可用状态.md'
 
 const ButtonExample01 = () => {
     return (
@@ -86,6 +87,29 @@ const ButtonExample04 = () => {
     )
 }
 
+const ButtonExample05 = () => {
+    return (
+        <div>
+            <div>   
+                <Button type="primary">主要</Button>
+                <Button disabled type="primary">主要(禁用态)</Button>
+            </div>
+            <div>   
+                <Button>基本</Button>
+                <Button disabled>基本(禁用态)</Button>
+            </div>
+            <div>   
+                <Button type="dashed">虚线</Button>
+                <Button type="dashed" disabled>虚线(禁用态)</Button>
+            </div>
+            <div>   
+                <Button type="text">无边框</Button>
+                <Button disabled type="text">无边框(禁用态)</Button>
+            </div>
+        </div>
+    )
+}
+
 
 const Card01 = (
     <DemoCard
@@ -127,6 +151,16 @@ const Card04 = (
         <ButtonExample04 />
     </DemoCard>
 )
+const Card05 = (
+    <DemoCard
+        code={content5.default.code}
+        subject={content5.default.subject}
+        description={content5.default.desc}
+        demo={content5.default.demo}
+    >
+        <ButtonExample05 />
+    </DemoCard>
+)
 
 
 
@@ -137,6 +171,7 @@ export default function () {
             {Card02}
             {Card03}
             {Card04}
+            {Card05}
         </div>
     )
 }
