@@ -20,4 +20,6 @@ export {
     Icon, Dialog, Layout, Content, Header, Footer,
     Sider, message, Button, ButtonGroup
 }
+export { default as Row } from './grid/Row'
+export { default as Col } from './grid/Col'
 

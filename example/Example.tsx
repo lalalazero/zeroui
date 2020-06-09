@@ -1,11 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {HashRouter as Router, Route, NavLink } from 'react-router-dom'
+import { HashRouter as Router, Route, NavLink } from 'react-router-dom'
 import IconExample from './icon/Icon.example'
 import ButtonDemo from './button'
 import DialogExample from './dialog/Dialog.example'
 import LayoutExample from './layout/Layout.example'
 import ColorExample from './color/Color.example'
+import GridExample from './grid/Grid.example'
 import './Example.scss'
 // @ts-ignore
 import logo from './logo.png'
@@ -17,7 +18,7 @@ ReactDOM.render(
         <Layout className='example-layout'>
             <Header className='example-header'>
                 <NavLink to='/icon'>
-                    <img src={logo} className="logo" alt="logo"/><span>ZEROUI</span>
+                    <img src={logo} className="logo" alt="logo" /><span>ZEROUI</span>
                 </NavLink>
                 {/*<p>a set of delightful UI components implemented with React Hooks and typescript</p>*/}
             </Header>
@@ -42,6 +43,9 @@ ReactDOM.render(
                         <li>
                             <NavLink to="/layout">Layout 布局</NavLink>
                         </li>
+                        <li>
+                            <NavLink to="/grid">Grid 栅格</NavLink>
+                        </li>
                     </ul>
                 </Sider>
                 <Content className='example-content-wrapper'>
@@ -51,6 +55,7 @@ ReactDOM.render(
                         <Route path="/dialog" component={DialogExample}></Route>
                         <Route path="/layout" component={LayoutExample}></Route>
                         <Route path="/color" component={ColorExample}></Route>
+                        <Route path="/grid" component={GridExample}></Route>
                     </div>
                 </Content>
             </Layout>
