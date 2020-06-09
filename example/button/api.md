@@ -13,3 +13,4 @@
 | disabled | 是否禁用 | boolean | -- | -- | -- |
 | ghost | 幽灵按钮，使按钮背景透明 | boolean | -- | -- | -- |
 | block | 块状按钮，使按钮宽度适应父节点 | boolean | -- | -- | -- |
+| onClick | 点击按钮时的回调 | (event) => void | -- | -- | -- |

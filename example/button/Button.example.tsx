@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, ButtonGroup } from '../../components'
 import DemoCard from '../DemoCard'
 import './Button.example.scss'
@@ -81,12 +81,16 @@ const ButtonExample03 = () => {
 
 
 const ButtonExample04 = () => {
+    const [loadign1, setLoading1] = useState(true)
+    const [loading2, setLoading2] = useState(true)
+    const [loading3, setLoading3] = useState(true)
+    const [loading4, setLoading4] = useState(true)
     return (
         <div className="space-button">
-            <Button loading>Loading</Button>
-            <Button type="primary" loading position="right">Loading</Button>
-            <Button loading shape="circle"></Button>
-            <Button loading type="primary" shape="circle"></Button>
+            <Button loading={loadign1} onClick={() => { setLoading1(!loadign1) }}>Loading</Button>
+            <Button type="primary" loading={loading2} onClick={() => setLoading2(!loading2)} position="right">Loading</Button>
+            <Button loading={loading3} onClick={() => { setLoading3(!loading3) }} shape="circle" icon="search"></Button>
+            <Button loading={loading4} onClick={() => setLoading4(!loading4)} type="primary" icon="search" shape="circle"></Button>
         </div>
     )
 }

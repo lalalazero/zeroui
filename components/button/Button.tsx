@@ -24,11 +24,14 @@ export interface ButtonProps {
     size?: ButtonSize,
     disabled?: boolean,
     ghost?: boolean,
-    block?: boolean
+    block?: boolean,
+    onClick?: React.MouseEventHandler<HTMLElement>
 }
 
 const Button: React.FunctionComponent<ButtonProps> = props => {
-    const { type, icon, loading, className, shape, position, size, disabled, ghost, block, ...restProps } = props
+    const { type, icon, loading, className, shape,
+        onClick,
+        position, size, disabled, ghost, block, ...restProps } = props
     const clsSwithes = makeClassSwitchs({
         type, shape, position, size,
         'loading': {
@@ -52,12 +55,12 @@ const Button: React.FunctionComponent<ButtonProps> = props => {
     })
     const nativeProps = { disabled, ...restProps }
     return (
-        <button className={sc(clsSwithes, className)}  {...nativeProps}>
+        <button onClick={onClick} className={sc(clsSwithes, className)}  {...nativeProps}>
             {
                 loading ? <Icon name='loading'></Icon> : ''
             }
             {
-                icon ? <Icon name={icon}></Icon> : ''
+                icon && !loading ? <Icon name={icon}></Icon> : ''
             }
             <div className={sc('content')}>
                 {props.children}
