@@ -4,16 +4,21 @@ import { Icon } from '../components'
 import './DemoCard.scss'
 import { Language } from 'prism-react-renderer'
 
-export interface DemoCardProps {
+export interface MarkdownProps {
     code: string,
     subject: string,
-    description: string,
+    desc: string,
     demo: string,
-    css?: string
+    css?: string,
+}
+
+export interface DemoCardProps {
+    markdown: MarkdownProps
 }
 
 const DemoCard: React.FunctionComponent<DemoCardProps> = props => {
-    const { code, subject, description, css, children } = props
+    const { markdown, children } = props
+    const { code, subject, desc, css } = markdown
     const [codeVisible, setVisible] = useState(false)
     const toggleCode = () => {
         setVisible(!codeVisible)
@@ -29,14 +34,10 @@ const DemoCard: React.FunctionComponent<DemoCardProps> = props => {
                 }
             </div>
             <p className='demo-subject'><span>{subject}<Icon name="edit"></Icon></span></p>
-            <p className='demo-desc' dangerouslySetInnerHTML={{__html: description}}></p>
+            <p className='demo-desc' dangerouslySetInnerHTML={{__html: desc}}></p>
             <div className={codeVisible ? 'demo-action code-visible' : 'demo-action'}
                 onClick={toggleCode}><span><Icon name="copy"></Icon></span><span>{codeIcon}</span></div>
             <div className='demo-code'>
-                {/* {
-                    codeVisible ? <HighLightCode
-                        code={code}></HighLightCode> : ''
-                } */}
                 {
                     codeVisible ? renderCode(code) : ''
                 }

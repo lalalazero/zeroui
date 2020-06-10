@@ -65,10 +65,7 @@ const GridExample02 = () =>{
 
 const Card01 = (
     <DemoCard
-        code={content1.default.code}
-        subject={content1.default.subject}
-        description={content1.default.desc}
-        demo={content1.default.demo}
+        markdown={content1.default}
     >
         <GridExample01 />
     </DemoCard>
@@ -76,11 +73,7 @@ const Card01 = (
 
 const Card02 = (
     <DemoCard
-        code={content2.default.code}
-        subject={content2.default.subject}
-        description={content2.default.desc}
-        demo={content2.default.demo}
-        css={content2.default.css}
+        markdown={content2.default}
     >
         <GridExample02 />
     </DemoCard>

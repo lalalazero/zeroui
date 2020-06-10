@@ -178,80 +178,56 @@ const ButtonExample08 = () => {
 
 const Card01 = (
     <DemoCard
-        code={content1.default.code}
-        subject={content1.default.subject}
-        description={content1.default.desc}
-        demo={content1.default.demo}
+        markdown={content1.default}
     >
         <ButtonExample01 />
     </DemoCard>
 )
 const Card02 = (
     <DemoCard
-        code={content2.default.code}
-        subject={content2.default.subject}
-        description={content2.default.desc}
-        demo={content2.default.demo}
+        markdown={content2.default}
     >
         <ButtonExample02 />
     </DemoCard>
 )
 const Card03 = (
     <DemoCard
-        code={content3.default.code}
-        subject={content3.default.subject}
-        description={content3.default.desc}
-        demo={content3.default.demo}
+        markdown={content3.default}
     >
         <ButtonExample03 />
     </DemoCard>
 )
 const Card04 = (
     <DemoCard
-        code={content4.default.code}
-        subject={content4.default.subject}
-        description={content4.default.desc}
-        demo={content4.default.demo}
+        markdown={content4.default}
     >
         <ButtonExample04 />
     </DemoCard>
 )
 const Card05 = (
     <DemoCard
-        code={content5.default.code}
-        subject={content5.default.subject}
-        description={content5.default.desc}
-        demo={content5.default.demo}
+        markdown={content5.default}
     >
         <ButtonExample05 />
     </DemoCard>
 )
 const Card06 = (
     <DemoCard
-        code={content6.default.code}
-        subject={content6.default.subject}
-        description={content6.default.desc}
-        demo={content6.default.demo}
+        markdown={content6.default}
     >
         <ButtonExample06 />
     </DemoCard>
 )
 const Card07 = (
     <DemoCard
-        code={content7.default.code}
-        subject={content7.default.subject}
-        description={content7.default.desc}
-        demo={content7.default.demo}
+        markdown={content7.default}
     >
         <ButtonExample07 />
     </DemoCard>
 )
 const Card08 = (
     <DemoCard
-        code={content8.default.code}
-        subject={content8.default.subject}
-        description={content8.default.desc}
-        demo={content8.default.demo}
+        markdown={content8.default}
     >
         <ButtonExample08 />
     </DemoCard>
