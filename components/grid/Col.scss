@@ -5,4 +5,11 @@
             width: ($n / 24) * 100%;
         }
     }
+
+    $offset-prefix: zeroUI-col-offset-;
+    @for $n from 1 through 24 {
+        &.#{$offset-prefix}#{$n} {
+          margin-left: ($n / 24) * 100%;
+        }
+      }
 }

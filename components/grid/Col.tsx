@@ -6,11 +6,14 @@ import './Col.scss'
 const scopedClassName = scopedClassMaker('zeroUI-col')
 const sc = scopedClassName
 
-const Col: React.FC<{ span: number }> = (props) => {
-    const { span } = props
+const Col: React.FC<{ span: number, offset?: number }> = (props) => {
+    const { span, offset } = props
     const gutter = useContext(GutterContext)
     const clsSwitch = makeClassSwitchs({
         [`span-${span}`]: {
+            useKey: true
+        },
+        [`offset-${offset}`]: {
             useKey: true
         }
     })
