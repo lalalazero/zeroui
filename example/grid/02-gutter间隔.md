@@ -45,6 +45,10 @@ export default GridExample
 ```
 
 ```css
+.zeroUI-row {
+    margin: 20px 0;
+    color: #fff;
+}
 .gutter-div {
     height: 40px;
     line-height: 40px;
