@@ -48,8 +48,11 @@ $border-color: lighten(black, 90%);
 }
 .demo-code {
   & > .prism-code {
-    padding: 30px 15px;
+    padding: 20px 15px;
     max-width: 100%;
+    &.language-css {
+      border-top: 1px dashed $border-color;
+    }
     & > .token-line {
       max-width: 100%;
       display: flex;

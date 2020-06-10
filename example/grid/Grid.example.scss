@@ -1,20 +1,31 @@
 @import "../../components/index.scss";
 
+@mixin a {
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    &:nth-child(even) {
+        background-color: $cyan-3;
+    }
+    &:nth-child(odd) {
+        background-color: $cyan-5;
+    }
+}
+
 .zeroUI-grid-example {
     .zeroUI-row {
         margin: 20px 0;
         color: #fff;
     }
-    .zeroUI-col {
-        height: 40px;
-        line-height: 40px;
-        text-align: center;
-        &:nth-child(even) {
-            background-color: $cyan-3;
+    .col-with-bg {
+        .zeroUI-col {
+            @include a;
+            
         }
-        &:nth-child(odd) {
-            background-color: $cyan-5;
-        }
-        
     }
+
+    .gutter-div {
+        @include a;
+    }
+    
 }

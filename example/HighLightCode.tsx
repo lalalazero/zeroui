@@ -1,14 +1,15 @@
 import React from "react";
-import Highlight, { defaultProps } from "prism-react-renderer";
+import Highlight, { defaultProps, Language } from "prism-react-renderer";
 import github from 'prism-react-renderer/themes/github';
 
 interface Props {
     code: string,
+    lang?: Language
 }
 
 const HighLightCode: React.FunctionComponent<Props> = props => {
     return (
-        <Highlight {...defaultProps} theme={github} code={props.code} language="jsx">
+        <Highlight {...defaultProps} theme={github} code={props.code} language={props.lang as Language}>
             {({ tokens, getLineProps, className, style, getTokenProps }) => (
                 <pre className={className} style={style}>
                     {tokens.map((line, i) => (
@@ -24,5 +25,7 @@ const HighLightCode: React.FunctionComponent<Props> = props => {
     )
 
 }
-
+HighLightCode.defaultProps = {
+    lang: 'jsx'
+}
 export default HighLightCode

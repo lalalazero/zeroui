@@ -3,6 +3,8 @@ function jsxFence(tokens, idx, options, env, self) {
     let token = tokens[idx]
     if (token.info === 'jsx') {
         return `<codeToken> ${token.content} </codeToken>`
+    } else if(token.info === 'css') {
+        return `<cssToken> ${token.content} </cssToken>`
     }
 };
 
@@ -18,6 +20,11 @@ function stripDescription(content) {
     return result && result[2] ? result[2].trim() : '';
 }
 
+function stripCss(content) {
+    const result = content.match(/<(cssToken)>([\s\S]+)<\/\1>/);
+    return result && result[2] ? result[2].trim() : '';
+}
+
 function stripDemo(content) {
     const result = content.match(/<(codeToken)>([\s\S]+)<\/\1>/);
     return result && result[2] ? result[2].trim() : '';
@@ -25,6 +32,7 @@ function stripDemo(content) {
 
 function stripExampleCode(content) {
     let demo = stripDemo(content)
+    let css = stripCss(content)
     let index = demo.indexOf('export default')
     let name = demo.substring(index + 'export default'.length + 1)
     let code = demo.substring(0, index)
@@ -32,7 +40,8 @@ function stripExampleCode(content) {
     let y = code + `\nReactDOM.render(<${name} />, document.getElementById('xxx'))`
     return {
         code: x,
-        demo: y
+        demo: y,
+        css
     }
 }
 
@@ -46,13 +55,14 @@ function render(resource) {
     }
     let subject = stripSubject(content)
     let desc = stripDescription(content)
-    let { code, demo } = stripExampleCode(content)
+    let { code, demo, css } = stripExampleCode(content)
 
     let xxx = {
         subject,
         desc,
         demo,
         code,
+        css
     }
     return `export default ${JSON.stringify(xxx)}`
 }
