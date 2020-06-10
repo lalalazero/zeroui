@@ -1,7 +1,4 @@
 .zeroUI-col {
-    border: 1px solid red;
-    height: 40px;
-    line-height: 40px;
     $class-prefix: zeroUI-col-span-;
     @for $n from 1 through 24 {
         &.#{$class-prefix}#{$n} {
