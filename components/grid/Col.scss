@@ -1,8 +1,8 @@
 .zeroUI-col {
     position: relative;
-    $class-prefix: zeroUI-col-span-;
+    $span-prefix: zeroUI-col-span-;
     @for $n from 1 through 24 {
-        &.#{$class-prefix}#{$n} {
+        &.#{$span-prefix}#{$n} {
             width: ($n / 24) * 100%;
         }
     }
@@ -14,16 +14,16 @@
       }
     }
 
-    $offset-prefix: zeroUI-col-pull-;
+    $pull-prefix: zeroUI-col-pull-;
     @for $n from 1 through 24 {
-      &.#{$offset-prefix}#{$n} {
+      &.#{$pull-prefix}#{$n} {
         right: ($n / 24) * 100%;
       }
     }
 
-    $offset-prefix: zeroUI-col-push-;
+    $push-prefix: zeroUI-col-push-;
     @for $n from 1 through 24 {
-      &.#{$offset-prefix}#{$n} {
+      &.#{$push-prefix}#{$n} {
         left: ($n / 24) * 100%;
       }
     }
