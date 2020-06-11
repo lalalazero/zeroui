@@ -1,4 +1,5 @@
 .zeroUI-col {
+    position: relative;
     $class-prefix: zeroUI-col-span-;
     @for $n from 1 through 24 {
         &.#{$class-prefix}#{$n} {
@@ -8,8 +9,23 @@
 
     $offset-prefix: zeroUI-col-offset-;
     @for $n from 1 through 24 {
-        &.#{$offset-prefix}#{$n} {
-          margin-left: ($n / 24) * 100%;
-        }
+      &.#{$offset-prefix}#{$n} {
+        margin-left: ($n / 24) * 100%;
       }
+    }
+
+    $offset-prefix: zeroUI-col-pull-;
+    @for $n from 1 through 24 {
+      &.#{$offset-prefix}#{$n} {
+        right: ($n / 24) * 100%;
+      }
+    }
+
+    $offset-prefix: zeroUI-col-push-;
+    @for $n from 1 through 24 {
+      &.#{$offset-prefix}#{$n} {
+        left: ($n / 24) * 100%;
+      }
+    }
+
 }

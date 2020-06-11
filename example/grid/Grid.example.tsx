@@ -5,6 +5,7 @@ import './Grid.example.scss'
 import * as content1 from './01-基础栅格.md'
 import * as content2 from './02-gutter间隔.md'
 import * as content3 from './03-左右偏移.md'
+import * as content4 from './04-栅格排序.md'
 
 const GridExample01 = () => {
     return (
@@ -80,6 +81,17 @@ const GridExample03 = () => {
     )
 }
 
+const GridExample04 = () => {
+    return (
+        <div className="col-with-bg">
+            <Row>
+                <Col span={18} push={6}>col-1 col-span-18-push-6</Col>
+                <Col span={6} pull={18}>col-2 col-span-6-pull-18</Col>
+            </Row>
+        </div>
+    )
+}
+
 const Card01 = (
     <DemoCard
         markdown={content1.default}
@@ -102,12 +114,19 @@ const Card03 = (
     </DemoCard>
 )
 
+const Card04 = (
+    <DemoCard markdown={content4.default}>
+        <GridExample04 />
+    </DemoCard>
+)
+
 export default function () {
     return (
         <div className='zeroUI-grid-example'>
             {Card01}
             {Card02}
             {Card03}
+            {Card04}
         </div>
     )
 }

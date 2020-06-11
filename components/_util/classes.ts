@@ -13,6 +13,7 @@ function makeClassSwitchs(obj: { [k: string]: any }, otherOptions?: classSwitchs
     let keyList = Object.keys(obj)
     for(let i = 0; i < keyList.length; i++) {
         let key = keyList[i]
+        if(key.indexOf('undefined') >= 0) continue
         if (obj[key]) {
             if (obj[key].hasOwnProperty('useKey')) {
                 switchObj[key] = obj[key].useKey
