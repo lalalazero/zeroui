@@ -35,7 +35,8 @@ const Row: React.FC<RowProps> = (props) => {
 }
 
 Row.defaultProps = {
-    justify: 'start'
+    justify: 'start',
+    align: 'top'
 }
 
 export default Row;
