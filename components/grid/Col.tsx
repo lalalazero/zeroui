@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, HTMLProps } from 'react'
 import { scopedClassMaker, makeClassSwitchs } from '../_util/classes'
 import GutterContext from './GutterContext'
 import './Col.scss'
@@ -6,8 +6,15 @@ import './Col.scss'
 const scopedClassName = scopedClassMaker('zeroUI-col')
 const sc = scopedClassName
 
-const Col: React.FC<{ span: number, offset?: number, push?: number, pull?:number }> = (props) => {
-    const { span, offset, push, pull } = props
+export interface ColProps extends HTMLProps<HTMLDivElement>{
+    span: number, 
+    offset?: number, 
+    push?: number, 
+    pull?:number 
+}
+
+const Col: React.FC<ColProps> = (props) => {
+    const { span, offset, push, pull, className, style, ...rest } = props
     const gutter = useContext(GutterContext)
     const clsSwitch = makeClassSwitchs({
         [`span-${span}`]: {
@@ -24,8 +31,9 @@ const Col: React.FC<{ span: number, offset?: number, push?: number, pull?:number
         }
     })
     const styleObj = gutter ? { paddingLeft: gutter / 2, paddingRight: gutter / 2 } : {}
+    const mergeStyle = Object.assign({}, style, styleObj)
     return (    
-        <div className={sc(clsSwitch)} style={styleObj}>
+        <div {...rest} className={sc(clsSwitch, className)} style={mergeStyle}>
             { props.children }
         </div>
     )

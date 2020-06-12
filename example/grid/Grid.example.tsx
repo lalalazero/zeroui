@@ -7,6 +7,7 @@ import * as content2 from './02-gutter间隔.md'
 import * as content3 from './03-左右偏移.md'
 import * as content4 from './04-栅格排序.md'
 import * as content5 from './05-flex布局.md'
+import * as content6 from './06-flex对齐.md'
 
 const GridExample01 = () => {
     return (
@@ -130,6 +131,31 @@ const GridExample05 = () => {
     )
 }
 
+const GridExample06 = () => {
+    return (
+        <div className="col-with-bg height-diff">
+            <Row align="top" justify="center" className='row-padding-20'>
+                <Col span={4}>col-span-4</Col>
+                <Col span={4}>col-span-4</Col>
+                <Col span={4}>col-span-4</Col>
+                <Col span={4}>col-span-4</Col>
+            </Row>
+            <Row align="middle" justify="center" className='row-padding-20'>
+                <Col span={4}>col-span-4</Col>
+                <Col span={4}>col-span-4</Col>
+                <Col span={4}>col-span-4</Col>
+                <Col span={4}>col-span-4</Col>
+            </Row>
+            <Row align="bottom" justify="center" className='row-padding-20'>
+                <Col span={4}>col-span-4</Col>
+                <Col span={4}>col-span-4</Col>
+                <Col span={4}>col-span-4</Col>
+                <Col span={4}>col-span-4</Col>
+            </Row>
+        </div>
+    )
+}
+
 const Card01 = (
     <DemoCard
         markdown={content1.default}
@@ -164,6 +190,12 @@ const Card05 = (
     </DemoCard>
 )
 
+const Card06 = (
+    <DemoCard markdown={content6.default}>
+        <GridExample06 />
+    </DemoCard>
+)
+
 export default function () {
     return (
         <div className='zeroUI-grid-example'>
@@ -172,6 +204,7 @@ export default function () {
             {Card03}
             {Card04}
             {Card05}
+            {Card06}
         </div>
     )
 }
