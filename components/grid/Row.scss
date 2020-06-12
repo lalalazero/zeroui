@@ -1,13 +1,20 @@
 .zeroUI-row {
     display: flex;
     flex-wrap: wrap;
-    &.align-left {
+    $prefix: zeroUI-row;
+    &-justify-start {
         justify-content: flex-start;
     }
-    &.align-right {
+    &-justify-end {
         justify-content: flex-end;
     }
-    &.align-center {
+    &-justify-center {
         justify-content: center;
+    }
+    &-justify-space-between {
+        justify-content: space-between;
+    }
+    &-justify-space-around {
+        justify-content: space-around;
     }
 }

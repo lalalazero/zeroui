@@ -6,6 +6,7 @@ import * as content1 from './01-基础栅格.md'
 import * as content2 from './02-gutter间隔.md'
 import * as content3 from './03-左右偏移.md'
 import * as content4 from './04-栅格排序.md'
+import * as content5 from './05-flex布局.md'
 
 const GridExample01 = () => {
     return (
@@ -92,6 +93,43 @@ const GridExample04 = () => {
     )
 }
 
+const GridExample05 = () => {
+    return (
+        <div className='col-with-bg'>
+            <Row justify="start" className='row-padding-10'>
+                <Col span={4}>col-span-4</Col>
+                <Col span={4}>col-span-4</Col>
+                <Col span={4}>col-span-4</Col>
+                <Col span={4}>col-span-4</Col>
+            </Row>
+            <Row justify="center" className='row-padding-10'>
+                <Col span={4}>col-span-4</Col>
+                <Col span={4}>col-span-4</Col>
+                <Col span={4}>col-span-4</Col>
+                <Col span={4}>col-span-4</Col>
+            </Row>
+            <Row justify="end" className='row-padding-10'>
+                <Col span={4}>col-span-4</Col>
+                <Col span={4}>col-span-4</Col>
+                <Col span={4}>col-span-4</Col>
+                <Col span={4}>col-span-4</Col>
+            </Row>
+            <Row justify="space-between" className='row-padding-10'>
+                <Col span={4}>col-span-4</Col>
+                <Col span={4}>col-span-4</Col>
+                <Col span={4}>col-span-4</Col>
+                <Col span={4}>col-span-4</Col>
+            </Row>
+            <Row justify="space-around" className='row-padding-10'>
+                <Col span={4}>col-span-4</Col>
+                <Col span={4}>col-span-4</Col>
+                <Col span={4}>col-span-4</Col>
+                <Col span={4}>col-span-4</Col>
+            </Row>
+        </div>
+    )
+}
+
 const Card01 = (
     <DemoCard
         markdown={content1.default}
@@ -120,6 +158,12 @@ const Card04 = (
     </DemoCard>
 )
 
+const Card05 = (
+    <DemoCard markdown={content5.default}>
+        <GridExample05 />
+    </DemoCard>
+)
+
 export default function () {
     return (
         <div className='zeroUI-grid-example'>
@@ -127,6 +171,7 @@ export default function () {
             {Card02}
             {Card03}
             {Card04}
+            {Card05}
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { CSSProperties, HTMLProps } from 'react'
 import { scopedClassMaker, makeClassSwitchs } from '../_util/classes'
 import GutterContext from './GutterContext'
 import './Row.scss'
@@ -6,23 +6,22 @@ import './Row.scss'
 const scopedClassName = scopedClassMaker('zeroUI-row')
 const sc = scopedClassName
 
-const Row: React.FC<{ align?: 'left' | 'right' | 'center', gutter?: number }> = (props) => {
-    const { align, gutter } = props
+interface RowProps extends HTMLProps<HTMLDivElement> {
+    justify?: 'start' | 'end' | 'center' | 'space-between' | 'space-around', 
+    gutter?: number
+}
+
+const Row: React.FC<RowProps> = (props) => {
+    const { justify, gutter, className, ...restProps } = props
     const clsSwitch = makeClassSwitchs({
-        'align-left': {
-            useKey: align === 'left'
-        },
-        'align-center': {
-            useKey: align === 'center'
-        },
-        'align-right': {
-            useKey: align === 'right'
+        [`justify-${justify}`]: {
+            useKey: true
         }
     })
     const styleObj = gutter ? { marginLeft: - gutter / 2, marginRight: - gutter / 2} : {}
     return (
         <GutterContext.Provider value={gutter}>
-            <div className={sc(clsSwitch)} style={styleObj}>
+            <div {...restProps} className={sc(clsSwitch, className)} style={styleObj} >
                 { props.children }
             </div>
         </GutterContext.Provider>
@@ -31,7 +30,7 @@ const Row: React.FC<{ align?: 'left' | 'right' | 'center', gutter?: number }> = 
 }
 
 Row.defaultProps = {
-    align: 'left'
+    justify: 'start'
 }
 
 export default Row;
