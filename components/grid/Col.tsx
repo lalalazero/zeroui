@@ -10,11 +10,12 @@ export interface ColProps extends HTMLProps<HTMLDivElement>{
     span: number, 
     offset?: number, 
     push?: number, 
-    pull?:number 
+    pull?:number,
+    order?: number
 }
 
 const Col: React.FC<ColProps> = (props) => {
-    const { span, offset, push, pull, className, style, ...rest } = props
+    const { span, offset, push, pull, className, style, order, ...rest } = props
     const gutter = useContext(GutterContext)
     const clsSwitch = makeClassSwitchs({
         [`span-${span}`]: {
@@ -27,6 +28,9 @@ const Col: React.FC<ColProps> = (props) => {
             useKey: true
         },
         [`pull-${pull}`]: {
+            useKey: true
+        },
+        [`order-${order}`]: {
             useKey: true
         }
     })

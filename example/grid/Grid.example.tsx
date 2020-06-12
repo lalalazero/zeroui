@@ -8,6 +8,7 @@ import * as content3 from './03-左右偏移.md'
 import * as content4 from './04-栅格排序.md'
 import * as content5 from './05-flex布局.md'
 import * as content6 from './06-flex对齐.md'
+import * as content7 from './07-flex排序.md'
 import * as apiContent from './api.md'
 
 const GridExample01 = () => {
@@ -157,6 +158,19 @@ const GridExample06 = () => {
     )
 }
 
+const GridExample07 = () => {
+    return (
+        <div className='col-with-bg'>
+            <Row>
+                <Col span={6} order={4}>col-1 span-6 order-4</Col>
+                <Col span={6} order={3}>col-2 span-6 order-3</Col>
+                <Col span={6} order={2}>col-3 span-6 order-2</Col>
+                <Col span={6} order={1}>col-4 span-6 order-1</Col>
+            </Row>
+        </div>
+    )
+}
+
 const Card01 = (
     <DemoCard
         markdown={content1.default}
@@ -197,6 +211,12 @@ const Card06 = (
     </DemoCard>
 )
 
+const Card07 = (
+    <DemoCard markdown={content7.default}>
+        <GridExample07 />
+    </DemoCard>
+)
+
 export default function () {
     return (
         <div className='zeroUI-grid-example'>
@@ -206,6 +226,7 @@ export default function () {
             {Card04}
             {Card05}
             {Card06}
+            {Card07}
             <div className='api-container'>
                 <div dangerouslySetInnerHTML={{ __html: apiContent.default.apiContent }}></div>
             </div>
