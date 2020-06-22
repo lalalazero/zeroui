@@ -9,6 +9,7 @@ import * as content4 from './04-栅格排序.md'
 import * as content5 from './05-flex布局.md'
 import * as content6 from './06-flex对齐.md'
 import * as content7 from './07-flex排序.md'
+import * as content8 from './08-响应式布局.md'
 import * as apiContent from './api.md'
 
 const GridExample01 = () => {
@@ -33,7 +34,7 @@ const GridExample01 = () => {
     )
 }
 
-const GridExample02 = () =>{
+const GridExample02 = () => {
     return (
         <div>
             <Row gutter={16}>
@@ -170,6 +171,38 @@ const GridExample07 = () => {
         </div>
     )
 }
+const GridExample08 = () => {
+    return (
+        <div className="col-with-bg">
+            <Row>
+                <Col xs={24} sm={12} md={8} lg={6} xl={4} xxl={3}>
+                    col
+                </Col>
+                <Col xs={24} sm={12} md={8} lg={6} xl={4} xxl={3}>
+                    col
+                </Col>
+                <Col xs={24} sm={12} md={8} lg={6} xl={4} xxl={3}>
+                    col
+                </Col>
+                <Col xs={24} sm={12} md={8} lg={6} xl={4} xxl={3}>
+                    col
+                </Col>
+                <Col xs={24} sm={12} md={8} lg={6} xl={4} xxl={3}>
+                    col
+                </Col>
+                <Col xs={24} sm={12} md={8} lg={6} xl={4} xxl={3}>
+                    col
+                </Col>
+                <Col xs={24} sm={12} md={8} lg={6} xl={4} xxl={3}>
+                    col
+                </Col>
+                <Col xs={24} sm={12} md={8} lg={6} xl={4} xxl={3}>
+                    col
+                </Col>
+            </Row>
+        </div>
+    )
+}
 
 const Card01 = (
     <DemoCard
@@ -216,6 +249,11 @@ const Card07 = (
         <GridExample07 />
     </DemoCard>
 )
+const Card08 = (
+    <DemoCard markdown={content8.default}>
+        <GridExample08 />
+    </DemoCard>
+)
 
 export default function () {
     return (
@@ -227,6 +265,7 @@ export default function () {
             {Card05}
             {Card06}
             {Card07}
+            {Card08}
             <div className='api-container'>
                 <div dangerouslySetInnerHTML={{ __html: apiContent.default.apiContent }}></div>
             </div>

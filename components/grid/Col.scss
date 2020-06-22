@@ -35,4 +35,58 @@
       }
     }
 
+    @media (min-width: 0px) {
+      $xs-span-prefix: zeroUI-col-xs-span-;
+      @for $n from 1 through 24 {
+        &.#{$xs-span-prefix}#{$n} {
+            width: ($n / 24) * 100%;
+        }
+      }
+    }
+
+    @media (min-width: 576px) {
+      $sm-span-prefix: zeroUI-col-sm-span-;
+      @for $n from 1 through 24 {
+        &.#{$sm-span-prefix}#{$n} {
+            width: ($n / 24) * 100%;
+        }
+      }
+    }
+
+    @media (min-width: 768px) {
+      $md-span-prefix: zeroUI-col-md-span-;
+      @for $n from 1 through 24 {
+        &.#{$md-span-prefix}#{$n} {
+            width: ($n / 24) * 100%;
+        }
+      }
+    }
+
+    @media (min-width: 992px) {
+      $lg-span-prefix: zeroUI-col-lg-span-;
+      @for $n from 1 through 24 {
+        &.#{$lg-span-prefix}#{$n} {
+            width: ($n / 24) * 100%;
+        }
+      }
+    }
+
+    @media (min-width: 1200px) {
+      $xl-span-prefix: zeroUI-col-xl-span-;
+      @for $n from 1 through 24 {
+        &.#{$xl-span-prefix}#{$n} {
+            width: ($n / 24) * 100%;
+        }
+      }
+    }
+
+    @media (min-width: 1600px) {
+      $xxl-span-prefix: zeroUI-col-xxl-span-;
+      @for $n from 1 through 24 {
+        &.#{$xxl-span-prefix}#{$n} {
+            width: ($n / 24) * 100%;
+        }
+      }
+    }
+
 }
