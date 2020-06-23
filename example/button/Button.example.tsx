@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react'
-import { Button, ButtonGroup } from '../../components'
+import { Button, ButtonGroup, Col, Row } from '../../components'
 import DemoCard from '../DemoCard'
 import './Button.example.scss'
 import * as content1 from './01-基础类型.md'
@@ -237,16 +237,21 @@ const Card08 = (
 export default function () {
     return (
         <div className='zeroUI-button-example'>
-            <div>
-                {Card01}
-                {Card02}
-                {Card03}
-                {Card04}
-                {Card05}
-                {Card06}
-                {Card07}
-                {Card08}
-            </div>
+            <Row>
+                <Col lg={12} sm={24}>
+                    {Card01}
+                    {Card02}
+                    {Card03}
+                    {Card04}
+                </Col>
+                <Col lg={12} sm={24}>
+                    {Card05}
+                    {Card06}
+                    {Card07}
+                    {Card08}
+                </Col>
+            </Row>
+            
             <div className='api-container'>
                 <div dangerouslySetInnerHTML={{ __html: apiContent.default.apiContent }}></div>
             </div>
