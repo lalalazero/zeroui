@@ -7,6 +7,7 @@ import DialogExample from './dialog/Dialog.example'
 import LayoutExample from './layout/Layout.example'
 import ColorExample from './color/Color.example'
 import GridExample from './grid/Grid.example'
+import TooltipExample from './tooltip/Tooltip.example'
 import './Example.scss'
 // @ts-ignore
 import logo from './logo.png'
@@ -46,6 +47,9 @@ ReactDOM.render(
                         <li>
                             <NavLink to="/grid">Grid 栅格</NavLink>
                         </li>
+                        <li>
+                            <NavLink to="/tooltip">Tooltip 文字提示</NavLink>
+                        </li>
                     </ul>
                 </Sider>
                 <Content className='example-content-wrapper'>
@@ -56,6 +60,7 @@ ReactDOM.render(
                         <Route path="/layout" component={LayoutExample}></Route>
                         <Route path="/color" component={ColorExample}></Route>
                         <Route path="/grid" component={GridExample}></Route>
+                        <Route path="/tooltip" component={TooltipExample}></Route>
                     </div>
                 </Content>
             </Layout>

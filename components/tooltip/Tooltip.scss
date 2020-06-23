@@ -1,0 +1,30 @@
+.zeroUI-tooltip-wrapper {
+    position: relative;
+    border: 1px solid red;
+    display: inline-block;
+}
+$tooltip-bg: rgba(0,0,0,0.75);
+
+.zeroUI-tooltip-content {
+    position: absolute;
+    transform: translateY(-100%);
+    background: $tooltip-bg;
+    color: #fff;
+    border-radius: 4px;
+    padding: 6px 10px;
+    display: inline-block;
+    margin-top: -10px;
+    min-width: 2em;
+    max-width: 20em;
+    word-break: break-word;
+    &::before {
+        content: '';
+        border: 5px solid transparent;
+        display: inline-block;
+        position: absolute;
+        border-top-color: $tooltip-bg;
+        left: 10px;
+        bottom: 0px;
+        transform: translateY(100%);
+    }
+}
