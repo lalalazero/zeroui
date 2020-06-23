@@ -7,14 +7,15 @@
   &-sider,&-header,&-footer {
     flex-shrink: 0;
   }
-  &.zeroUI-layout-has-sider {
-    flex-direction: row;
-    .zeroUI-layout {
-      flex-direction: column;
-    }
-  }
-  & & {
+  &>& {
     flex-grow: 1;
     flex-direction: row;
   }
+  &-has-sider {
+    flex-direction: row;
+    &>.zeroUI-layout {
+      flex-direction: column;
+    }
+  }
+  
 }

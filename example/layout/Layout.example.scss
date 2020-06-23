@@ -1,0 +1,37 @@
+@import "../../components/index";
+
+
+.layout-example-wrapper {
+    margin-bottom: 40px;
+}
+
+.zeroUI-layout-example {
+    .zeroUI-layout-header {
+        background: $cyan-2;
+        height: 80px;
+        line-height: 80px;
+        text-align: center;
+        color: #fff;
+    }
+    .zeroUI-layout-sider {
+        background: $cyan-5;
+        width: 200px;
+        line-height: 200px;
+        text-align: center;
+        color: #fff;
+    }
+    .zeroUI-layout-content {
+        height: 200px;
+        line-height: 200px;
+        background: $cyan-4;
+        text-align: center;
+        color: #fff;
+    }
+    .zeroUI-layout-footer {
+        background: $cyan-2;
+        height: 80px;
+        line-height: 80px;
+        text-align: center;
+        color: #fff;
+    }
+}
