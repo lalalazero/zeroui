@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Tooltip } from '../../components'
+import { Tooltip, Button, Row, Col } from '../../components'
 import DemoCard from '../DemoCard'
 import * as content01 from './01-基本用法.md'
 
@@ -8,7 +8,7 @@ const TooltipExample01 = () => {
     return (
         <div>
             <Tooltip title="prompt text">
-                <span>Tooltip will show on mouse enter.</span>
+                <Button>Tooltip will show on mouse enter.</Button>
             </Tooltip>
 
         </div>
@@ -48,9 +48,15 @@ const Card03 = (
 export default function () {
     return (
         <div className="zeroUI-tooltip-example">
-            {Card01}
-            {Card02}
-            {Card03}
+            <Row>
+                <Col lg={12} sm={24}>
+                    {Card01}
+                    {Card03}
+                </Col>
+                <Col lg={12} sm={24}>
+                    {Card02}
+                </Col>
+            </Row>
         </div>
     )
 
