@@ -1,7 +1,11 @@
 import React from 'react'
-import './importIcons'
+// import './importIcons'
 import './Icon.scss'
-import '../icons/icons.js'
+// import '../icons/icons.js'
+
+let scriptElement = document.createElement('script')
+scriptElement.src = "//at.alicdn.com/t/font_1353479_c4cj3budfrg.js"
+document.body.appendChild(scriptElement)
 
 import { scopedClassMaker } from '../_util/classes'
 
