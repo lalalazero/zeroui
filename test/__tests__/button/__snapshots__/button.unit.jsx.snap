@@ -13,3 +13,41 @@ exports[`button 测试 renders ok 1`] = `
   </div>
 </button>
 `;
+
+exports[`button 测试 可以设置icon 1`] = `
+<button
+  className="zeroUI-button zeroUI-button-normal zeroUI-button-left"
+>
+  
+  <svg
+    className="zeroUI-icon"
+  >
+    <use
+      xlinkHref="#icon-wechat"
+    />
+  </svg>
+  <div
+    className="zeroUI-button-content"
+  >
+    button
+  </div>
+</button>
+`;
+
+exports[`button 测试 可以设置loading 1`] = `
+<button
+  className="zeroUI-button zeroUI-button-normal zeroUI-button-left zeroUI-button-loading"
+>
+  <svg
+    className="zeroUI-icon"
+  >
+    <use
+      xlinkHref="#icon-loading"
+    />
+  </svg>
+  
+  <div
+    className="zeroUI-button-content"
+  />
+</button>
+`;
