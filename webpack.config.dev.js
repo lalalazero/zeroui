@@ -3,11 +3,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = Object.assign({}, base, {
     mode: 'development',
     entry: {
-        index: "./example/Example.tsx"
+        index: process.env.IS_APP === 'true' ? "./example/App.tsx" : "./example/Example.tsx"
     },
-    // output: {
-    //   publicPath: ''
-    // },
     plugins: [
         new HtmlWebpackPlugin({
             title: 'Zero-UI-React',
