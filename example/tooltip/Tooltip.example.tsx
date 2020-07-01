@@ -1,8 +1,9 @@
 import React from 'react'
-
 import { Tooltip, Button, Row, Col } from '../../components'
 import DemoCard from '../DemoCard'
+import './Tooltip.example.scss'
 import * as content01 from './01-基本用法.md'
+import * as content02 from './02-4个方位.md'
 
 const TooltipExample01 = () => {
     return (
@@ -14,16 +15,32 @@ const TooltipExample01 = () => {
         </div>
     )
 }
-const TooltipExample02 = () => (
-    <Tooltip title="pr">
-        <span>Tooltip will show on mouse enter.</span>
-    </Tooltip>
-)
-const TooltipExample03 = () => (
-    <Tooltip title="Tooltip will show on mouse enter.Tooltip will show on mouse enter.Tooltip will show on mouse enter.Tooltip will show on mouse enter.Tooltip will show on mouse enter.Tooltip will show on mouse enter.prompt text">
-        <span>tooltip will show on mouse enter</span>
-    </Tooltip>
-)
+
+const TooltipExample02 = () => {
+    return (
+        <div className="tooltip-example-02">
+            <div className='box-1'>
+                <Tooltip title="propmt text" placement="top">
+                    <Button>TOP</Button>
+                </Tooltip>
+            </div>
+            <div className='box-2'>
+                <Tooltip title="propmt text" placement="left">
+                    <Button>LEFT</Button>
+                </Tooltip>
+                <Tooltip title="propmt text" placement="right">
+                    <Button>RIGHT</Button>
+                </Tooltip>
+            </div>
+            <div className='box-3'>
+                <Tooltip title="propmt text" placement="bottom">
+                    <Button>BOTTOM</Button>
+                </Tooltip>
+            </div>
+            
+        </div>
+    )
+}
 
 const Card01 = (
     <DemoCard markdown={content01.default}>
@@ -31,19 +48,14 @@ const Card01 = (
     </DemoCard>
 )
 
-
 const Card02 = (
-    <DemoCard markdown={content01.default}>
+    <DemoCard markdown={content02.default}>
         <TooltipExample02 />
     </DemoCard>
 )
 
 
-const Card03 = (
-    <DemoCard markdown={content01.default}>
-        <TooltipExample03 />
-    </DemoCard>
-)
+
 
 export default function () {
     return (
@@ -51,7 +63,6 @@ export default function () {
             <Row>
                 <Col lg={12} sm={24}>
                     {Card01}
-                    {Card03}
                 </Col>
                 <Col lg={12} sm={24}>
                     {Card02}

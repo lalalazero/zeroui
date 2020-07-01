@@ -1,30 +1,76 @@
+$tooltip-bg: rgba(0,0,0,0.75);
 .zeroUI-tooltip-wrapper {
     position: relative;
-    // border: 1px solid red;
     display: inline-block;
+    &-top {
+        .zeroUI-tooltip-content {
+            bottom: 100%;
+            margin-bottom: 10px;
+            &::before {
+                left: 10px;
+                bottom: 0px;
+                transform: translateY(100%);
+                border-top-color: $tooltip-bg;
+            }
+        }
+    }
+    &-bottom{
+        .zeroUI-tooltip-content {
+            top: 100%;
+            margin-top: 10px;
+            &::before {
+                bottom: 10px;
+                top: 0px;
+                transform: translateY(-100%);
+                border-bottom-color: $tooltip-bg;
+            }
+        }
+    }
+    &-left {
+        .zeroUI-tooltip-content {
+            right: 100%;
+            top: 0;
+            margin-right: 10px;
+            &::before {
+                right: 0px;
+                top: 10px;
+                border-left-color: $tooltip-bg;
+                transform: translateX(100%);
+            }
+        }
+    }
+    &-right {
+        .zeroUI-tooltip-content {
+            left: 100%;
+            top: 0;
+            margin-left: 10px;
+            &::before {
+                left: 0px;
+                top: 10px;
+                border-right-color: $tooltip-bg;
+                transform: translateX(-100%);
+            }
+        }
+    }
 }
-$tooltip-bg: rgba(0,0,0,0.75);
+
+
 
 .zeroUI-tooltip-content {
     position: absolute;
-    transform: translateY(-100%);
     background: $tooltip-bg;
     color: #fff;
     border-radius: 4px;
     padding: 6px 10px;
     display: inline-block;
-    margin-top: -10px;
-    min-width: 2em;
-    max-width: 20em;
-    word-break: break-word;
+    min-width: 4em;
+    max-width: 24em;
+    z-index: 3;
+    // word-break: break-word;
     &::before {
         content: '';
         border: 5px solid transparent;
         display: inline-block;
         position: absolute;
-        border-top-color: $tooltip-bg;
-        left: 10px;
-        bottom: 0px;
-        transform: translateY(100%);
     }
 }

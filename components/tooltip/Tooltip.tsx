@@ -1,17 +1,23 @@
 import React, { useState } from 'react'
-import { scopedClassMaker } from '../_util/classes'
+import { scopedClassMaker, makeClassSwitchs } from '../_util/classes'
 import './Tooltip.scss'
+import { tuple } from '../_util/type'
 
 const scopedClassName = scopedClassMaker('zeroUI-tooltip-wrapper')
 const sc = scopedClassName
 
+const TooltipPlacements = tuple('top','bottom','left','right')
+export type TooltipPlacementType = typeof TooltipPlacements[number]
+
+
 export interface ToolTipProps {
     title?: string,
-    mouseLeaveDelay?: number
+    mouseLeaveDelay?: number,
+    placement?: TooltipPlacementType
 }
 
 const Tooltip: React.FC<ToolTipProps> = (props) => {
-    const { mouseLeaveDelay } = props
+    const { mouseLeaveDelay, placement } = props
     const [visible, setVisible] = useState(false)
     let timerId: any = null
     const onMouseEnter = () => {
@@ -31,8 +37,9 @@ const Tooltip: React.FC<ToolTipProps> = (props) => {
         }
 
     }
+    const clsSwitches = makeClassSwitchs({ placement })
     return (
-        <div className={sc('')}>
+        <div className={sc(clsSwitches, '')}>
             {
                 visible && <span className='zeroUI-tooltip-content'
                     onMouseEnter={onMouseEnter}
@@ -51,7 +58,8 @@ const Tooltip: React.FC<ToolTipProps> = (props) => {
 }
 
 Tooltip.defaultProps = {
-    mouseLeaveDelay: 1
+    mouseLeaveDelay: 1,
+    placement: 'top'
 }
 
 export default Tooltip
