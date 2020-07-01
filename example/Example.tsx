@@ -72,4 +72,6 @@ ReactDOM.render(
             </Footer>
         </Layout>
 
-    </Router>, document.querySelector('#root'))
+    </Router>, 
+    
+    document.querySelector('#root'))
