@@ -41,14 +41,10 @@ const Tooltip: React.FC<ToolTipProps> = (props) => {
     return (
         <div className={sc(clsSwitches, '')}>
             {
-                visible && <div className='zeroUI-tooltip-content-wrapper'
+                visible && <span className='zeroUI-tooltip-content'
                     onMouseEnter={onMouseEnter}
                     onMouseLeave={onMouseLeave}
-                >
-                    <span className='zeroUI-tooltip-content'>
-                        {props.title || ''}
-                    </span>
-                </div>
+                >{props.title || ''}</span>
             }
             <span className='zeroUI-tooltip-trigger' style={{ display: 'inline-block' }}
                 onMouseLeave={onMouseLeave}
@@ -62,7 +58,7 @@ const Tooltip: React.FC<ToolTipProps> = (props) => {
 }
 
 Tooltip.defaultProps = {
-    mouseLeaveDelay: 0.3,
+    mouseLeaveDelay: 1,
     placement: 'top'
 }
 
