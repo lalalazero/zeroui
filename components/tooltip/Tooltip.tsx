@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { scopedClassMaker, makeClassSwitchs } from '../_util/classes'
 import './Tooltip.scss'
 import { tuple } from '../_util/type'
+import { HTMLAttributes } from 'enzyme'
 
 const scopedClassName = scopedClassMaker('zeroUI-tooltip-wrapper')
 const sc = scopedClassName
@@ -10,14 +11,14 @@ const TooltipPlacements = tuple('top','bottom','left','right')
 export type TooltipPlacementType = typeof TooltipPlacements[number]
 
 
-export interface ToolTipProps {
+export interface ToolTipProps extends React.HTMLProps<HTMLDivElement | HTMLSpanElement> {
     title?: string,
     mouseLeaveDelay?: number,
-    placement?: TooltipPlacementType
+    placement?: TooltipPlacementType,
 }
 
 const Tooltip: React.FC<ToolTipProps> = (props) => {
-    const { mouseLeaveDelay, placement } = props
+    const { mouseLeaveDelay, placement, ...rest } = props
     const [visible, setVisible] = useState(false)
     let timerId: any = null
     const onMouseEnter = () => {
@@ -41,10 +42,15 @@ const Tooltip: React.FC<ToolTipProps> = (props) => {
     return (
         <div className={sc(clsSwitches, '')}>
             {
-                visible && <span className='zeroUI-tooltip-content'
+                visible && <span className='zeroUI-tooltip-content-wrapper'
                     onMouseEnter={onMouseEnter}
                     onMouseLeave={onMouseLeave}
-                >{props.title || ''}</span>
+                >
+                    <span className="zeroUI-tooltip-content" { ...rest }>
+                        {props.title || ''}
+                    </span>
+                    
+                </span>
             }
             <span className='zeroUI-tooltip-trigger' style={{ display: 'inline-block' }}
                 onMouseLeave={onMouseLeave}
@@ -58,7 +64,7 @@ const Tooltip: React.FC<ToolTipProps> = (props) => {
 }
 
 Tooltip.defaultProps = {
-    mouseLeaveDelay: 1,
+    mouseLeaveDelay: 0.3,
     placement: 'top'
 }
 

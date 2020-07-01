@@ -3,7 +3,7 @@ $tooltip-bg: rgba(0,0,0,0.75);
     position: relative;
     display: inline-block;
     &-top {
-        .zeroUI-tooltip-content {
+        .zeroUI-tooltip-content-wrapper {
             bottom: 100%;
             margin-bottom: 10px;
             &::before {
@@ -15,7 +15,7 @@ $tooltip-bg: rgba(0,0,0,0.75);
         }
     }
     &-bottom{
-        .zeroUI-tooltip-content {
+        .zeroUI-tooltip-content-wrapper {
             top: 100%;
             margin-top: 10px;
             &::before {
@@ -27,7 +27,7 @@ $tooltip-bg: rgba(0,0,0,0.75);
         }
     }
     &-left {
-        .zeroUI-tooltip-content {
+        .zeroUI-tooltip-content-wrapper {
             right: 100%;
             top: 0;
             margin-right: 10px;
@@ -40,7 +40,7 @@ $tooltip-bg: rgba(0,0,0,0.75);
         }
     }
     &-right {
-        .zeroUI-tooltip-content {
+        .zeroUI-tooltip-content-wrapper {
             left: 100%;
             top: 0;
             margin-left: 10px;
@@ -56,21 +56,23 @@ $tooltip-bg: rgba(0,0,0,0.75);
 
 
 
-.zeroUI-tooltip-content {
+.zeroUI-tooltip-content-wrapper {
     position: absolute;
     background: $tooltip-bg;
     color: #fff;
     border-radius: 4px;
-    padding: 6px 10px;
-    display: inline-block;
-    min-width: 4em;
-    max-width: 24em;
     z-index: 3;
-    // word-break: break-word;
+    word-break: break-word;
     &::before {
         content: '';
         border: 5px solid transparent;
         display: inline-block;
         position: absolute;
     }
+}
+
+.zeroUI-tooltip-content {
+    min-width: 30px;
+    display: inline-block;
+    padding: 6px 8px;
 }

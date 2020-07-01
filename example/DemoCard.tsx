@@ -1,6 +1,6 @@
 import React, { useState, ReactNode } from 'react'
 import HighLightCode from './HighLightCode'
-import { Icon } from '../components'
+import { Icon, Tooltip } from '../components'
 import './DemoCard.scss'
 import { Language } from 'prism-react-renderer'
 
@@ -36,7 +36,12 @@ const DemoCard: React.FunctionComponent<DemoCardProps> = props => {
             <p className='demo-subject'><span>{subject}<Icon name="edit"></Icon></span></p>
             <p className='demo-desc' dangerouslySetInnerHTML={{__html: desc}}></p>
             <div className={codeVisible ? 'demo-action code-visible' : 'demo-action'}
-                onClick={toggleCode}><span><Icon name="copy"></Icon></span><span>{codeIcon}</span></div>
+                onClick={toggleCode}>
+                <Tooltip title="复制代码" style={{ width: '80px' }}>
+                    <span><Icon name="copy"></Icon></span>
+                </Tooltip>
+                <Tooltip title={!codeVisible ? '查看代码' : '收起代码'} style={{ width: '80px'}}><span>{codeIcon}</span></Tooltip>
+            </div>
             <div className='demo-code'>
                 {
                     codeVisible ? renderCode(code) : ''

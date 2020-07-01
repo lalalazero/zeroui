@@ -26,10 +26,10 @@ const TooltipExample02 = () => {
                 </Tooltip>
             </div>
             <div className='box-2'>
-                <Tooltip title="propmt text" placement="left">
+                <Tooltip title="propmt text" placement="left" style={{ width: '80px' }}>
                     <Button>LEFT</Button>
                 </Tooltip>
-                <Tooltip title="propmt text" placement="right">
+                <Tooltip title="propmt text" placement="right" style={{ width: '80px'}}>
                     <Button>RIGHT</Button>
                 </Tooltip>
             </div>
