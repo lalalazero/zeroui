@@ -4,6 +4,7 @@ import DemoCard from '../DemoCard'
 import './Tooltip.example.scss'
 import * as content01 from './01-基本用法.md'
 import * as content02 from './02-4个方位.md'
+import * as apiContent from './api.md'
 
 const TooltipExample01 = () => {
     return (
@@ -68,6 +69,9 @@ export default function () {
                     {Card02}
                 </Col>
             </Row>
+            <div className='api-container'>
+                <div dangerouslySetInnerHTML={{ __html: apiContent.default.apiContent }}></div>
+            </div>
         </div>
     )
 
