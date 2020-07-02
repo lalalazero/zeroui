@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { scopedClassMaker, makeClassSwitchs } from '../_util/classes'
 import './Tooltip.scss'
 import { tuple } from '../_util/type'
-import { HTMLAttributes } from 'enzyme'
 
 const scopedClassName = scopedClassMaker('zeroUI-tooltip-wrapper')
 const sc = scopedClassName
@@ -18,8 +17,41 @@ export interface ToolTipProps extends React.HTMLProps<HTMLDivElement | HTMLSpanE
 }
 
 const Tooltip: React.FC<ToolTipProps> = (props) => {
-    const { mouseLeaveDelay, placement, ...rest } = props
+    const { mouseLeaveDelay, placement, style, ...rest } = props
     const [visible, setVisible] = useState(false)
+    const contentWrapperRef = useRef<HTMLSpanElement>(null)
+    const tooltipWrapperRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        
+        if(contentWrapperRef && contentWrapperRef.current && tooltipWrapperRef && tooltipWrapperRef.current) {
+            document.body.appendChild(contentWrapperRef.current)
+            const tooltipDiv = tooltipWrapperRef.current 
+            const propmtSpan = contentWrapperRef.current 
+            let { width, height, left, top } = tooltipDiv.getBoundingClientRect()
+            const map = {
+                top: {
+                    left: window.scrollX + left,
+                    top: window.scrollY + top
+                },
+                bottom: {
+                    left: window.scrollX + left,
+                    top: window.scrollY + top + height
+                },
+                left: {
+                    left: window.scrollX + left,
+                    top: window.scrollY + top
+                },
+                right: {
+                    left: window.scrollX + left + width,
+                    top: window.scrollY + top
+                }
+            }
+            propmtSpan.style.left = map[placement!].left + 'px'
+            propmtSpan.style.top = map[placement!].top + 'px'
+        }
+    }, [])
+
     let timerId: any = null
     const onMouseEnter = () => {
         if (!visible) {
@@ -39,19 +71,23 @@ const Tooltip: React.FC<ToolTipProps> = (props) => {
 
     }
     const clsSwitches = makeClassSwitchs({ placement })
+    const visibilityObj = visible ? {} : { display: 'none' }
     return (
-        <div className={sc(clsSwitches, '')}>
-            {
-                visible && <span className='zeroUI-tooltip-content-wrapper'
-                    onMouseEnter={onMouseEnter}
-                    onMouseLeave={onMouseLeave}
-                >
-                    <span className="zeroUI-tooltip-content" { ...rest }>
-                        {props.title || ''}
-                    </span>
-                    
+        <div className={sc(clsSwitches, '')} ref={tooltipWrapperRef}>
+            
+            <span className={`zeroUI-tooltip-content-wrapper zeroUI-tooltip-content-placement-${placement}`} 
+                ref={contentWrapperRef} 
+                style={Object.assign({},style, visibilityObj)}
+                {...rest}
+                onMouseEnter={onMouseEnter}
+                onMouseLeave={onMouseLeave}
+            >
+                <span className="zeroUI-tooltip-content">
+                    {props.title || ''}
                 </span>
-            }
+                
+            </span>
+            
             <span className='zeroUI-tooltip-trigger' style={{ display: 'inline-block' }}
                 onMouseLeave={onMouseLeave}
                 onMouseEnter={onMouseEnter}>

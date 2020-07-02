@@ -5,9 +5,26 @@ import './App.scss'
 
 const App = () => (
     <div className="app">
-        <Tooltip title="xxxxxx">
-            <Button>测试 overflow: hidden </Button>
-        </Tooltip>
+        <div style={{ overflow: 'hidden', marginBottom: '100px' }}>
+            <Tooltip title="xxxxxx">
+                <Button>测试 overflow: hidden </Button>
+            </Tooltip>
+        </div>
+        <div style={{ overflow: 'hidden', marginBottom: '100px' }}>
+            <Tooltip title="xxxxxx" placement="bottom">
+                <Button>测试 overflow: hidden </Button>
+            </Tooltip>
+        </div>
+        <div style={{ overflow: 'hidden', marginBottom: '100px' }}>
+            <Tooltip title="xxxxxx" placement="left">
+                <Button>测试 overflow: hidden </Button>
+            </Tooltip>
+        </div>
+        <div style={{ overflow: 'hidden', marginBottom: '100px' }}>
+            <Tooltip title="xxxxxx" placement="right">
+                <Button>测试 overflow: hidden </Button>
+            </Tooltip>
+        </div>
     </div>
 )
 
