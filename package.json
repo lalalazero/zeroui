@@ -1,6 +1,6 @@
 {
   "name": "zero-ui-react",
-  "version": "0.0.10",
+  "version": "0.0.13",
   "description": "react ui components",
   "main": "dist/components/index",
   "types": "dist/components/index",
@@ -67,5 +67,8 @@
     "dot-snake-camel-case-convertor": "^0.0.4",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
   }
 }

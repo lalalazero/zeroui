@@ -6,7 +6,7 @@ import { tuple } from '../_util/type'
 const scopedClassName = scopedClassMaker('zeroUI-tooltip-wrapper')
 const sc = scopedClassName
 
-const TooltipPlacements = tuple('top','bottom','left','right')
+const TooltipPlacements = tuple('top', 'bottom', 'left', 'right')
 export type TooltipPlacementType = typeof TooltipPlacements[number]
 
 
@@ -23,11 +23,10 @@ const Tooltip: React.FC<ToolTipProps> = (props) => {
     const tooltipWrapperRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        
-        if(contentWrapperRef && contentWrapperRef.current && tooltipWrapperRef && tooltipWrapperRef.current) {
+        if (typeof window !== 'undefined' && contentWrapperRef && contentWrapperRef.current && tooltipWrapperRef && tooltipWrapperRef.current) {
             document.body.appendChild(contentWrapperRef.current)
-            const tooltipDiv = tooltipWrapperRef.current 
-            const propmtSpan = contentWrapperRef.current 
+            const tooltipDiv = tooltipWrapperRef.current
+            const propmtSpan = contentWrapperRef.current
             let { width, height, left, top } = tooltipDiv.getBoundingClientRect()
             const map = {
                 top: {
@@ -57,14 +56,14 @@ const Tooltip: React.FC<ToolTipProps> = (props) => {
         if (!visible) {
             setVisible(true)
         }
-        if (timerId) {
+        if (timerId && typeof window !== 'undefined') {
             window.clearTimeout(timerId)
             timerId = null
         }
     }
     const onMouseLeave = () => {
-        if (typeof mouseLeaveDelay === 'number' && !timerId) {
-            timerId = setTimeout(() => {
+        if (typeof mouseLeaveDelay === 'number' && !timerId && typeof window !== 'undefined') {
+            timerId = window.setTimeout(() => {
                 setVisible(false)
             }, mouseLeaveDelay * 1000)
         }
@@ -74,10 +73,10 @@ const Tooltip: React.FC<ToolTipProps> = (props) => {
     const visibilityObj = visible ? {} : { display: 'none' }
     return (
         <div className={sc(clsSwitches, '')} ref={tooltipWrapperRef}>
-            
-            <span className={`zeroUI-tooltip-content-wrapper zeroUI-tooltip-content-placement-${placement}`} 
-                ref={contentWrapperRef} 
-                style={Object.assign({},style, visibilityObj)}
+
+            <span className={`zeroUI-tooltip-content-wrapper zeroUI-tooltip-content-placement-${placement}`}
+                ref={contentWrapperRef}
+                style={Object.assign({}, style, visibilityObj)}
                 {...rest}
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
@@ -85,9 +84,9 @@ const Tooltip: React.FC<ToolTipProps> = (props) => {
                 <span className="zeroUI-tooltip-content">
                     {props.title || ''}
                 </span>
-                
+
             </span>
-            
+
             <span className='zeroUI-tooltip-trigger' style={{ display: 'inline-block' }}
                 onMouseLeave={onMouseLeave}
                 onMouseEnter={onMouseEnter}>
