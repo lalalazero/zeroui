@@ -27,7 +27,9 @@ const IconExample: React.FunctionComponent = () => {
         'search',
         'zoom-in',
         'zoom-out',
-        'close'
+        'close',
+        'rotate-left',
+        'rotate-right',
     ]
     const onClick = (name: string): void => {
         const text = `<Icon name="${name}"></Icon>`

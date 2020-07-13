@@ -4,7 +4,7 @@ import './Icon.scss'
 // import '../icons/icons.js'
 
 let scriptElement = document.createElement('script')
-scriptElement.src = "//at.alicdn.com/t/font_1353479_p7nz6xi1hwd.js"
+scriptElement.src = "//at.alicdn.com/t/font_1353479_bo8lfvikrrl.js"
 document.body.appendChild(scriptElement)
 
 import { scopedClassMaker } from '../_util/classes'
