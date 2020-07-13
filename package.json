@@ -1,6 +1,6 @@
 {
   "name": "zero-ui-react",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "react ui components",
   "main": "dist/components/index",
   "types": "dist/components/index",
