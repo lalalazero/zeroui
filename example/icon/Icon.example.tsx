@@ -24,7 +24,10 @@ const IconExample: React.FunctionComponent = () => {
         'download',
         'next-double',
         'prev-double',
-        'search'
+        'search',
+        'zoom-in',
+        'zoom-out',
+        'close'
     ]
     const onClick = (name: string): void => {
         const text = `<Icon name="${name}"></Icon>`
