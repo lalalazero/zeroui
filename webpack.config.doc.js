@@ -11,7 +11,7 @@ module.exports = merge(base, {
     },
     output: {
         path: path.resolve(__dirname, 'dist/'),
-        publicPath: '/lalalazero'
+        publicPath: '/ZEROUI'
     },
     plugins: [
         new HtmlWebpackPlugin({
