@@ -1,14 +1,8 @@
-const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 module.exports = {
     entry: {
         index: './components/index.tsx'
-    },
-    output: {
-        path: path.resolve(__dirname, 'dist/components'),
-        library: 'zero-ui-react',
-        libraryTarget: 'umd',
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.jsx']

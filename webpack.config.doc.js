@@ -2,21 +2,25 @@ const base = require('./webpack.config')
 const path = require('path')
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { merge } = require('webpack-merge')
 module.exports = merge(base, {
-    mode: 'development',
+    mode: 'production',
+    entry: {
+        index: "./example/Example.tsx"
+    },
     output: {
         path: path.resolve(__dirname, 'dist/'),
-    },
-    entry: {
-        index: process.env.IS_APP === 'true' ? "./example/App.tsx" : "./example/Example.tsx"
+        publicPath: '/lalalazero'
     },
     plugins: [
         new HtmlWebpackPlugin({
             title: 'Zero-UI-React',
             template: './example/example.html',
             favicon: './example/favicon_32x32.png',
-        })
+        }),
+        new CleanWebpackPlugin()
+
     ],
 
 })
