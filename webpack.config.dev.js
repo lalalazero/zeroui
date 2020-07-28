@@ -1,6 +1,7 @@
 const base = require('./webpack.config')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-module.exports = Object.assign({}, base, {
+const { merge } = require('webpack-merge')
+module.exports = merge(base, {
     mode: 'development',
     entry: {
         index: process.env.IS_APP === 'true' ? "./example/App.tsx" : "./example/Example.tsx"
