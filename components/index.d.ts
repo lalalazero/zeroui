@@ -17,3 +17,4 @@ export { Icon, Dialog, Layout, Content, Header, Footer, Sider, message, Button, 
 export { default as Row } from './grid/Row';
 export { default as Col } from './grid/Col';
 export { default as Tooltip } from './tooltip/Tooltip';
+export { default as Menu } from './menu/Menu';

@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 import './Button.scss';
 declare const ButtonTypes: ["normal", "primary", "dashed", "text", "danger"];
 export declare type ButtonType = typeof ButtonTypes[number];
 export declare type ButtonShape = 'circle';
 export declare type ButtonPosition = 'left' | 'right';
 export declare type ButtonSize = 'large' | 'small' | 'default';
-export interface ButtonProps {
+export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
     type?: ButtonType;
     icon?: string;
     position?: ButtonPosition;
