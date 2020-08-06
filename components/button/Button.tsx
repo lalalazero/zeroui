@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 import { scopedClassMaker, makeClassSwitchs } from '../_util/classes'
 import { Icon } from '../index'
 import './Button.scss'
@@ -14,7 +14,7 @@ export type ButtonShape = 'circle'
 export type ButtonPosition = 'left' | 'right'
 export type ButtonSize = 'large' | 'small' | 'default'
 
-export interface ButtonProps {
+export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
     type?: ButtonType,
     icon?: string,
     position?: ButtonPosition,

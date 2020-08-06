@@ -1,0 +1,35 @@
+$item-default-padding-left: 28px;
+$label-default-padding-left: 14px;
+
+.zeroUI-menu {
+    user-select: none;
+    border: 1px solid ;
+    
+    &-group {
+        &-label {
+            padding-left: $label-default-padding-left;
+            font-size: 14px;
+            color: #ccc;
+        }
+        &-item-wrapper {
+
+        }
+    }
+    &-item {
+        padding-left: $item-default-padding-left;
+    }
+}
+
+.zeroUI-submenu {
+    &-label {
+        & > span > svg {
+            transition: all 300ms;
+        }
+    }
+    &-label[data-visible="false"] {
+        & > span > svg {
+            transform: rotate(180deg);
+            color: red;
+        }
+    }
+}
