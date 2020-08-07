@@ -21,8 +21,8 @@ const App = () => (
                 </MenuGroup>
                 <SubMenu title="三级菜单" key="submenu-2">
                     <MenuItem key="7">小龙虾</MenuItem>
-                    <MenuItem key="7">皮皮虾</MenuItem>
-                    <MenuItem key="7">对对虾</MenuItem>
+                    <MenuItem key="8">皮皮虾</MenuItem>
+                    <MenuItem key="9">对对虾</MenuItem>
                 </SubMenu>
             </SubMenu>
             <MenuItem key="7">打球</MenuItem>
