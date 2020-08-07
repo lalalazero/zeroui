@@ -1,9 +1,28 @@
-$item-default-padding-left: 28px;
+@import '../index.scss';
+
+$item-default-padding-left: 24px;
 $label-default-padding-left: 14px;
+$item-default-padding-top: 5px;
+$item-default-padding-bottom: 5px;
+$defalt-width: 168px;
+
+@mixin on-hover {
+    &:hover {
+        background-color: $selected-background;
+        cursor: pointer;
+    }
+}
+
+@mixin default-padding {
+    padding-left: $item-default-padding-left;
+    padding-top: $item-default-padding-top;
+    padding-bottom: $item-default-padding-bottom;
+}
 
 .zeroUI-menu {
+    min-width: $defalt-width;
     user-select: none;
-    border: 1px solid ;
+    display: inline-block;
     
     &-group {
         &-label {
@@ -12,16 +31,23 @@ $label-default-padding-left: 14px;
             color: #ccc;
         }
         &-item-wrapper {
-
+            // border: 1px solid red;
         }
     }
     &-item {
-        padding-left: $item-default-padding-left;
+        @include default-padding();
+        @include on-hover();
     }
 }
 
 .zeroUI-submenu {
     &-label {
+        @include on-hover();
+        @include default-padding();
+        padding-right: $item-default-padding-left;
+        & > span {
+            float: right;
+        }
         & > span > svg {
             transition: all 300ms;
         }
