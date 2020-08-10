@@ -32,7 +32,6 @@ class Menu extends Component<MenuProps, MenuState> {
 
     componentDidMount() {
         collectItemKeys(this.props.children)
-        console.log('all keys', allKeys)
     }
 
     changeKey = (newKey: string) => {

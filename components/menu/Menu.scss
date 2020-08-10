@@ -45,6 +45,7 @@ $defalt-width: 168px;
 }
 
 .zeroUI-submenu {
+    position: relative;
     &-label {
         @include on-hover();
         @include default-padding();
@@ -64,5 +65,14 @@ $defalt-width: 168px;
             transform: rotate(180deg);
             color: red;
         }
+    }
+
+    &-popup-wrapper {
+        border: 1px solid red;
+        position: absolute;
+        right: 10px;
+        left: 100%;
+        top: 0;
+        min-width: $defalt-width;
     }
 }

@@ -29,15 +29,31 @@ class SubMenu extends Component<SubMenuProps, SubMenuState> {
             itemsVisible: !this.state.itemsVisible
         })
     }
+
+    open = () => {
+        this.setState({
+            itemsVisible: true
+        })
+    }
+    close = () => {
+        this.setState({
+            itemsVisible: false
+        })
+    }
     componentDidMount() {
         loopChildren(this.props.children, (itemKey: string) => {
             this.subItemKeys.push(itemKey)
         })
     }
+    onMouseEnter = () => {
+        this.open()
+    }
+    onMouseLeave = () => {
+        this.close()
+    }
     render() {
         const { className, title, indentLevel, ...rest } = this.props
         const { itemsVisible } = this.state
-        console.log('indent: ', title, indentLevel)
         return <MenuContext.Consumer>
             {
                 ({ selectedKey }) => {
@@ -46,14 +62,19 @@ class SubMenu extends Component<SubMenuProps, SubMenuState> {
                             useKey: this.subItemKeys.indexOf(selectedKey) >= 0
                         }
                     })
-                    return <li>
+                    return <li
+                        onMouseLeave={this.onMouseLeave}
+                        onMouseEnter={this.onMouseEnter}>
                         <ul className={sc(clsObj, className)} {...rest}>
                             <p className={sc('label')}
                                 style={{ paddingLeft: `${indentLevel as number * PADDING_BASE}px` }}
                                 onClick={this.toggle} data-visible={itemsVisible} >{title}<span><Icon
                                     name="down"></Icon></span></p>
+                            <div className={sc('popup-wrapper')}>
+                                {itemsVisible && renderChildren(this.props.children, { indentLevel: indentLevel as number + 1 })}
+                            </div>
 
-                            {itemsVisible && renderChildren(this.props.children, { indentLevel: indentLevel as number + 1 })}
+
                         </ul>
                     </li>
 
