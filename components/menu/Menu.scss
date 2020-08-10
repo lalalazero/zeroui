@@ -55,6 +55,9 @@ $defalt-width: 168px;
             transition: all 300ms;
         }
     }
+    &-sub-item-selected > &-label {
+        color: $brand-color;
+    }
     &-label[data-visible="false"] {
         & > span > svg {
             transform: rotate(180deg);

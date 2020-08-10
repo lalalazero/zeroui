@@ -28,8 +28,7 @@ export default class MenuItem extends Component<MenuItemProps, MenuItemState> {
     }
 
     render() {
-        const { className, itemKey,  ...rest } = this.props
-        console.log('itemKey: ', itemKey)
+        const { className, itemKey, ...rest } = this.props
         return <MenuContext.Consumer>
             {
                 ({ selectedKey, changeKey, allKeys }) => {
@@ -41,7 +40,7 @@ export default class MenuItem extends Component<MenuItemProps, MenuItemState> {
                     })
                     const mergedClsName = sc(clsObj, className)
                     return <li className={mergedClsName} {...rest}
-                            onClick={(event) => this.onClick(event, changeKey)}>
+                        onClick={(event) => this.onClick(event, changeKey)}>
                         {this.props.children}
                     </li>
                 }
