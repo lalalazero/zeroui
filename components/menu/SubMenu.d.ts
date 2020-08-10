@@ -6,6 +6,7 @@ export interface SubMenuState {
     itemsVisible: boolean;
 }
 declare class SubMenu extends Component<SubMenuProps, SubMenuState> {
+    static isSubMenu: boolean;
     constructor(props: SubMenuProps);
     toggle: () => void;
     render(): JSX.Element;

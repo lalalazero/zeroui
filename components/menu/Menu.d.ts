@@ -11,6 +11,7 @@ declare class Menu extends Component<MenuProps> {
     static MenuItem: typeof MenuItem;
     static SubMenu: typeof SubMenu;
     constructor(props: MenuProps);
+    componentDidMount(): void;
     render(): JSX.Element;
 }
 export default Menu;
