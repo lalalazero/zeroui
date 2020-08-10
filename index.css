@@ -2023,24 +2023,31 @@
     .zeroUI-menu-item-selected {
       background-color: #13c2c2 !important; }
 
-.zeroUI-submenu-label {
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-right: 14px; }
-  .zeroUI-submenu-label:hover {
-    background-color: #e6fffb;
-    cursor: pointer; }
-  .zeroUI-submenu-label > span {
-    float: right; }
-  .zeroUI-submenu-label > span > svg {
-    transition: all 300ms; }
-
-.zeroUI-submenu-sub-item-selected > .zeroUI-submenu-label {
-  color: #13c2c2; }
-
-.zeroUI-submenu-label[data-visible="false"] > span > svg {
-  transform: rotate(180deg);
-  color: red; }
+.zeroUI-submenu {
+  position: relative; }
+  .zeroUI-submenu-label {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 14px; }
+    .zeroUI-submenu-label:hover {
+      background-color: #e6fffb;
+      cursor: pointer; }
+    .zeroUI-submenu-label > span {
+      float: right; }
+    .zeroUI-submenu-label > span > svg {
+      transition: all 300ms; }
+  .zeroUI-submenu-sub-item-selected > .zeroUI-submenu-label {
+    color: #13c2c2; }
+  .zeroUI-submenu-label[data-visible="false"] > span > svg {
+    transform: rotate(180deg);
+    color: red; }
+  .zeroUI-submenu-popup-wrapper {
+    border: 1px solid red;
+    position: absolute;
+    right: 10px;
+    left: 100%;
+    top: 0;
+    min-width: 168px; }
 
 [class^=zeroUI-] {
   box-sizing: border-box; }

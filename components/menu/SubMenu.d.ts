@@ -12,7 +12,11 @@ declare class SubMenu extends Component<SubMenuProps, SubMenuState> {
     private indentLevel;
     constructor(props: SubMenuProps);
     toggle: () => void;
+    open: () => void;
+    close: () => void;
     componentDidMount(): void;
+    onMouseEnter: () => void;
+    onMouseLeave: () => void;
     render(): JSX.Element;
 }
 export default SubMenu;
