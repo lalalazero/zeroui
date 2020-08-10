@@ -13,6 +13,7 @@ export interface MenuGroupState {
 }
 
 export default class MenuGroup extends Component<MenuGroupProps, MenuGroupState> {
+    static isMenuGroup = true
     constructor(props: MenuGroupProps) {
         super(props)
         this.state = {
@@ -26,7 +27,7 @@ export default class MenuGroup extends Component<MenuGroupProps, MenuGroupState>
         return <div className={sc('', className)} {...rest}>
             <p className={sc('label')}>{title}</p>
             <div className={sc('item-wrapper')}>
-                {this.props.children}
+            {this.props.children}
             </div>
         </div>
     }

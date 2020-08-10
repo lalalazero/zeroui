@@ -1,4 +1,4 @@
-import React, { Component, HTMLAttributes } from 'react'
+import React, { Component, HTMLAttributes, ReactElement } from 'react'
 import { scopedClassMaker, makeClassSwitchs } from '../_util/classes'
 import MenuContext from './MenuContext'
 
@@ -6,6 +6,7 @@ const scopedClassName = scopedClassMaker('zeroUI-menu-item')
 const sc = scopedClassName
 
 export interface MenuItemProps extends HTMLAttributes<HTMLElement> {
+    itemKey?: string | number
 }
 
 export interface MenuItemState {
@@ -13,6 +14,7 @@ export interface MenuItemState {
 }
 
 export default class MenuItem extends Component<MenuItemProps, MenuItemState> {
+    static isMenuItem = true
     static contextType = MenuContext
     constructor(props: MenuItemProps) {
         super(props)
@@ -26,10 +28,12 @@ export default class MenuItem extends Component<MenuItemProps, MenuItemState> {
     }
 
     render() {
-        const { className, ...rest } = this.props
+        const { className, itemKey,  ...rest } = this.props
+        console.log('itemKey: ', itemKey)
         return <MenuContext.Consumer>
             {
-                ({ selectedKey, changeKey }) => {
+                ({ selectedKey, changeKey, allKeys }) => {
+                    console.log('allKeys', allKeys)
                     const clsObj = makeClassSwitchs({
                         'selected': {
                             useKey: false

@@ -1,9 +1,10 @@
-import React, { Component, HTMLAttributes } from 'react'
+import React, { Component, HTMLAttributes, Children } from 'react'
 import { scopedClassMaker, makeClassSwitchs } from '../_util/classes'
 import MenuGroup from './MenuGroup'
 import MenuItem from './MenuItem'
 import SubMenu from './SubMenu'
 import MenuContext, { defaultContextValue } from './MenuContext'
+import { collectItemKeys } from './utils'
 import './Menu.scss'
 
 export interface MenuProps extends HTMLAttributes<HTMLElement> {
@@ -19,6 +20,12 @@ class Menu extends Component<MenuProps> {
     constructor(props: MenuProps) {
         super(props)
     }
+
+    componentDidMount(){
+        collectItemKeys(this.props.children)
+        console.log(this.context.allKeys)
+    }
+    
     render() {
         const { className, ...rest } = this.props
         return (
@@ -27,8 +34,6 @@ class Menu extends Component<MenuProps> {
                     {this.props.children}
                 </ul>
             </MenuContext.Provider>
-
-
         )
 
     }

@@ -1,4 +1,4 @@
-import React, { Component, HTMLAttributes } from 'react'
+import React, { Component, HTMLAttributes, Children, ReactElement, createElement, cloneElement } from 'react'
 import { scopedClassMaker, makeClassSwitchs } from '../_util/classes'
 import { Icon } from '../index'
 
@@ -12,6 +12,7 @@ const scopedClassName = scopedClassMaker('zeroUI-submenu')
 const sc = scopedClassName
 
 class SubMenu extends Component<SubMenuProps, SubMenuState> {
+    static isSubMenu = true
     constructor(props: SubMenuProps) {
         super(props)
         this.state = {
@@ -30,6 +31,7 @@ class SubMenu extends Component<SubMenuProps, SubMenuState> {
             <p className={sc('label')}
                 onClick={this.toggle} data-visible={itemsVisible} >{title}<span><Icon
                     name="down"></Icon></span></p>
+
             {itemsVisible && this.props.children}
         </ul>
     }
