@@ -37,6 +37,9 @@ $defalt-width: 168px;
     &-item {
         @include default-padding();
         @include on-hover();
+        &-selected {
+            background-color: $brand-color !important;
+        }
     }
 }
 

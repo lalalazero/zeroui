@@ -8,7 +8,17 @@ export const collectItemKeys = (children: ReactNode) => {
     loopChildren(children, addItemKey)
 }
 
-const loopChildren = (children: ReactNode, cb: any) => {
+
+export const renderChildren = (children: ReactNode) => {
+    return Children.map(children, (child: ReactElement) => {
+        if (child.type && (child.type as typeof MenuItem).isMenuItem) {
+            return cloneElement(child, { itemKey: child.key })
+        }
+        return child
+    })
+}
+
+export const loopChildren = (children: ReactNode, cb: any) => {
     Children.map(children, (child: ReactElement, i: number) => {
         if(child && child.type) {
             let tmp1 = child.type as typeof MenuItem

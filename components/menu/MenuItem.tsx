@@ -24,7 +24,7 @@ export default class MenuItem extends Component<MenuItemProps, MenuItemState> {
     }
 
     onClick = (event: React.MouseEvent<HTMLLIElement, MouseEvent>, changeKey: any) => {
-        console.log('onClick...')
+        changeKey(this.props.itemKey)
     }
 
     render() {
@@ -33,10 +33,10 @@ export default class MenuItem extends Component<MenuItemProps, MenuItemState> {
         return <MenuContext.Consumer>
             {
                 ({ selectedKey, changeKey, allKeys }) => {
-                    console.log('allKeys', allKeys)
+
                     const clsObj = makeClassSwitchs({
                         'selected': {
-                            useKey: false
+                            useKey: selectedKey === itemKey
                         }
                     })
                     const mergedClsName = sc(clsObj, className)
