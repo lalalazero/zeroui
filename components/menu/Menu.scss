@@ -1,6 +1,6 @@
 @import '../index.scss';
 
-$item-default-padding-left: 24px;
+$item-default-padding-left: 14px;
 $label-default-padding-left: 14px;
 $item-default-padding-top: 5px;
 $item-default-padding-bottom: 5px;
@@ -14,7 +14,6 @@ $defalt-width: 168px;
 }
 
 @mixin default-padding {
-    padding-left: $item-default-padding-left;
     padding-top: $item-default-padding-top;
     padding-bottom: $item-default-padding-bottom;
 }
@@ -23,10 +22,11 @@ $defalt-width: 168px;
     min-width: $defalt-width;
     user-select: none;
     display: inline-block;
-    
+    border: 1px solid;
+    // padding-left: $item-default-padding-left;
     &-group {
         &-label {
-            padding-left: $label-default-padding-left;
+            // padding-left: $label-default-padding-left;
             font-size: 14px;
             color: #ccc;
         }
@@ -37,6 +37,7 @@ $defalt-width: 168px;
     &-item {
         @include default-padding();
         @include on-hover();
+        // padding-left: $item-default-padding-left;
         &-selected {
             background-color: $brand-color !important;
         }

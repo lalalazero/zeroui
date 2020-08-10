@@ -1,11 +1,12 @@
 import React, { Component, HTMLAttributes, Children, ReactElement, createElement, cloneElement } from 'react'
 import { scopedClassMaker, makeClassSwitchs } from '../_util/classes'
 import { Icon } from '../index'
-import { renderChildren, loopChildren } from './utils'
+import { renderChildren, loopChildren, detectIndent, PADDING_BASE } from './utils'
 import MenuContext from './MenuContext'
 
 export interface SubMenuProps extends HTMLAttributes<HTMLElement> {
     title: string,
+    indentLevel?: number,
 }
 export interface SubMenuState {
     itemsVisible: boolean
@@ -16,6 +17,7 @@ const sc = scopedClassName
 class SubMenu extends Component<SubMenuProps, SubMenuState> {
     static isSubMenu = true
     private subItemKeys: string[] = []
+    private indentLevel = 0
     constructor(props: SubMenuProps) {
         super(props)
         this.state = {
@@ -33,8 +35,9 @@ class SubMenu extends Component<SubMenuProps, SubMenuState> {
         })
     }
     render() {
-        const { className, title, ...rest } = this.props
+        const { className, title, indentLevel, ...rest } = this.props
         const { itemsVisible } = this.state
+        console.log('indent: ', title, indentLevel)
         return <MenuContext.Consumer>
             {
                 ({ selectedKey }) => {
@@ -43,13 +46,17 @@ class SubMenu extends Component<SubMenuProps, SubMenuState> {
                             useKey: this.subItemKeys.indexOf(selectedKey) >= 0
                         }
                     })
-                    return <ul className={sc(clsObj, className)} {...rest}>
-                        <p className={sc('label')}
-                            onClick={this.toggle} data-visible={itemsVisible} >{title}<span><Icon
-                                name="down"></Icon></span></p>
+                    return <li>
+                        <ul className={sc(clsObj, className)} {...rest}>
+                            <p className={sc('label')}
+                                style={{ paddingLeft: `${indentLevel as number * PADDING_BASE}px` }}
+                                onClick={this.toggle} data-visible={itemsVisible} >{title}<span><Icon
+                                    name="down"></Icon></span></p>
 
-                        {itemsVisible && renderChildren(this.props.children)}
-                    </ul>
+                            {itemsVisible && renderChildren(this.props.children, { indentLevel: indentLevel as number + 1 })}
+                        </ul>
+                    </li>
+
                 }
             }
         </MenuContext.Consumer>
