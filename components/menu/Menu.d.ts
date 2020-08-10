@@ -14,6 +14,7 @@ declare class Menu extends Component<MenuProps, MenuState> {
     static MenuGroup: typeof MenuGroup;
     static MenuItem: typeof MenuItem;
     static SubMenu: typeof SubMenu;
+    private indentLevel;
     constructor(props: MenuProps);
     componentDidMount(): void;
     changeKey: (newKey: string) => void;

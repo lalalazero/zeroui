@@ -1,6 +1,7 @@
 import { Component, HTMLAttributes } from 'react';
 export interface MenuGroupProps extends HTMLAttributes<HTMLElement> {
     title: string;
+    indentLevel?: number;
 }
 export interface MenuGroupState {
 }
