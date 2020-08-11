@@ -1,4 +1,4 @@
-@import '../index.scss';
+@import "../index.scss";
 
 $item-default-padding-left: 14px;
 $label-default-padding-left: 14px;
@@ -18,28 +18,46 @@ $defalt-width: 168px;
     padding-bottom: $item-default-padding-bottom;
 }
 
+@mixin menu-item-base-style {
+    @include default-padding();
+    @include on-hover();
+    &-selected {
+        background-color: $brand-color !important;
+    }
+}
+
 .zeroUI-menu {
     min-width: $defalt-width;
     user-select: none;
     display: inline-block;
     border: 1px solid;
-    // padding-left: $item-default-padding-left;
     &-group {
         &-label {
-            // padding-left: $label-default-padding-left;
             font-size: 14px;
             color: #ccc;
         }
         &-item-wrapper {
-            // border: 1px solid red;
         }
     }
     &-item {
-        @include default-padding();
-        @include on-hover();
-        // padding-left: $item-default-padding-left;
-        &-selected {
-            background-color: $brand-color !important;
+        @include menu-item-base-style();
+    }
+    &-inline {
+        .zeroUI-submenu {
+            &-label[data-visible="false"] {
+                & > span > svg {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+    }
+    &-vertical {
+        .zeroUI-submenu {
+            &-label {
+                & > span > svg {
+                    transform: rotate(-90deg);
+                }
+            }
         }
     }
 }
@@ -60,19 +78,21 @@ $defalt-width: 168px;
     &-sub-item-selected > &-label {
         color: $brand-color;
     }
-    &-label[data-visible="false"] {
-        & > span > svg {
-            transform: rotate(180deg);
-            color: red;
+
+    &-vertical {
+        .zeroUI-submenu-popup-wrapper {
+            position: absolute;
+            right: 10px;
+            left: 100%;
+            top: 0;
+            min-width: $defalt-width;
+            background: white;
+            border-radius: 4px;
+            margin-left: 4px;
+        }
+        .zeroUI-submenu-popup-wrapper[data-visible="true"] {
+            border: 1px solid;
         }
     }
-
-    &-popup-wrapper {
-        border: 1px solid red;
-        position: absolute;
-        right: 10px;
-        left: 100%;
-        top: 0;
-        min-width: $defalt-width;
-    }
 }
+

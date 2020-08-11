@@ -8,7 +8,10 @@ import { collectItemKeys, renderChildren } from './utils'
 import './Menu.scss'
 
 export interface MenuProps extends HTMLAttributes<HTMLElement> {
+    mode: modeType
 }
+
+export type modeType = 'inline' | 'vertical' | 'horizontal'
 
 export interface MenuState {
     selectedKey: string
@@ -22,6 +25,9 @@ class Menu extends Component<MenuProps, MenuState> {
     static MenuGroup = MenuGroup
     static MenuItem = MenuItem
     static SubMenu = SubMenu
+    static defaultProps = {
+        mode: 'inline'
+    }
     private indentLevel = 1
     constructor(props: MenuProps) {
         super(props)
@@ -41,15 +47,18 @@ class Menu extends Component<MenuProps, MenuState> {
     }
 
     render() {
-        const { className, ...rest } = this.props
+        const { className, mode, ...rest } = this.props
         const { selectedKey } = this.state
         const { indentLevel } = this
+        const clsSwitch = makeClassSwitchs({
+            mode
+        })
         const contextValue = { selectedKey, allKeys, changeKey: this.changeKey }
         return (
             <MenuContext.Provider value={contextValue}>
-                <ul className={sc('', className)} {...rest}>
+                <ul className={sc(clsSwitch, className)} {...rest}>
                     {
-                        renderChildren(this.props.children, { indentLevel })
+                        renderChildren(this.props.children, { indentLevel, mode })
                     }
                 </ul>
             </MenuContext.Provider>

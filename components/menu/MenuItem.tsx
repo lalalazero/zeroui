@@ -2,6 +2,7 @@ import React, { Component, HTMLAttributes, ReactElement } from 'react'
 import { scopedClassMaker, makeClassSwitchs } from '../_util/classes'
 import MenuContext from './MenuContext'
 import { PADDING_BASE } from './utils'
+import { modeType } from './Menu'
 
 const scopedClassName = scopedClassMaker('zeroUI-menu-item')
 const sc = scopedClassName
@@ -9,6 +10,7 @@ const sc = scopedClassName
 export interface MenuItemProps extends HTMLAttributes<HTMLElement> {
     itemKey?: React.Key,
     indentLevel?: number,
+    mode?: modeType
 }
 
 export interface MenuItemState {
@@ -30,7 +32,8 @@ export default class MenuItem extends Component<MenuItemProps, MenuItemState> {
     }
 
     render() {
-        const { className, itemKey, indentLevel, ...rest } = this.props
+        const { className, itemKey, indentLevel, mode, ...rest } = this.props
+        const paddingLeftStyle = mode === 'inline' ? { paddingLeft: `${indentLevel as number * PADDING_BASE}px` } : { paddingLeft: `${PADDING_BASE}px`}
         return <MenuContext.Consumer>
             {
                 ({ selectedKey, changeKey, allKeys }) => {
@@ -42,7 +45,7 @@ export default class MenuItem extends Component<MenuItemProps, MenuItemState> {
                     })
                     const mergedClsName = sc(clsObj, className)
                     return <li className={mergedClsName} {...rest}
-                        style={{ paddingLeft: `${indentLevel as number * PADDING_BASE}px` }}
+                        style={paddingLeftStyle}
                         onClick={(event) => this.onClick(event, changeKey)}>
                         {this.props.children}
                     </li>
