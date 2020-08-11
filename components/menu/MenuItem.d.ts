@@ -1,7 +1,9 @@
 import React, { Component, HTMLAttributes } from 'react';
+import { modeType } from './Menu';
 export interface MenuItemProps extends HTMLAttributes<HTMLElement> {
     itemKey?: React.Key;
     indentLevel?: number;
+    mode?: modeType;
 }
 export interface MenuItemState {
     isSelectedKey: boolean;

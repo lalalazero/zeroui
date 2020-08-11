@@ -2022,6 +2022,10 @@
       cursor: pointer; }
     .zeroUI-menu-item-selected {
       background-color: #13c2c2 !important; }
+  .zeroUI-menu-inline .zeroUI-submenu-label[data-visible="false"] > span > svg {
+    transform: rotate(180deg); }
+  .zeroUI-menu-vertical .zeroUI-submenu-label > span > svg {
+    transform: rotate(-90deg); }
 
 .zeroUI-submenu {
   position: relative; }
@@ -2038,16 +2042,17 @@
       transition: all 300ms; }
   .zeroUI-submenu-sub-item-selected > .zeroUI-submenu-label {
     color: #13c2c2; }
-  .zeroUI-submenu-label[data-visible="false"] > span > svg {
-    transform: rotate(180deg);
-    color: red; }
-  .zeroUI-submenu-popup-wrapper {
-    border: 1px solid red;
+  .zeroUI-submenu-vertical .zeroUI-submenu-popup-wrapper {
     position: absolute;
     right: 10px;
     left: 100%;
     top: 0;
-    min-width: 168px; }
+    min-width: 168px;
+    background: white;
+    border-radius: 4px;
+    margin-left: 4px; }
+  .zeroUI-submenu-vertical .zeroUI-submenu-popup-wrapper[data-visible="true"] {
+    border: 1px solid; }
 
 [class^=zeroUI-] {
   box-sizing: border-box; }
