@@ -1,5 +1,4 @@
 import React from 'react';
-interface Props extends React.HTMLAttributes<HTMLElement> {
-}
+declare type Props = React.HTMLAttributes<HTMLElement>;
 declare const Header: React.FunctionComponent<Props>;
 export default Header;
