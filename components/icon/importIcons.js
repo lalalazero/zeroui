@@ -1,6 +1,8 @@
-let importAll = (requireContext) => requireContext.keys().forEach(requireContext)
+let importAll = (requireContext) =>
+  requireContext.keys().forEach(requireContext)
 
 try {
-    importAll(require.context('../icons/', true, /\.svg$/))
+  importAll(require.context('../icons/', true, /\.svg$/))
 } catch (error) {
+  /*eslint-disable no-empty */
 }
