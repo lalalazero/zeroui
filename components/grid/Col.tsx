@@ -32,8 +32,8 @@ const Col: React.FC<ColProps> = (props) => {
     const { className, style } = props
     const gutter = useContext(GutterContext)
 
-    let cls1 = makeResponsiveCls(props)
-    let cls2 = makeResponsiveCls2(props)
+    const cls1 = makeResponsiveCls(props)
+    const cls2 = makeResponsiveCls2(props)
 
     const clsSwitch = makeClassSwitchs(Object.assign(cls2, cls1))
     const styleObj = gutter ? { paddingLeft: gutter / 2, paddingRight: gutter / 2 } : {}
@@ -48,7 +48,7 @@ const Col: React.FC<ColProps> = (props) => {
 export default Col;
 
 function makeResponsiveCls(props: ColProps) {
-    let { xs, sm, md, lg, xl, xxl } = props
+    const { xs, sm, md, lg, xl, xxl } = props
     let responsiveCls: { [key: string]: any } = {}
     if (typeof xs === 'number') {
         responsiveCls[`xs-span-${xs}`] = {
@@ -110,29 +110,29 @@ function makeResponsiveCls(props: ColProps) {
 }
 
 function makeResponsiveCls2(props: ResponseProps, prefix = '') {
-    let responsiveCls: { [key: string]: any } = {}
-    let { span, offset, push, pull, order } = props
-    if (span as Number) {
+    const responsiveCls: { [key: string]: any } = {}
+    const { span, offset, push, pull, order } = props
+    if (span as number) {
         responsiveCls[`${prefix}span-${span}`] = {
             useKey: true
         }
     }
-    if (offset as Number) {
+    if (offset as number) {
         responsiveCls[`${prefix}offset-${offset}`] = {
             useKey: true
         }
     }
-    if (push as Number) {
+    if (push as number) {
         responsiveCls[`${prefix}push-${push}`] = {
             useKey: true
         }
     }
-    if (pull as Number) {
+    if (pull as number) {
         responsiveCls[`${prefix}pull-${pull}`] = {
             useKey: true
         }
     }
-    if (order as Number) {
+    if (order as number) {
         responsiveCls[`${prefix}order-${order}`] = {
             useKey: true
         }

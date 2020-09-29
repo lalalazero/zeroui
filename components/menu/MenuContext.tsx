@@ -6,7 +6,7 @@ export interface MenuContextProps {
     allKeys: Set<string>
 }
 let selectedKey = ''
-let changeKey = (newKey: string) => { selectedKey = newKey; console.log('newKey', newKey)}
+const changeKey = (newKey: string) => { selectedKey = newKey; console.log('newKey', newKey)}
 export const allKeys: Set<string> = new Set()
 
 export const addItemKey = (key: string) => allKeys.add(key)

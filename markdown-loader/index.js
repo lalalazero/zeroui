@@ -6,7 +6,7 @@ function jsxFence(tokens, idx, options, env, self) {
     } else if(token.info === 'css') {
         return `<cssToken> ${token.content} </cssToken>`
     }
-};
+}
 
 md.renderer.rules['fence'] = jsxFence
 

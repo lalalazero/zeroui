@@ -64,7 +64,7 @@ const modal = (content: ReactNode, buttons?: Array<ReactElement>, afterClose?: F
 }
 
 const alert = (content:string) => {
-    let button = <button key="1" onClick={() => close()}>ok</button>
+    const button = <button key="1" onClick={() => close()}>ok</button>
     const close = modal(content, [button])
 }
 
@@ -78,7 +78,7 @@ const confirm = (content:string, yes?: ()=>void, no?: ()=>void) => {
         close()
         no && no()
     }
-    let buttons = [
+    const buttons = [
         <button key="1" onClick={onYes}>yes</button>,
         <button key="2" onClick={onNo}>no</button>
     ]

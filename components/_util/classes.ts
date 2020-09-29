@@ -9,10 +9,10 @@ interface classSwitchs {
 }
 
 function makeClassSwitchs(obj: { [k: string]: any }, otherOptions?: classSwitchs) {
-    let switchObj: classSwitchs = otherOptions || {}
-    let keyList = Object.keys(obj)
+    const switchObj: classSwitchs = otherOptions || {}
+    const keyList = Object.keys(obj)
     for(let i = 0; i < keyList.length; i++) {
-        let key = keyList[i]
+        const key = keyList[i]
         if(key.indexOf('undefined') >= 0) continue
         if (obj[key]) {
             if (obj[key].hasOwnProperty('useKey')) {
@@ -27,7 +27,7 @@ function makeClassSwitchs(obj: { [k: string]: any }, otherOptions?: classSwitchs
 
 function scopedClassMaker(prefix: string, ) {
     return function (cls: string | classSwitchs, userClsName?: string) {
-        let classArray = []
+        const classArray = []
         if (typeof cls === 'string' && cls) {
             classArray.push(cls)
         } else if (cls === '') {
@@ -38,8 +38,8 @@ function scopedClassMaker(prefix: string, ) {
             clsArr = clsArr.map(cls => camel2dot(cls))
             classArray.push(...clsArr)
         }
-        let prefixedClassArray = classArray.map(cls => cls ? prefix + '-' + cls : prefix)
-        let allCls = [...prefixedClassArray, userClsName]
+        const prefixedClassArray = classArray.map(cls => cls ? prefix + '-' + cls : prefix)
+        const allCls = [...prefixedClassArray, userClsName]
         return allCls.filter(Boolean).join(' ')
     }
 }

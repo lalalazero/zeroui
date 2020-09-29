@@ -27,16 +27,16 @@ export const renderChildren = (children: ReactNode, extraProps: any) => {
 export const loopChildren = (children: ReactNode, cb: any) => {
     Children.map(children, (child: ReactElement, i: number) => {
         if (child && child.type) {
-            let tmp1 = child.type as typeof MenuItem
+            const tmp1 = child.type as typeof MenuItem
             if (tmp1.isMenuItem) {
                 cb(child.key)
             }
-            let tmp2 = child.type as typeof MenuGroup
+            const tmp2 = child.type as typeof MenuGroup
             if (tmp2.isMenuGroup) {
                 loopChildren(child.props.children, cb)
             }
 
-            let tmp3 = child.type as typeof SubMenu
+            const tmp3 = child.type as typeof SubMenu
             if (tmp3.isSubMenu) {
                 loopChildren(child.props.children, cb)
             }
@@ -49,7 +49,7 @@ export const detectIndent = (children: ReactNode, level: number) => {
         let x = level
         Children.forEach(children, (child: ReactElement) => {
             if (child && child.type) {
-                let tmp3 = child.type as typeof SubMenu
+                const tmp3 = child.type as typeof SubMenu
                 if (tmp3.isSubMenu) {
                     x = loop(child.props.children, x + 1)
                 }

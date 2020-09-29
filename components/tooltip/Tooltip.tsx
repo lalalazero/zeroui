@@ -27,7 +27,7 @@ const Tooltip: React.FC<ToolTipProps> = (props) => {
             document.body.appendChild(contentWrapperRef.current)
             const tooltipDiv = tooltipWrapperRef.current
             const propmtSpan = contentWrapperRef.current
-            let { width, height, left, top } = tooltipDiv.getBoundingClientRect()
+            const { width, height, left, top } = tooltipDiv.getBoundingClientRect()
             const map = {
                 top: {
                     left: window.scrollX + left,
