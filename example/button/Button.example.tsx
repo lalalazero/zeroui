@@ -1,8 +1,6 @@
-
 import React, { useState } from 'react'
 import { Button, ButtonGroup, Col, Row } from '../../components'
 import DemoCard from '../DemoCard'
-import './Button.example.scss'
 import * as content1 from './01-基础类型.md'
 import * as content2 from './02-图标按钮.md'
 import * as content3 from './03-按钮大小.md'
@@ -12,6 +10,7 @@ import * as content6 from './06-按钮组.md'
 import * as content7 from './07-幽灵按钮.md'
 import * as content8 from './08-块级按钮.md'
 import * as apiContent from './api.md'
+import './Button.example.scss'
 
 const ButtonExample01 = () => {
     return (
@@ -28,9 +27,13 @@ const ButtonExample02 = () => {
     return (
         <div className="space-button">
             <Button icon="search" shape="circle" type="primary"></Button>
-            <Button icon='search' shape='circle'></Button>
-            <Button icon="search" type="primary">Search</Button>
-            <Button icon='search' position="right">Search</Button>
+            <Button icon="search" shape="circle"></Button>
+            <Button icon="search" type="primary">
+        Search
+            </Button>
+            <Button icon="search" position="right">
+        Search
+            </Button>
         </div>
     )
 }
@@ -41,44 +44,80 @@ const ButtonExample03 = () => {
             <p>大尺寸按钮</p>
             <div>
                 <Button size="large">基本</Button>
-                <Button type="primary" size="large">主要</Button>
-                <Button type="dashed" size="large">虚线</Button>
-                <Button type="text" size="large">无边框</Button>
-                <Button type="danger" size="large">危险</Button>
-                <Button icon="search" shape="circle" type="primary" size="large"></Button>
-                <Button icon='search' shape='circle' size="large"></Button>
-                <Button icon="search" type="primary" size="large">Search</Button>
-                <Button icon='search' position="right" size="large">Search</Button>
+                <Button type="primary" size="large">
+          主要
+                </Button>
+                <Button type="dashed" size="large">
+          虚线
+                </Button>
+                <Button type="text" size="large">
+          无边框
+                </Button>
+                <Button type="danger" size="large">
+          危险
+                </Button>
+                <Button
+                    icon="search"
+                    shape="circle"
+                    type="primary"
+                    size="large"
+                ></Button>
+                <Button icon="search" shape="circle" size="large"></Button>
+                <Button icon="search" type="primary" size="large">
+          Search
+                </Button>
+                <Button icon="search" position="right" size="large">
+          Search
+                </Button>
             </div>
             <p>默认尺寸按钮</p>
             <div>
                 <Button>基本</Button>
                 <Button type="primary">主要</Button>
-                <Button type="dashed" >虚线</Button>
-                <Button type="text" >无边框</Button>
-                <Button type="danger" >危险</Button>
-                <Button icon="search" shape="circle" type="primary" ></Button>
-                <Button icon='search' shape='circle' ></Button>
-                <Button icon="search" type="primary" >Search</Button>
-                <Button icon='search' position="right" >Search</Button>
+                <Button type="dashed">虚线</Button>
+                <Button type="text">无边框</Button>
+                <Button type="danger">危险</Button>
+                <Button icon="search" shape="circle" type="primary"></Button>
+                <Button icon="search" shape="circle"></Button>
+                <Button icon="search" type="primary">
+          Search
+                </Button>
+                <Button icon="search" position="right">
+          Search
+                </Button>
             </div>
             <p>小尺寸按钮</p>
             <div>
                 <Button size="small">基本</Button>
-                <Button type="primary" size="small">主要</Button>
-                <Button type="dashed" size="small">虚线</Button>
-                <Button type="text" size="small">无边框</Button>
-                <Button type="danger" size="small">危险</Button>
-                <Button icon="search" shape="circle" type="primary" size="small"></Button>
-                <Button icon='search' shape='circle' size="small"></Button>
-                <Button icon="search" type="primary" size="small">Search</Button>
-                <Button icon='search' position="right" size="small">Search</Button>
+                <Button type="primary" size="small">
+          主要
+                </Button>
+                <Button type="dashed" size="small">
+          虚线
+                </Button>
+                <Button type="text" size="small">
+          无边框
+                </Button>
+                <Button type="danger" size="small">
+          危险
+                </Button>
+                <Button
+                    icon="search"
+                    shape="circle"
+                    type="primary"
+                    size="small"
+                ></Button>
+                <Button icon="search" shape="circle" size="small"></Button>
+                <Button icon="search" type="primary" size="small">
+          Search
+                </Button>
+                <Button icon="search" position="right" size="small">
+          Search
+                </Button>
             </div>
-
         </div>
     )
 }
-
 
 const ButtonExample04 = () => {
     const [loadign1, setLoading1] = useState(true)
@@ -87,10 +126,37 @@ const ButtonExample04 = () => {
     const [loading4, setLoading4] = useState(true)
     return (
         <div className="space-button">
-            <Button loading={loadign1} onClick={() => { setLoading1(!loadign1) }}>Loading</Button>
-            <Button type="primary" loading={loading2} onClick={() => setLoading2(!loading2)} position="right">Loading</Button>
-            <Button loading={loading3} onClick={() => { setLoading3(!loading3) }} shape="circle" icon="search"></Button>
-            <Button loading={loading4} onClick={() => setLoading4(!loading4)} type="primary" icon="search" shape="circle"></Button>
+            <Button
+                loading={loadign1}
+                onClick={() => {
+                    setLoading1(!loadign1)
+                }}
+            >
+        Loading
+            </Button>
+            <Button
+                type="primary"
+                loading={loading2}
+                onClick={() => setLoading2(!loading2)}
+                position="right"
+            >
+        Loading
+            </Button>
+            <Button
+                loading={loading3}
+                onClick={() => {
+                    setLoading3(!loading3)
+                }}
+                shape="circle"
+                icon="search"
+            ></Button>
+            <Button
+                loading={loading4}
+                onClick={() => setLoading4(!loading4)}
+                type="primary"
+                icon="search"
+                shape="circle"
+            ></Button>
         </div>
     )
 }
@@ -100,7 +166,9 @@ const ButtonExample05 = () => {
         <div className="space-button">
             <div>
                 <Button type="primary">主要</Button>
-                <Button disabled type="primary">主要(禁用态)</Button>
+                <Button disabled type="primary">
+          主要(禁用态)
+                </Button>
             </div>
             <div>
                 <Button>基本</Button>
@@ -108,11 +176,15 @@ const ButtonExample05 = () => {
             </div>
             <div>
                 <Button type="dashed">虚线</Button>
-                <Button type="dashed" disabled>虚线(禁用态)</Button>
+                <Button type="dashed" disabled>
+          虚线(禁用态)
+                </Button>
             </div>
             <div>
                 <Button type="text">无边框</Button>
-                <Button disabled type="text">无边框(禁用态)</Button>
+                <Button disabled type="text">
+          无边框(禁用态)
+                </Button>
             </div>
         </div>
     )
@@ -131,8 +203,12 @@ const ButtonExample06 = () => {
                 <Button disabled>右</Button>
             </ButtonGroup>
             <ButtonGroup>
-                <Button icon="left" type="primary">上一页</Button>
-                <Button icon="right" type="primary" position="right">下一页</Button>
+                <Button icon="left" type="primary">
+          上一页
+                </Button>
+                <Button icon="right" type="primary" position="right">
+          下一页
+                </Button>
             </ButtonGroup>
             <ButtonGroup>
                 <Button icon="download" type="primary"></Button>
@@ -144,12 +220,23 @@ const ButtonExample06 = () => {
 
 const ButtonExample07 = () => {
     return (
-        <div className="space-button" style={{ background: '#ccc', padding: '20px 0' }}>
-            <Button ghost type="primary">主要</Button>
+        <div
+            className="space-button"
+            style={{ background: '#ccc', padding: '20px 0' }}
+        >
+            <Button ghost type="primary">
+        主要
+            </Button>
             <Button ghost>基本</Button>
-            <Button ghost type="dashed">虚线</Button>
-            <Button ghost type="text">无边框</Button>
-            <Button ghost type="danger">危险</Button>
+            <Button ghost type="dashed">
+        虚线
+            </Button>
+            <Button ghost type="text">
+        无边框
+            </Button>
+            <Button ghost type="danger">
+        危险
+            </Button>
         </div>
     )
 }
@@ -157,86 +244,76 @@ const ButtonExample08 = () => {
     return (
         <div className="space-button">
             <div>
-                <Button block type="primary">主要</Button>
+                <Button block type="primary">
+          主要
+                </Button>
             </div>
             <div>
                 <Button block>基本</Button>
             </div>
             <div>
-                <Button block type="dashed">虚线</Button>
+                <Button block type="dashed">
+          虚线
+                </Button>
             </div>
             <div>
-                <Button block type="text">无边框</Button>
+                <Button block type="text">
+          无边框
+                </Button>
             </div>
             <div>
-                <Button block type="danger">危险</Button>
+                <Button block type="danger">
+          危险
+                </Button>
             </div>
         </div>
     )
 }
 
-
 const Card01 = (
-    <DemoCard
-        markdown={content1.default}
-    >
+    <DemoCard markdown={content1.default}>
         <ButtonExample01 />
     </DemoCard>
 )
 const Card02 = (
-    <DemoCard
-        markdown={content2.default}
-    >
+    <DemoCard markdown={content2.default}>
         <ButtonExample02 />
     </DemoCard>
 )
 const Card03 = (
-    <DemoCard
-        markdown={content3.default}
-    >
+    <DemoCard markdown={content3.default}>
         <ButtonExample03 />
     </DemoCard>
 )
 const Card04 = (
-    <DemoCard
-        markdown={content4.default}
-    >
+    <DemoCard markdown={content4.default}>
         <ButtonExample04 />
     </DemoCard>
 )
 const Card05 = (
-    <DemoCard
-        markdown={content5.default}
-    >
+    <DemoCard markdown={content5.default}>
         <ButtonExample05 />
     </DemoCard>
 )
 const Card06 = (
-    <DemoCard
-        markdown={content6.default}
-    >
+    <DemoCard markdown={content6.default}>
         <ButtonExample06 />
     </DemoCard>
 )
 const Card07 = (
-    <DemoCard
-        markdown={content7.default}
-    >
+    <DemoCard markdown={content7.default}>
         <ButtonExample07 />
     </DemoCard>
 )
 const Card08 = (
-    <DemoCard
-        markdown={content8.default}
-    >
+    <DemoCard markdown={content8.default}>
         <ButtonExample08 />
     </DemoCard>
 )
 
-
-export default function () {
+export default function ButtonDemo() {
     return (
-        <div className='zeroUI-button-example'>
+        <div className="zeroUI-button-example">
             <Row>
                 <Col lg={12} sm={24}>
                     {Card01}
@@ -251,11 +328,12 @@ export default function () {
                     {Card08}
                 </Col>
             </Row>
-            
-            <div className='api-container'>
-                <div dangerouslySetInnerHTML={{ __html: apiContent.default.apiContent }}></div>
-            </div>
 
+            <div className="api-container">
+                <div
+                    dangerouslySetInnerHTML={{ __html: apiContent.default.apiContent }}
+                ></div>
+            </div>
         </div>
     )
 }

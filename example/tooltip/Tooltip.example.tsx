@@ -1,10 +1,10 @@
 import React from 'react'
-import { Tooltip, Button, Row, Col } from '../../components'
+import { Button, Col, Row, Tooltip } from '../../components'
 import DemoCard from '../DemoCard'
-import './Tooltip.example.scss'
 import * as content01 from './01-基本用法.md'
 import * as content02 from './02-4个方位.md'
 import * as apiContent from './api.md'
+import './Tooltip.example.scss'
 
 const TooltipExample01 = () => {
     return (
@@ -12,7 +12,6 @@ const TooltipExample01 = () => {
             <Tooltip title="prompt text">
                 <Button>Tooltip will show on mouse enter.</Button>
             </Tooltip>
-
         </div>
     )
 }
@@ -20,25 +19,24 @@ const TooltipExample01 = () => {
 const TooltipExample02 = () => {
     return (
         <div className="tooltip-example-02">
-            <div className='box-1'>
+            <div className="box-1">
                 <Tooltip title="propmt text" placement="top">
                     <Button>TOP</Button>
                 </Tooltip>
             </div>
-            <div className='box-2'>
-                <Tooltip title="propmt text" placement="left" >
+            <div className="box-2">
+                <Tooltip title="propmt text" placement="left">
                     <Button>LEFT</Button>
                 </Tooltip>
-                <Tooltip title="propmt text" placement="right" >
+                <Tooltip title="propmt text" placement="right">
                     <Button>RIGHT</Button>
                 </Tooltip>
             </div>
-            <div className='box-3'>
+            <div className="box-3">
                 <Tooltip title="propmt text" placement="bottom">
                     <Button>BOTTOM</Button>
                 </Tooltip>
             </div>
-            
         </div>
     )
 }
@@ -55,10 +53,7 @@ const Card02 = (
     </DemoCard>
 )
 
-
-
-
-export default function () {
+export default function ToolTipDemo() {
     return (
         <div className="zeroUI-tooltip-example">
             <Row>
@@ -69,10 +64,11 @@ export default function () {
                     {Card02}
                 </Col>
             </Row>
-            <div className='api-container'>
-                <div dangerouslySetInnerHTML={{ __html: apiContent.default.apiContent }}></div>
+            <div className="api-container">
+                <div
+                    dangerouslySetInnerHTML={{ __html: apiContent.default.apiContent }}
+                ></div>
             </div>
         </div>
     )
-
 }

@@ -10,168 +10,166 @@
             width: ($n / 24) * 100%;
         }
         &.#{$offset-prefix}#{$n} {
-          margin-left: ($n / 24) * 100%;
+            margin-left: ($n / 24) * 100%;
         }
         &.#{$pull-prefix}#{$n} {
-          right: ($n / 24) * 100%;
+            right: ($n / 24) * 100%;
         }
         &.#{$push-prefix}#{$n} {
-          left: ($n / 24) * 100%;
+            left: ($n / 24) * 100%;
         }
         &.#{$order-prefix}#{$n} {
-          order: $n;
+            order: $n;
         }
     }
 
     @media (min-width: 0px) {
-      $xs-span-prefix: zeroUI-col-xs-span-;
-      $xs-offset-prefix: zeroUI-col-xs-offset-;
-      $xs-push-prefix: zeroUI-col-xs-push-;
-      $xs-pull-prefix: zeroUI-col-xs-pull-;
-      $xs-order-prefix: zeroUI-col-xs-order-;
-      @for $n from 1 through 24 {
-        &.#{$xs-span-prefix}#{$n} {
-            width: ($n / 24) * 100%;
-            
+        $xs-span-prefix: zeroUI-col-xs-span-;
+        $xs-offset-prefix: zeroUI-col-xs-offset-;
+        $xs-push-prefix: zeroUI-col-xs-push-;
+        $xs-pull-prefix: zeroUI-col-xs-pull-;
+        $xs-order-prefix: zeroUI-col-xs-order-;
+        @for $n from 1 through 24 {
+            &.#{$xs-span-prefix}#{$n} {
+                width: ($n / 24) * 100%;
+            }
+            &.#{$xs-offset-prefix}#{$n} {
+                margin-left: ($n / 24) * 100%;
+            }
+            &.#{$xs-pull-prefix}#{$n} {
+                right: ($n / 24) * 100%;
+            }
+            &.#{$xs-push-prefix}#{$n} {
+                left: ($n / 24) * 100%;
+            }
+            &.#{$xs-order-prefix}#{$n} {
+                order: $n;
+            }
         }
-        &.#{$xs-offset-prefix}#{$n} {
-          margin-left: ($n / 24) * 100%;
-        }
-        &.#{$xs-pull-prefix}#{$n} {
-          right: ($n / 24) * 100%;
-        }
-        &.#{$xs-push-prefix}#{$n} {
-          left: ($n / 24) * 100%;
-        }
-        &.#{$xs-order-prefix}#{$n} {
-          order: $n;
-        }
-      }
     }
 
     @media (min-width: 576px) {
-      $sm-span-prefix: zeroUI-col-sm-span-;
-      $sm-offset-prefix: zeroUI-col-sm-offset-;
-      $sm-push-prefix: zeroUI-col-sm-push-;
-      $sm-pull-prefix: zeroUI-col-sm-pull-;
-      $sm-order-prefix: zeroUI-col-sm-order-;
-      @for $n from 1 through 24 {
-        &.#{$sm-span-prefix}#{$n} {
-            width: ($n / 24) * 100%;
+        $sm-span-prefix: zeroUI-col-sm-span-;
+        $sm-offset-prefix: zeroUI-col-sm-offset-;
+        $sm-push-prefix: zeroUI-col-sm-push-;
+        $sm-pull-prefix: zeroUI-col-sm-pull-;
+        $sm-order-prefix: zeroUI-col-sm-order-;
+        @for $n from 1 through 24 {
+            &.#{$sm-span-prefix}#{$n} {
+                width: ($n / 24) * 100%;
+            }
+            &.#{$sm-offset-prefix}#{$n} {
+                margin-left: ($n / 24) * 100%;
+            }
+            &.#{$sm-pull-prefix}#{$n} {
+                right: ($n / 24) * 100%;
+            }
+            &.#{$sm-push-prefix}#{$n} {
+                left: ($n / 24) * 100%;
+            }
+            &.#{$sm-order-prefix}#{$n} {
+                order: $n;
+            }
         }
-        &.#{$sm-offset-prefix}#{$n} {
-          margin-left: ($n / 24) * 100%;
-        }
-        &.#{$sm-pull-prefix}#{$n} {
-          right: ($n / 24) * 100%;
-        }
-        &.#{$sm-push-prefix}#{$n} {
-          left: ($n / 24) * 100%;
-        }
-        &.#{$sm-order-prefix}#{$n} {
-          order: $n;
-        }
-      }
     }
 
     @media (min-width: 768px) {
-      $md-span-prefix: zeroUI-col-md-span-;
-      $md-offset-prefix: zeroUI-col-md-offset-;
-      $md-push-prefix: zeroUI-col-md-push-;
-      $md-pull-prefix: zeroUI-col-md-pull-;
-      $md-order-prefix: zeroUI-col-md-order-;
-      @for $n from 1 through 24 {
-        &.#{$md-span-prefix}#{$n} {
-            width: ($n / 24) * 100%;
+        $md-span-prefix: zeroUI-col-md-span-;
+        $md-offset-prefix: zeroUI-col-md-offset-;
+        $md-push-prefix: zeroUI-col-md-push-;
+        $md-pull-prefix: zeroUI-col-md-pull-;
+        $md-order-prefix: zeroUI-col-md-order-;
+        @for $n from 1 through 24 {
+            &.#{$md-span-prefix}#{$n} {
+                width: ($n / 24) * 100%;
+            }
+            &.#{$md-offset-prefix}#{$n} {
+                margin-left: ($n / 24) * 100%;
+            }
+            &.#{$md-pull-prefix}#{$n} {
+                right: ($n / 24) * 100%;
+            }
+            &.#{$md-push-prefix}#{$n} {
+                left: ($n / 24) * 100%;
+            }
+            &.#{$md-order-prefix}#{$n} {
+                order: $n;
+            }
         }
-        &.#{$md-offset-prefix}#{$n} {
-          margin-left: ($n / 24) * 100%;
-        }
-        &.#{$md-pull-prefix}#{$n} {
-          right: ($n / 24) * 100%;
-        }
-        &.#{$md-push-prefix}#{$n} {
-          left: ($n / 24) * 100%;
-        }
-        &.#{$md-order-prefix}#{$n} {
-          order: $n;
-        }
-      }
     }
 
     @media (min-width: 992px) {
-      $lg-span-prefix: zeroUI-col-lg-span-;
-      $lg-offset-prefix: zeroUI-col-lg-offset-;
-      $lg-push-prefix: zeroUI-col-lg-push-;
-      $lg-pull-prefix: zeroUI-col-lg-pull-;
-      $lg-order-prefix: zeroUI-col-lg-order-;
-      @for $n from 1 through 24 {
-        &.#{$lg-span-prefix}#{$n} {
-            width: ($n / 24) * 100%;
+        $lg-span-prefix: zeroUI-col-lg-span-;
+        $lg-offset-prefix: zeroUI-col-lg-offset-;
+        $lg-push-prefix: zeroUI-col-lg-push-;
+        $lg-pull-prefix: zeroUI-col-lg-pull-;
+        $lg-order-prefix: zeroUI-col-lg-order-;
+        @for $n from 1 through 24 {
+            &.#{$lg-span-prefix}#{$n} {
+                width: ($n / 24) * 100%;
+            }
+            &.#{$lg-offset-prefix}#{$n} {
+                margin-left: ($n / 24) * 100%;
+            }
+            &.#{$lg-pull-prefix}#{$n} {
+                right: ($n / 24) * 100%;
+            }
+            &.#{$lg-push-prefix}#{$n} {
+                left: ($n / 24) * 100%;
+            }
+            &.#{$lg-order-prefix}#{$n} {
+                order: $n;
+            }
         }
-        &.#{$lg-offset-prefix}#{$n} {
-          margin-left: ($n / 24) * 100%;
-        }
-        &.#{$lg-pull-prefix}#{$n} {
-          right: ($n / 24) * 100%;
-        }
-        &.#{$lg-push-prefix}#{$n} {
-          left: ($n / 24) * 100%;
-        }
-        &.#{$lg-order-prefix}#{$n} {
-          order: $n;
-        }
-      }
     }
 
     @media (min-width: 1200px) {
-      $xl-span-prefix: zeroUI-col-xl-span-;
-      $xl-offset-prefix: zeroUI-col-xl-offset-;
-      $xl-push-prefix: zeroUI-col-xl-push-;
-      $xl-pull-prefix: zeroUI-col-xl-pull-;
-      $xl-order-prefix: zeroUI-col-xl-order-;
-      @for $n from 1 through 24 {
-        &.#{$xl-span-prefix}#{$n} {
-            width: ($n / 24) * 100%;
+        $xl-span-prefix: zeroUI-col-xl-span-;
+        $xl-offset-prefix: zeroUI-col-xl-offset-;
+        $xl-push-prefix: zeroUI-col-xl-push-;
+        $xl-pull-prefix: zeroUI-col-xl-pull-;
+        $xl-order-prefix: zeroUI-col-xl-order-;
+        @for $n from 1 through 24 {
+            &.#{$xl-span-prefix}#{$n} {
+                width: ($n / 24) * 100%;
+            }
+            &.#{$xl-offset-prefix}#{$n} {
+                margin-left: ($n / 24) * 100%;
+            }
+            &.#{$xl-pull-prefix}#{$n} {
+                right: ($n / 24) * 100%;
+            }
+            &.#{$xl-push-prefix}#{$n} {
+                left: ($n / 24) * 100%;
+            }
+            &.#{$xl-order-prefix}#{$n} {
+                order: $n;
+            }
         }
-        &.#{$xl-offset-prefix}#{$n} {
-          margin-left: ($n / 24) * 100%;
-        }
-        &.#{$xl-pull-prefix}#{$n} {
-          right: ($n / 24) * 100%;
-        }
-        &.#{$xl-push-prefix}#{$n} {
-          left: ($n / 24) * 100%;
-        }
-        &.#{$xl-order-prefix}#{$n} {
-          order: $n;
-        }
-      }
     }
 
     @media (min-width: 1600px) {
-      $xxl-span-prefix: zeroUI-col-xxl-span-;
-      $xxl-offset-prefix: zeroUI-col-xxl-offset-;
-      $xxl-push-prefix: zeroUI-col-xxl-push-;
-      $xxl-pull-prefix: zeroUI-col-xxl-pull-;
-      $xxl-order-prefix: zeroUI-col-xxl-order-;
-      @for $n from 1 through 24 {
-        &.#{$xxl-span-prefix}#{$n} {
-            width: ($n / 24) * 100%;
+        $xxl-span-prefix: zeroUI-col-xxl-span-;
+        $xxl-offset-prefix: zeroUI-col-xxl-offset-;
+        $xxl-push-prefix: zeroUI-col-xxl-push-;
+        $xxl-pull-prefix: zeroUI-col-xxl-pull-;
+        $xxl-order-prefix: zeroUI-col-xxl-order-;
+        @for $n from 1 through 24 {
+            &.#{$xxl-span-prefix}#{$n} {
+                width: ($n / 24) * 100%;
+            }
+            &.#{$xxl-offset-prefix}#{$n} {
+                margin-left: ($n / 24) * 100%;
+            }
+            &.#{$xxl-pull-prefix}#{$n} {
+                right: ($n / 24) * 100%;
+            }
+            &.#{$xxl-push-prefix}#{$n} {
+                left: ($n / 24) * 100%;
+            }
+            &.#{$xxl-order-prefix}#{$n} {
+                order: $n;
+            }
         }
-        &.#{$xxl-offset-prefix}#{$n} {
-          margin-left: ($n / 24) * 100%;
-        }
-        &.#{$xxl-pull-prefix}#{$n} {
-          right: ($n / 24) * 100%;
-        }
-        &.#{$xxl-push-prefix}#{$n} {
-          left: ($n / 24) * 100%;
-        }
-        &.#{$xxl-order-prefix}#{$n} {
-          order: $n;
-        }
-      }
     }
-
 }

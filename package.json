@@ -15,8 +15,8 @@
     "dev": "cross-env IS_APP=true webpack-dev-server --config webpack.config.dev.js",
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
     "ci": "cross-env NODE_ENV=test JEST_JUNIT_OUTPUT=./test-results/jest/results.xml jest --config=jest.config.ci.js",
-    "lint": "eslint --ext .ts,.tsx .",
-    "lint:fix": "eslint --fix --ext .ts,.tsx ."
+    "lint": "eslint --quiet --ext .ts,.tsx .",
+    "lint:fix": "eslint --quiet --fix --ext .ts,.tsx ."
   },
   "husky": {
     "hooks": {

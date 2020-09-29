@@ -1,8 +1,8 @@
 import React from 'react'
-import { Layout, Header, Sider, Footer, Content } from "../../components";
-import './Layout.example.scss'
+import { Content, Footer, Header, Layout, Sider } from '../../components'
+import DemoCard from '../DemoCard'
 import * as content01 from './01-基本布局.md'
-import DemoCard from '../DemoCard';
+import './Layout.example.scss'
 
 const LayoutExample01 = () => {
     return (
@@ -54,11 +54,6 @@ const DemoCard01 = (
     </DemoCard>
 )
 
-export default function() {
-    return (
-        <div className="zeroUI-layout-example">
-            {DemoCard01}
-        </div>
-    )
-
+export default function LayoutDemo() {
+    return <div className="zeroUI-layout-example">{DemoCard01}</div>
 }

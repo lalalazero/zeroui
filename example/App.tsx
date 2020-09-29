@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Menu, Button } from '../components'
+import { Menu } from '../components'
 import './App.scss'
 
 const { SubMenu, MenuGroup, MenuItem } = Menu
@@ -29,7 +29,6 @@ const App = () => (
                         <MenuItem key="14">对对虾</MenuItem>
                     </SubMenu>
                 </SubMenu>
-
             </SubMenu>
             <SubMenu title="二级菜单-2">
                 <MenuItem key="15">小龙虾</MenuItem>
@@ -39,7 +38,7 @@ const App = () => (
             <MenuItem key="10">打球</MenuItem>
             <MenuItem key="11">跑步</MenuItem>
         </Menu>
-        <Menu mode='vertical'>
+        <Menu mode="vertical">
             <SubMenu title="二级菜单">
                 <MenuGroup title="吃货">
                     <MenuItem key="1">水果</MenuItem>
@@ -61,7 +60,6 @@ const App = () => (
                         <MenuItem key="14">对对虾</MenuItem>
                     </SubMenu>
                 </SubMenu>
-
             </SubMenu>
             <SubMenu title="二级菜单-2">
                 <MenuItem key="15">小龙虾</MenuItem>

@@ -1,7 +1,7 @@
-import { cloneElement, ReactElement, ReactNode, Children } from 'react'
-import MenuItem from './MenuItem'
+import { Children, cloneElement, ReactElement, ReactNode } from 'react'
 import { addItemKey } from './MenuContext'
 import MenuGroup from './MenuGroup'
+import MenuItem from './MenuItem'
 import SubMenu from './SubMenu'
 
 export const PADDING_BASE = 14
@@ -10,7 +10,6 @@ export const PADDING_BASE_GROUP = 8
 export const collectItemKeys = (children: ReactNode) => {
     loopChildren(children, addItemKey)
 }
-
 
 export const renderChildren = (children: ReactNode, extraProps: any) => {
     return Children.map(children, (child: ReactElement) => {
@@ -25,7 +24,7 @@ export const renderChildren = (children: ReactNode, extraProps: any) => {
 }
 
 export const loopChildren = (children: ReactNode, cb: any) => {
-    Children.map(children, (child: ReactElement, i: number) => {
+    Children.map(children, (child: ReactElement) => {
         if (child && child.type) {
             const tmp1 = child.type as typeof MenuItem
             if (tmp1.isMenuItem) {
@@ -53,7 +52,6 @@ export const detectIndent = (children: ReactNode, level: number) => {
                 if (tmp3.isSubMenu) {
                     x = loop(child.props.children, x + 1)
                 }
-
             }
         })
         return x

@@ -28,60 +28,60 @@ export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
 }
 
 const Button: React.FunctionComponent<ButtonProps> = (props) => {
-  const {
-    type,
-    icon,
-    loading,
-    className,
-    shape,
-    onClick,
-    position,
-    size,
-    disabled,
-    ghost,
-    block,
-    ...restProps
-  } = props
-  const clsSwithes = makeClassSwitchs({
-    type,
-    shape,
-    position,
-    size,
-    loading: {
-      useKey: loading,
-    },
-    disabled: {
-      useKey: disabled,
-    },
-    ghost: {
-      useKey: ghost,
-    },
-    block: {
-      useKey: block,
-    },
-    circleLarge: {
-      useKey: shape === 'circle' && size === 'large',
-    },
-    circleSmall: {
-      useKey: shape === 'circle' && size === 'small',
-    },
-  })
-  const nativeProps = { disabled, ...restProps }
-  return (
-    <button
-      onClick={onClick}
-      className={sc(clsSwithes, className)}
-      {...nativeProps}
-    >
-      {loading ? <Icon name="loading"></Icon> : ''}
-      {icon && !loading ? <Icon name={icon}></Icon> : ''}
-      <div className={sc('content')}>{props.children}</div>
-    </button>
-  )
+    const {
+        type,
+        icon,
+        loading,
+        className,
+        shape,
+        onClick,
+        position,
+        size,
+        disabled,
+        ghost,
+        block,
+        ...restProps
+    } = props
+    const clsSwithes = makeClassSwitchs({
+        type,
+        shape,
+        position,
+        size,
+        loading: {
+            useKey: loading,
+        },
+        disabled: {
+            useKey: disabled,
+        },
+        ghost: {
+            useKey: ghost,
+        },
+        block: {
+            useKey: block,
+        },
+        circleLarge: {
+            useKey: shape === 'circle' && size === 'large',
+        },
+        circleSmall: {
+            useKey: shape === 'circle' && size === 'small',
+        },
+    })
+    const nativeProps = { disabled, ...restProps }
+    return (
+        <button
+            onClick={onClick}
+            className={sc(clsSwithes, className)}
+            {...nativeProps}
+        >
+            {loading ? <Icon name="loading"></Icon> : ''}
+            {icon && !loading ? <Icon name={icon}></Icon> : ''}
+            <div className={sc('content')}>{props.children}</div>
+        </button>
+    )
 }
 
 Button.defaultProps = {
-  type: 'normal',
-  position: 'left',
+    type: 'normal',
+    position: 'left',
 }
 export default Button

@@ -17,8 +17,8 @@ const Layout: React.FunctionComponent<Props> = (props) => {
 
     const hasSider = !!(childrenArr.length &&
         childrenArr.reduce((result, node) =>
-        result || node.type === Sider
-    , false))
+            result || node.type === Sider
+        , false))
     return (
         <div className={sc({ hasSider }, className )} {...rest}>{ props.children }</div>
     )

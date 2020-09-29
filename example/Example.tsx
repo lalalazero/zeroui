@@ -1,36 +1,37 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { HashRouter as Router, Route, NavLink } from 'react-router-dom'
-import IconExample from './icon/Icon.example'
+import { HashRouter as Router, NavLink, Route } from 'react-router-dom'
+import { Content, Footer, Header, Layout, Sider } from '../components'
 import ButtonDemo from './button'
-import DialogExample from './dialog/Dialog.example'
-import LayoutExample from './layout/Layout.example'
 import ColorExample from './color/Color.example'
-import GridExample from './grid/Grid.example'
-import TooltipExample from './tooltip/Tooltip.example'
+import DialogExample from './dialog/Dialog.example'
 import './Example.scss'
-// @ts-ignore
+import GridExample from './grid/Grid.example'
+import IconExample from './icon/Icon.example'
+import LayoutExample from './layout/Layout.example'
 import logo from './logo.png'
-
-import { Layout, Header, Content, Footer, Sider } from '../components'
+import TooltipExample from './tooltip/Tooltip.example'
 
 ReactDOM.render(
     <Router>
-        <Layout className='example-layout'>
-            <Header className='example-header'>
-                <NavLink to='/icon'>
-                    <img src={logo} className="logo" alt="logo" /><span>ZEROUI</span>
+        <Layout className="example-layout">
+            <Header className="example-header">
+                <NavLink to="/icon">
+                    <img src={logo} className="logo" alt="logo" />
+                    <span>ZEROUI</span>
                 </NavLink>
                 {/*<p>a set of delightful UI components implemented with React Hooks and typescript</p>*/}
             </Header>
-            <Layout className='example-main'>
-                <Sider className='example-sider'>
+            <Layout className="example-main">
+                <Sider className="example-sider">
                     <ul>
                         <li>
                             <NavLink to="/color">色彩搭配</NavLink>
                         </li>
                     </ul>
-                    <p><span>组件</span></p>
+                    <p>
+                        <span>组件</span>
+                    </p>
                     <ul>
                         <li>
                             <NavLink to="/icon">Icon 图标</NavLink>
@@ -52,8 +53,8 @@ ReactDOM.render(
                         </li>
                     </ul>
                 </Sider>
-                <Content className='example-content-wrapper'>
-                    <div className='example-content'>
+                <Content className="example-content-wrapper">
+                    <div className="example-content">
                         <Route path="/icon" component={IconExample}></Route>
                         <Route path="/button" component={ButtonDemo}></Route>
                         <Route path="/dialog" component={DialogExample}></Route>
@@ -64,14 +65,15 @@ ReactDOM.render(
                     </div>
                 </Content>
             </Layout>
-            <Footer className='example-footer'>
+            <Footer className="example-footer">
                 <p>
                     {/*<img src={logo} className="logo" alt="logo"/>*/}
-                    <a href="https://github.com/lalalazero">lalalazero</a><span>{' '}implemented with React hooks and typescript</span>
+                    <a href="https://github.com/lalalazero">lalalazero</a>
+                    <span> implemented with React hooks and typescript</span>
                 </p>
             </Footer>
         </Layout>
+    </Router>,
 
-    </Router>, 
-    
-    document.querySelector('#root'))
+    document.querySelector('#root')
+)
