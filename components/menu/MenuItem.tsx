@@ -1,7 +1,7 @@
 import React, { Component, HTMLAttributes } from 'react'
 import { makeClassSwitchs, scopedClassMaker } from '../_util/classes'
 import { modeType } from './Menu'
-import MenuContext from './MenuContext'
+// import MenuContext from './MenuContext'
 import { PADDING_BASE } from './utils'
 
 const scopedClassName = scopedClassMaker('zeroUI-menu-item')
@@ -17,9 +17,9 @@ export interface MenuItemState {
     isSelectedKey: boolean
 }
 
-export default class MenuItem extends Component<MenuItemProps, MenuItemState> {
+class MenuItem extends Component<MenuItemProps, MenuItemState> {
     static isMenuItem = true
-    static contextType = MenuContext
+    // static contextType = MenuContext
     constructor(props: MenuItemProps) {
         super(props)
         this.state = {
@@ -27,41 +27,40 @@ export default class MenuItem extends Component<MenuItemProps, MenuItemState> {
         }
     }
 
-    onClick = (
-        event: React.MouseEvent<HTMLLIElement, MouseEvent>,
-        changeKey: any
-    ) => {
-        changeKey(this.props.itemKey)
+    onClick = (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+        // changeKey(this.props.itemKey)
+        console.log('click event', event)
     }
 
     render() {
         const { className, itemKey, indentLevel, mode, ...rest } = this.props
+        const selectedKey = ''
         const paddingLeftStyle =
             mode === 'inline'
                 ? { paddingLeft: `${(indentLevel as number) * PADDING_BASE}px` }
                 : { paddingLeft: `${PADDING_BASE}px` }
+        const clsObj = makeClassSwitchs({
+            selected: {
+                useKey: selectedKey === itemKey,
+            },
+        })
+        const mergedClsName = sc(clsObj, className)
         return (
-            <MenuContext.Consumer>
-                {({ selectedKey, changeKey, allKeys }) => {
-                    console.log(allKeys)
-                    const clsObj = makeClassSwitchs({
-                        selected: {
-                            useKey: selectedKey === itemKey,
-                        },
-                    })
-                    const mergedClsName = sc(clsObj, className)
-                    return (
-                        <li
-                            className={mergedClsName}
-                            {...rest}
-                            style={paddingLeftStyle}
-                            onClick={(event) => this.onClick(event, changeKey)}
-                        >
-                            {this.props.children}
-                        </li>
-                    )
-                }}
-            </MenuContext.Consumer>
+            <li
+                className={mergedClsName}
+                {...rest}
+                style={paddingLeftStyle}
+                onClick={this.onClick}
+            >
+                {this.props.children}
+            </li>
         )
     }
 }
+export default MenuItem
+
+// const mapState = (state: any) => state
+
+// const connected = connect(mapState)(MenuItem)
+
+// export default connected

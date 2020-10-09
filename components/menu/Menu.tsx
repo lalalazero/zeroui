@@ -1,7 +1,7 @@
 import React, { Component, HTMLAttributes } from 'react'
 import { makeClassSwitchs, scopedClassMaker } from '../_util/classes'
+import { create, Provider, Store } from '../_util/mini-store'
 import './Menu.scss'
-import MenuContext, { allKeys } from './MenuContext'
 import MenuGroup from './MenuGroup'
 import MenuItem from './MenuItem'
 import SubMenu from './SubMenu'
@@ -20,19 +20,21 @@ const scopedClassName = scopedClassMaker('zeroUI-menu')
 const sc = scopedClassName
 
 class Menu extends Component<MenuProps, MenuState> {
-    static contextType = MenuContext
+    // static contextType = MenuContext
     static MenuGroup = MenuGroup
     static MenuItem = MenuItem
     static SubMenu = SubMenu
     static defaultProps = {
         mode: 'inline',
     }
+    store: Store
     private indentLevel = 1
     constructor(props: MenuProps) {
         super(props)
         this.state = {
             selectedKey: '',
         }
+        this.store = create({ selectedKey: [], allKeys: [] })
     }
 
     componentDidMount() {
@@ -47,18 +49,16 @@ class Menu extends Component<MenuProps, MenuState> {
 
     render() {
         const { className, mode, ...rest } = this.props
-        const { selectedKey } = this.state
         const { indentLevel } = this
         const clsSwitch = makeClassSwitchs({
             mode,
         })
-        const contextValue = { selectedKey, allKeys, changeKey: this.changeKey }
         return (
-            <MenuContext.Provider value={contextValue}>
+            <Provider store={this.store}>
                 <ul className={sc(clsSwitch, className)} {...rest}>
                     {renderChildren(this.props.children, { indentLevel, mode })}
                 </ul>
-            </MenuContext.Provider>
+            </Provider>
         )
     }
 }

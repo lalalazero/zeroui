@@ -2,7 +2,7 @@ import React, { Component, HTMLAttributes } from 'react'
 import { Icon } from '../index'
 import { makeClassSwitchs, scopedClassMaker } from '../_util/classes'
 import { modeType } from './Menu'
-import MenuContext from './MenuContext'
+// import MenuContext from './MenuContext'
 import { loopChildren, PADDING_BASE, renderChildren } from './utils'
 
 export interface SubMenuProps extends HTMLAttributes<HTMLElement> {
@@ -78,54 +78,52 @@ class SubMenu extends Component<SubMenuProps, SubMenuState> {
             mode === 'inline'
                 ? { paddingLeft: `${(indentLevel as number) * PADDING_BASE}px` }
                 : { paddingLeft: `${PADDING_BASE}px` }
+        const selectedKey = ''
+        const clsObj = makeClassSwitchs({
+            'sub-item-selected': {
+                useKey: this.subItemKeys.indexOf(selectedKey) >= 0,
+            },
+            mode,
+        })
         return (
-            <MenuContext.Consumer>
-                {({ selectedKey }) => {
-                    const clsObj = makeClassSwitchs({
-                        'sub-item-selected': {
-                            useKey: this.subItemKeys.indexOf(selectedKey) >= 0,
-                        },
-                        mode,
-                    })
-                    return (
-                        <li
-                            onMouseLeave={this.onMouseLeave}
-                            onMouseEnter={this.onMouseEnter}
-                        >
-                            <ul
-                                className={sc(clsObj, className)}
-                                {...rest}
-                                onMouseEnter={this.onMouseEnter}
-                            >
-                                <p
-                                    className={sc('label')}
-                                    style={paddingLeftStyle}
-                                    onClick={this.toggle}
-                                    data-visible={itemsVisible}
-                                >
-                                    {title}
-                                    <span>
-                                        <Icon name="down"></Icon>
-                                    </span>
-                                </p>
-                                <div
-                                    className={sc('popup-wrapper')}
-                                    data-visible={itemsVisible}
-                                >
-                                    {itemsVisible &&
-                                        renderChildren(this.props.children, {
-                                            indentLevel:
-                                                (indentLevel as number) + 1,
-                                            mode,
-                                        })}
-                                </div>
-                            </ul>
-                        </li>
-                    )
-                }}
-            </MenuContext.Consumer>
+            <li
+                onMouseLeave={this.onMouseLeave}
+                onMouseEnter={this.onMouseEnter}
+            >
+                <ul
+                    className={sc(clsObj, className)}
+                    {...rest}
+                    onMouseEnter={this.onMouseEnter}
+                >
+                    <p
+                        className={sc('label')}
+                        style={paddingLeftStyle}
+                        onClick={this.toggle}
+                        data-visible={itemsVisible}
+                    >
+                        {title}
+                        <span>
+                            <Icon name="down"></Icon>
+                        </span>
+                    </p>
+                    <div
+                        className={sc('popup-wrapper')}
+                        data-visible={itemsVisible}
+                    >
+                        {itemsVisible &&
+                            renderChildren(this.props.children, {
+                                indentLevel: (indentLevel as number) + 1,
+                                mode,
+                            })}
+                    </div>
+                </ul>
+            </li>
         )
     }
 }
-
 export default SubMenu
+// const mapState = (state: any) => state
+
+// const connected = connect(mapState)(SubMenu)
+
+// export default connected

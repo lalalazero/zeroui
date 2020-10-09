@@ -30,7 +30,16 @@ module.exports = {
             },
             {
                 test: /\.s([ac])ss$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            implementation: require('sass'),
+                        },
+                    },
+                ],
             },
             {
                 test: /\.md$/,

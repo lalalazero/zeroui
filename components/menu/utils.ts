@@ -7,11 +7,11 @@ import SubMenu from './SubMenu'
 export const PADDING_BASE = 14
 export const PADDING_BASE_GROUP = 8
 
-export const collectItemKeys = (children: ReactNode) => {
+export const collectItemKeys = (children: ReactNode): void => {
     loopChildren(children, addItemKey)
 }
 
-export const renderChildren = (children: ReactNode, extraProps: any) => {
+export const renderChildren = (children: ReactNode, extraProps: any): any[] => {
     return Children.map(children, (child: ReactElement) => {
         if (child.type && (child.type as typeof MenuItem).isMenuItem) {
             return cloneElement(child, { itemKey: child.key, ...extraProps })

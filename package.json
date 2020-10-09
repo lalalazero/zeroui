@@ -1,103 +1,106 @@
 {
-  "name": "zero-ui-react",
-  "version": "0.0.15",
-  "description": "react ui components",
-  "main": "dist/index",
-  "types": "dist/components/index",
-  "files": [
-    "/dist/**/*"
-  ],
-  "scripts": {
-    "docs:dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.dev.js",
-    "docs:build": "cross-env NODE_ENV=development webpack --config webpack.config.doc.js",
-    "test": "cross-env NODE_ENV=test jest --config=jest.config.js --runInBand",
-    "start": "yarn docs:dev",
-    "dev": "cross-env IS_APP=true webpack-dev-server --config webpack.config.dev.js",
-    "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
-    "ci": "cross-env NODE_ENV=test JEST_JUNIT_OUTPUT=./test-results/jest/results.xml jest --config=jest.config.ci.js",
-    "lint": "eslint --quiet --ext .ts,.tsx .",
-    "lint:fix": "eslint --quiet --fix --ext .ts,.tsx ."
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged && yarn test"
+    "name": "zero-ui-react",
+    "version": "0.0.15",
+    "description": "react ui components",
+    "main": "dist/index",
+    "types": "dist/components/index",
+    "files": [
+        "/dist/**/*"
+    ],
+    "scripts": {
+        "docs:dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.dev.js",
+        "docs:build": "cross-env NODE_ENV=development webpack --config webpack.config.doc.js",
+        "test": "cross-env NODE_ENV=test jest --config=jest.config.js --runInBand",
+        "start": "yarn docs:dev",
+        "dev": "cross-env IS_APP=true webpack-dev-server --config webpack.config.dev.js",
+        "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
+        "ci": "cross-env NODE_ENV=test JEST_JUNIT_OUTPUT=./test-results/jest/results.xml jest --config=jest.config.ci.js",
+        "lint": "eslint --quiet --ext .ts,.tsx .",
+        "lint:fix": "eslint --quiet --fix --ext .ts,.tsx ."
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged && yarn test"
+        }
+    },
+    "lint-staged": {
+        "./**/*.ts?(x)": [
+            "eslint --fix --ext .ts,.tsx",
+            "git add"
+        ]
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/lalalazero/ZEROUI.git"
+    },
+    "author": "lalalazero",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/lalalazero/ZEROUI/issues"
+    },
+    "homepage": "https://github.com/lalalazero/ZEROUI#readme",
+    "devDependencies": {
+        "@babel/core": "^7.5.5",
+        "@babel/preset-env": "^7.5.5",
+        "@babel/preset-react": "^7.0.0",
+        "@babel/preset-typescript": "^7.3.3",
+        "@types/jest": "^24.0.15",
+        "@types/react": "^16.8.23",
+        "@types/react-dom": "^16.8.4",
+        "@types/react-router-dom": "^4.3.4",
+        "@types/react-test-renderer": "^16.8.3",
+        "@types/shallowequal": "^1.1.1",
+        "@typescript-eslint/eslint-plugin": "^4.3.0",
+        "@typescript-eslint/parser": "^4.3.0",
+        "awesome-typescript-loader": "^5.2.1",
+        "babel-jest": "^24.8.0",
+        "clean-webpack-plugin": "^3.0.0",
+        "copy-to-clipboard": "^3.3.1",
+        "cross-env": "^5.2.0",
+        "css-loader": "^3.1.0",
+        "csstype": "^2.6.6",
+        "dart-sass": "^1.25.0",
+        "enzyme": "^3.10.0",
+        "enzyme-adapter-react-16": "^1.14.0",
+        "eslint": "^7.10.0",
+        "eslint-plugin-prettier": "^3.1.4",
+        "eslint-plugin-react": "^7.21.2",
+        "eslint-plugin-react-hooks": "^4.1.2",
+        "eslint-webpack-plugin": "^2.1.0",
+        "file-loader": "^6.0.0",
+        "html-webpack-plugin": "^3.2.0",
+        "husky": "^4.3.0",
+        "jest": "^24.8.0",
+        "jest-junit": "^7.0.0",
+        "lint-staged": "^10.4.0",
+        "markdown-it": "^10.0.0",
+        "mini-css-extract-plugin": "^0.9.0",
+        "prism-react-renderer": "^1.0.2",
+        "raw-loader": "^4.0.0",
+        "react-router": "^5.0.1",
+        "react-router-dom": "^5.0.1",
+        "react-test-renderer": "^16.8.6",
+        "sass": "^1.27.0",
+        "sass-loader": "^7.1.0",
+        "shallowequal": "^1.1.0",
+        "style-loader": "^0.23.1",
+        "svg-sprite-loader": "^4.1.6",
+        "ts-jest": "^24.0.2",
+        "typescript": "^3.5.2",
+        "webpack": "4.29.6",
+        "webpack-cli": "3.2.3",
+        "webpack-dev-server": "^3.7.2",
+        "webpack-merge": "^5.0.9"
+    },
+    "dependencies": {
+        "dot-snake-camel-case-convertor": "^0.0.4",
+        "react": "^16.8.6",
+        "react-dom": "^16.8.6"
+    },
+    "publishConfig": {
+        "registry": "https://registry.npmjs.org"
+    },
+    "eslintConfig": {
+        "extends": "react-app"
     }
-  },
-  "lint-staged": {
-    "./**/*.ts?(x)": [
-      "eslint --fix --ext .ts,.tsx",
-      "git add"
-    ]
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lalalazero/ZEROUI.git"
-  },
-  "author": "lalalazero",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/lalalazero/ZEROUI/issues"
-  },
-  "homepage": "https://github.com/lalalazero/ZEROUI#readme",
-  "devDependencies": {
-    "@babel/core": "^7.5.5",
-    "@babel/preset-env": "^7.5.5",
-    "@babel/preset-react": "^7.0.0",
-    "@babel/preset-typescript": "^7.3.3",
-    "@types/jest": "^24.0.15",
-    "@types/react": "^16.8.23",
-    "@types/react-dom": "^16.8.4",
-    "@types/react-router-dom": "^4.3.4",
-    "@types/react-test-renderer": "^16.8.3",
-    "@typescript-eslint/eslint-plugin": "^4.3.0",
-    "@typescript-eslint/parser": "^4.3.0",
-    "awesome-typescript-loader": "^5.2.1",
-    "babel-jest": "^24.8.0",
-    "clean-webpack-plugin": "^3.0.0",
-    "copy-to-clipboard": "^3.3.1",
-    "cross-env": "^5.2.0",
-    "css-loader": "^3.1.0",
-    "csstype": "^2.6.6",
-    "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.14.0",
-    "eslint": "^7.10.0",
-    "eslint-plugin-prettier": "^3.1.4",
-    "eslint-plugin-react": "^7.21.2",
-    "eslint-plugin-react-hooks": "^4.1.2",
-    "eslint-webpack-plugin": "^2.1.0",
-    "file-loader": "^6.0.0",
-    "html-webpack-plugin": "^3.2.0",
-    "husky": "^4.3.0",
-    "jest": "^24.8.0",
-    "jest-junit": "^7.0.0",
-    "lint-staged": "^10.4.0",
-    "markdown-it": "^10.0.0",
-    "mini-css-extract-plugin": "^0.9.0",
-    "node-sass": "^4.12.0",
-    "prism-react-renderer": "^1.0.2",
-    "raw-loader": "^4.0.0",
-    "react-router": "^5.0.1",
-    "react-router-dom": "^5.0.1",
-    "react-test-renderer": "^16.8.6",
-    "sass-loader": "^7.1.0",
-    "style-loader": "^0.23.1",
-    "svg-sprite-loader": "^4.1.6",
-    "ts-jest": "^24.0.2",
-    "typescript": "^3.5.2",
-    "webpack": "4.29.6",
-    "webpack-cli": "3.2.3",
-    "webpack-dev-server": "^3.7.2",
-    "webpack-merge": "^5.0.9"
-  },
-  "dependencies": {
-    "dot-snake-camel-case-convertor": "^0.0.4",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
-  },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  }
 }
