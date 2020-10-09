@@ -10,7 +10,7 @@ import { Button, ButtonGroup } from './button/index';
 import './index.scss';
 declare const message: {
     confirm: (content: string, yes?: (() => void) | undefined, no?: (() => void) | undefined) => void;
-    modal: (content: import("react").ReactNode, buttons?: import("react").ReactElement<any, string | ((props: any) => import("react").ReactElement<any, string | any | (new (props: any) => import("react").Component<any, any, any>)> | null) | (new (props: any) => import("react").Component<any, any, any>)>[] | undefined, afterClose?: Function | undefined) => () => void;
+    modal: (content: import("react").ReactNode, buttons?: import("react").ReactElement<any, string | ((props: any) => import("react").ReactElement<any, string | any | (new (props: any) => import("react").Component<any, any, any>)> | null) | (new (props: any) => import("react").Component<any, any, any>)>[] | undefined, afterClose?: any) => () => void;
     alert: (content: string) => void;
 };
 export { Icon, Dialog, Layout, Content, Header, Footer, Sider, message, Button, ButtonGroup };

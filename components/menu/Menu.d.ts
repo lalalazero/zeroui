@@ -1,9 +1,8 @@
 import React, { Component, HTMLAttributes } from 'react';
+import './Menu.scss';
 import MenuGroup from './MenuGroup';
 import MenuItem from './MenuItem';
 import SubMenu from './SubMenu';
-import { MenuContextProps } from './MenuContext';
-import './Menu.scss';
 export interface MenuProps extends HTMLAttributes<HTMLElement> {
     mode: modeType;
 }
@@ -12,7 +11,7 @@ export interface MenuState {
     selectedKey: string;
 }
 declare class Menu extends Component<MenuProps, MenuState> {
-    static contextType: React.Context<MenuContextProps>;
+    static contextType: React.Context<import("./MenuContext").MenuContextProps>;
     static MenuGroup: typeof MenuGroup;
     static MenuItem: typeof MenuItem;
     static SubMenu: typeof SubMenu;

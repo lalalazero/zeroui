@@ -2054,45 +2054,6 @@
   .zeroUI-submenu-vertical .zeroUI-submenu-popup-wrapper[data-visible="true"] {
     border: 1px solid; }
 
-[class^=zeroUI-] {
-  box-sizing: border-box; }
-  [class^=zeroUI-]::before {
-    box-sizing: border-box; }
-  [class^=zeroUI-]::after {
-    box-sizing: border-box; }
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg); }
-  100% {
-    transform: rotate(360deg); } }
-
-.icon-example ul {
-  margin-top: 20px;
-  display: flex;
-  flex-wrap: wrap; }
-  .icon-example ul li {
-    padding: 10px;
-    border-radius: 4px;
-    text-align: center;
-    width: 120px;
-    height: 90px;
-    margin-bottom: 20px; }
-    .icon-example ul li svg {
-      font-size: 1.5em;
-      fill: #13c2c2; }
-    .icon-example ul li span {
-      font-size: 0.8em;
-      color: #737373; }
-    .icon-example ul li:hover {
-      background: #006d75;
-      transform: scale(1.1);
-      transition: transform 300ms; }
-      .icon-example ul li:hover svg {
-        fill: white; }
-      .icon-example ul li:hover span {
-        color: white; }
-
 .demo-card {
   border: 1px solid #e6e6e6;
   margin: 20px; }
@@ -2156,51 +2117,6 @@
 .zeroUI-button-group {
   margin: 5px; }
 
-
-[class^=zeroUI-] {
-  box-sizing: border-box; }
-  [class^=zeroUI-]::before {
-    box-sizing: border-box; }
-  [class^=zeroUI-]::after {
-    box-sizing: border-box; }
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg); }
-  100% {
-    transform: rotate(360deg); } }
-
-.layout-example-wrapper {
-  margin-bottom: 40px; }
-
-.zeroUI-layout-example .zeroUI-layout-header {
-  background: #b5f5ec;
-  height: 80px;
-  line-height: 80px;
-  text-align: center;
-  color: #fff; }
-
-.zeroUI-layout-example .zeroUI-layout-sider {
-  background: #36cfc9;
-  width: 200px;
-  line-height: 200px;
-  text-align: center;
-  color: #fff; }
-
-.zeroUI-layout-example .zeroUI-layout-content {
-  height: 200px;
-  line-height: 200px;
-  background: #5cdbd3;
-  text-align: center;
-  color: #fff; }
-
-.zeroUI-layout-example .zeroUI-layout-footer {
-  background: #b5f5ec;
-  height: 80px;
-  line-height: 80px;
-  text-align: center;
-  color: #fff; }
-
 .example-color div .cell {
   height: 72px;
   width: 136px;
@@ -2210,72 +2126,6 @@
   line-height: 72px;
   display: inline-block; }
 
-[class^=zeroUI-] {
-  box-sizing: border-box; }
-  [class^=zeroUI-]::before {
-    box-sizing: border-box; }
-  [class^=zeroUI-]::after {
-    box-sizing: border-box; }
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg); }
-  100% {
-    transform: rotate(360deg); } }
-
-.zeroUI-grid-example .zeroUI-row {
-  margin: 20px 0;
-  color: #fff; }
-
-.zeroUI-grid-example .col-with-bg .zeroUI-col {
-  height: 40px;
-  line-height: 40px;
-  text-align: center; }
-  .zeroUI-grid-example .col-with-bg .zeroUI-col:nth-child(even) {
-    background-color: #87e8de; }
-  .zeroUI-grid-example .col-with-bg .zeroUI-col:nth-child(odd) {
-    background-color: #36cfc9; }
-
-.zeroUI-grid-example .gutter-div {
-  height: 40px;
-  line-height: 40px;
-  text-align: center; }
-  .zeroUI-grid-example .gutter-div:nth-child(even) {
-    background-color: #87e8de; }
-  .zeroUI-grid-example .gutter-div:nth-child(odd) {
-    background-color: #36cfc9; }
-
-.row-padding-10 {
-  padding: 10px 0;
-  background: #ccc; }
-
-.row-padding-20 {
-  padding: 20px 0;
-  background: #ccc; }
-
-.height-diff .zeroUI-col:nth-child(1) {
-  height: 60px; }
-
-.height-diff .zeroUI-col:nth-child(2) {
-  height: 110px; }
-
-.height-diff .zeroUI-col:nth-child(3) {
-  height: 80px; }
-
-.height-diff .zeroUI-col:nth-child(4) {
-  height: 100px; }
-
-.tooltip-example-02 .box-1, .tooltip-example-02 .box-2, .tooltip-example-02 .box-3 {
-  display: flex; }
-
-.tooltip-example-02 .box-1, .tooltip-example-02 .box-3 {
-  justify-content: center; }
-
-.tooltip-example-02 .box-2 {
-  justify-content: space-around; }
-
-.tooltip-example-02 .zeroUI-tooltip-wrapper {
-  margin: 10px; }
 
 [class^=zeroUI-] {
   box-sizing: border-box; }
@@ -2396,4 +2246,154 @@ a {
   .example-footer a {
     color: white;
     text-decoration: underline; }
+
+[class^=zeroUI-] {
+  box-sizing: border-box; }
+  [class^=zeroUI-]::before {
+    box-sizing: border-box; }
+  [class^=zeroUI-]::after {
+    box-sizing: border-box; }
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
+.zeroUI-grid-example .zeroUI-row {
+  margin: 20px 0;
+  color: #fff; }
+
+.zeroUI-grid-example .col-with-bg .zeroUI-col {
+  height: 40px;
+  line-height: 40px;
+  text-align: center; }
+  .zeroUI-grid-example .col-with-bg .zeroUI-col:nth-child(even) {
+    background-color: #87e8de; }
+  .zeroUI-grid-example .col-with-bg .zeroUI-col:nth-child(odd) {
+    background-color: #36cfc9; }
+
+.zeroUI-grid-example .gutter-div {
+  height: 40px;
+  line-height: 40px;
+  text-align: center; }
+  .zeroUI-grid-example .gutter-div:nth-child(even) {
+    background-color: #87e8de; }
+  .zeroUI-grid-example .gutter-div:nth-child(odd) {
+    background-color: #36cfc9; }
+
+.row-padding-10 {
+  padding: 10px 0;
+  background: #ccc; }
+
+.row-padding-20 {
+  padding: 20px 0;
+  background: #ccc; }
+
+.height-diff .zeroUI-col:nth-child(1) {
+  height: 60px; }
+
+.height-diff .zeroUI-col:nth-child(2) {
+  height: 110px; }
+
+.height-diff .zeroUI-col:nth-child(3) {
+  height: 80px; }
+
+.height-diff .zeroUI-col:nth-child(4) {
+  height: 100px; }
+
+[class^=zeroUI-] {
+  box-sizing: border-box; }
+  [class^=zeroUI-]::before {
+    box-sizing: border-box; }
+  [class^=zeroUI-]::after {
+    box-sizing: border-box; }
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
+.icon-example ul {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap; }
+  .icon-example ul li {
+    padding: 10px;
+    border-radius: 4px;
+    text-align: center;
+    width: 120px;
+    height: 90px;
+    margin-bottom: 20px; }
+    .icon-example ul li svg {
+      font-size: 1.5em;
+      fill: #13c2c2; }
+    .icon-example ul li span {
+      font-size: 0.8em;
+      color: #737373; }
+    .icon-example ul li:hover {
+      background: #006d75;
+      transform: scale(1.1);
+      transition: transform 300ms; }
+      .icon-example ul li:hover svg {
+        fill: white; }
+      .icon-example ul li:hover span {
+        color: white; }
+
+[class^=zeroUI-] {
+  box-sizing: border-box; }
+  [class^=zeroUI-]::before {
+    box-sizing: border-box; }
+  [class^=zeroUI-]::after {
+    box-sizing: border-box; }
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
+.layout-example-wrapper {
+  margin-bottom: 40px; }
+
+.zeroUI-layout-example .zeroUI-layout-header {
+  background: #b5f5ec;
+  height: 80px;
+  line-height: 80px;
+  text-align: center;
+  color: #fff; }
+
+.zeroUI-layout-example .zeroUI-layout-sider {
+  background: #36cfc9;
+  width: 200px;
+  line-height: 200px;
+  text-align: center;
+  color: #fff; }
+
+.zeroUI-layout-example .zeroUI-layout-content {
+  height: 200px;
+  line-height: 200px;
+  background: #5cdbd3;
+  text-align: center;
+  color: #fff; }
+
+.zeroUI-layout-example .zeroUI-layout-footer {
+  background: #b5f5ec;
+  height: 80px;
+  line-height: 80px;
+  text-align: center;
+  color: #fff; }
+
+.tooltip-example-02 .box-1, .tooltip-example-02 .box-2, .tooltip-example-02 .box-3 {
+  display: flex; }
+
+.tooltip-example-02 .box-1, .tooltip-example-02 .box-3 {
+  justify-content: center; }
+
+.tooltip-example-02 .box-2 {
+  justify-content: space-around; }
+
+.tooltip-example-02 .zeroUI-tooltip-wrapper {
+  margin: 10px; }
 

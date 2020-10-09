@@ -6,6 +6,7 @@ export interface MenuGroupProps extends HTMLAttributes<HTMLElement> {
     mode?: modeType;
 }
 export interface MenuGroupState {
+    [key: string]: any;
 }
 export default class MenuGroup extends Component<MenuGroupProps, MenuGroupState> {
     static isMenuGroup: boolean;
