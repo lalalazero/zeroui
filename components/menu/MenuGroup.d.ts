@@ -3,6 +3,7 @@ import { modeType } from './Menu';
 export interface MenuGroupProps extends HTMLAttributes<HTMLElement> {
     title: string;
     extraProps?: extraProps;
+    itemKey?: string;
 }
 export interface extraProps {
     indentLevel?: number;

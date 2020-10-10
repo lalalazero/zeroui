@@ -3,6 +3,7 @@ import { extraProps } from './MenuGroup';
 export interface SubMenuProps extends HTMLAttributes<HTMLElement> {
     title: string;
     extraProps?: extraProps;
+    itemKey?: string;
 }
 export interface SubMenuState {
     itemsVisible: boolean;
