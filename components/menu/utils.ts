@@ -1,25 +1,27 @@
 import { Children, cloneElement, ReactElement, ReactNode } from 'react'
-import { addItemKey } from './MenuContext'
-import MenuGroup from './MenuGroup'
+import MenuGroup, { extraProps } from './MenuGroup'
 import MenuItem from './MenuItem'
 import SubMenu from './SubMenu'
 
 export const PADDING_BASE = 14
 export const PADDING_BASE_GROUP = 8
 
-export const collectItemKeys = (children: ReactNode): void => {
-    loopChildren(children, addItemKey)
+export const collectItemKeys = (children: ReactNode, cb: any): void => {
+    loopChildren(children, cb)
 }
 
-export const renderChildren = (children: ReactNode, extraProps: any): any[] => {
+export const renderChildren = (
+    children: ReactNode,
+    extraProps: extraProps
+): any[] => {
     return Children.map(children, (child: ReactElement) => {
         if (child.type && (child.type as typeof MenuItem).isMenuItem) {
-            return cloneElement(child, { itemKey: child.key, ...extraProps })
+            return cloneElement(child, { itemKey: child.key, extraProps })
         }
         // if (child.type && (child.type as typeof SubMenu).isSubMenu) {
         //     return cloneElement(child, extraProps)
         // }
-        return cloneElement(child, extraProps)
+        return cloneElement(child, { extraProps })
     })
 }
 

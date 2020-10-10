@@ -1,6 +1,5 @@
 import React, { Component, HTMLAttributes } from 'react'
 import { makeClassSwitchs, scopedClassMaker } from '../_util/classes'
-import { create, Provider, Store } from '../_util/mini-store'
 import './Menu.scss'
 import MenuGroup from './MenuGroup'
 import MenuItem from './MenuItem'
@@ -27,21 +26,26 @@ class Menu extends Component<MenuProps, MenuState> {
     static defaultProps = {
         mode: 'inline',
     }
-    store: Store
     private indentLevel = 1
+    itemKeys: any[] = []
     constructor(props: MenuProps) {
         super(props)
         this.state = {
             selectedKey: '',
         }
-        this.store = create({ selectedKey: [], allKeys: [] })
     }
 
     componentDidMount() {
-        collectItemKeys(this.props.children)
+        collectItemKeys(this.props.children, this.addItemKey)
+        console.log(this.itemKeys)
+    }
+
+    addItemKey = (key: any) => {
+        this.itemKeys.push(key)
     }
 
     changeKey = (newKey: string) => {
+        console.log('change key', newKey)
         this.setState({
             selectedKey: newKey,
         })
@@ -50,15 +54,19 @@ class Menu extends Component<MenuProps, MenuState> {
     render() {
         const { className, mode, ...rest } = this.props
         const { indentLevel } = this
+        const { selectedKey } = this.state
         const clsSwitch = makeClassSwitchs({
             mode,
         })
         return (
-            <Provider store={this.store}>
-                <ul className={sc(clsSwitch, className)} {...rest}>
-                    {renderChildren(this.props.children, { indentLevel, mode })}
-                </ul>
-            </Provider>
+            <ul className={sc(clsSwitch, className)} {...rest}>
+                {renderChildren(this.props.children, {
+                    indentLevel,
+                    mode,
+                    changeKey: this.changeKey,
+                    selectedKey,
+                })}
+            </ul>
         )
     }
 }

@@ -1,14 +1,12 @@
 import React, { Component, HTMLAttributes } from 'react'
 import { Icon } from '../index'
 import { makeClassSwitchs, scopedClassMaker } from '../_util/classes'
-import { modeType } from './Menu'
-// import MenuContext from './MenuContext'
+import { extraProps } from './MenuGroup'
 import { loopChildren, PADDING_BASE, renderChildren } from './utils'
 
 export interface SubMenuProps extends HTMLAttributes<HTMLElement> {
     title: string
-    indentLevel?: number
-    mode?: modeType
+    extraProps?: extraProps
 }
 export interface SubMenuState {
     itemsVisible: boolean
@@ -19,7 +17,6 @@ const sc = scopedClassName
 class SubMenu extends Component<SubMenuProps, SubMenuState> {
     static isSubMenu = true
     private subItemKeys: string[] = []
-    private indentLevel = 0
     private timerId: any = null
     constructor(props: SubMenuProps) {
         super(props)
@@ -28,7 +25,9 @@ class SubMenu extends Component<SubMenuProps, SubMenuState> {
         }
     }
     toggle = () => {
-        if (this.props.mode !== 'inline') {
+        const { extraProps = {} } = this.props
+        const { mode } = extraProps as extraProps
+        if (mode !== 'inline') {
             return
         }
         this.setState({
@@ -52,7 +51,9 @@ class SubMenu extends Component<SubMenuProps, SubMenuState> {
         })
     }
     onMouseEnter = () => {
-        if (this.props.mode === 'inline') {
+        const { extraProps = {} } = this.props
+        const { mode } = extraProps as extraProps
+        if (mode === 'inline') {
             return
         }
         if (this.timerId) {
@@ -61,7 +62,9 @@ class SubMenu extends Component<SubMenuProps, SubMenuState> {
         this.open()
     }
     onMouseLeave = () => {
-        if (this.props.mode === 'inline') {
+        const { extraProps = {} } = this.props
+        const { mode } = extraProps as extraProps
+        if (mode === 'inline') {
             return
         }
         if (this.timerId) {
@@ -72,13 +75,17 @@ class SubMenu extends Component<SubMenuProps, SubMenuState> {
         }, 100)
     }
     render() {
-        const { className, title, indentLevel, mode, ...rest } = this.props
+        const { className, title, extraProps = {}, ...rest } = this.props
+        const { indentLevel, mode, selectedKey } = extraProps as extraProps
         const { itemsVisible } = this.state
+        console.log(title, this.subItemKeys)
+        const isHighlighted = !!this.subItemKeys.find(
+            (item) => item === selectedKey
+        )
         const paddingLeftStyle =
             mode === 'inline'
                 ? { paddingLeft: `${(indentLevel as number) * PADDING_BASE}px` }
                 : { paddingLeft: `${PADDING_BASE}px` }
-        const selectedKey = ''
         const clsObj = makeClassSwitchs({
             'sub-item-selected': {
                 useKey: this.subItemKeys.indexOf(selectedKey) >= 0,
@@ -92,6 +99,7 @@ class SubMenu extends Component<SubMenuProps, SubMenuState> {
             >
                 <ul
                     className={sc(clsObj, className)}
+                    is-highlighted={isHighlighted ? 'yes' : 'no'}
                     {...rest}
                     onMouseEnter={this.onMouseEnter}
                 >
@@ -112,9 +120,9 @@ class SubMenu extends Component<SubMenuProps, SubMenuState> {
                     >
                         {itemsVisible &&
                             renderChildren(this.props.children, {
+                                ...extraProps,
                                 indentLevel: (indentLevel as number) + 1,
-                                mode,
-                            })}
+                            } as extraProps)}
                     </div>
                 </ul>
             </li>
@@ -122,8 +130,3 @@ class SubMenu extends Component<SubMenuProps, SubMenuState> {
     }
 }
 export default SubMenu
-// const mapState = (state: any) => state
-
-// const connected = connect(mapState)(SubMenu)
-
-// export default connected

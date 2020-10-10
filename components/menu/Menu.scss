@@ -1,4 +1,4 @@
-@import "../index.scss";
+@import '../index.scss';
 
 $item-default-padding-left: 14px;
 $label-default-padding-left: 14px;
@@ -44,7 +44,7 @@ $defalt-width: 168px;
     }
     &-inline {
         .zeroUI-submenu {
-            &-label[data-visible="false"] {
+            &-label[data-visible='false'] {
                 & > span > svg {
                     transform: rotate(180deg);
                 }
@@ -75,7 +75,8 @@ $defalt-width: 168px;
             transition: all 300ms;
         }
     }
-    &-sub-item-selected > &-label {
+    &-sub-item-selected > &-label,
+    &[is-highlighted='yes'] > &-label {
         color: $brand-color;
     }
 
@@ -90,9 +91,8 @@ $defalt-width: 168px;
             border-radius: 4px;
             margin-left: 4px;
         }
-        .zeroUI-submenu-popup-wrapper[data-visible="true"] {
+        .zeroUI-submenu-popup-wrapper[data-visible='true'] {
             border: 1px solid;
         }
     }
 }
-

@@ -8,8 +8,14 @@ const sc = scopedClassName
 
 export interface MenuGroupProps extends HTMLAttributes<HTMLElement> {
     title: string
+    extraProps?: extraProps
+}
+
+export interface extraProps {
     indentLevel?: number
     mode?: modeType
+    changeKey?: (key: string) => void
+    selectedKey: string
 }
 
 export interface MenuGroupState {
@@ -30,7 +36,13 @@ export default class MenuGroup extends Component<
     }
 
     render() {
-        const { className, title, indentLevel, mode, ...rest } = this.props
+        const {
+            className,
+            title,
+            extraProps: extraProps = {},
+            ...rest
+        } = this.props
+        const { indentLevel, mode } = extraProps as extraProps
         const paddingLeftStyle =
             mode === 'inline'
                 ? {
@@ -45,7 +57,10 @@ export default class MenuGroup extends Component<
                     {title}
                 </p>
                 <div className={sc('item-wrapper')}>
-                    {renderChildren(this.props.children, { indentLevel, mode })}
+                    {renderChildren(
+                        this.props.children,
+                        extraProps as extraProps
+                    )}
                 </div>
             </div>
         )

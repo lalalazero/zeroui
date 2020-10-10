@@ -1,7 +1,6 @@
 import React, { Component, HTMLAttributes } from 'react'
 import { makeClassSwitchs, scopedClassMaker } from '../_util/classes'
-import { modeType } from './Menu'
-// import MenuContext from './MenuContext'
+import { extraProps } from './MenuGroup'
 import { PADDING_BASE } from './utils'
 
 const scopedClassName = scopedClassMaker('zeroUI-menu-item')
@@ -9,8 +8,7 @@ const sc = scopedClassName
 
 export interface MenuItemProps extends HTMLAttributes<HTMLElement> {
     itemKey?: React.Key
-    indentLevel?: number
-    mode?: modeType
+    extraProps?: extraProps
 }
 
 export interface MenuItemState {
@@ -27,14 +25,15 @@ class MenuItem extends Component<MenuItemProps, MenuItemState> {
         }
     }
 
-    onClick = (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
-        // changeKey(this.props.itemKey)
-        console.log('click event', event)
+    onClick = () => {
+        const { extraProps = {}, itemKey } = this.props
+        const { changeKey } = extraProps as extraProps
+        changeKey && changeKey(itemKey as string)
     }
 
     render() {
-        const { className, itemKey, indentLevel, mode, ...rest } = this.props
-        const selectedKey = ''
+        const { className, itemKey, extraProps = {}, ...rest } = this.props
+        const { indentLevel, mode, selectedKey } = extraProps as extraProps
         const paddingLeftStyle =
             mode === 'inline'
                 ? { paddingLeft: `${(indentLevel as number) * PADDING_BASE}px` }
@@ -58,9 +57,3 @@ class MenuItem extends Component<MenuItemProps, MenuItemState> {
     }
 }
 export default MenuItem
-
-// const mapState = (state: any) => state
-
-// const connected = connect(mapState)(MenuItem)
-
-// export default connected
