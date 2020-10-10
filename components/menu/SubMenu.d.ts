@@ -1,9 +1,8 @@
 import { Component, HTMLAttributes } from 'react';
-import { modeType } from './Menu';
+import { extraProps } from './MenuGroup';
 export interface SubMenuProps extends HTMLAttributes<HTMLElement> {
     title: string;
-    indentLevel?: number;
-    mode?: modeType;
+    extraProps?: extraProps;
 }
 export interface SubMenuState {
     itemsVisible: boolean;
@@ -11,7 +10,6 @@ export interface SubMenuState {
 declare class SubMenu extends Component<SubMenuProps, SubMenuState> {
     static isSubMenu: boolean;
     private subItemKeys;
-    private indentLevel;
     private timerId;
     constructor(props: SubMenuProps);
     toggle: () => void;

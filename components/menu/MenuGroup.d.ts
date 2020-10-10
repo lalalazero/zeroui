@@ -2,8 +2,13 @@ import { Component, HTMLAttributes } from 'react';
 import { modeType } from './Menu';
 export interface MenuGroupProps extends HTMLAttributes<HTMLElement> {
     title: string;
+    extraProps?: extraProps;
+}
+export interface extraProps {
     indentLevel?: number;
     mode?: modeType;
+    changeKey?: (key: string) => void;
+    selectedKey: string;
 }
 export interface MenuGroupState {
     [key: string]: any;

@@ -1,4 +1,4 @@
-import React, { Component, HTMLAttributes } from 'react';
+import { Component, HTMLAttributes } from 'react';
 import './Menu.scss';
 import MenuGroup from './MenuGroup';
 import MenuItem from './MenuItem';
@@ -11,7 +11,6 @@ export interface MenuState {
     selectedKey: string;
 }
 declare class Menu extends Component<MenuProps, MenuState> {
-    static contextType: React.Context<import("./MenuContext").MenuContextProps>;
     static MenuGroup: typeof MenuGroup;
     static MenuItem: typeof MenuItem;
     static SubMenu: typeof SubMenu;
@@ -19,8 +18,10 @@ declare class Menu extends Component<MenuProps, MenuState> {
         mode: string;
     };
     private indentLevel;
+    itemKeys: any[];
     constructor(props: MenuProps);
     componentDidMount(): void;
+    addItemKey: (key: any) => void;
     changeKey: (newKey: string) => void;
     render(): JSX.Element;
 }
