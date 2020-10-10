@@ -7,6 +7,7 @@ import { loopChildren, PADDING_BASE, renderChildren } from './utils'
 export interface SubMenuProps extends HTMLAttributes<HTMLElement> {
     title: string
     extraProps?: extraProps
+    itemKey?: string
 }
 export interface SubMenuState {
     itemsVisible: boolean
@@ -75,7 +76,13 @@ class SubMenu extends Component<SubMenuProps, SubMenuState> {
         }, 100)
     }
     render() {
-        const { className, title, extraProps = {}, ...rest } = this.props
+        const {
+            className,
+            title,
+            extraProps = {},
+            itemKey,
+            ...rest
+        } = this.props
         const { indentLevel, mode, selectedKey } = extraProps as extraProps
         const { itemsVisible } = this.state
         console.log(title, this.subItemKeys)
@@ -102,6 +109,7 @@ class SubMenu extends Component<SubMenuProps, SubMenuState> {
                     is-highlighted={isHighlighted ? 'yes' : 'no'}
                     {...rest}
                     onMouseEnter={this.onMouseEnter}
+                    item-key={itemKey}
                 >
                     <p
                         className={sc('label')}

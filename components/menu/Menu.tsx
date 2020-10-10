@@ -36,7 +36,7 @@ class Menu extends Component<MenuProps, MenuState> {
     }
 
     componentDidMount() {
-        collectItemKeys(this.props.children, this.addItemKey)
+        collectItemKeys(this.props.children, this.itemKeys)
         console.log(this.itemKeys)
     }
 

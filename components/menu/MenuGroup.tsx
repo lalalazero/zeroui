@@ -9,6 +9,7 @@ const sc = scopedClassName
 export interface MenuGroupProps extends HTMLAttributes<HTMLElement> {
     title: string
     extraProps?: extraProps
+    itemKey?: string
 }
 
 export interface extraProps {
@@ -39,6 +40,7 @@ export default class MenuGroup extends Component<
         const {
             className,
             title,
+            itemKey,
             extraProps: extraProps = {},
             ...rest
         } = this.props
@@ -52,7 +54,7 @@ export default class MenuGroup extends Component<
                 }
                 : { paddingLeft: `${PADDING_BASE_GROUP}px` }
         return (
-            <div className={sc('', className)} {...rest}>
+            <div className={sc('', className)} {...rest} item-key={itemKey}>
                 <p className={sc('label')} style={paddingLeftStyle}>
                     {title}
                 </p>
