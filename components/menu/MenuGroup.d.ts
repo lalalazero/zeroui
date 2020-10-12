@@ -8,8 +8,9 @@ export interface MenuGroupProps extends HTMLAttributes<HTMLElement> {
 export interface extraProps {
     indentLevel?: number;
     mode?: modeType;
-    changeKey?: (key: string) => void;
+    changeKey: (key: string, keyPath: string[]) => void;
     selectedKey: string;
+    selectedKeys: string[];
 }
 export interface MenuGroupState {
     [key: string]: any;

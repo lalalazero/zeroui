@@ -9,6 +9,7 @@ export interface MenuProps extends HTMLAttributes<HTMLElement> {
 export declare type modeType = 'inline' | 'vertical' | 'horizontal';
 export interface MenuState {
     selectedKey: string;
+    selectedKeys: string[];
 }
 declare class Menu extends Component<MenuProps, MenuState> {
     static MenuGroup: typeof MenuGroup;
@@ -22,7 +23,7 @@ declare class Menu extends Component<MenuProps, MenuState> {
     constructor(props: MenuProps);
     componentDidMount(): void;
     addItemKey: (key: any) => void;
-    changeKey: (newKey: string) => void;
+    changeKey: (newKey: string, keyPath: string[]) => void;
     render(): JSX.Element;
 }
 export default Menu;
