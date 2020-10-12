@@ -1,7 +1,7 @@
 import { Children, cloneElement, ReactElement, ReactNode } from 'react'
 import MenuGroup, { extraProps } from './MenuGroup'
 import MenuItem from './MenuItem'
-import SubMenu from './SubMenu'
+import { SubMenuInternal } from './SubMenu'
 
 export const PADDING_BASE = 14
 export const PADDING_BASE_GROUP = 8
@@ -26,7 +26,7 @@ export const collectItemKeys = (
                 })
             }
 
-            const tmp3 = child.type as typeof SubMenu
+            const tmp3 = child.type as typeof SubMenuInternal
             if (tmp3.isSubMenu) {
                 const childKeys: any[] = []
                 collectItemKeys(child.props.children, childKeys)
@@ -47,7 +47,7 @@ export const renderChildren = (
         if (child.type && (child.type as typeof MenuItem).isMenuItem) {
             return cloneElement(child, { itemKey: child.key, extraProps })
         }
-        if (child.type && (child.type as typeof SubMenu).isSubMenu) {
+        if (child.type && (child.type as typeof SubMenuInternal).isSubMenu) {
             return cloneElement(child, {
                 itemKey: child.key || `subMenu-${idx}`,
                 extraProps,
@@ -80,7 +80,7 @@ export const loopChildren = (children: ReactNode, cb: any) => {
                 loopChildren(child.props.children, cb)
             }
 
-            const tmp3 = child.type as typeof SubMenu
+            const tmp3 = child.type as typeof SubMenuInternal
             if (tmp3.isSubMenu) {
                 loopChildren(child.props.children, cb)
             }
@@ -93,7 +93,7 @@ export const detectIndent = (children: ReactNode, level: number) => {
         let x = level
         Children.forEach(children, (child: ReactElement) => {
             if (child && child.type) {
-                const tmp3 = child.type as typeof SubMenu
+                const tmp3 = child.type as typeof SubMenuInternal
                 if (tmp3.isSubMenu) {
                     x = loop(child.props.children, x + 1)
                 }

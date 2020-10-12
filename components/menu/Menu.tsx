@@ -14,6 +14,7 @@ export type modeType = 'inline' | 'vertical' | 'horizontal'
 
 export interface MenuState {
     selectedKey: string
+    selectedKeys: string[]
 }
 const scopedClassName = scopedClassMaker('zeroUI-menu')
 const sc = scopedClassName
@@ -32,6 +33,7 @@ class Menu extends Component<MenuProps, MenuState> {
         super(props)
         this.state = {
             selectedKey: '',
+            selectedKeys: [],
         }
     }
 
@@ -44,17 +46,18 @@ class Menu extends Component<MenuProps, MenuState> {
         this.itemKeys.push(key)
     }
 
-    changeKey = (newKey: string) => {
+    changeKey = (newKey: string, keyPath: string[]) => {
         console.log('change key', newKey)
         this.setState({
             selectedKey: newKey,
+            selectedKeys: keyPath,
         })
     }
 
     render() {
         const { className, mode, ...rest } = this.props
         const { indentLevel } = this
-        const { selectedKey } = this.state
+        const { selectedKey, selectedKeys } = this.state
         const clsSwitch = makeClassSwitchs({
             mode,
         })
@@ -65,6 +68,7 @@ class Menu extends Component<MenuProps, MenuState> {
                     mode,
                     changeKey: this.changeKey,
                     selectedKey,
+                    selectedKeys,
                 })}
             </ul>
         )

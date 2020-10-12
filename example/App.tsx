@@ -30,13 +30,13 @@ const App = () => (
                     </SubMenu>
                 </SubMenu>
             </SubMenu>
-            {/* <SubMenu title="二级菜单-2">
+            <SubMenu title="二级菜单-2">
                 <MenuItem key="15">小龙虾</MenuItem>
                 <MenuItem key="16">皮皮虾</MenuItem>
                 <MenuItem key="17">对对虾</MenuItem>
             </SubMenu>
             <MenuItem key="10">打球</MenuItem>
-            <MenuItem key="11">跑步</MenuItem> */}
+            <MenuItem key="11">跑步</MenuItem>
         </Menu>
         {/* <Menu mode="vertical">
             <SubMenu title="二级菜单">

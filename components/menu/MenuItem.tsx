@@ -28,7 +28,7 @@ class MenuItem extends Component<MenuItemProps, MenuItemState> {
     onClick = () => {
         const { extraProps = {}, itemKey } = this.props
         const { changeKey } = extraProps as extraProps
-        changeKey && changeKey(itemKey as string)
+        changeKey && changeKey(itemKey as string, [itemKey as string])
     }
 
     render() {
