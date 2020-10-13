@@ -61,6 +61,7 @@ export default class MenuGroup extends Component<
                 </p>
                 <div className={sc('item-wrapper')}>
                     {renderChildren(
+                        itemKey as string,
                         this.props.children,
                         extraProps as extraProps
                     )}

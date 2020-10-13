@@ -19,7 +19,7 @@ export class SubMenuInternal extends Component<
     InternalMenuProps,
     InternalMenuState
 > {
-    static isSubMenu = true
+    static isSubMenuInternal = true
     // private subItemKeys: string[] = []
     private timerId: any = null
     constructor(props: InternalMenuProps) {
@@ -144,11 +144,15 @@ export class SubMenuInternal extends Component<
                         data-visible={itemsVisible}
                     >
                         {itemsVisible &&
-                            renderChildren(this.props.children, {
-                                ...extraProps,
-                                indentLevel: (indentLevel as number) + 1,
-                                changeKey: this.changeKey,
-                            } as extraProps)}
+                            renderChildren(
+                                itemKey as string,
+                                this.props.children,
+                                {
+                                    ...extraProps,
+                                    indentLevel: (indentLevel as number) + 1,
+                                    changeKey: this.changeKey,
+                                } as extraProps
+                            )}
                     </div>
                 </ul>
             </li>
@@ -159,6 +163,7 @@ export interface SubMenuProps extends HTMLAttributes<HTMLElement> {
     title: string
 }
 class SubMenu extends Component<SubMenuProps> {
+    static isSubMenu = true
     constructor(props: SubMenuProps) {
         super(props)
     }
