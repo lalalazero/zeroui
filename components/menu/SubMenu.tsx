@@ -2,29 +2,44 @@ import React, { Component, HTMLAttributes } from 'react'
 import { Icon } from '../index'
 import { makeClassSwitchs, scopedClassMaker } from '../_util/classes'
 import { extraProps } from './MenuGroup'
-import { loopChildren, PADDING_BASE, renderChildren } from './utils'
+import { PADDING_BASE, renderChildren } from './utils'
 
 interface InternalMenuProps extends SubMenuProps {
     extraProps: extraProps
     itemKey: string
 }
-export interface SubMenuState {
+interface InternalMenuState {
     itemsVisible: boolean
+    isHighlighted: boolean
 }
 const scopedClassName = scopedClassMaker('zeroUI-submenu')
 const sc = scopedClassName
 
 export class SubMenuInternal extends Component<
     InternalMenuProps,
-    SubMenuState
+    InternalMenuState
 > {
     static isSubMenu = true
-    private subItemKeys: string[] = []
+    // private subItemKeys: string[] = []
     private timerId: any = null
     constructor(props: InternalMenuProps) {
         super(props)
         this.state = {
             itemsVisible: false,
+            isHighlighted: false,
+        }
+    }
+    static getDerivedStateFromProps(
+        props: InternalMenuProps
+        // state: InternalMenuState
+    ): Partial<InternalMenuState> {
+        const { itemKey, extraProps = {} } = props
+        const { selectedKeys = [] } = extraProps as extraProps
+        const isHighlighted = !!selectedKeys.find(
+            (key: string) => key === itemKey
+        )
+        return {
+            isHighlighted,
         }
     }
     toggle = () => {
@@ -48,11 +63,11 @@ export class SubMenuInternal extends Component<
             itemsVisible: false,
         })
     }
-    componentDidMount() {
-        loopChildren(this.props.children, (itemKey: string) => {
-            this.subItemKeys.push(itemKey)
-        })
-    }
+    // componentDidMount() {
+    //     loopChildren(this.props.children, (itemKey: string) => {
+    //         this.subItemKeys.push(itemKey)
+    //     })
+    // }
     onMouseEnter = () => {
         const { extraProps = {} } = this.props
         const { mode } = extraProps as extraProps
@@ -89,24 +104,16 @@ export class SubMenuInternal extends Component<
             itemKey,
             ...rest
         } = this.props
-        const {
-            indentLevel,
-            mode,
-            selectedKey,
-            selectedKeys,
-        } = extraProps as extraProps
-        const { itemsVisible } = this.state
-        console.log(title, selectedKeys)
-        const isHighlighted = !!selectedKeys.find((j) => j === itemKey)
-        console.log('isHightlithed..', isHighlighted)
+        const { indentLevel, mode } = extraProps as extraProps
+        const { itemsVisible, isHighlighted } = this.state
         const paddingLeftStyle =
             mode === 'inline'
                 ? { paddingLeft: `${(indentLevel as number) * PADDING_BASE}px` }
                 : { paddingLeft: `${PADDING_BASE}px` }
         const clsObj = makeClassSwitchs({
-            'sub-item-selected': {
-                useKey: this.subItemKeys.indexOf(selectedKey) >= 0,
-            },
+            // 'sub-item-selected': {
+            //     useKey: this.subItemKeys.indexOf(selectedKey) >= 0,
+            // },
             mode,
         })
         return (

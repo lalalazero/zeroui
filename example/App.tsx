@@ -38,7 +38,7 @@ const App = () => (
             <MenuItem key="10">打球</MenuItem>
             <MenuItem key="11">跑步</MenuItem>
         </Menu>
-        {/* <Menu mode="vertical">
+        <Menu mode="vertical">
             <SubMenu title="二级菜单">
                 <MenuGroup title="吃货">
                     <MenuItem key="1">水果</MenuItem>
@@ -68,7 +68,7 @@ const App = () => (
             </SubMenu>
             <MenuItem key="10">打球</MenuItem>
             <MenuItem key="11">跑步</MenuItem>
-        </Menu> */}
+        </Menu>
     </div>
 )
 
