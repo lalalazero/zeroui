@@ -10,6 +10,7 @@ import GridExample from './grid/Grid.example'
 import IconExample from './icon/Icon.example'
 import LayoutExample from './layout/Layout.example'
 import logo from './logo.png'
+import MenuExample from './menu/Menu.example'
 import SiderNav from './SiderNav'
 import TooltipExample from './tooltip/Tooltip.example'
 
@@ -39,6 +40,7 @@ ReactDOM.render(
                             path="/tooltip"
                             component={TooltipExample}
                         ></Route>
+                        <Route path="/menu" component={MenuExample}></Route>
                     </div>
                 </Content>
             </Layout>

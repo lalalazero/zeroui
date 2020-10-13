@@ -50,6 +50,11 @@ export default class SiderNav extends Component {
                                 <p>Tooltip 文字提示</p>
                             </NavLink>
                         </MenuItem>
+                        <MenuItem>
+                            <NavLink to="/menu">
+                                <p>Menu 导航菜单</p>
+                            </NavLink>
+                        </MenuItem>
                     </SubMenu>
                 </Menu>
             </Fragment>
