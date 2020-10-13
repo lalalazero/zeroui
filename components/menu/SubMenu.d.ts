@@ -4,18 +4,18 @@ interface InternalMenuProps extends SubMenuProps {
     extraProps: extraProps;
     itemKey: string;
 }
-export interface SubMenuState {
+interface InternalMenuState {
     itemsVisible: boolean;
+    isHighlighted: boolean;
 }
-export declare class SubMenuInternal extends Component<InternalMenuProps, SubMenuState> {
-    static isSubMenu: boolean;
-    private subItemKeys;
+export declare class SubMenuInternal extends Component<InternalMenuProps, InternalMenuState> {
+    static isSubMenuInternal: boolean;
     private timerId;
     constructor(props: InternalMenuProps);
+    static getDerivedStateFromProps(props: InternalMenuProps): Partial<InternalMenuState>;
     toggle: () => void;
     open: () => void;
     close: () => void;
-    componentDidMount(): void;
     onMouseEnter: () => void;
     onMouseLeave: () => void;
     changeKey: (key: string, keyPath: string[]) => void;
@@ -25,6 +25,7 @@ export interface SubMenuProps extends HTMLAttributes<HTMLElement> {
     title: string;
 }
 declare class SubMenu extends Component<SubMenuProps> {
+    static isSubMenu: boolean;
     constructor(props: SubMenuProps);
     render(): JSX.Element;
 }

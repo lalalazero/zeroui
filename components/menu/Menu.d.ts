@@ -19,10 +19,7 @@ declare class Menu extends Component<MenuProps, MenuState> {
         mode: string;
     };
     private indentLevel;
-    itemKeys: any[];
     constructor(props: MenuProps);
-    componentDidMount(): void;
-    addItemKey: (key: any) => void;
     changeKey: (newKey: string, keyPath: string[]) => void;
     render(): JSX.Element;
 }
