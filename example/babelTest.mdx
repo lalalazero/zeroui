@@ -1,0 +1,26 @@
+import React from 'react'
+import { Button } from '../components'
+
+export default class ButtonDemo extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      loading: false
+    }
+    this.onClick = this.onClick.bind(this)
+  }
+  onClick(){
+    this.setState({
+      loading: !this.state.loading
+    })
+  }
+  render(){
+    return (
+      <div>
+        <h2>this is ButtonDemo mdx file</h2>
+        <Button type="primary" loading={this.state.loading} onClick={this.onClick}>button</Button>
+      </div>
+    )
+  }
+
+}

@@ -48,6 +48,13 @@ module.exports = {
                 //     path.resolve(__dirname, 'example/**/'),
                 //   ]
             },
+            {
+                test: /\.mdx$/,
+                use: [
+                    // 'awesome-typescript-loader',
+                    require.resolve('./mdx-loader.js'),
+                ],
+            },
         ],
     },
     plugins: [

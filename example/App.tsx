@@ -1,13 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Menu } from '../components'
+// import { Menu } from '../components'
 import './App.scss'
+import Mdx from './babelTest.mdx'
+console.log('App 这里导入 mdx')
+console.log(Mdx)
 
-const { SubMenu, MenuGroup, MenuItem } = Menu
+// const { SubMenu, MenuGroup, MenuItem } = Menu
 
 const App = () => (
     <div className="app">
-        <Menu>
+        <Mdx />
+        {/* <Menu>
             <SubMenu title="二级菜单">
                 <MenuGroup title="吃货">
                     <MenuItem key="1">水果</MenuItem>
@@ -68,7 +72,7 @@ const App = () => (
             </SubMenu>
             <MenuItem key="10">打球</MenuItem>
             <MenuItem key="11">跑步</MenuItem>
-        </Menu>
+        </Menu> */}
     </div>
 )
 
