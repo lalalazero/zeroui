@@ -1,5 +1,5 @@
 import React from 'react';
-export default class renderHOC extends React.Component<{
+export default class DemoRenderer extends React.Component<{
     className?: string;
     demos: any[];
     api: any;
