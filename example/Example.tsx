@@ -30,6 +30,7 @@ ReactDOM.render(
                 </Sider>
                 <Content className="example-content-wrapper">
                     <div className="example-content">
+                        <div id="mountNode"></div>
                         <Route path="/icon" component={IconExample}></Route>
                         <Route path="/button" component={ButtonDemo}></Route>
                         <Route path="/dialog" component={DialogExample}></Route>

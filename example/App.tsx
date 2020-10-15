@@ -2,15 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 // import { Menu } from '../components'
 import './App.scss'
-import Mdx from './babelTest.mdx'
-console.log('App 这里导入 mdx')
-console.log(Mdx)
 
 // const { SubMenu, MenuGroup, MenuItem } = Menu
 
 const App = () => (
     <div className="app">
-        <Mdx />
+        <p>app</p>
         {/* <Menu>
             <SubMenu title="二级菜单">
                 <MenuGroup title="吃货">

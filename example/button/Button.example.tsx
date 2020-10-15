@@ -10,7 +10,6 @@ import * as content6 from './06-按钮组.md'
 import * as content7 from './07-幽灵按钮.md'
 import * as content8 from './08-块级按钮.md'
 import * as apiContent from './api.md'
-import './Button.example.scss'
 
 const ButtonExample01 = () => {
     return (
@@ -29,10 +28,10 @@ const ButtonExample02 = () => {
             <Button icon="search" shape="circle" type="primary"></Button>
             <Button icon="search" shape="circle"></Button>
             <Button icon="search" type="primary">
-        Search
+                Search
             </Button>
             <Button icon="search" position="right">
-        Search
+                Search
             </Button>
         </div>
     )
@@ -45,16 +44,16 @@ const ButtonExample03 = () => {
             <div>
                 <Button size="large">基本</Button>
                 <Button type="primary" size="large">
-          主要
+                    主要
                 </Button>
                 <Button type="dashed" size="large">
-          虚线
+                    虚线
                 </Button>
                 <Button type="text" size="large">
-          无边框
+                    无边框
                 </Button>
                 <Button type="danger" size="large">
-          危险
+                    危险
                 </Button>
                 <Button
                     icon="search"
@@ -64,10 +63,10 @@ const ButtonExample03 = () => {
                 ></Button>
                 <Button icon="search" shape="circle" size="large"></Button>
                 <Button icon="search" type="primary" size="large">
-          Search
+                    Search
                 </Button>
                 <Button icon="search" position="right" size="large">
-          Search
+                    Search
                 </Button>
             </div>
             <p>默认尺寸按钮</p>
@@ -80,26 +79,26 @@ const ButtonExample03 = () => {
                 <Button icon="search" shape="circle" type="primary"></Button>
                 <Button icon="search" shape="circle"></Button>
                 <Button icon="search" type="primary">
-          Search
+                    Search
                 </Button>
                 <Button icon="search" position="right">
-          Search
+                    Search
                 </Button>
             </div>
             <p>小尺寸按钮</p>
             <div>
                 <Button size="small">基本</Button>
                 <Button type="primary" size="small">
-          主要
+                    主要
                 </Button>
                 <Button type="dashed" size="small">
-          虚线
+                    虚线
                 </Button>
                 <Button type="text" size="small">
-          无边框
+                    无边框
                 </Button>
                 <Button type="danger" size="small">
-          危险
+                    危险
                 </Button>
                 <Button
                     icon="search"
@@ -109,10 +108,10 @@ const ButtonExample03 = () => {
                 ></Button>
                 <Button icon="search" shape="circle" size="small"></Button>
                 <Button icon="search" type="primary" size="small">
-          Search
+                    Search
                 </Button>
                 <Button icon="search" position="right" size="small">
-          Search
+                    Search
                 </Button>
             </div>
         </div>
@@ -132,7 +131,7 @@ const ButtonExample04 = () => {
                     setLoading1(!loadign1)
                 }}
             >
-        Loading
+                Loading
             </Button>
             <Button
                 type="primary"
@@ -140,7 +139,7 @@ const ButtonExample04 = () => {
                 onClick={() => setLoading2(!loading2)}
                 position="right"
             >
-        Loading
+                Loading
             </Button>
             <Button
                 loading={loading3}
@@ -167,7 +166,7 @@ const ButtonExample05 = () => {
             <div>
                 <Button type="primary">主要</Button>
                 <Button disabled type="primary">
-          主要(禁用态)
+                    主要(禁用态)
                 </Button>
             </div>
             <div>
@@ -177,13 +176,13 @@ const ButtonExample05 = () => {
             <div>
                 <Button type="dashed">虚线</Button>
                 <Button type="dashed" disabled>
-          虚线(禁用态)
+                    虚线(禁用态)
                 </Button>
             </div>
             <div>
                 <Button type="text">无边框</Button>
                 <Button disabled type="text">
-          无边框(禁用态)
+                    无边框(禁用态)
                 </Button>
             </div>
         </div>
@@ -204,10 +203,10 @@ const ButtonExample06 = () => {
             </ButtonGroup>
             <ButtonGroup>
                 <Button icon="left" type="primary">
-          上一页
+                    上一页
                 </Button>
                 <Button icon="right" type="primary" position="right">
-          下一页
+                    下一页
                 </Button>
             </ButtonGroup>
             <ButtonGroup>
@@ -225,17 +224,17 @@ const ButtonExample07 = () => {
             style={{ background: '#ccc', padding: '20px 0' }}
         >
             <Button ghost type="primary">
-        主要
+                主要
             </Button>
             <Button ghost>基本</Button>
             <Button ghost type="dashed">
-        虚线
+                虚线
             </Button>
             <Button ghost type="text">
-        无边框
+                无边框
             </Button>
             <Button ghost type="danger">
-        危险
+                危险
             </Button>
         </div>
     )
@@ -245,7 +244,7 @@ const ButtonExample08 = () => {
         <div className="space-button">
             <div>
                 <Button block type="primary">
-          主要
+                    主要
                 </Button>
             </div>
             <div>
@@ -253,17 +252,17 @@ const ButtonExample08 = () => {
             </div>
             <div>
                 <Button block type="dashed">
-          虚线
+                    虚线
                 </Button>
             </div>
             <div>
                 <Button block type="text">
-          无边框
+                    无边框
                 </Button>
             </div>
             <div>
                 <Button block type="danger">
-          危险
+                    危险
                 </Button>
             </div>
         </div>
@@ -311,29 +310,55 @@ const Card08 = (
     </DemoCard>
 )
 
-export default function ButtonDemo() {
-    return (
-        <div className="zeroUI-button-example">
-            <Row>
-                <Col lg={12} sm={24}>
-                    {Card01}
-                    {Card02}
-                    {Card03}
-                    {Card04}
-                </Col>
-                <Col lg={12} sm={24}>
-                    {Card05}
-                    {Card06}
-                    {Card07}
-                    {Card08}
-                </Col>
-            </Row>
+export default class ButtonDemo extends React.Component<any, any> {
+    constructor(props: any) {
+        super(props)
+        this.state = {
+            DemoList: [],
+        }
+    }
+    componentDidMount() {
+        import('../babelTest.mdx').then((Demo: any) => {
+            this.setState({
+                DemoList: this.state.DemoList.concat([Demo.default]),
+            })
+        })
+        import('../babelTest2.mdx').then((Demo: any) => {
+            this.setState({
+                DemoList: this.state.DemoList.concat([Demo.default]),
+            })
+        })
+    }
+    render() {
+        const { DemoList } = this.state
+        return (
+            <div className="zeroUI-button-example">
+                {DemoList.map((Demo: any, idx: any) => (
+                    <Demo key={idx} />
+                ))}
+                <Row>
+                    <Col lg={12} sm={24}>
+                        {Card01}
+                        {Card02}
+                        {Card03}
+                        {Card04}
+                    </Col>
+                    <Col lg={12} sm={24}>
+                        {Card05}
+                        {Card06}
+                        {Card07}
+                        {Card08}
+                    </Col>
+                </Row>
 
-            <div className="api-container">
-                <div
-                    dangerouslySetInnerHTML={{ __html: apiContent.default.apiContent }}
-                ></div>
+                <div className="api-container">
+                    <div
+                        dangerouslySetInnerHTML={{
+                            __html: apiContent.default.apiContent,
+                        }}
+                    ></div>
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 }

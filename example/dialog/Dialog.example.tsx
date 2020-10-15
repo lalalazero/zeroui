@@ -1,10 +1,13 @@
-import React, { ReactEventHandler, useState } from 'react'
+import React, { ReactEventHandler, useEffect, useState } from 'react'
 import { Dialog, message } from '../../components'
 import './Dialog.example.scss'
 
 const { alert, confirm, modal } = message
 
 const DialogExample: React.FunctionComponent = () => {
+    useEffect(() => {
+        // import('../babelTest2.mdx')
+    })
     const [x, setX] = useState(false)
     const [y, setY] = useState(false)
     const onCloseModal: ReactEventHandler = () => setX(false)
@@ -21,7 +24,7 @@ const DialogExample: React.FunctionComponent = () => {
                 console.log('modal button clicked.')
             }}
         >
-      button
+            button
         </button>
     )
     return (
@@ -30,15 +33,21 @@ const DialogExample: React.FunctionComponent = () => {
                 <button onClick={() => modal(modalContent)}>modal</button>
             </div>
             <div>
-                <button onClick={() => alert('xxxx alert content')}>alert</button>
-            </div>
-            <div>
-                <button onClick={() => confirm('confirm', yesCallback, noCallback)}>
-          confirm
+                <button onClick={() => alert('xxxx alert content')}>
+                    alert
                 </button>
             </div>
             <div>
-                <button onClick={() => confirm('confirm22222')}>confirm222</button>
+                <button
+                    onClick={() => confirm('confirm', yesCallback, noCallback)}
+                >
+                    confirm
+                </button>
+            </div>
+            <div>
+                <button onClick={() => confirm('confirm22222')}>
+                    confirm222
+                </button>
             </div>
             <div>
                 <h2>example dialog 1</h2>
@@ -52,7 +61,7 @@ const DialogExample: React.FunctionComponent = () => {
                                 setX(false)
                             }}
                         >
-              11111cancel
+                            11111cancel
                         </button>,
                         <button
                             key="2"
@@ -60,7 +69,7 @@ const DialogExample: React.FunctionComponent = () => {
                                 setX(false)
                             }}
                         >
-              22222ok
+                            22222ok
                         </button>,
                     ]}
                     onClose={onCloseModal}
@@ -80,7 +89,7 @@ const DialogExample: React.FunctionComponent = () => {
                                 setY(false)
                             }}
                         >
-              11cancel
+                            11cancel
                         </button>,
                         <button
                             key="2"
@@ -88,7 +97,7 @@ const DialogExample: React.FunctionComponent = () => {
                                 setY(false)
                             }}
                         >
-              22ok
+                            22ok
                         </button>,
                     ]}
                     onClose={onCloseModal2}
