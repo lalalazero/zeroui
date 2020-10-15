@@ -1,0 +1,36 @@
+## 位置
+
+支持 4 个方位
+
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Tooltip, Button } from 'zero-ui-react'
+
+const App = () => {
+    return (
+        <div className="tooltip-example-02">
+            <div className="box-1">
+                <Tooltip title="propmt text" placement="top">
+                    <Button>TOP</Button>
+                </Tooltip>
+            </div>
+            <div className="box-2">
+                <Tooltip title="propmt text" placement="left">
+                    <Button>LEFT</Button>
+                </Tooltip>
+                <Tooltip title="propmt text" placement="right">
+                    <Button>RIGHT</Button>
+                </Tooltip>
+            </div>
+            <div className="box-3">
+                <Tooltip title="propmt text" placement="bottom">
+                    <Button>BOTTOM</Button>
+                </Tooltip>
+            </div>
+        </div>
+    )
+}
+
+export default App
+```

@@ -12,7 +12,7 @@ import LayoutExample from './layout'
 import logo from './logo.png'
 import MenuExample from './menu/Menu.example'
 import SiderNav from './SiderNav'
-import TooltipExample from './tooltip/Tooltip.example'
+import TooltipExample from './tooltip'
 
 ReactDOM.render(
     <Router>
