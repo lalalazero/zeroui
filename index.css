@@ -3066,6 +3066,12 @@
   display: flex;
   flex-wrap: wrap;
 }
+.zeroUI-button-example .space-button .zeroUI-button {
+  margin: 5px;
+}
+.zeroUI-button-example .space-button-group .zeroUI-button-group {
+  margin: 5px;
+}
 .example-color div .cell {
   height: 72px;
   width: 136px;
