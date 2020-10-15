@@ -7,22 +7,22 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Row, Col } from 'zero-ui-react'
 
-const GridExample = () =>{
+const App = () => {
     return (
-        <div>
-            <Row align="top" justify="center" >
+        <div className="col-with-bg height-diff">
+            <Row align="top" justify="center" className="row-padding-20">
                 <Col span={4}>col-span-4</Col>
                 <Col span={4}>col-span-4</Col>
                 <Col span={4}>col-span-4</Col>
                 <Col span={4}>col-span-4</Col>
             </Row>
-            <Row align="middle" justify="center" >
+            <Row align="middle" justify="center" className="row-padding-20">
                 <Col span={4}>col-span-4</Col>
                 <Col span={4}>col-span-4</Col>
                 <Col span={4}>col-span-4</Col>
                 <Col span={4}>col-span-4</Col>
             </Row>
-            <Row align="bottom" justify="center" >
+            <Row align="bottom" justify="center" className="row-padding-20">
                 <Col span={4}>col-span-4</Col>
                 <Col span={4}>col-span-4</Col>
                 <Col span={4}>col-span-4</Col>
@@ -31,7 +31,7 @@ const GridExample = () =>{
         </div>
     )
 }
-export default GridExample
+export default App
 ```
 
 ```css

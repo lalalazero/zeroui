@@ -7,34 +7,34 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Row, Col } from 'zero-ui-react'
 
-const GridExample = () =>{
+const App = () => {
     return (
-        <div>
-            <Row justify="start" className='row-padding-10'>
+        <div className="col-with-bg">
+            <Row justify="start" className="row-padding-10">
                 <Col span={4}>col-span-4</Col>
                 <Col span={4}>col-span-4</Col>
                 <Col span={4}>col-span-4</Col>
                 <Col span={4}>col-span-4</Col>
             </Row>
-            <Row justify="center" className='row-padding-10'>
+            <Row justify="center" className="row-padding-10">
                 <Col span={4}>col-span-4</Col>
                 <Col span={4}>col-span-4</Col>
                 <Col span={4}>col-span-4</Col>
                 <Col span={4}>col-span-4</Col>
             </Row>
-            <Row justify="end" className='row-padding-10'>
+            <Row justify="end" className="row-padding-10">
                 <Col span={4}>col-span-4</Col>
                 <Col span={4}>col-span-4</Col>
                 <Col span={4}>col-span-4</Col>
                 <Col span={4}>col-span-4</Col>
             </Row>
-            <Row justify="space-between" className='row-padding-10'>
+            <Row justify="space-between" className="row-padding-10">
                 <Col span={4}>col-span-4</Col>
                 <Col span={4}>col-span-4</Col>
                 <Col span={4}>col-span-4</Col>
                 <Col span={4}>col-span-4</Col>
             </Row>
-            <Row justify="space-around" className='row-padding-10'>
+            <Row justify="space-around" className="row-padding-10">
                 <Col span={4}>col-span-4</Col>
                 <Col span={4}>col-span-4</Col>
                 <Col span={4}>col-span-4</Col>
@@ -43,7 +43,7 @@ const GridExample = () =>{
         </div>
     )
 }
-export default GridExample
+export default App
 ```
 
 ```css
@@ -55,7 +55,6 @@ export default GridExample
     height: 40px;
     line-height: 40px;
     text-align: center;
-    
 }
 .zeroUI-col:nth-child(even) {
     background-color: #87e8de;
