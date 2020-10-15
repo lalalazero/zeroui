@@ -1,0 +1,30 @@
+## 幽灵按钮
+
+幽灵按钮将按钮的内容反色，背景变为透明，常用在有色背景上。
+
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Button } from 'zero-ui-react'
+
+const App = () => {
+    return (
+        <div style={{ background: '#ccc', padding: '20px 0' }}>
+            <Button ghost type="primary">
+                主要
+            </Button>
+            <Button ghost>基本</Button>
+            <Button ghost type="dashed">
+                虚线
+            </Button>
+            <Button ghost type="text">
+                无边框
+            </Button>
+            <Button ghost type="danger">
+                危险
+            </Button>
+        </div>
+    )
+}
+export default App
+```

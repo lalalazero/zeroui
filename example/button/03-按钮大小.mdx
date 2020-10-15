@@ -1,0 +1,91 @@
+## 按钮尺寸
+
+按钮有大、中、小三种尺寸。通过设置 `size` 为 `large` `small` 分别把按钮设为大、小尺寸。若不设置 `size`，则尺寸为默认。
+
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Button } from 'zero-ui-react'
+
+const App = () => {
+    return (
+        <div className="space-button">
+            <div>大尺寸按钮</div>
+            <div>
+                <Button size="large">基本</Button>
+                <Button type="primary" size="large">
+                    主要
+                </Button>
+                <Button type="dashed" size="large">
+                    虚线
+                </Button>
+                <Button type="text" size="large">
+                    无边框
+                </Button>
+                <Button type="danger" size="large">
+                    危险
+                </Button>
+                <Button
+                    icon="search"
+                    shape="circle"
+                    type="primary"
+                    size="large"
+                ></Button>
+                <Button icon="search" shape="circle" size="large"></Button>
+                <Button icon="search" type="primary" size="large">
+                    Search
+                </Button>
+                <Button icon="search" position="right" size="large">
+                    Search
+                </Button>
+            </div>
+            <div>默认尺寸按钮</div>
+            <div>
+                <Button>基本</Button>
+                <Button type="primary">主要</Button>
+                <Button type="dashed">虚线</Button>
+                <Button type="text">无边框</Button>
+                <Button type="danger">危险</Button>
+                <Button icon="search" shape="circle" type="primary"></Button>
+                <Button icon="search" shape="circle"></Button>
+                <Button icon="search" type="primary">
+                    Search
+                </Button>
+                <Button icon="search" position="right">
+                    Search
+                </Button>
+            </div>
+            <div>小尺寸按钮</div>
+            <div>
+                <Button size="small">基本</Button>
+                <Button type="primary" size="small">
+                    主要
+                </Button>
+                <Button type="dashed" size="small">
+                    虚线
+                </Button>
+                <Button type="text" size="small">
+                    无边框
+                </Button>
+                <Button type="danger" size="small">
+                    危险
+                </Button>
+                <Button
+                    icon="search"
+                    shape="circle"
+                    type="primary"
+                    size="small"
+                ></Button>
+                <Button icon="search" shape="circle" size="small"></Button>
+                <Button icon="search" type="primary" size="small">
+                    Search
+                </Button>
+                <Button icon="search" position="right" size="small">
+                    Search
+                </Button>
+            </div>
+        </div>
+    )
+}
+export default App
+```

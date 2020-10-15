@@ -7,9 +7,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Button, ButtonGroup } from 'zero-ui-react'
 
-const ButtonExample = () => {
+const App = () => {
     return (
-        <div>
+        <div className="space-button-group">
             <ButtonGroup>
                 <Button>取消</Button>
                 <Button>确定</Button>
@@ -20,8 +20,12 @@ const ButtonExample = () => {
                 <Button disabled>右</Button>
             </ButtonGroup>
             <ButtonGroup>
-                <Button icon="left" type="primary">上一页</Button>
-                <Button icon="right" type="primary" position="right">下一页</Button>
+                <Button icon="left" type="primary">
+                    上一页
+                </Button>
+                <Button icon="right" type="primary" position="right">
+                    下一页
+                </Button>
             </ButtonGroup>
             <ButtonGroup>
                 <Button icon="download" type="primary"></Button>
@@ -30,5 +34,5 @@ const ButtonExample = () => {
         </div>
     )
 }
-export default ButtonExample
+export default App
 ```

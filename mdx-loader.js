@@ -63,7 +63,7 @@ function render(resource) {
         css,
     }
 
-    let demo2 = demo.replace(/zero-ui-react/, `../components`)
+    let demo2 = demo.replace(/zero-ui-react/, `../../components`)
     demo2 += '\n'
     demo2 = demo2.replace(
         /export default App/,

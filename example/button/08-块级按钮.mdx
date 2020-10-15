@@ -1,0 +1,40 @@
+## 块级按钮
+
+通过 `block` 属性使得按钮宽度适应其父元素。
+
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Button } from 'zero-ui-react'
+
+const App = () => {
+    return (
+        <div className="space-button">
+            <div>
+                <Button block type="primary">
+                    主要
+                </Button>
+            </div>
+            <div>
+                <Button block>基本</Button>
+            </div>
+            <div>
+                <Button block type="dashed">
+                    虚线
+                </Button>
+            </div>
+            <div>
+                <Button block type="text">
+                    无边框
+                </Button>
+            </div>
+            <div>
+                <Button block type="danger">
+                    危险
+                </Button>
+            </div>
+        </div>
+    )
+}
+export default App
+```

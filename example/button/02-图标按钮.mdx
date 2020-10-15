@@ -7,15 +7,19 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Button } from 'zero-ui-react'
 
-const ButtonExample = () => {
+const App = () => {
     return (
-        <div>
+        <div className="space-button">
             <Button icon="search" shape="circle" type="primary"></Button>
-            <Button icon='search' shape='circle'></Button>
-            <Button icon="search" type="primary">Search</Button>
-            <Button icon='search' position="right">Search</Button>
+            <Button icon="search" shape="circle"></Button>
+            <Button icon="search" type="primary">
+                Search
+            </Button>
+            <Button icon="search" position="right">
+                Search
+            </Button>
         </div>
     )
 }
-export default ButtonExample
+export default App
 ```
