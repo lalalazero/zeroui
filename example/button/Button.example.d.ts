@@ -1,3 +1,6 @@
-/// <reference types="react" />
-import './Button.example.scss';
-export default function ButtonDemo(): JSX.Element;
+import React from 'react';
+export default class ButtonDemo extends React.Component<any, any> {
+    constructor(props: any);
+    componentDidMount(): void;
+    render(): JSX.Element;
+}
