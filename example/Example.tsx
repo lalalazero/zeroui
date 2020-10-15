@@ -10,7 +10,7 @@ import GridExample from './grid'
 import IconExample from './icon/Icon.example'
 import LayoutExample from './layout'
 import logo from './logo.png'
-import MenuExample from './menu/Menu.example'
+import MenuExample from './menu'
 import SiderNav from './SiderNav'
 import TooltipExample from './tooltip'
 

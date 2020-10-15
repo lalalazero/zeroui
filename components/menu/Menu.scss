@@ -2,14 +2,21 @@
 
 $item-default-padding-left: 14px;
 $label-default-padding-left: 14px;
-$item-default-padding-top: 5px;
-$item-default-padding-bottom: 5px;
+$item-default-padding-top: 8px;
+$item-default-padding-bottom: 8px;
+$item-default-margin-top: 5px;
+$item-default-margin-bottom: 5px;
+
 $defalt-width: 168px;
 
 @mixin on-hover {
     &:hover {
-        background-color: $selected-background;
+        // background-color: $selected-background;
         cursor: pointer;
+        color: $brand-color;
+        .zeroUI-icon {
+            fill: $brand-color;
+        }
     }
 }
 
@@ -18,11 +25,18 @@ $defalt-width: 168px;
     padding-bottom: $item-default-padding-bottom;
 }
 
+@mixin default-margin {
+    margin-top: $item-default-margin-top;
+    margin-bottom: $item-default-margin-bottom;
+}
+
 @mixin menu-item-base-style {
     @include default-padding();
+    @include default-margin();
     @include on-hover();
     &-selected {
-        background-color: $brand-color !important;
+        background-color: $selected-background !important;
+        color: $brand-color;
     }
 }
 
@@ -50,6 +64,23 @@ $defalt-width: 168px;
                 }
             }
         }
+        .zeroUI-menu-item {
+            position: relative;
+            margin-right: 4px;
+        }
+        .zeroUI-menu-item-selected {
+            &:after {
+                content: '';
+                display: inline-block;
+                // border: 1px solid red;
+                width: 4px;
+                background: $brand-color;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                right: -4px;
+            }
+        }
     }
     &-vertical {
         .zeroUI-submenu {
@@ -70,6 +101,7 @@ $defalt-width: 168px;
         padding-right: $item-default-padding-left;
         & > span {
             float: right;
+            margin-left: 16px;
         }
         & > span > svg {
             transition: all 300ms;
@@ -78,6 +110,9 @@ $defalt-width: 168px;
     // &-sub-item-selected > &-label,
     &[is-highlighted='yes'] > &-label {
         color: $brand-color;
+        .zeroUI-icon {
+            fill: $brand-color;
+        }
     }
 
     &-vertical {
