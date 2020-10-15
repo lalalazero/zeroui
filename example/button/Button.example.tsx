@@ -9,7 +9,6 @@ import * as content5 from './05-不可用状态.md'
 import * as content6 from './06-按钮组.md'
 import * as content7 from './07-幽灵按钮.md'
 import * as content8 from './08-块级按钮.md'
-import * as apiContent from './api.md'
 
 const ButtonExample01 = () => {
     return (
@@ -315,6 +314,7 @@ export default class ButtonDemo extends React.Component<any, any> {
         super(props)
         this.state = {
             DemoList: [],
+            api: '',
         }
     }
     componentDidMount() {
@@ -329,14 +329,14 @@ export default class ButtonDemo extends React.Component<any, any> {
                 DemoList: this.state.DemoList.concat([abc]),
             })
         })
-        // import('../babelTest2.mdx').then((Demo: any) => {
-        //     this.setState({
-        //         DemoList: this.state.DemoList.concat([Demo.default]),
-        //     })
-        // })
+        import('../babelTest2.mdx').then((content: any) => {
+            this.setState({
+                api: content.default.apiContent,
+            })
+        })
     }
     render() {
-        const { DemoList } = this.state
+        const { DemoList, api } = this.state
         return (
             <div className="zeroUI-button-example">
                 {DemoList.map((Demo: any, idx: any) => (
@@ -356,11 +356,10 @@ export default class ButtonDemo extends React.Component<any, any> {
                         {Card08}
                     </Col>
                 </Row>
-
                 <div className="api-container">
                     <div
                         dangerouslySetInnerHTML={{
-                            __html: apiContent.default.apiContent,
+                            __html: api,
                         }}
                     ></div>
                 </div>
