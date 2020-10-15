@@ -319,15 +319,21 @@ export default class ButtonDemo extends React.Component<any, any> {
     }
     componentDidMount() {
         import('../babelTest.mdx').then((Demo: any) => {
+            const { LiveDemo, markdown } = Demo
+            const abc = () => (
+                <DemoCard markdown={markdown}>
+                    <LiveDemo />
+                </DemoCard>
+            )
             this.setState({
-                DemoList: this.state.DemoList.concat([Demo.default]),
+                DemoList: this.state.DemoList.concat([abc]),
             })
         })
-        import('../babelTest2.mdx').then((Demo: any) => {
-            this.setState({
-                DemoList: this.state.DemoList.concat([Demo.default]),
-            })
-        })
+        // import('../babelTest2.mdx').then((Demo: any) => {
+        //     this.setState({
+        //         DemoList: this.state.DemoList.concat([Demo.default]),
+        //     })
+        // })
     }
     render() {
         const { DemoList } = this.state

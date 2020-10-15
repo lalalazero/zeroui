@@ -1,27 +1,22 @@
+## 按钮类型
+
+按钮有五种类型：主按钮、次按钮、虚线按钮、无边框按钮和危险按钮。主按钮在同一个操作区域最多出现一次。
+
+```jsx
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Button } from '../components'
+import { Button } from 'zero-ui-react'
 
-export default class ButtonDemo extends React.Component {
-constructor(props) {
-super(props)
-this.state = {
-loading: false,
+const App = () => {
+    return (
+        <div>
+            <Button>基本</Button>
+            <Button type="primary">主要</Button>
+            <Button type="dashed">虚线</Button>
+            <Button type="text">无边框</Button>
+            <Button type="danger">危险</Button>
+        </div>
+    )
 }
-this.onClick = this.onClick.bind(this)
-}
-onClick() {
-this.setState({
-loading: !this.state.loading,
-})
-}
-render() {
-return (
-
-<div>
-    <h2>this is ButtonDemo mdx file</h2>
-    <Button type="primary" loading={this.state.loading} onClick={this.onClick}>
-        button
-    </Button>
-</div>
-) } }
+export default App
+```
