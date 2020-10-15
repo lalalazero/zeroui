@@ -36,11 +36,7 @@ function stripExampleCode(content) {
     let demo = stripDemo(content)
     let css = stripCss(content)
     let index = demo.indexOf('export default')
-    // let name = demo.substring(index + 'export default'.length + 1)
     let code = demo.substring(0, index)
-    // let x = code + `\nReactDOM.render(<${name} />, MountNode)`
-    // let y =
-    // code + `\nReactDOM.render(<${name} />, document.getElementById('xxx'))`
     return {
         code: code,
         demo,
@@ -54,24 +50,14 @@ function render(resource) {
     let desc = stripDescription(content)
     let { code, demo, css } = stripExampleCode(content)
 
-    let xxx = {
+    let markdown = {
         subject,
         desc,
-        // demo,
         code,
         css,
     }
 
-    keep(xxx)
-
-    let demo2 = demo
-        .replace(/import React from 'react'/, `const React = require('react')`)
-        .replace(
-            /import ReactDOM from 'react-dom'/,
-            `const ReactDOM = require('react-dom')`
-        )
-        .replace(/import/, 'const')
-        .replace(/from 'zero-ui-react'/, ` = require('../components')`)
+    let demo2 = demo.replace(/zero-ui-react/, `../components`)
     demo2 += '\n'
     demo2 = demo2.replace(
         /export default App/,
@@ -79,21 +65,10 @@ function render(resource) {
     )
 
     const app = `
-    ${demo2}
-    export const markdown = ${JSON.stringify(xxx)}
+        ${demo2}
+        export const markdown = ${JSON.stringify(markdown)}
     `
     return babel.transformSync(app).code
 }
 
 module.exports = render
-
-// function render(resouce) {
-//     let result = babel.transformSync(resouce)
-//     return result.code
-// }
-
-// module.exports = render
-
-function keep(arg) {
-    return arg
-}
