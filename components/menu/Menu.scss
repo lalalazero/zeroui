@@ -125,9 +125,13 @@ $defalt-width: 168px;
             background: white;
             border-radius: 4px;
             margin-left: 4px;
+            z-index: 10;
         }
         .zeroUI-submenu-popup-wrapper[data-visible='true'] {
-            border: 1px solid;
+            // border: 1px solid;
+            background: #fff;
+            padding: 4px 0;
+            @extend %box-shadow;
         }
     }
 }

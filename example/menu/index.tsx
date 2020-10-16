@@ -11,7 +11,10 @@ export default class Demo extends React.Component<any, any> {
         }
     }
     async componentDidMount() {
-        const demos = [await import('./01-内嵌菜单.mdx')]
+        const demos = [
+            await import('./01-内嵌菜单.mdx'),
+            await import('./02-垂直菜单.mdx'),
+        ]
         // const api = await import('./api.mdx')
         this.setState({
             // api: api.default.apiContent,
@@ -27,6 +30,7 @@ export default class Demo extends React.Component<any, any> {
                 className={className}
                 demos={demos}
                 api={api}
+                colCount={1}
             ></DemoRenderer>
         )
     }
