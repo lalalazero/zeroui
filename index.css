@@ -2856,6 +2856,9 @@
 .zeroUI-row-align-bottom {
   align-items: flex-end;
 }
+.zeroUI-row-direction-vertical {
+  flex-direction: column;
+}
 [class^=zeroUI-] {
   box-sizing: border-box;
 }
@@ -2864,6 +2867,10 @@
 }
 [class^=zeroUI-]::after {
   box-sizing: border-box;
+}
+
+.zeroUI-submenu-vertical .zeroUI-submenu-popup-wrapper[data-visible=true] {
+  box-shadow: 0 0 6px 0 #ccc;
 }
 
 @keyframes spin {
@@ -2959,9 +2966,11 @@
   background: white;
   border-radius: 4px;
   margin-left: 4px;
+  z-index: 10;
 }
 .zeroUI-submenu-vertical .zeroUI-submenu-popup-wrapper[data-visible=true] {
-  border: 1px solid;
+  background: #fff;
+  padding: 4px 0;
 }
 .zeroUI-tooltip-wrapper {
   position: relative;

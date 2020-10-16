@@ -1,10 +1,12 @@
 import React from 'react';
-export default class DemoRenderer extends React.Component<{
+export interface Props {
     className?: string;
     demos: any[];
     api: any;
-    layout?: any;
-}, any> {
+    colCount?: number;
+}
+export default class DemoRenderer extends React.Component<Props, any> {
     constructor(props: any);
+    renderColumns(): JSX.Element;
     render(): JSX.Element;
 }
