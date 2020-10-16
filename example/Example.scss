@@ -4,11 +4,17 @@
     min-height: 100vh;
 }
 .logo {
-    margin: 8px;
+    margin: 16px;
     display: inline-block;
     vertical-align: middle;
-    height: 32px;
-    width: 32px;
+    height: 64px;
+    width: 64px;
+    + span {
+        font-size: 22px;
+        line-height: 64px;
+        height: 64px;
+        font-weight: 500;
+    }
 }
 
 .example-header {
@@ -22,7 +28,12 @@
 }
 
 .example-sider {
-    // width: 290px;
+    .zeroUI-menu {
+        width: 24rem;
+        border: none;
+        border-right: 1px solid $brand-color;
+        height: 100%;
+    }
     // border-right: $lighten-border;
     // p {
     //   padding: 0 $padding-left;
