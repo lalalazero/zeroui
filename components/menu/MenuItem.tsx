@@ -37,7 +37,10 @@ class MenuItem extends Component<MenuItemProps, MenuItemState> {
         const paddingLeftStyle =
             mode === 'inline'
                 ? { paddingLeft: `${(indentLevel as number) * PADDING_BASE}px` }
-                : { paddingLeft: `${PADDING_BASE}px` }
+                : mode === 'vertical'
+                ? { paddingLeft: `${PADDING_BASE}px` }
+                : { paddingLeft: PADDING_BASE, paddingRight: PADDING_BASE }
+
         const clsObj = makeClassSwitchs({
             selected: {
                 useKey: selectedKey === itemKey,
