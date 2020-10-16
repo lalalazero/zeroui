@@ -1,10 +1,14 @@
 import React from 'react'
 import { Col, Row } from '../components'
 import DemoCard from './DemoCard'
-export default class DemoRenderer extends React.Component<
-    { className?: string; demos: any[]; api: any; layout?: any },
-    any
-> {
+
+export interface Props {
+    className?: string
+    demos: any[]
+    api: any
+    colCount?: number
+}
+export default class DemoRenderer extends React.Component<Props, any> {
     constructor(props: any) {
         super(props)
         this.state = {
@@ -13,8 +17,8 @@ export default class DemoRenderer extends React.Component<
         }
     }
 
-    render() {
-        const { demos = [], api = '' } = this.props
+    renderColumns() {
+        const { demos = [], colCount = 2 } = this.props
         const Demos =
             demos.reduce((acc, cur) => {
                 const { LiveDemo, markdown } = cur as any
@@ -26,18 +30,54 @@ export default class DemoRenderer extends React.Component<
                 acc.push(demo)
                 return acc
             }, []) || []
-        const { className, layout = { lg: 12, sm: 24 } } = this.props
-        const colStyle =
-            typeof layout === 'number' ? { span: layout } : { ...layout }
+
+        if (colCount === 2) {
+            const leftDemos = Demos.filter(
+                (_: any, idx: number) => idx % 2 === 0
+            )
+            const rightDemos = Demos.filter(
+                (_: any, idx: number) => idx % 2 !== 0
+            )
+            return (
+                <Row>
+                    <Col span={12}>
+                        <Row direction="vertical">
+                            {leftDemos.map((Demo: any, idx: any) => (
+                                <Col key={idx} span={24}>
+                                    <Demo />
+                                </Col>
+                            ))}
+                        </Row>
+                    </Col>
+                    <Col span={12}>
+                        <Row direction="vertical">
+                            {rightDemos.map((Demo: any, idx: any) => (
+                                <Col key={idx} span={24}>
+                                    <Demo />
+                                </Col>
+                            ))}
+                        </Row>
+                    </Col>
+                </Row>
+            )
+        } else {
+            return (
+                <Row>
+                    <Col span={24}>
+                        {Demos.map((Demo: any, idx: any) => (
+                            <Demo key={idx} />
+                        ))}
+                    </Col>
+                </Row>
+            )
+        }
+    }
+
+    render() {
+        const { className, api } = this.props
         return (
             <div className={className}>
-                <Row>
-                    {Demos.map((Demo: any, idx: any) => (
-                        <Col {...colStyle} key={idx}>
-                            <Demo />
-                        </Col>
-                    ))}
-                </Row>
+                {this.renderColumns()}
                 <div className="api-container">
                     <div
                         dangerouslySetInnerHTML={{

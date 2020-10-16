@@ -1,5 +1,6 @@
 .zeroUI-row {
     display: flex;
+
     flex-wrap: wrap;
     &-justify-start {
         justify-content: flex-start;
@@ -25,5 +26,7 @@
     &-align-bottom {
         align-items: flex-end;
     }
-    
+    &-direction-vertical {
+        flex-direction: column;
+    }
 }

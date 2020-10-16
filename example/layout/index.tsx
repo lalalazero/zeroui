@@ -25,7 +25,7 @@ export default class Demo extends React.Component<any, any> {
         return (
             <DemoRenderer
                 className={className}
-                layout={24}
+                colCount={1}
                 demos={demos}
                 api={api}
             ></DemoRenderer>

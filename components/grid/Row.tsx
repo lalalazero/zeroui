@@ -10,15 +10,27 @@ export interface RowProps extends HTMLProps<HTMLDivElement> {
     justify?: 'start' | 'end' | 'center' | 'space-between' | 'space-around'
     gutter?: number
     align?: 'top' | 'middle' | 'bottom'
+    direction?: 'horizontal' | 'vertical'
 }
 
 const Row: React.FC<RowProps> = (props) => {
-    const { justify, gutter, className, style, align, ...restProps } = props
+    const {
+        justify,
+        gutter,
+        className,
+        style,
+        align,
+        direction = 'horizontal',
+        ...restProps
+    } = props
     const clsSwitch = makeClassSwitchs({
         [`justify-${justify}`]: {
             useKey: true,
         },
         [`align-${align}`]: {
+            useKey: true,
+        },
+        [`direction-${direction}`]: {
             useKey: true,
         },
     })
