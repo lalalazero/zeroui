@@ -6,7 +6,7 @@ import SubMenu from './SubMenu';
 export interface MenuProps extends HTMLAttributes<HTMLElement> {
     mode: modeType;
 }
-export declare type modeType = 'inline' | 'vertical' | 'horizontal';
+export declare type modeType = 'inline' | 'vertical' | 'horizontal' | 'ceilinged';
 export interface MenuState {
     selectedKey: string;
     selectedKeys: string[];
