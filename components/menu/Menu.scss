@@ -6,12 +6,10 @@ $item-default-padding-top: 8px;
 $item-default-padding-bottom: 8px;
 $item-default-margin-top: 5px;
 $item-default-margin-bottom: 5px;
-
 $defalt-width: 168px;
 
 @mixin on-hover {
     &:hover {
-        // background-color: $selected-background;
         cursor: pointer;
         color: $brand-color;
         .zeroUI-icon {
@@ -60,7 +58,6 @@ $defalt-width: 168px;
 %indicator-line-base-style {
     content: '';
     display: inline-block;
-    width: 4px;
     background: $brand-color;
     position: absolute;
 }
@@ -75,8 +72,6 @@ $defalt-width: 168px;
             font-size: 14px;
             color: #ccc;
             @include default-padding();
-        }
-        &-item-wrapper {
         }
     }
     &-item {
@@ -100,6 +95,7 @@ $defalt-width: 168px;
                 top: 0;
                 bottom: 0;
                 right: -4px;
+                width: 4px;
                 @extend %indicator-line-base-style;
             }
         }
@@ -120,6 +116,22 @@ $defalt-width: 168px;
         display: flex;
         .zeroUI-menu-item {
             @include horizontal-menu-item-base-style();
+        }
+        & > .zeroUI-menu-item,
+        & > li > .zeroUI-submenu {
+            margin-left: 4px;
+            margin-right: 4px;
+            position: relative;
+            &:hover,
+            &[is-highlighted='yes'] {
+                &:after {
+                    bottom: -4px;
+                    left: 0;
+                    right: 0;
+                    height: 4px;
+                    @extend %indicator-line-base-style;
+                }
+            }
         }
     }
 }
@@ -155,8 +167,6 @@ $defalt-width: 168px;
                 @include submenu-popup-wrapper-base-style();
             }
         }
-        .zeroUI-submenu-popup-wrapper[data-visible='true'] {
-        }
     }
     &-horizontal {
         .zeroUI-submenu-label {
@@ -165,6 +175,9 @@ $defalt-width: 168px;
             }
         }
         .zeroUI-submenu-popup-wrapper {
+            left: 0;
+            right: 0;
+            top: 45px;
             &[data-visible='true'] {
                 @include submenu-popup-wrapper-base-style();
             }
