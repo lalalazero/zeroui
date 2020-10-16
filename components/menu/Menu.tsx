@@ -10,7 +10,7 @@ export interface MenuProps extends HTMLAttributes<HTMLElement> {
     mode: modeType
 }
 
-export type modeType = 'inline' | 'vertical' | 'horizontal'
+export type modeType = 'inline' | 'vertical' | 'horizontal' | 'ceilinged'
 
 export interface MenuState {
     selectedKey: string

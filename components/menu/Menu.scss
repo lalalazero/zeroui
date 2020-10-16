@@ -112,7 +112,8 @@ $defalt-width: 168px;
             @include vertical-and-inline-menu-item-base-style();
         }
     }
-    &-horizontal {
+    &-horizontal,
+    &-ceilinged {
         display: flex;
         .zeroUI-menu-item {
             @include horizontal-menu-item-base-style();
@@ -122,10 +123,33 @@ $defalt-width: 168px;
             margin-left: 4px;
             margin-right: 4px;
             position: relative;
+        }
+    }
+
+    &-horizontal {
+        & > .zeroUI-menu-item,
+        & > li > .zeroUI-submenu {
             &:hover,
+            &-selected,
             &[is-highlighted='yes'] {
                 &:after {
                     bottom: -4px;
+                    left: 0;
+                    right: 0;
+                    height: 4px;
+                    @extend %indicator-line-base-style;
+                }
+            }
+        }
+    }
+    &-ceilinged {
+        & > .zeroUI-menu-item,
+        & > li > .zeroUI-submenu {
+            &:hover,
+            &-selected,
+            &[is-highlighted='yes'] {
+                &:after {
+                    top: -4px;
                     left: 0;
                     right: 0;
                     height: 4px;
@@ -168,7 +192,8 @@ $defalt-width: 168px;
             }
         }
     }
-    &-horizontal {
+    &-horizontal,
+    &-ceilinged {
         .zeroUI-submenu-label {
             & > span > svg {
                 display: none;
