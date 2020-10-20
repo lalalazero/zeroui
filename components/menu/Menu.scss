@@ -66,7 +66,6 @@ $defalt-width: 168px;
     min-width: $defalt-width;
     user-select: none;
     display: inline-block;
-    border: 1px solid;
     &-group {
         &-label {
             font-size: 14px;
@@ -78,6 +77,7 @@ $defalt-width: 168px;
         @include menu-item-base-style();
     }
     &-inline {
+        border-right: 1px solid $border-color-1;
         .zeroUI-submenu {
             &-label[data-visible='false'] {
                 & > span > svg {
@@ -101,6 +101,7 @@ $defalt-width: 168px;
         }
     }
     &-vertical {
+        border-right: 1px solid $border-color-1;
         .zeroUI-submenu {
             &-label {
                 & > span > svg {
@@ -115,6 +116,8 @@ $defalt-width: 168px;
     &-horizontal,
     &-ceilinged {
         display: flex;
+        padding-top: 4px;
+        padding-bottom: 4px;
         .zeroUI-menu-item {
             @include horizontal-menu-item-base-style();
         }
@@ -127,6 +130,7 @@ $defalt-width: 168px;
     }
 
     &-horizontal {
+        border-bottom: 1px solid $border-color-1;
         & > .zeroUI-menu-item,
         & > li > .zeroUI-submenu {
             &:hover,
@@ -143,6 +147,7 @@ $defalt-width: 168px;
         }
     }
     &-ceilinged {
+        border-top: 1px solid $border-color-1;
         & > .zeroUI-menu-item,
         & > li > .zeroUI-submenu {
             &:hover,
