@@ -47,8 +47,10 @@ function stripExampleCode(content) {
 function render(resource) {
     let content = md.render(resource)
     if (content.indexOf('table') >= 0 && content.indexOf('API') >= 0) {
+        const apiCode = stripDemo(content)
         let a = {
             apiContent: content,
+            apiCode,
         }
         return `export default ${JSON.stringify(a)}`
     }

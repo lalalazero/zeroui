@@ -1,11 +1,12 @@
 import React from 'react'
 import { Col, Row } from '../components'
-import DemoCard from './DemoCard'
+import DemoCard, { RenderCode } from './DemoCard'
 
 export interface Props {
     className?: string
     demos: any[]
     api: any
+    apiCode?: any
     colCount?: number
 }
 export default class DemoRenderer extends React.Component<Props, any> {
@@ -14,6 +15,7 @@ export default class DemoRenderer extends React.Component<Props, any> {
         this.state = {
             Demos: [],
             api: '',
+            apiCode: '',
         }
     }
 
@@ -73,12 +75,27 @@ export default class DemoRenderer extends React.Component<Props, any> {
         }
     }
 
+    renderApiCode = (apiCode: string) => {
+        if (apiCode && apiCode.trim()) {
+            return (
+                <>
+                    <h2>使用方式</h2>
+                    <div className="demo-code">
+                        <RenderCode code={apiCode} />
+                    </div>
+                </>
+            )
+        }
+        return ''
+    }
+
     render() {
-        const { className, api } = this.props
+        const { className, api, apiCode } = this.props
         return (
             <div className={className}>
                 {this.renderColumns()}
                 <div className="api-container">
+                    {this.renderApiCode(apiCode)}
                     <div
                         dangerouslySetInnerHTML={{
                             __html: api,

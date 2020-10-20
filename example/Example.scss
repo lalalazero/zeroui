@@ -29,7 +29,7 @@
 
 .example-sider {
     .zeroUI-menu {
-        width: 24rem;
+        width: 20rem;
         border: none;
         border-right: 1px solid $brand-color;
         height: 100%;
@@ -70,6 +70,9 @@
         margin: 0 auto;
         .api-container {
             margin: 10px;
+            .demo-code {
+                margin: 10px;
+            }
             h3 {
                 font-weight: 400;
                 margin: 10px 0;

@@ -16,6 +16,13 @@ export interface DemoCardProps {
     markdown: MarkdownProps
 }
 
+export const RenderCode: React.FC<{ code: string; lang?: string }> = (
+    props
+) => {
+    const { code, lang = 'jsx' } = props
+    return <HighLightCode code={code} lang={lang as Language}></HighLightCode>
+}
+
 const DemoCard: React.FunctionComponent<DemoCardProps> = (props) => {
     const { markdown, children } = props
     const { code, subject, desc, css } = markdown
@@ -32,9 +39,6 @@ const DemoCard: React.FunctionComponent<DemoCardProps> = (props) => {
     }
     const [codeIcon, setCodeIcon] = useState<ReactNode>(
         <Icon name="code-open"></Icon>
-    )
-    const renderCode = (code: string, lang = 'jsx') => (
-        <HighLightCode code={code} lang={lang as Language}></HighLightCode>
     )
     return (
         <div className="demo-card">
@@ -67,8 +71,8 @@ const DemoCard: React.FunctionComponent<DemoCardProps> = (props) => {
                 </Tooltip>
             </div>
             <div className="demo-code">
-                {codeVisible ? renderCode(code) : ''}
-                {codeVisible && css && renderCode(css, 'css')}
+                {codeVisible ? <RenderCode code={code} /> : ''}
+                {codeVisible && css && <RenderCode code={css} lang="css" />}
             </div>
         </div>
     )

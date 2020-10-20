@@ -36,6 +36,7 @@ export default class Demo extends React.Component<any, any> {
                 className={className}
                 demos={demos}
                 api={api}
+                colCount={1}
             ></DemoRenderer>
         )
     }
