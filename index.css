@@ -2892,7 +2892,6 @@
   min-width: 168px;
   user-select: none;
   display: inline-block;
-  border: 1px solid;
 }
 .zeroUI-menu-group-label {
   font-size: 14px;
@@ -2911,6 +2910,9 @@
   background-color: #e6fffb !important;
   color: #13c2c2;
 }
+.zeroUI-menu-inline {
+  border-right: 1px solid #ccc;
+}
 .zeroUI-menu-inline .zeroUI-submenu-label[data-visible=false] > span > svg {
   transform: rotate(180deg);
 }
@@ -2928,6 +2930,9 @@
   right: -4px;
   width: 4px;
 }
+.zeroUI-menu-vertical {
+  border-right: 1px solid #ccc;
+}
 .zeroUI-menu-vertical .zeroUI-submenu-label > span > svg {
   transform: rotate(-90deg);
 }
@@ -2939,6 +2944,8 @@
 }
 .zeroUI-menu-horizontal, .zeroUI-menu-ceilinged {
   display: flex;
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 .zeroUI-menu-horizontal .zeroUI-menu-item, .zeroUI-menu-ceilinged .zeroUI-menu-item {
   padding-top: 8px;
@@ -2949,11 +2956,17 @@
   margin-right: 4px;
   position: relative;
 }
+.zeroUI-menu-horizontal {
+  border-bottom: 1px solid #ccc;
+}
 .zeroUI-menu-horizontal > .zeroUI-menu-item:hover:after, .zeroUI-menu-horizontal > .zeroUI-menu-item-selected:after, .zeroUI-menu-horizontal > .zeroUI-menu-item[is-highlighted=yes]:after, .zeroUI-menu-horizontal > li > .zeroUI-submenu:hover:after, .zeroUI-menu-horizontal > li > .zeroUI-submenu-selected:after, .zeroUI-menu-horizontal > li > .zeroUI-submenu[is-highlighted=yes]:after {
   bottom: -4px;
   left: 0;
   right: 0;
   height: 4px;
+}
+.zeroUI-menu-ceilinged {
+  border-top: 1px solid #ccc;
 }
 .zeroUI-menu-ceilinged > .zeroUI-menu-item:hover:after, .zeroUI-menu-ceilinged > .zeroUI-menu-item-selected:after, .zeroUI-menu-ceilinged > .zeroUI-menu-item[is-highlighted=yes]:after, .zeroUI-menu-ceilinged > li > .zeroUI-submenu:hover:after, .zeroUI-menu-ceilinged > li > .zeroUI-submenu-selected:after, .zeroUI-menu-ceilinged > li > .zeroUI-submenu[is-highlighted=yes]:after {
   top: -4px;
@@ -3244,8 +3257,6 @@ a {
 
 .example-sider .zeroUI-menu {
   width: 20rem;
-  border: none;
-  border-right: 1px solid #13c2c2;
   height: 100%;
 }
 
@@ -3501,13 +3512,6 @@ a {
   100% {
     transform: rotate(360deg);
   }
-}
-.zeroUI-menu-example .zeroUI-menu {
-  border: none;
-  border-right: 1px solid #13c2c2;
-}
-.zeroUI-menu-example .zeroUI-menu-horizontal {
-  border: none;
 }
 .tooltip-example-02 .box-1, .tooltip-example-02 .box-2, .tooltip-example-02 .box-3 {
   display: flex;
