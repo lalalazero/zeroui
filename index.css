@@ -3243,7 +3243,7 @@ a {
 }
 
 .example-sider .zeroUI-menu {
-  width: 24rem;
+  width: 20rem;
   border: none;
   border-right: 1px solid #13c2c2;
   height: 100%;
@@ -3257,6 +3257,9 @@ a {
   margin: 0 auto;
 }
 .example-content-wrapper .example-content .api-container {
+  margin: 10px;
+}
+.example-content-wrapper .example-content .api-container .demo-code {
   margin: 10px;
 }
 .example-content-wrapper .example-content .api-container h3 {

@@ -10,5 +10,9 @@ export interface MarkdownProps {
 export interface DemoCardProps {
     markdown: MarkdownProps;
 }
+export declare const RenderCode: React.FC<{
+    code: string;
+    lang?: string;
+}>;
 declare const DemoCard: React.FunctionComponent<DemoCardProps>;
 export default DemoCard;
