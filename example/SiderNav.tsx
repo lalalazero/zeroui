@@ -55,6 +55,11 @@ export default class SiderNav extends Component {
                                 <p>Menu 导航菜单</p>
                             </NavLink>
                         </MenuItem>
+                        <MenuItem>
+                            <NavLink to="/pagination">
+                                <p>Pagination 分页菜单</p>
+                            </NavLink>
+                        </MenuItem>
                     </SubMenu>
                 </Menu>
             </Fragment>

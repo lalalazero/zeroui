@@ -1,11 +1,18 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Menu } from '../components'
+import { Menu, Pagination } from '../components'
 import './App.scss'
 
 const { SubMenu, MenuGroup, MenuItem } = Menu
 
 const App = () => (
+    <div className="app">
+        <Pagination total={200} simple />
+        <Pagination total={200} />
+    </div>
+)
+
+const App2 = () => (
     <div className="app">
         <Menu>
             <SubMenu title="二级菜单">

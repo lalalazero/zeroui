@@ -1,0 +1,67 @@
+@import '../index';
+
+%base-style {
+    vertical-align: middle;
+    display: inline-block;
+    height: $btn-height-base;
+    line-height: $btn-height-base;
+    min-width: 24px;
+    margin: 0px 5px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border: 1px solid $border-color;
+    border-radius: 4px;
+    text-align: center;
+    &:hover {
+        border-color: $brand-color;
+        cursor: pointer;
+    }
+}
+
+%-active {
+    border-color: $brand-color;
+    background-color: $brand-color;
+    color: #fff;
+}
+
+%-disabled {
+    pointer-events: none;
+    background-color: $btn-disabled-color;
+}
+
+.zeroUI-pagination {
+    display: inline-flex;
+    margin: 10px 0;
+    align-items: center;
+    &-item,
+    &-nav {
+        @extend %base-style;
+    }
+    &-active-page {
+        @extend %-active;
+    }
+    &-nav {
+        padding-left: 4px;
+        padding-right: 4px;
+        &[nav-disabled='true'] {
+            @extend %-disabled;
+        }
+    }
+    &-simple {
+        .zeroUI-pagination-item,
+        .zeroUI-pagination-nav {
+            border: none;
+            &:not(.zeroUI-pagination-active-page):hover {
+                color: $brand-color;
+                .zeroUI-icon {
+                    fill: $brand-color;
+                }
+            }
+        }
+        .zeroUI-pagination-nav[nav-disabled='true'] {
+            .zeroUI-icon {
+                fill: #ccc;
+            }
+        }
+    }
+}

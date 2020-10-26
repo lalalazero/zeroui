@@ -1,0 +1,27 @@
+## 当只有一页时
+
+可以选择隐藏或者显示分页
+
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Pagination, Button } from 'zero-ui-react'
+
+const App = () => {
+    const [hideIfOnePage, setHideIfOnePage] = React.useState(false)
+    const onClick = () => {
+        setHideIfOnePage(!hideIfOnePage)
+    }
+    return (
+        <div>
+            <div>
+                <Button onClick={onClick}>切换显示</Button>
+            </div>
+            <Pagination total={10} hideIfOnePage={hideIfOnePage} />
+            <br />
+            <Pagination total={10} simple hideIfOnePage={hideIfOnePage} />
+        </div>
+    )
+}
+export default App
+```

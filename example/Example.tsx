@@ -11,6 +11,7 @@ import IconExample from './icon/Icon.example'
 import LayoutExample from './layout'
 import logo from './logo.png'
 import MenuExample from './menu'
+import PaginationExample from './pagination'
 import SiderNav from './SiderNav'
 import TooltipExample from './tooltip'
 
@@ -42,6 +43,10 @@ ReactDOM.render(
                             component={TooltipExample}
                         ></Route>
                         <Route path="/menu" component={MenuExample}></Route>
+                        <Route
+                            path="/pagination"
+                            component={PaginationExample}
+                        ></Route>
                     </div>
                 </Content>
             </Layout>
