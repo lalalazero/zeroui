@@ -22,6 +22,8 @@ interface PaginationInnerProps {
     hideIfOnePage: boolean
 }
 
+const PAGE_ELIPSIS = '...'
+
 const Pagination: React.FC<PaginationProps> = (props) => {
     const {
         simple,
@@ -64,21 +66,50 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         setCurrentPage(newPage)
     }, [currentPage, endPage])
 
-    const clsName = sc('item')
+    const displayPages = useMemo(() => {
+        let array: any[] = []
+        if (total > 0 && endPage > 5) {
+            const array1 = new Array(2)
+                .fill(1)
+                .map((item, idx) => currentPage - idx - 1)
+                .sort((a, b) => (a - b > 0 ? 1 : -1))
+            const array2 = new Array(2)
+                .fill(1)
+                .map((item, idx) => currentPage + idx + 1)
+            array = [...array1, currentPage, ...array2].filter(
+                (j: number) => j > 0 && j <= endPage
+            )
+            if (array[0] > 1) {
+                array.unshift(PAGE_ELIPSIS)
+                array.unshift(1)
+            }
+            if (array[array.length - 1] < endPage) {
+                array.push(PAGE_ELIPSIS)
+                array.push(endPage)
+            }
+        } else {
+            array = new Array(endPage).fill(1).map((item, idx) => idx + 1)
+        }
+        return array
+    }, [currentPage, endPage, total])
     const renderPages = useMemo(() => {
-        const array = new Array(endPage).fill(1).map((item, idx) => (
+        const array = displayPages.map((item, idx) => (
             <span
-                className={`${clsName} ${
-                    currentPage === idx + 1 ? sc('active-page') : ''
-                }`}
-                onClick={() => onSelectPage(idx + 1)}
+                className={
+                    item === PAGE_ELIPSIS
+                        ? ''
+                        : `${sc('item')} ${
+                            currentPage === item ? sc('active-page') : ''
+                        }`
+                }
+                onClick={() => item !== PAGE_ELIPSIS && onSelectPage(item)}
                 key={idx}
             >
-                {idx + 1}
+                {item}
             </span>
         ))
         return array
-    }, [total, pageSize, endPage, currentPage])
+    }, [currentPage, displayPages])
 
     return hideIfOnePage ? (
         <div className={sc(clsSwithes)}></div>
@@ -94,7 +125,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
             {total > 0 ? (
                 renderPages
             ) : (
-                <span className={`${clsName} active-page`}>1</span>
+                <span className={`${sc('item')} active-page`}>1</span>
             )}
             <span
                 onClick={onSelectPageNext}

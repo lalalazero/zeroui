@@ -15,7 +15,7 @@ export default class Demo extends React.Component<any, any> {
             await import('./01-基本分页.mdx'),
             await import('./02-简洁分页.mdx'),
             await import('./03-一页分页.mdx'),
-            // await import('./04-天花板菜单.mdx'),
+            await import('./04-隐藏多余页码.mdx'),
         ]
         // const api = await import('./api.mdx')
         this.setState({
