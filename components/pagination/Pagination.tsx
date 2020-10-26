@@ -13,6 +13,9 @@ interface PaginationProps {
     simple?: boolean
     hideIfOnePage?: boolean
     onPageChange?: (pageNumber: number) => void
+    // TODO
+    pageJumper?: boolean
+    pageSizer?: boolean
 }
 
 interface PaginationInnerProps {
@@ -21,6 +24,8 @@ interface PaginationInnerProps {
     pageNumber: number
     simple: boolean
     hideIfOnePage: boolean
+    pageJumper: boolean
+    pageSizer: boolean
 }
 
 const PAGE_ELIPSIS = '...'
@@ -32,6 +37,8 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         total,
         pageNumber,
         pageSize,
+        pageJumper,
+        pageSizer,
     } = props as PaginationInnerProps
     const [currentPage, setCurrentPage] = useState(pageNumber)
     const [endPage, setEndPage] = useState(1)
@@ -143,6 +150,8 @@ const Pagination: React.FC<PaginationProps> = (props) => {
             >
                 <Icon name="right"></Icon>
             </span>
+            {/* <span className={sc('page-sizer')}>pageSizer</span> */}
+            {/* <span className={sc('page-jumper')}>pageJumper</span> */}
         </div>
     )
 }
@@ -153,6 +162,8 @@ Pagination.defaultProps = {
     pageNumber: 1,
     total: 0,
     pageSize: 10,
+    pageJumper: false,
+    pageSizer: false,
 }
 
 export default Pagination
