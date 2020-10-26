@@ -5,12 +5,17 @@ import './App.scss'
 
 const { SubMenu, MenuGroup, MenuItem } = Menu
 
-const App = () => (
-    <div className="app">
-        <Pagination total={200} simple />
-        <Pagination total={200} />
-    </div>
-)
+const App = () => {
+    const onPageChange = (pageNumber: number) => {
+        console.log('pageNumber change..', pageNumber)
+    }
+    return (
+        <div className="app">
+            <Pagination total={200} simple onPageChange={onPageChange} />
+            <Pagination total={200} />
+        </div>
+    )
+}
 
 const App2 = () => (
     <div className="app">

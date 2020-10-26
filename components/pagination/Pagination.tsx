@@ -12,6 +12,7 @@ interface PaginationProps {
     pageNumber?: number
     simple?: boolean
     hideIfOnePage?: boolean
+    onPageChange?: (pageNumber: number) => void
 }
 
 interface PaginationInnerProps {
@@ -51,6 +52,14 @@ const Pagination: React.FC<PaginationProps> = (props) => {
             useKey: hideIfOnePage,
         },
     })
+
+    useEffect(() => {
+        handlePageNumberChange()
+    }, [currentPage])
+
+    const handlePageNumberChange = useCallback(() => {
+        props.onPageChange && props.onPageChange(currentPage)
+    }, [currentPage])
 
     const onSelectPage = useCallback((idx: number) => {
         setCurrentPage(idx)
@@ -99,8 +108,8 @@ const Pagination: React.FC<PaginationProps> = (props) => {
                     item === PAGE_ELIPSIS
                         ? ''
                         : `${sc('item')} ${
-                            currentPage === item ? sc('active-page') : ''
-                        }`
+                              currentPage === item ? sc('active-page') : ''
+                          }`
                 }
                 onClick={() => item !== PAGE_ELIPSIS && onSelectPage(item)}
                 key={idx}
