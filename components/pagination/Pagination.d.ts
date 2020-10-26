@@ -6,6 +6,7 @@ interface PaginationProps {
     pageNumber?: number;
     simple?: boolean;
     hideIfOnePage?: boolean;
+    onPageChange?: (pageNumber: number) => void;
 }
 declare const Pagination: React.FC<PaginationProps>;
 export default Pagination;
