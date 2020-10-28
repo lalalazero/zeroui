@@ -2869,6 +2869,42 @@
   box-sizing: border-box;
 }
 
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.zeroUI-input {
+  height: 32px;
+  line-height: 32px;
+  font-size: 14px;
+  padding: 4px 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.zeroUI-input-large {
+  height: 40px;
+  line-height: 40px;
+  font-size: 16px;
+}
+.zeroUI-input-small {
+  height: 24px;
+  line-height: 24px;
+  font-size: 12px;
+}
+[class^=zeroUI-] {
+  box-sizing: border-box;
+}
+[class^=zeroUI-]::before {
+  box-sizing: border-box;
+}
+[class^=zeroUI-]::after {
+  box-sizing: border-box;
+}
+
 .zeroUI-submenu-horizontal .zeroUI-submenu-popup-wrapper[data-visible=true], .zeroUI-submenu-ceilinged .zeroUI-submenu-popup-wrapper[data-visible=true], .zeroUI-submenu-vertical .zeroUI-submenu-popup-wrapper[data-visible=true] {
   box-shadow: 0 0 6px 0 #ccc;
 }

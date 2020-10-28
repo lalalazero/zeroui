@@ -15,6 +15,7 @@ declare const message: {
 };
 export { default as Col } from './grid/Col';
 export { default as Row } from './grid/Row';
+export { default as Input } from './input/index';
 export { default as Menu } from './menu/index';
 export { default as Pagination } from './pagination';
 export { default as Tooltip } from './tooltip/Tooltip';
