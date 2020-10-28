@@ -1,11 +1,53 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Menu, Pagination } from '../components'
+import { Input, Menu, Pagination } from '../components'
 import './App.scss'
 
 const { SubMenu, MenuGroup, MenuItem } = Menu
 
 const App = () => {
+    const [value, setValue] = React.useState('')
+    const handleSearch = () => {
+        console.log('handle search')
+        setValue(value)
+    }
+    const handleChange = (name: string, value: string) => {
+        console.log('handle change', name, value)
+        setValue(value)
+    }
+    return (
+        <div className="app app3">
+            <p>
+                <Input.TextInput
+                    name="xxx"
+                    value={value}
+                    onPressEnter={handleSearch}
+                    onChange={handleChange}
+                ></Input.TextInput>
+            </p>
+            <p>
+                <Input.TextInput
+                    name="name"
+                    size="large"
+                    value={value}
+                    onPressEnter={handleSearch}
+                    onChange={handleChange}
+                ></Input.TextInput>
+            </p>
+            <p>
+                <Input.TextInput
+                    name="name"
+                    size="small"
+                    value={value}
+                    onPressEnter={handleSearch}
+                    onChange={handleChange}
+                ></Input.TextInput>
+            </p>
+        </div>
+    )
+}
+
+const App3 = () => {
     const onPageChange = (pageNumber: number) => {
         console.log('pageNumber change..', pageNumber)
     }

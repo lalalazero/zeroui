@@ -1,0 +1,21 @@
+@import '../index';
+
+.zeroUI-input {
+    height: $btn-height-base;
+    line-height: $btn-height-base;
+    font-size: $font-size-base;
+    // width: 100%;
+    padding: 4px 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    &-large {
+        height: $btn-height-lg;
+        line-height: $btn-height-lg;
+        font-size: $font-size-lg;
+    }
+    &-small {
+        height: $btn-height-sm;
+        line-height: $btn-height-sm;
+        font-size: $font-size-sm;
+    }
+}
