@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import TextInput from '../input/TextInput'
 import { scopedClassMaker } from '../_util/classes'
 import './style.scss'
@@ -13,16 +13,28 @@ interface OptionProps {
 
 export interface SelectProps {
     name?: string
-    value?: string
-    option?: OptionProps[]
+    value?: string | OptionProps
+    options: OptionProps[]
     multiple?: boolean
+    onSelect?: (item: OptionProps) => void
 }
 
 const Select: React.FC<SelectProps> = (props) => {
-    const [inputValue, setInputValue] = React.useState('')
+    const [selectedItem, setSelectedItem] = React.useState(props.value || '')
     const [poperVisible, setPoperVisible] = React.useState(false)
+    const timerId = React.useRef<any>()
+    useEffect(() => {
+        setSelectedItem(props.value || '')
+    }, [props.value])
+    const inputValue = React.useMemo(() => {
+        if (typeof selectedItem === 'string') {
+            return selectedItem
+        } else {
+            return selectedItem.title
+        }
+    }, [selectedItem])
     const handleInput = React.useCallback((name: string, value: string) => {
-        setInputValue(value)
+        setSelectedItem(value)
     }, [])
 
     const openPoper = React.useCallback(() => {
@@ -36,12 +48,29 @@ const Select: React.FC<SelectProps> = (props) => {
         setPoperVisible(false)
     }, [])
 
-    const onAddItem = () => {
-        if (props.multiple) {
-            return
+    const onBlur = () => {
+        if (timerId.current) {
+            clearTimeout(timerId.current)
         }
-        setPoperVisible(false)
+        timerId.current = setTimeout(() => {
+            closePoper()
+        }, 300)
     }
+
+    const onSelectItem = (item: OptionProps) => {
+        setPoperVisible(false)
+        props.onSelect && props.onSelect(item)
+    }
+
+    const isSelected = React.useCallback(
+        (item) => {
+            if (typeof selectedItem === 'object') {
+                return item.value === selectedItem.value
+            }
+            return false
+        },
+        [selectedItem]
+    )
 
     return (
         <div className={sc('')}>
@@ -51,20 +80,25 @@ const Select: React.FC<SelectProps> = (props) => {
                 onInput={handleInput}
                 icon="down"
                 onFocus={openPoper}
-                onBlur={closePoper}
+                onBlur={onBlur}
             ></TextInput>
-            {poperVisible && (
-                <div className={sc('pop-wrapper')}>
-                    <ul>
-                        <li className={sc('option-item')} onClick={onAddItem}>
-                            item 1
+            <div
+                className={sc('pop-wrapper')}
+                pop-visible={poperVisible.toString()}
+            >
+                <ul>
+                    {props.options.map((item) => (
+                        <li
+                            className={sc('option-item')}
+                            data-selected={`${isSelected(item)}`}
+                            key={item.value}
+                            onClick={() => onSelectItem(item)}
+                        >
+                            {item.title}
                         </li>
-                        <li className={sc('option-item')} onClick={onAddItem}>
-                            item 2
-                        </li>
-                    </ul>
-                </div>
-            )}
+                    ))}
+                </ul>
+            </div>
         </div>
     )
 }
@@ -72,6 +106,7 @@ const Select: React.FC<SelectProps> = (props) => {
 Select.defaultProps = {
     multiple: false,
     name: 'select',
+    options: [],
 }
 
 export default Select

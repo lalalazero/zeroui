@@ -15,6 +15,30 @@ const App = () => {
         console.log('handle change', name, value)
         setValue(value)
     }
+    const [selectedItem, setSelectedItem] = React.useState()
+    const onSelect = (item: any) => {
+        console.log('App 组件, 2')
+        console.log('App 组件 onSelect', item)
+        setSelectedItem(item)
+    }
+    const options = [
+        {
+            title: '中国',
+            value: 'cn',
+        },
+        {
+            title: '美国',
+            value: 'us',
+        },
+        {
+            title: '日本',
+            value: 'jp',
+        },
+        {
+            title: '韩国',
+            value: 'kr',
+        },
+    ]
     return (
         <div className="app app3">
             <p>
@@ -44,7 +68,11 @@ const App = () => {
                 ></Input.TextInput>
             </p>
             <div>
-                <Select multiple={true}></Select>
+                <Select
+                    value={selectedItem}
+                    onSelect={onSelect}
+                    options={options}
+                ></Select>
             </div>
         </div>
     )

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Icon from '../icon/Icon'
 import { makeClassSwitchs, scopedClassMaker } from '../_util/classes'
 import './style.scss'
@@ -30,7 +30,11 @@ const TextInput: React.FC<TextInputProps> = (
         size: 'default',
     }
 ) => {
-    const { name, value, size, icon, onPressEnter, onInput, ...rest } = props
+    const [inputValue, setInputValue] = useState(props.value || '')
+    useEffect(() => {
+        setInputValue(props.value || '')
+    }, [props.value])
+    const { name, size, icon, onPressEnter, onInput, ...rest } = props
     const clsSwitchObj = makeClassSwitchs({
         size,
         'has-icon': {
@@ -50,6 +54,7 @@ const TextInput: React.FC<TextInputProps> = (
         }
     }
     const handleInput: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+        setInputValue(event.target.value)
         onInput && onInput(props.name, event.target.value)
     }
     return (
@@ -59,7 +64,7 @@ const TextInput: React.FC<TextInputProps> = (
                 className={sc(clsSwitchObj)}
                 autoComplete="off"
                 type="text"
-                value={value}
+                value={inputValue}
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
                 onInput={handleInput}

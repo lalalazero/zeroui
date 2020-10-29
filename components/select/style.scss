@@ -10,12 +10,21 @@
         width: 100%;
         @extend %box-shadow;
         padding: 4px 0;
+        &[pop-visible='false'] {
+            display: none;
+        }
+        &[pop-visible='true'] {
+            display: block;
+        }
     }
     &-option-item {
         padding: 8px 10px;
         margin: 4px 0;
         &:hover {
             @extend %on-hover-bg-default;
+        }
+        &[data-selected='true'] {
+            color: $brand-color;
         }
     }
 }
