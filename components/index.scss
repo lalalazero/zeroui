@@ -106,6 +106,30 @@ $table-border-color: rgb(232, 232, 232);
 $table-strip-color: #fafafa;
 $table-row-hover-color: rgb(230, 247, 255);
 
+%on-hover {
+    &:hover {
+        cursor: pointer;
+        color: $brand-color;
+        .zeroUI-icon {
+            fill: $brand-color;
+        }
+    }
+}
+
+%on-hover-bg-active {
+    &:hover {
+        cursor: pointer;
+        background-color: $cyan-1;
+    }
+}
+
+%on-hover-bg-default {
+    &:hover {
+        cursor: pointer;
+        background-color: #eee;
+    }
+}
+
 %box-shadow {
     box-shadow: 0 0 6px 0 #ccc;
 }

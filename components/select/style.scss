@@ -1,0 +1,21 @@
+@import '../index';
+
+.zeroUI-select {
+    position: relative;
+    display: inline-block;
+    &-pop-wrapper {
+        position: absolute;
+        background-color: #fff;
+        max-height: 200px;
+        width: 100%;
+        @extend %box-shadow;
+        padding: 4px 0;
+    }
+    &-option-item {
+        padding: 8px 10px;
+        margin: 4px 0;
+        &:hover {
+            @extend %on-hover-bg-default;
+        }
+    }
+}

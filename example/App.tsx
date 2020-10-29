@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Input, Menu, Pagination } from '../components'
+import { Input, Menu, Pagination, Select } from '../components'
 import './App.scss'
 
 const { SubMenu, MenuGroup, MenuItem } = Menu
@@ -43,6 +43,9 @@ const App = () => {
                     onChange={handleChange}
                 ></Input.TextInput>
             </p>
+            <div>
+                <Select multiple={true}></Select>
+            </div>
         </div>
     )
 }

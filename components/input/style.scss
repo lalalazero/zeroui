@@ -1,13 +1,23 @@
 @import '../index';
 
+.zeroUI-input-wrapper {
+    position: relative;
+}
+
 .zeroUI-input {
     height: $btn-height-base;
     line-height: $btn-height-base;
     font-size: $font-size-base;
-    // width: 100%;
     padding: 4px 10px;
     overflow: hidden;
     text-overflow: ellipsis;
+    &-has-icon {
+        padding-right: 2em;
+    }
+
+    &:focus {
+        outline-color: $brand-color;
+    }
     &-large {
         height: $btn-height-lg;
         line-height: $btn-height-lg;
@@ -17,5 +27,12 @@
         height: $btn-height-sm;
         line-height: $btn-height-sm;
         font-size: $font-size-sm;
+    }
+    & + .zeroUI-icon {
+        position: absolute;
+        vertical-align: middle;
+        fill: #888;
+        margin-left: -24px;
+        margin-top: 0.5em;
     }
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import Icon from '../icon/Icon'
 import { makeClassSwitchs, scopedClassMaker } from '../_util/classes'
 import './style.scss'
 
@@ -7,18 +8,19 @@ const sc = scopedClassName
 
 type EventHandler = (name: string, value: string) => void
 
-// type FilterdProps = Omit<
-//     InputHTMLAttributes<HTMLInputElement>,
-//     'onChange' | 'name' | 'onInput'
-// >
+type FilterdProps = Omit<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    'onChange' | 'name' | 'onInput' | 'size' | 'onKeyDown'
+>
 
-export interface TextInputProps {
+export interface TextInputProps extends FilterdProps {
     onChange?: EventHandler
     onPressEnter?: () => void
     onInput?: EventHandler
     name: string
     value?: string
     size?: 'default' | 'large' | 'small'
+    icon?: string | React.ComponentType<any>
 }
 
 const TextInput: React.FC<TextInputProps> = (
@@ -28,9 +30,12 @@ const TextInput: React.FC<TextInputProps> = (
         size: 'default',
     }
 ) => {
-    const { name, value, size } = props
+    const { name, value, size, icon, onPressEnter, onInput, ...rest } = props
     const clsSwitchObj = makeClassSwitchs({
         size,
+        'has-icon': {
+            useKey: !!icon,
+        },
     })
     const handleChange: React.ChangeEventHandler<HTMLInputElement> = (
         event
@@ -41,23 +46,31 @@ const TextInput: React.FC<TextInputProps> = (
     const handleKeyDown: React.KeyboardEventHandler = (event) => {
         const { keyCode } = event
         if (keyCode === 13 || keyCode === 108) {
-            props.onPressEnter && props.onPressEnter()
+            onPressEnter && onPressEnter()
         }
     }
     const handleInput: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-        props.onInput && props.onInput(props.name, event.target.value)
+        onInput && onInput(props.name, event.target.value)
     }
     return (
-        <input
-            className={sc(clsSwitchObj)}
-            autoComplete="off"
-            type="text"
-            value={value}
-            onChange={handleChange}
-            onKeyDown={handleKeyDown}
-            onInput={handleInput}
-            name={name}
-        ></input>
+        <span className={sc('wrapper')}>
+            <input
+                {...rest}
+                className={sc(clsSwitchObj)}
+                autoComplete="off"
+                type="text"
+                value={value}
+                onChange={handleChange}
+                onKeyDown={handleKeyDown}
+                onInput={handleInput}
+                name={name}
+            ></input>
+            {icon && typeof icon === 'string' ? (
+                <Icon name={icon as string}></Icon>
+            ) : (
+                <>{icon}</>
+            )}
+        </span>
     )
 }
 
