@@ -6,9 +6,10 @@ interface OptionProps {
 }
 export interface SelectProps {
     name?: string;
-    value?: string;
-    option?: OptionProps[];
+    value?: string | OptionProps;
+    options: OptionProps[];
     multiple?: boolean;
+    onSelect?: (item: OptionProps) => void;
 }
 declare const Select: React.FC<SelectProps>;
 export default Select;

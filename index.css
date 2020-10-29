@@ -3187,15 +3187,25 @@
   display: inline-block;
 }
 .zeroUI-select-pop-wrapper {
+  z-index: 10;
   position: absolute;
   background-color: #fff;
   max-height: 200px;
   width: 100%;
   padding: 4px 0;
 }
+.zeroUI-select-pop-wrapper[pop-visible=false] {
+  display: none;
+}
+.zeroUI-select-pop-wrapper[pop-visible=true] {
+  display: block;
+}
 .zeroUI-select-option-item {
   padding: 8px 10px;
   margin: 4px 0;
+}
+.zeroUI-select-option-item[data-selected=true] {
+  color: #13c2c2;
 }
 .zeroUI-tooltip-wrapper {
   position: relative;
@@ -3598,6 +3608,9 @@ a {
 }
 .icon-example ul li:hover span {
   color: white;
+}
+.zeroUI-input-example .zeroUI-input {
+  margin-bottom: 10px;
 }
 [class^=zeroUI-] {
   box-sizing: border-box;
