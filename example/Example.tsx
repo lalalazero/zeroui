@@ -8,10 +8,12 @@ import DialogExample from './dialog/Dialog.example'
 import './Example.scss'
 import GridExample from './grid'
 import IconExample from './icon/Icon.example'
+import InputExample from './input'
 import LayoutExample from './layout'
 import logo from './logo.png'
 import MenuExample from './menu'
 import PaginationExample from './pagination'
+import SelectExample from './select'
 import SiderNav from './SiderNav'
 import TooltipExample from './tooltip'
 
@@ -33,6 +35,8 @@ ReactDOM.render(
                     <div className="example-content">
                         <div id="mountNode"></div>
                         <Route path="/icon" component={IconExample}></Route>
+                        <Route path="/input" component={InputExample}></Route>
+                        <Route path="/select" component={SelectExample}></Route>
                         <Route path="/button" component={ButtonDemo}></Route>
                         <Route path="/dialog" component={DialogExample}></Route>
                         <Route path="/layout" component={LayoutExample}></Route>

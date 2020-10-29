@@ -1,0 +1,24 @@
+## 基本用法
+
+基本的文本输入框。
+
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Input } from 'zero-ui-react'
+
+const App = () => {
+    const [inputValue, setInputValue] = React.useState('')
+    const onChange = (name, value) => {
+        setInputValue(value)
+    }
+    return (
+        <Input.TextInput
+            placeholder={'enter your name'}
+            value={inputValue}
+            onChange={onChange}
+        ></Input.TextInput>
+    )
+}
+export default App
+```

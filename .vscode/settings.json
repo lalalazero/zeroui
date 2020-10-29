@@ -45,7 +45,7 @@
             "trailingComma": "es5"
         }
     },
-    "window.zoomLevel": 0,
+    "window.zoomLevel": 1,
     "editor.fontSize": 18,
     "editor.formatOnSave": true,
     "typescript.updateImportsOnFileMove.enabled": "always",

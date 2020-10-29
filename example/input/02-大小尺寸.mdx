@@ -1,0 +1,40 @@
+## 尺寸大小
+
+三种不同尺寸的输入框
+
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Input } from 'zero-ui-react'
+
+const App = () => {
+    const [inputValue, setInputValue] = React.useState('')
+    const onChange = (name, value) => {
+        setInputValue(value)
+    }
+    return (
+        <>
+            <Input.TextInput
+                placeholder="large"
+                size="large"
+                value={inputValue}
+                onChange={onChange}
+            ></Input.TextInput>
+            <br />
+            <Input.TextInput
+                placeholder="default"
+                value={inputValue}
+                onChange={onChange}
+            ></Input.TextInput>
+            <br />
+            <Input.TextInput
+                placeholder="small"
+                size="small"
+                value={inputValue}
+                onChange={onChange}
+            ></Input.TextInput>
+        </>
+    )
+}
+export default App
+```

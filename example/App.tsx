@@ -43,6 +43,7 @@ const App = () => {
         <div className="app app3">
             <p>
                 <Input.TextInput
+                    placeholder={'placeholer'}
                     name="xxx"
                     value={value}
                     onPressEnter={handleSearch}

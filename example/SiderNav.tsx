@@ -26,8 +26,18 @@ export default class SiderNav extends Component {
                             </NavLink>
                         </MenuItem>
                         <MenuItem>
+                            <NavLink to="/input">
+                                <p>Input 输入框</p>
+                            </NavLink>
+                        </MenuItem>
+                        <MenuItem>
                             <NavLink to="/button">
                                 <p>Button 按钮</p>
+                            </NavLink>
+                        </MenuItem>
+                        <MenuItem>
+                            <NavLink to="/select">
+                                <p>Select 选择框</p>
                             </NavLink>
                         </MenuItem>
                         <MenuItem>

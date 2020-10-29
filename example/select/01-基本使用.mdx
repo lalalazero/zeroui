@@ -1,0 +1,39 @@
+## 基本用法
+
+普通的下拉选择框。
+
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Select } from 'zero-ui-react'
+
+const App = () => {
+    const [selected, setSelected] = React.useState(null)
+    const options = [
+        {
+            title: '中国',
+            value: 'cn',
+        },
+        {
+            title: '美国',
+            value: 'us',
+        },
+        {
+            title: '日本',
+            value: 'jp',
+        },
+        {
+            title: '韩国',
+            value: 'kr',
+        },
+    ]
+    return (
+        <Select
+            value={selected}
+            options={options}
+            onSelect={(item) => setSelected(item)}
+        ></Select>
+    )
+}
+export default App
+```

@@ -4,6 +4,7 @@
     position: relative;
     display: inline-block;
     &-pop-wrapper {
+        z-index: 10;
         position: absolute;
         background-color: #fff;
         max-height: 200px;
