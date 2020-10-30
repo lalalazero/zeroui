@@ -3083,6 +3083,20 @@
 .zeroUI-submenu-horizontal .zeroUI-menu-item, .zeroUI-submenu-ceilinged .zeroUI-menu-item {
   position: relative;
 }
+.zeroUI-notification-wrapper {
+  border: 1px solid red;
+  position: fixed;
+  top: 0;
+  right: 0;
+  max-width: 200px;
+  padding: 10px;
+}
+
+.zeroUI-notification {
+  border: 1px solid blue;
+  padding: 10px 20px;
+  background: #fff;
+}
 [class^=zeroUI-] {
   box-sizing: border-box;
 }
