@@ -3083,19 +3083,57 @@
 .zeroUI-submenu-horizontal .zeroUI-menu-item, .zeroUI-submenu-ceilinged .zeroUI-menu-item {
   position: relative;
 }
-.zeroUI-notification-wrapper {
-  border: 1px solid red;
-  position: fixed;
-  top: 0;
-  right: 0;
-  max-width: 200px;
-  padding: 10px;
+[class^=zeroUI-] {
+  box-sizing: border-box;
+}
+[class^=zeroUI-]::before {
+  box-sizing: border-box;
+}
+[class^=zeroUI-]::after {
+  box-sizing: border-box;
 }
 
 .zeroUI-notification {
-  border: 1px solid blue;
-  padding: 10px 20px;
+  box-shadow: 0 0 6px 0 #ccc;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.zeroUI-notification-container {
+  position: relative;
+}
+
+.zeroUI-notification-item-lane {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.zeroUI-notification-item-wrapper {
+  margin-bottom: 10px;
+}
+
+.zeroUI-notification {
+  padding: 20px;
   background: #fff;
+  position: relative;
+  border-radius: 4px;
+  min-width: 240px;
+  transition: all 300ms;
+}
+.zeroUI-notification-close-icon {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 1.2em;
 }
 [class^=zeroUI-] {
   box-sizing: border-box;

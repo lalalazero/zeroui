@@ -1,10 +1,11 @@
 import React from 'react';
 import './style.scss';
-export interface NotificationConfig {
+declare type NotificationConfig = {
     getContainer?: () => HTMLElement;
     title: string | React.ElementType | React.ComponentType;
     body: string | React.ElementType | React.ComponentType;
-}
+    wait?: number;
+};
 declare const notification: {
     open: (config: NotificationConfig) => void;
 };
