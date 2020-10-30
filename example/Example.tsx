@@ -12,6 +12,7 @@ import InputExample from './input'
 import LayoutExample from './layout'
 import logo from './logo.png'
 import MenuExample from './menu'
+import NotificationExample from './notification'
 import PaginationExample from './pagination'
 import SelectExample from './select'
 import SiderNav from './SiderNav'
@@ -50,6 +51,10 @@ ReactDOM.render(
                         <Route
                             path="/pagination"
                             component={PaginationExample}
+                        ></Route>
+                        <Route
+                            path="/notification"
+                            component={NotificationExample}
                         ></Route>
                     </div>
                 </Content>

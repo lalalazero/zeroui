@@ -73,7 +73,7 @@ let seed = 1
 const defaultConfig = {
     title: '',
     body: '',
-    wait: 3000,
+    wait: 5000,
 }
 
 const getDefaultContainer = () => document.body
