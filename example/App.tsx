@@ -1,6 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Input, Menu, Pagination, Select } from '../components'
+import {
+    Button,
+    Input,
+    Menu,
+    notification,
+    Pagination,
+    Select,
+} from '../components'
 import './App.scss'
 
 const { SubMenu, MenuGroup, MenuItem } = Menu
@@ -20,6 +27,12 @@ const App = () => {
         console.log('App 组件, 2')
         console.log('App 组件 onSelect', item)
         setSelectedItem(item)
+    }
+    const openNotification = () => {
+        notification.open({
+            title: '通知',
+            body: '记得今天晚上看快乐8开奖',
+        })
     }
     const options = [
         {
@@ -41,6 +54,7 @@ const App = () => {
     ]
     return (
         <div className="app app3">
+            <Button onClick={openNotification}>notification</Button>
             <p>
                 <Input.TextInput
                     placeholder={'placeholer'}
