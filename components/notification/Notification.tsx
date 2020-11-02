@@ -14,16 +14,16 @@ interface NotificationProps {
     title: string | React.ElementType | React.ComponentType
     body: string | React.ElementType | React.ComponentType
     mountNode: Element
-    close: () => void
+    onClose: () => void
     wait: number
+    autoClose: () => void
 }
 
 const Notification: React.FC<NotificationProps> = (props) => {
     const [timer, setTimer] = useState<any>()
     useEffect(() => {
         const timerId = setTimeout(() => {
-            console.log('1')
-            props.close()
+            props.autoClose()
         }, props.wait)
         setTimer(timerId)
     }, [])
@@ -35,8 +35,7 @@ const Notification: React.FC<NotificationProps> = (props) => {
     const onMouseLeave = useCallback(() => {
         if (timer) clearTimeout(timer)
         const newTimer = setTimeout(() => {
-            console.log('2')
-            props.close()
+            props.autoClose()
         }, props.wait)
         setTimer(newTimer)
     }, [timer])
@@ -50,7 +49,7 @@ const Notification: React.FC<NotificationProps> = (props) => {
             >
                 <div className={sc('title')}>{props.title}</div>
                 <div className={sc('body')}>{props.body}</div>
-                <div className={sc('close-icon')} onClick={props.close}>
+                <div className={sc('close-icon')} onClick={props.onClose}>
                     <Icon name="close"></Icon>
                 </div>
             </div>
@@ -66,6 +65,7 @@ type NotificationConfig = {
     title: string | React.ElementType | React.ComponentType
     body: string | React.ElementType | React.ComponentType
     wait?: number
+    autoClose?: boolean
 }
 
 let seed = 1
@@ -74,6 +74,7 @@ const defaultConfig = {
     title: '',
     body: '',
     wait: 5000,
+    autoClose: true,
 }
 
 const getDefaultContainer = () => document.body
@@ -97,17 +98,34 @@ const open = (config: NotificationConfig) => {
     const container = getContainer(config)
     const mountNode = document.createElement('div')
     mountNode.className = itemWrapperClass
-    mountNode.setAttribute('data-seed', `${seed++}`)
-    const handleClose = () => {
+    mountNode.onanimationstart = () => console.log('1 start')
+    mountNode.onanimationend = (event: any) => {
+        if (event.target.getAttribute('data-seed')) {
+            close()
+        }
+    }
+
+    const close = () => {
         ReactDOM.unmountComponentAtNode(mountNode)
         container.removeChild(mountNode)
+    }
+
+    const handleClose = () => {
+        mountNode.setAttribute('data-seed', `${seed++}`)
+    }
+
+    const autoClose = () => {
+        if (config.autoClose) {
+            handleClose()
+        }
     }
     const component = (
         <Notification
             title={config.title}
             body={config.body}
             mountNode={mountNode}
-            close={handleClose}
+            onClose={handleClose}
+            autoClose={autoClose}
             wait={config.wait as number}
         ></Notification>
     )
