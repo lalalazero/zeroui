@@ -5,6 +5,7 @@ declare type NotificationConfig = {
     title: string | React.ElementType | React.ComponentType;
     body: string | React.ElementType | React.ComponentType;
     wait?: number;
+    autoClose?: boolean;
 };
 declare const notification: {
     open: (config: NotificationConfig) => void;

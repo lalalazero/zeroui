@@ -3117,13 +3117,40 @@
   flex-direction: column;
 }
 
+@keyframes fadeInDown {
+  from {
+    top: -100px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+@keyframes fadeOutUp {
+  0% {
+    opacity: 1;
+    top: 0;
+  }
+  100% {
+    opacity: 0;
+    top: -100px;
+  }
+}
 .zeroUI-notification-item-wrapper {
   margin-bottom: 10px;
+  animation: fadeInDown 300ms;
+  position: relative;
+  transition: all 300ms;
+  background-color: lightblue;
+}
+
+.zeroUI-notification-item-wrapper[data-seed] {
+  animation: fadeOutUp 300ms;
 }
 
 .zeroUI-notification {
   padding: 20px;
-  background: #fff;
   position: relative;
   border-radius: 4px;
   min-width: 240px;
