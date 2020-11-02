@@ -5,6 +5,7 @@ import {
     Input,
     Menu,
     notification,
+    Notification,
     Pagination,
     Select,
 } from '../components'
@@ -13,6 +14,7 @@ import './App.scss'
 const { SubMenu, MenuGroup, MenuItem } = Menu
 
 const App = () => {
+    let notification2: any = Notification.getIntance()
     const [value, setValue] = React.useState('')
     const handleSearch = () => {
         console.log('handle search')
@@ -32,6 +34,16 @@ const App = () => {
         notification.open({
             title: '通知',
             body: '记得今天晚上看快乐8开奖',
+        })
+    }
+
+    const openNotification2 = () => {
+        if (!notification2) {
+            notification2 = Notification.getIntance()
+        }
+        notification2.open({
+            title: <Button type="danger">danger</Button>,
+            body: <p style={{ color: 'red' }}>禁止操作</p>,
         })
     }
     const options = [
@@ -54,6 +66,19 @@ const App = () => {
     ]
     return (
         <div className="app app3">
+            <div>
+                <Button type="primary" onClick={openNotification2}>
+                    notification2
+                </Button>
+                <Button
+                    onClick={() =>
+                        (notification2 = Notification.destroy(notification2))
+                    }
+                >
+                    clear
+                </Button>
+            </div>
+
             <Button onClick={openNotification}>notification</Button>
             <p>
                 <Input.TextInput
