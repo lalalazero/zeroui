@@ -3145,10 +3145,6 @@
   background-color: lightblue;
 }
 
-.zeroUI-notification-item-wrapper[data-seed] {
-  animation: fadeOutUp 300ms;
-}
-
 .zeroUI-notification {
   padding: 20px;
   position: relative;
