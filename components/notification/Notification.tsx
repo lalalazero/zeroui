@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, {
+    ReactElement,
+    useCallback,
+    useEffect,
+    useMemo,
+    useState,
+} from 'react'
 import ReactDOM from 'react-dom'
 import { Icon } from '../index'
 import { scopedClassMaker } from '../_util/classes'
@@ -68,8 +74,6 @@ type NotificationConfig = {
     autoClose?: boolean
 }
 
-let seed = 1
-
 const defaultConfig = {
     title: '',
     body: '',
@@ -93,44 +97,62 @@ const getContainer = (config: NotificationConfig) => {
     return panel
 }
 
-const open = (config: NotificationConfig) => {
-    config = Object.assign({}, defaultConfig, config)
-    const container = getContainer(config)
-    const mountNode = document.createElement('div')
-    mountNode.className = itemWrapperClass
-    mountNode.onanimationstart = () => console.log('1 start')
-    mountNode.onanimationend = (event: any) => {
+class NotificationItem {
+    static seed = 0
+    instance: HTMLDivElement
+    container: Element
+    component: ReactElement
+    constructor(config: NotificationConfig) {
+        this.init(config)
+        this.bindListeners()
+    }
+    init(config: NotificationConfig) {
+        config = Object.assign({}, defaultConfig, config)
+        const container = getContainer(config)
+        const mountNode = document.createElement('div')
+        mountNode.className = itemWrapperClass
+        this.instance = mountNode
+        this.container = container
+
+        const component = (
+            <Notification
+                title={config.title}
+                body={config.body}
+                mountNode={this.instance}
+                onClose={this.handleClose.bind(this)}
+                autoClose={
+                    config.autoClose ? this.handleClose.bind(this) : null
+                }
+                wait={config.wait as number}
+            ></Notification>
+        )
+        this.component = component
+    }
+    bindListeners() {
+        this.instance.onanimationstart = () => console.log('1 start')
+        this.instance.onanimationend = this.onAnimationEnd.bind(this)
+    }
+    onAnimationEnd(event: any) {
         if (event.target.getAttribute('data-seed')) {
-            close()
+            this.unmount()
         }
     }
-
-    const close = () => {
-        ReactDOM.unmountComponentAtNode(mountNode)
-        container.removeChild(mountNode)
+    handleClose() {
+        this.instance.setAttribute('data-seed', `${NotificationItem.seed++}`)
     }
-
-    const handleClose = () => {
-        mountNode.setAttribute('data-seed', `${seed++}`)
+    unmount() {
+        ReactDOM.unmountComponentAtNode(this.instance)
+        this.container.removeChild(this.instance)
     }
-
-    const autoClose = () => {
-        if (config.autoClose) {
-            handleClose()
-        }
+    mount() {
+        ReactDOM.render(this.component, this.instance)
+        this.container.appendChild(this.instance)
     }
-    const component = (
-        <Notification
-            title={config.title}
-            body={config.body}
-            mountNode={mountNode}
-            onClose={handleClose}
-            autoClose={autoClose}
-            wait={config.wait as number}
-        ></Notification>
-    )
-    ReactDOM.render(component, mountNode)
-    container.appendChild(mountNode)
+}
+
+const open = (config: NotificationConfig) => {
+    const notificationItem = new NotificationItem(config)
+    notificationItem.mount()
 }
 
 const notification = {
