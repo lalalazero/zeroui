@@ -7,7 +7,17 @@ declare type NotificationConfig = {
     wait?: number;
     autoClose?: boolean;
 };
-declare const notification: {
-    open: (config: NotificationConfig) => void;
-};
-export default notification;
+declare class Notification {
+    container: Element;
+    instanceNode: Element;
+    mountNode: Element;
+    seed: number;
+    notifications: any[];
+    private constructor();
+    remove(seed: number): void;
+    open(config: NotificationConfig): void;
+    static getIntance(): Notification;
+    static destroy(instance: Notification): undefined;
+}
+export default Notification;
+export declare const notification: Notification;
