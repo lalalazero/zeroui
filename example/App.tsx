@@ -44,8 +44,8 @@ const App = () => {
         notification2.open({
             title: <Button type="danger">danger</Button>,
             body: <p style={{ color: 'red' }}>禁止操作</p>,
-            // autoClose: false,
-            wait: 2000,
+            autoClose: false,
+            // wait: 2000,
         })
     }
     const options = [

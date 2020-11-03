@@ -1,4 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, {
+    AnimationEventHandler,
+    useEffect,
+    useRef,
+    useState,
+} from 'react'
 import ReactDOM from 'react-dom'
 import { Icon } from '../index'
 import { scopedClassMaker } from '../_util/classes'
@@ -30,12 +35,11 @@ const getDefaultContainer = () => document.body
 const NotificationItem: React.FC<any> = (props) => {
     const { seed, title, body, onClose, wait, autoClose } = props
     const [timer, setTimerId] = useState<any>()
-    const [offsetTop, setOffsetTop] = useState<any>()
     const ref = useRef<HTMLDivElement>(null)
     useEffect(() => {
         if (autoClose) {
             const timerId = setTimeout(() => {
-                onClose && onClose()
+                hanleClose()
             }, wait)
 
             setTimerId(timerId)
@@ -47,26 +51,27 @@ const NotificationItem: React.FC<any> = (props) => {
         clearTimeout(timer)
     }, [])
 
-    useEffect(() => {
-        if (ref && ref.current) {
-            let offsetTop = ref.current.offsetTop
-            console.log(`seed=${seed} offsetTop=${offsetTop}`)
-            setOffsetTop(offsetTop)
+    const hanleClose = () => {
+        ref.current && ref.current.setAttribute('data-close', 'true')
+    }
+
+    const handleAnimationEnd: AnimationEventHandler = (event) => {
+        if ((event.target as HTMLDivElement).getAttribute('data-close')) {
+            onClose && onClose()
         }
-    }, [])
+    }
 
     return (
         <div
             ref={ref}
             className={itemWrapperClass}
             data-seed={seed}
-            data-offset-top={offsetTop}
-            // style={offsetTop && { top: offsetTop }}
+            onAnimationEnd={handleAnimationEnd}
         >
             <div className={itemClass}>
                 <div className={sc('title')}>{title}</div>
                 <div className={sc('body')}>{body}</div>
-                <div className={sc('close-icon')} onClick={onClose}>
+                <div className={sc('close-icon')} onClick={hanleClose}>
                     <Icon name="close"></Icon>
                 </div>
             </div>
@@ -133,18 +138,19 @@ class Notification {
             this.instanceNode
         )
     }
-    mountDom(component: React.ReactElement, childNode: Element) {
-        ReactDOM.render(component, childNode)
-        this.instanceNode.appendChild(childNode)
-    }
-    unmountDom(childNode: Element) {
-        ReactDOM.unmountComponentAtNode(childNode)
-        this.instanceNode.removeChild(childNode)
-    }
+    // mountDom(component: React.ReactElement, childNode: Element) {
+    //     ReactDOM.render(component, childNode)
+    //     this.instanceNode.appendChild(childNode)
+    // }
+    // unmountDom(childNode: Element) {
+    //     ReactDOM.unmountComponentAtNode(childNode)
+    //     this.instanceNode.removeChild(childNode)
+    // }
     static getIntance() {
         return new Notification()
     }
     static destroy(instance: Notification) {
+        ReactDOM.unmountComponentAtNode(instance.instanceNode)
         instance.container &&
             (instance.container as Element).removeChild(instance.instanceNode)
         return undefined
