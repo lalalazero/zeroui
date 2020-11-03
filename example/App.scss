@@ -1,5 +1,9 @@
 @import './normalize-and-reset.scss';
 
+body {
+    padding: 10px;
+    border: 1px solid blue;
+}
 .app {
     border: 1px solid red;
     padding: 40px 200px;
