@@ -1,0 +1,26 @@
+## 弹出位置
+
+指定弹出位置
+
+```jsx
+import React from 'react'
+import { notification, Button } from 'zero-ui-react'
+
+const App = () => {
+    const onClick = () => {
+        notification.open({
+            title: '标题',
+            body: '通知内容',
+        })
+    }
+    return (
+        <div>
+            <Button onClick={onClick}>右上角弹出</Button>
+            <Button onClick={onClick}>左上角弹出</Button>
+            <Button onClick={onClick}>中间顶部弹出</Button>
+            <Button onClick={onClick}>中间底部弹出</Button>
+        </div>
+    )
+}
+export default App
+```

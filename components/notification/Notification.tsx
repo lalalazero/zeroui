@@ -1,8 +1,7 @@
 import React, {
-    ReactElement,
-    useCallback,
+    AnimationEventHandler,
     useEffect,
-    useMemo,
+    useRef,
     useState,
 } from 'react'
 import ReactDOM from 'react-dom'
@@ -15,55 +14,12 @@ const sc = scopedClassName
 const containerClass = sc('container')
 const laneClass = sc('item-lane')
 const itemWrapperClass = sc('item-wrapper')
-
-interface NotificationProps {
-    title: string | React.ElementType | React.ComponentType
-    body: string | React.ElementType | React.ComponentType
-    mountNode: Element
-    onClose: () => void
-    wait: number
-    autoClose: () => void
-}
-
-const Notification: React.FC<NotificationProps> = (props) => {
-    const [timer, setTimer] = useState<any>()
-    useEffect(() => {
-        const timerId = setTimeout(() => {
-            props.autoClose()
-        }, props.wait)
-        setTimer(timerId)
-    }, [])
-
-    const onMouseEnter = useCallback(() => {
-        if (timer) clearTimeout(timer)
-    }, [timer])
-
-    const onMouseLeave = useCallback(() => {
-        if (timer) clearTimeout(timer)
-        const newTimer = setTimeout(() => {
-            props.autoClose()
-        }, props.wait)
-        setTimer(newTimer)
-    }, [timer])
-
-    const modal = useMemo(
-        () => (
-            <div
-                className={sc('')}
-                onMouseEnter={onMouseEnter}
-                onMouseLeave={onMouseLeave}
-            >
-                <div className={sc('title')}>{props.title}</div>
-                <div className={sc('body')}>{props.body}</div>
-                <div className={sc('close-icon')} onClick={props.onClose}>
-                    <Icon name="close"></Icon>
-                </div>
-            </div>
-        ),
-        [props, onMouseEnter, onMouseLeave]
-    )
-
-    return ReactDOM.createPortal(modal, props.mountNode)
+const itemClass = sc('')
+const defaultConfig = {
+    title: '',
+    body: '',
+    wait: 5000,
+    autoClose: true,
 }
 
 type NotificationConfig = {
@@ -74,89 +30,127 @@ type NotificationConfig = {
     autoClose?: boolean
 }
 
-const defaultConfig = {
-    title: '',
-    body: '',
-    wait: 5000,
-    autoClose: true,
-}
-
 const getDefaultContainer = () => document.body
 
-const getContainer = (config: NotificationConfig) => {
-    const container = config.getContainer
-        ? config.getContainer()
-        : getDefaultContainer()
-    container.classList.add(containerClass)
-    let panel = container.querySelector(`.${laneClass}`)
-    if (!panel) {
-        panel = document.createElement('div')
-        panel.className = laneClass
-        container.appendChild(panel)
-    }
-    return panel
-}
+const NotificationItem: React.FC<any> = (props) => {
+    const { seed, title, body, onClose, wait, autoClose } = props
+    const [timer, setTimerId] = useState<any>()
+    const ref = useRef<HTMLDivElement>(null)
+    useEffect(() => {
+        if (autoClose) {
+            const timerId = setTimeout(() => {
+                hanleClose()
+            }, wait)
 
-class NotificationItem {
-    static seed = 0
-    instance: HTMLDivElement
-    container: Element
-    component: ReactElement
-    constructor(config: NotificationConfig) {
-        this.init(config)
-        this.bindListeners()
-    }
-    init(config: NotificationConfig) {
-        config = Object.assign({}, defaultConfig, config)
-        const container = getContainer(config)
-        const mountNode = document.createElement('div')
-        mountNode.className = itemWrapperClass
-        this.instance = mountNode
-        this.container = container
+            setTimerId(timerId)
+        }
+        return () => clearTimeout(timer)
+    }, [seed])
 
-        const component = (
-            <Notification
-                title={config.title}
-                body={config.body}
-                mountNode={this.instance}
-                onClose={this.handleClose.bind(this)}
-                autoClose={
-                    config.autoClose ? this.handleClose.bind(this) : null
-                }
-                wait={config.wait as number}
-            ></Notification>
-        )
-        this.component = component
+    useEffect(() => {
+        clearTimeout(timer)
+    }, [])
+
+    const hanleClose = () => {
+        ref.current && ref.current.setAttribute('data-close', 'true')
     }
-    bindListeners() {
-        this.instance.onanimationstart = () => console.log('1 start')
-        this.instance.onanimationend = this.onAnimationEnd.bind(this)
-    }
-    onAnimationEnd(event: any) {
-        if (event.target.getAttribute('data-seed')) {
-            this.unmount()
+
+    const handleAnimationEnd: AnimationEventHandler = (event) => {
+        if ((event.target as HTMLDivElement).getAttribute('data-close')) {
+            onClose && onClose()
         }
     }
-    handleClose() {
-        this.instance.setAttribute('data-seed', `${NotificationItem.seed++}`)
+
+    return (
+        <div
+            ref={ref}
+            className={itemWrapperClass}
+            data-seed={seed}
+            onAnimationEnd={handleAnimationEnd}
+        >
+            <div className={itemClass}>
+                <div className={sc('title')}>{title}</div>
+                <div className={sc('body')}>{body}</div>
+                <div className={sc('close-icon')} onClick={hanleClose}>
+                    <Icon name="close"></Icon>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+class NotificationInternal extends React.Component<any, any> {
+    constructor(props: any) {
+        super(props)
     }
-    unmount() {
-        ReactDOM.unmountComponentAtNode(this.instance)
-        this.container.removeChild(this.instance)
-    }
-    mount() {
-        ReactDOM.render(this.component, this.instance)
-        this.container.appendChild(this.instance)
+
+    render() {
+        const { items } = this.props
+        return (
+            <>
+                {items.map((item: any) => (
+                    <NotificationItem {...item} key={item.seed} />
+                ))}
+            </>
+        )
     }
 }
 
-const open = (config: NotificationConfig) => {
-    const notificationItem = new NotificationItem(config)
-    notificationItem.mount()
+class Notification {
+    container: Element
+    instanceNode: Element
+    mountNode: Element
+    seed = 1
+    notifications: any[] = []
+    private constructor(config?: any) {
+        this.container =
+            config && config.getContainer
+                ? config.getContainer()
+                : getDefaultContainer()
+        this.container.className = containerClass
+        this.instanceNode = document.createElement('div')
+        this.instanceNode.className = laneClass
+        this.container.appendChild(this.instanceNode)
+        ReactDOM.render(
+            <NotificationInternal items={this.notifications} />,
+            this.instanceNode
+        )
+    }
+    remove(seed: number) {
+        this.notifications = this.notifications.filter(
+            (item) => item.seed !== seed
+        )
+        ReactDOM.render(
+            <NotificationInternal items={this.notifications} />,
+            this.instanceNode
+        )
+    }
+    open(config: NotificationConfig) {
+        config = Object.assign({}, defaultConfig, config)
+        const seed = this.seed++
+        this.notifications.push({
+            ...config,
+            seed,
+            onClose: () => this.remove(seed),
+        })
+        ReactDOM.render(
+            <NotificationInternal items={this.notifications} />,
+            this.instanceNode
+        )
+    }
+    static getIntance() {
+        return new Notification()
+    }
+    static destroy(instance: Notification) {
+        ReactDOM.unmountComponentAtNode(instance.instanceNode)
+        instance.container &&
+            (instance.container as Element).removeChild(instance.instanceNode)
+        return undefined
+    }
 }
 
-const notification = {
-    open,
-}
+export default Notification
 
-export default notification
+const defaultInstance = Notification.getIntance()
+
+export const notification = defaultInstance

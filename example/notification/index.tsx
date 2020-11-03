@@ -14,7 +14,7 @@ export default class Demo extends React.Component<any, any> {
     async componentDidMount() {
         const demos = [
             await import('./01-基本用法.mdx'),
-            // await import('./02-垂直菜单.mdx'),
+            await import('./02-弹出位置.mdx'),
             // await import('./03-水平菜单.mdx'),
             // await import('./04-天花板菜单.mdx'),
         ]
