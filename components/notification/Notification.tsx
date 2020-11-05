@@ -7,6 +7,7 @@ import React, {
 import ReactDOM from 'react-dom'
 import { Icon } from '../index'
 import { scopedClassMaker } from '../_util/classes'
+import { tuple } from '../_util/type'
 import './style.scss'
 
 const scopedClassName = scopedClassMaker('zeroUI-notification')
@@ -20,10 +21,26 @@ const defaultConfig = {
     body: '',
     wait: 5000,
     autoClose: true,
+    placement: 'topRight',
 }
-
-type NotificationConfig = {
-    getContainer?: () => HTMLElement
+const NotificationPlacementTypes = tuple(
+    'topRight',
+    'topLeft',
+    'topCenter',
+    'bottomLeft',
+    'bottomRight',
+    'bottomCenter'
+)
+const placementClassMap = {
+    topRight: sc('top-right'),
+    topLeft: sc('top-left'),
+    topCenter: sc('top-center'),
+    bottomLeft: sc('bottom-left'),
+    bottomRight: sc('bottom-right'),
+    bottomCenter: sc('bottom-center'),
+}
+export type NotificationPlacement = typeof NotificationPlacementTypes[number]
+export type NotificationConfig = {
     title?: React.ReactNode
     body?: React.ReactNode
     wait?: number
@@ -96,20 +113,28 @@ class NotificationInternal extends React.Component<any, any> {
     }
 }
 
+export type InstanceConfig = {
+    placement?: NotificationPlacement
+    getContainer?: () => HTMLElement
+}
+
 class Notification {
     container: Element
     root: Element
     mountNode: Element
     seed = 1
     notifications: any[] = []
-    private constructor(config?: any) {
+    private constructor(config?: InstanceConfig) {
         this.container =
             config && config.getContainer
                 ? config.getContainer()
                 : getDefaultContainer()
         this.container.className = containerClass
         this.root = document.createElement('div')
-        this.root.className = laneClass
+        this.root.classList.add(laneClass)
+        if (config && config.placement) {
+            this.root.classList.add(placementClassMap[config.placement])
+        }
         this.container.appendChild(this.root)
     }
     remove(seed: number) {
@@ -123,6 +148,7 @@ class Notification {
     }
     open(config: NotificationConfig) {
         config = Object.assign({}, defaultConfig, config)
+
         const seed = this.seed++
         this.notifications.push({
             ...config,
@@ -134,8 +160,8 @@ class Notification {
             this.root
         )
     }
-    static getIntance() {
-        return new Notification()
+    static getIntance(config?: InstanceConfig) {
+        return new Notification(config)
     }
     static destroy(instance: Notification) {
         ReactDOM.unmountComponentAtNode(instance.root)

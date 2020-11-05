@@ -4,21 +4,37 @@
 
 ```jsx
 import React from 'react'
-import { notification, Button } from 'zero-ui-react'
+import { notification, Notification, Button } from 'zero-ui-react'
 
 const App = () => {
-    const onClick = () => {
-        notification.open({
-            title: '标题',
-            body: '通知内容',
-        })
+    const defaultConfig = {
+        title: '标题',
+        body: '通知内容',
+    }
+    const onClick = (placement) => {
+        if (placement) {
+            notification.open({ ...defaultConfig })
+        } else {
+            Notification.getInstance(
+                {
+                    placement,
+                },
+                (instance) => {
+                    instance.open({ ...defaultConfig })
+                }
+            )
+        }
     }
     return (
         <div>
-            <Button onClick={onClick}>右上角弹出</Button>
-            <Button onClick={onClick}>左上角弹出</Button>
-            <Button onClick={onClick}>中间顶部弹出</Button>
-            <Button onClick={onClick}>中间底部弹出</Button>
+            <Button onClick={() => onClick()}>右上角弹出</Button>
+            <Button onClick={() => onClick('topLeft')}>左上角弹出</Button>
+            <Button onClick={() => onClick('bottomRight')}>右下角弹出</Button>
+            <Button onClick={() => onClick('bottomLeft')}>左下角弹出</Button>
+            <Button onClick={() => onClick('topCenter')}>中间顶部弹出</Button>
+            <Button onClick={() => onClick('bottomCenter')}>
+                中间底部弹出
+            </Button>
         </div>
     )
 }

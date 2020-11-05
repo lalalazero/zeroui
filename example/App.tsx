@@ -48,6 +48,72 @@ const App = () => {
             // wait: 2000,
         })
     }
+
+    const open3 = () => {
+        if (!notification2) {
+            notification2 = Notification.getIntance()
+        }
+        notification2.open({
+            title: <Button type="primary">通知</Button>,
+            body: <p>在其他地方打开的通知</p>,
+            placement: 'topLeft',
+            // autoClose: false,
+            // wait: 2000,
+        })
+    }
+
+    const open4 = () => {
+        if (!notification2) {
+            notification2 = Notification.getIntance()
+        }
+        notification2.open({
+            title: <Button type="primary">通知</Button>,
+            body: <p>在其他地方打开的通知</p>,
+            placement: 'topCenter',
+            // autoClose: false,
+            // wait: 2000,
+        })
+    }
+
+    const open5 = () => {
+        if (!notification2) {
+            notification2 = Notification.getIntance()
+        }
+        notification2.open({
+            title: <Button type="primary">通知</Button>,
+            body: <p>在其他地方打开的通知</p>,
+            placement: 'bottomLeft',
+            // autoClose: false,
+            // wait: 2000,
+        })
+    }
+
+    const open6 = () => {
+        if (!notification2) {
+            notification2 = Notification.getIntance()
+        }
+        notification2.open({
+            title: <Button type="primary">通知</Button>,
+            body: <p>在其他地方打开的通知</p>,
+            placement: 'bottomRight',
+            // autoClose: false,
+            // wait: 2000,
+        })
+    }
+
+    const open7 = () => {
+        if (!notification2) {
+            notification2 = Notification.getIntance()
+        }
+        notification2.open({
+            title: <Button type="primary">通知</Button>,
+            body: <p>在其他地方打开的通知</p>,
+            placement: 'bottomCenter',
+            // autoClose: false,
+            // wait: 2000,
+        })
+    }
+
     const options = [
         {
             title: '中国',
@@ -71,6 +137,21 @@ const App = () => {
             <div>
                 <Button type="primary" onClick={openNotification2}>
                     notification2
+                </Button>
+                <Button type="primary" onClick={open3}>
+                    topLeft
+                </Button>
+                <Button type="primary" onClick={open4}>
+                    topCenter
+                </Button>
+                <Button type="primary" onClick={open5}>
+                    bottomLeft
+                </Button>
+                <Button type="primary" onClick={open6}>
+                    bottomRight
+                </Button>
+                <Button type="primary" onClick={open7}>
+                    bottomCenter
                 </Button>
                 <Button
                     onClick={() =>
