@@ -24,8 +24,8 @@ const defaultConfig = {
 
 type NotificationConfig = {
     getContainer?: () => HTMLElement
-    title: string | React.ElementType | React.ComponentType
-    body: string | React.ElementType | React.ComponentType
+    title?: React.ReactNode
+    body?: React.ReactNode
     wait?: number
     autoClose?: boolean
 }
@@ -98,7 +98,7 @@ class NotificationInternal extends React.Component<any, any> {
 
 class Notification {
     container: Element
-    instanceNode: Element
+    root: Element
     mountNode: Element
     seed = 1
     notifications: any[] = []
@@ -108,13 +108,9 @@ class Notification {
                 ? config.getContainer()
                 : getDefaultContainer()
         this.container.className = containerClass
-        this.instanceNode = document.createElement('div')
-        this.instanceNode.className = laneClass
-        this.container.appendChild(this.instanceNode)
-        ReactDOM.render(
-            <NotificationInternal items={this.notifications} />,
-            this.instanceNode
-        )
+        this.root = document.createElement('div')
+        this.root.className = laneClass
+        this.container.appendChild(this.root)
     }
     remove(seed: number) {
         this.notifications = this.notifications.filter(
@@ -122,7 +118,7 @@ class Notification {
         )
         ReactDOM.render(
             <NotificationInternal items={this.notifications} />,
-            this.instanceNode
+            this.root
         )
     }
     open(config: NotificationConfig) {
@@ -135,16 +131,16 @@ class Notification {
         })
         ReactDOM.render(
             <NotificationInternal items={this.notifications} />,
-            this.instanceNode
+            this.root
         )
     }
     static getIntance() {
         return new Notification()
     }
     static destroy(instance: Notification) {
-        ReactDOM.unmountComponentAtNode(instance.instanceNode)
+        ReactDOM.unmountComponentAtNode(instance.root)
         instance.container &&
-            (instance.container as Element).removeChild(instance.instanceNode)
+            (instance.container as Element).removeChild(instance.root)
         return undefined
     }
 }
