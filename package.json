@@ -26,19 +26,19 @@
     "lint-staged": {
         "./**/*.ts?(x)": [
             "eslint --fix --quiet --ext .ts,.tsx",
-            "git add"
+            "git add ."
         ]
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/lalalazero/ZEROUI.git"
+        "url": "git+https://github.com/lalalazero/zeroui.git"
     },
     "author": "lalalazero",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/lalalazero/ZEROUI/issues"
+        "url": "https://github.com/lalalazero/zeroui/issues"
     },
-    "homepage": "https://github.com/lalalazero/ZEROUI#readme",
+    "homepage": "https://github.com/lalalazero/zeroui#readme",
     "devDependencies": {
         "@babel/core": "^7.5.5",
         "@babel/preset-env": "^7.5.5",
@@ -77,6 +77,8 @@
         "mini-css-extract-plugin": "^0.9.0",
         "prism-react-renderer": "^1.0.2",
         "raw-loader": "^4.0.0",
+        "react": "16.8.6",
+        "react-dom": "16.8.6",
         "react-router": "^5.0.1",
         "react-router-dom": "^5.0.1",
         "react-test-renderer": "^16.8.6",
@@ -92,8 +94,7 @@
         "webpack-dev-server": "^3.7.2",
         "webpack-merge": "^5.0.9"
     },
-    "dependencies": {
-        "dot-snake-camel-case-convertor": "^0.0.4",
+    "peerDependencies": {
         "react": "^16.8.6",
         "react-dom": "^16.8.6"
     },
@@ -102,5 +103,8 @@
     },
     "eslintConfig": {
         "extends": "react-app"
+    },
+    "dependencies": {
+        "dot-snake-camel-case-convertor": "0.0.4"
     }
 }
