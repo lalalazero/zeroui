@@ -1,0 +1,24 @@
+## 标签、前缀和后缀
+
+为输入框添加额外的信息。
+
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Input } from 'zero-ui-react'
+
+const App = () => {
+    const [inputValue, setInputValue] = React.useState('')
+    const onChange = (name, value) => {
+        setInputValue(value)
+    }
+    return (
+        <Input.TextInput
+            label="Name: "
+            value={inputValue}
+            onChange={onChange}
+        ></Input.TextInput>
+    )
+}
+export default App
+```

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 import Icon from '../icon/Icon'
 import { makeClassSwitchs, scopedClassMaker } from '../_util/classes'
 import './style.scss'
@@ -10,7 +10,7 @@ type EventHandler = (name: string, value: string) => void
 
 type FilterdProps = Omit<
     React.InputHTMLAttributes<HTMLInputElement>,
-    'onChange' | 'name' | 'onInput' | 'size' | 'onKeyDown'
+    'onChange' | 'name' | 'onInput' | 'size' | 'onKeyDown' | 'prefix'
 >
 
 export interface TextInputProps extends FilterdProps {
@@ -21,6 +21,9 @@ export interface TextInputProps extends FilterdProps {
     value?: string
     size?: 'default' | 'large' | 'small'
     icon?: string | React.ComponentType<any>
+    prefix?: ReactNode
+    suffix?: ReactNode
+    label?: string
 }
 
 const TextInput: React.FC<TextInputProps> = (
@@ -34,7 +37,17 @@ const TextInput: React.FC<TextInputProps> = (
     useEffect(() => {
         setInputValue(props.value || '')
     }, [props.value])
-    const { name, size, icon, onPressEnter, onInput, ...rest } = props
+    const {
+        name,
+        size,
+        icon,
+        onPressEnter,
+        onInput,
+        prefix = '',
+        suffix = '',
+        label = '',
+        ...rest
+    } = props
     const clsSwitchObj = makeClassSwitchs({
         size,
         'has-icon': {
@@ -57,8 +70,17 @@ const TextInput: React.FC<TextInputProps> = (
         setInputValue(event.target.value)
         onInput && onInput(props.name, event.target.value)
     }
+
     return (
         <span className={sc('wrapper')}>
+            {label && <label htmlFor={props.name}>{label}</label>}
+            {prefix ? (
+                typeof prefix === 'object' ? (
+                    prefix
+                ) : (
+                    <label>{prefix}</label>
+                )
+            ) : null}
             <input
                 {...rest}
                 className={sc(clsSwitchObj)}
@@ -75,6 +97,13 @@ const TextInput: React.FC<TextInputProps> = (
             ) : (
                 <>{icon}</>
             )}
+            {suffix ? (
+                typeof suffix === 'object' ? (
+                    suffix
+                ) : (
+                    <label>{suffix}</label>
+                )
+            ) : null}
         </span>
     )
 }
