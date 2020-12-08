@@ -1,0 +1,23 @@
+## 无边框
+
+在深色背景下去掉边框
+
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Card } from 'zero-ui-react'
+
+const App = () => {
+    return (
+        <div style={{ background: '#ccc', padding: 20 }}>
+            <Card title={'无边框卡片'} bordered={false}>
+                <p>卡片内容</p>
+                <p>卡片内容</p>
+                <p>卡片内容</p>
+                <p>卡片内容</p>
+            </Card>
+        </div>
+    )
+}
+export default App
+```

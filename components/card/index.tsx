@@ -9,17 +9,22 @@ export interface CardProps
     extends Omit<HTMLAttributes<HTMLDivElement>, 'title' | 'size'> {
     title?: ReactNode
     size?: 'small'
+    bordered?: boolean
 }
 
 const Card: React.FC<CardProps> = (props) => {
-    const { title, children, size = '', ...rest } = props
+    const { title, children, size = '', bordered = true, ...rest } = props
 
     const clsSwithes = makeClassSwitchs({
         size,
+        noborder: {
+            useKey: !bordered,
+        },
     })
     return (
         <div className={sc(clsSwithes, '')} {...rest}>
-            <div className={sc('title-panel')}>{title}</div>
+            {title && <div className={sc('title-panel')}>{title}</div>}
+
             <div className={sc('content-panel')}>{children}</div>
         </div>
     )

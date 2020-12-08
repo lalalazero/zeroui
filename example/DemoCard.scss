@@ -55,6 +55,9 @@ $border-color: lighten(black, 90%);
     & > .prism-code {
         padding: 20px 15px;
         max-width: 100%;
+        font-size: 14px;
+        font-family: Lucida Console, Consolas, Monaco, Andale Mono, Ubuntu Mono,
+            monospace;
         &.language-css {
             border-top: 1px dashed $border-color;
         }
@@ -62,6 +65,7 @@ $border-color: lighten(black, 90%);
             max-width: 100%;
             display: flex;
             flex-wrap: wrap;
+            margin: 5px 0;
         }
     }
     background: rgb(246, 248, 250);

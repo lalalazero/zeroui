@@ -2,6 +2,10 @@ $border-color: #e2e2e2;
 
 .zeroUI-card {
     border: 1px solid $border-color;
+    border-radius: 4px;
+    &-noborder {
+        border: none;
+    }
     background: #fff;
     &-title-panel,
     &-content-panel {

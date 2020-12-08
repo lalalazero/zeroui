@@ -7,8 +7,8 @@ import github from 'prism-react-renderer/themes/github'
 import React from 'react'
 
 interface Props {
-  code: string
-  lang?: Language
+    code: string
+    lang?: Language
 }
 
 const HighLightCode: React.FunctionComponent<Props> = (props) => {
@@ -24,7 +24,10 @@ const HighLightCode: React.FunctionComponent<Props> = (props) => {
                     {tokens.map((line, i) => (
                         <div {...getLineProps({ line, key: i })} key={i}>
                             {line.map((token, key) => (
-                                <span {...getTokenProps({ token, key })} key={key} />
+                                <span
+                                    {...getTokenProps({ token, key })}
+                                    key={key}
+                                />
                             ))}
                         </div>
                     ))}

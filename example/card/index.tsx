@@ -10,7 +10,11 @@ export default class ButtonDemo extends React.Component<any, any> {
         }
     }
     async componentDidMount() {
-        const demos = [await import('./01-基本使用.mdx')] as any
+        const demos = [
+            await import('./01-基本使用.mdx'),
+            await import('./02-无边框.mdx'),
+            await import('./03-简洁卡片.mdx'),
+        ] as any
         // const api = await import('./api.mdx')
         this.setState({
             // api: api.default.apiContent,
