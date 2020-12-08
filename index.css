@@ -1,3 +1,72 @@
+.zeroUI-icon {
+  height: 1em;
+  width: 1em;
+}
+.zeroUI-dialog {
+  background: white;
+  position: fixed;
+  min-width: 15em;
+  border-radius: 4px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  border: 1px solid gray;
+}
+.zeroUI-dialog-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+.zeroUI-dialog-header {
+  font-size: 22px;
+  padding: 8px 16px;
+  border-bottom: 1px solid gray;
+}
+.zeroUI-dialog-main {
+  min-height: 6em;
+  padding: 8px 16px;
+}
+.zeroUI-dialog-footer {
+  border-top: 1px solid gray;
+  padding: 8px 16px;
+}
+.zeroUI-dialog-close {
+  position: absolute;
+  bottom: 100%;
+  left: 100%;
+  background: white;
+  border: 1px solid red;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 4px;
+  transform: translate(-50%, 50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+[class^=zeroUI-] {
+  box-sizing: border-box;
+}
+[class^=zeroUI-]::before {
+  box-sizing: border-box;
+}
+[class^=zeroUI-]::after {
+  box-sizing: border-box;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 [class^=zeroUI-] {
   box-sizing: border-box;
 }
@@ -204,184 +273,68 @@
 .zeroUI-button-group .zeroUI-button-primary:nth-child(even):hover {
   border-left-color: transparent;
 }
-.zeroUI-icon {
-  height: 1em;
-  width: 1em;
+.zeroUI-card-grid-hoverable:hover, .zeroUI-card-hoverable:hover {
+  box-shadow: 0 1px 2px -2px rgba(0, 0, 0, 0.16), 0 3px 6px 0 rgba(0, 0, 0, 0.12), 0 5px 12px 4px rgba(0, 0, 0, 0.09);
 }
-.zeroUI-dialog {
-  background: white;
-  position: fixed;
-  min-width: 15em;
+
+.zeroUI-card {
+  border: 1px solid #e2e2e2;
+  position: relative;
   border-radius: 4px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  border: 1px solid gray;
+  transition: all 0.3s;
+  background: #fff;
 }
-.zeroUI-dialog-mask {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 1;
+.zeroUI-card-noborder {
+  border: none;
 }
-.zeroUI-dialog-header {
-  font-size: 22px;
-  padding: 8px 16px;
-  border-bottom: 1px solid gray;
+.zeroUI-card-has-grid .zeroUI-card-content-panel {
+  padding: 0;
+  position: relative;
+  margin-bottom: -1px;
+  margin-right: -2px;
 }
-.zeroUI-dialog-main {
-  min-height: 6em;
-  padding: 8px 16px;
+.zeroUI-card-title-panel, .zeroUI-card-content-panel {
+  padding-left: 24px;
+  padding-right: 24px;
 }
-.zeroUI-dialog-footer {
-  border-top: 1px solid gray;
-  padding: 8px 16px;
+.zeroUI-card-title-panel {
+  border-bottom: 1px solid #e2e2e2;
+  min-height: 48px;
+  line-height: 48px;
+  font-weight: bold;
 }
-.zeroUI-dialog-close {
-  position: absolute;
-  bottom: 100%;
-  left: 100%;
-  background: white;
-  border: 1px solid red;
-  width: 1.5em;
-  height: 1.5em;
-  border-radius: 4px;
-  transform: translate(-50%, 50%);
-  display: flex;
+.zeroUI-card-content-panel {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.zeroUI-card-small .zeroUI-card-title-panel, .zeroUI-card-small .zeroUI-card-content-panel {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+.zeroUI-card-small .zeroUI-card-title-panel {
+  min-height: 38px;
+  line-height: 38px;
+  font-size: 14px;
+}
+.zeroUI-card-small .zeroUI-card-content-panel {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 14px;
+}
+
+.zeroUI-card-grid {
+  width: 20%;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
+  transition: box-shadow 0.3s;
+  border-right: 1px solid #e2e2e2;
+  border-bottom: 1px solid #e2e2e2;
 }
-[class^=zeroUI-] {
-  box-sizing: border-box;
-}
-[class^=zeroUI-]::before {
-  box-sizing: border-box;
-}
-[class^=zeroUI-]::after {
-  box-sizing: border-box;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-.zeroUI-layout {
-  display: flex;
-  flex-direction: column;
-}
-.zeroUI-layout-content {
-  flex-grow: 1;
-}
-.zeroUI-layout-sider, .zeroUI-layout-header, .zeroUI-layout-footer {
-  flex-shrink: 0;
-}
-.zeroUI-layout > .zeroUI-layout {
-  flex-grow: 1;
-  flex-direction: row;
-}
-.zeroUI-layout-has-sider {
-  flex-direction: row;
-}
-.zeroUI-layout-has-sider > .zeroUI-layout {
-  flex-direction: column;
-}
-[class^=zeroUI-] {
-  box-sizing: border-box;
-}
-[class^=zeroUI-]::before {
-  box-sizing: border-box;
-}
-[class^=zeroUI-]::after {
-  box-sizing: border-box;
-}
-
-.zeroUI-notification {
-  box-shadow: 0 0 6px 0 #ccc;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-.zeroUI-notification-container {
+.zeroUI-card-grid-hoverable:hover {
   position: relative;
-}
-
-.zeroUI-notification-item-lane {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  display: flex;
-  flex-direction: column;
-}
-@keyframes fadeInDown {
-  0% {
-    opacity: 0;
-    top: -100px;
-  }
-  50% {
-    opacity: 0.5;
-    top: -50px;
-  }
-  100% {
-    opacity: 1;
-    top: 0px;
-  }
-}
-@keyframes fadeOutUp {
-  0% {
-    opacity: 1;
-    top: 0px;
-  }
-  50% {
-    opacity: 0.5;
-    top: -50px;
-  }
-  100% {
-    opacity: 0;
-    top: -100px;
-  }
-}
-.zeroUI-notification-item-wrapper {
-  margin-bottom: 10px;
-  animation: fadeInDown 300ms linear;
-  animation-fill-mode: both;
-  position: relative;
-  background-color: #fff;
-}
-.zeroUI-notification-item-wrapper[data-close] {
-  animation: fadeOutUp 300ms linear;
-}
-
-.zeroUI-notification {
-  padding: 16px;
-  position: relative;
-  border-radius: 4px;
-  min-width: 240px;
-  transition: all 300ms;
-}
-.zeroUI-notification-close-icon {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  font-size: 1.2em;
-  padding: 2px;
-}
-.zeroUI-notification-close-icon:hover {
-  background-color: #eee;
-  cursor: pointer;
+  z-index: 1;
 }
 .zeroUI-col {
   position: relative;
@@ -3002,6 +2955,26 @@
   margin-left: -24px;
   margin-top: 0.5em;
 }
+.zeroUI-layout {
+  display: flex;
+  flex-direction: column;
+}
+.zeroUI-layout-content {
+  flex-grow: 1;
+}
+.zeroUI-layout-sider, .zeroUI-layout-header, .zeroUI-layout-footer {
+  flex-shrink: 0;
+}
+.zeroUI-layout > .zeroUI-layout {
+  flex-grow: 1;
+  flex-direction: row;
+}
+.zeroUI-layout-has-sider {
+  flex-direction: row;
+}
+.zeroUI-layout-has-sider > .zeroUI-layout {
+  flex-direction: column;
+}
 [class^=zeroUI-] {
   box-sizing: border-box;
 }
@@ -3172,6 +3145,96 @@
 }
 .zeroUI-submenu-horizontal .zeroUI-menu-item, .zeroUI-submenu-ceilinged .zeroUI-menu-item {
   position: relative;
+}
+[class^=zeroUI-] {
+  box-sizing: border-box;
+}
+[class^=zeroUI-]::before {
+  box-sizing: border-box;
+}
+[class^=zeroUI-]::after {
+  box-sizing: border-box;
+}
+
+.zeroUI-notification {
+  box-shadow: 0 0 6px 0 #ccc;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.zeroUI-notification-container {
+  position: relative;
+}
+
+.zeroUI-notification-item-lane {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    top: -100px;
+  }
+  50% {
+    opacity: 0.5;
+    top: -50px;
+  }
+  100% {
+    opacity: 1;
+    top: 0px;
+  }
+}
+@keyframes fadeOutUp {
+  0% {
+    opacity: 1;
+    top: 0px;
+  }
+  50% {
+    opacity: 0.5;
+    top: -50px;
+  }
+  100% {
+    opacity: 0;
+    top: -100px;
+  }
+}
+.zeroUI-notification-item-wrapper {
+  margin-bottom: 10px;
+  animation: fadeInDown 300ms linear;
+  animation-fill-mode: both;
+  position: relative;
+  background-color: #fff;
+}
+.zeroUI-notification-item-wrapper[data-close] {
+  animation: fadeOutUp 300ms linear;
+}
+
+.zeroUI-notification {
+  padding: 16px;
+  position: relative;
+  border-radius: 4px;
+  min-width: 240px;
+  transition: all 300ms;
+}
+.zeroUI-notification-close-icon {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 1.2em;
+  padding: 2px;
+}
+.zeroUI-notification-close-icon:hover {
+  background-color: #eee;
+  cursor: pointer;
 }
 [class^=zeroUI-] {
   box-sizing: border-box;
@@ -3422,6 +3485,8 @@
 .demo-code > .prism-code {
   padding: 20px 15px;
   max-width: 100%;
+  font-size: 14px;
+  font-family: Lucida Console, Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
 }
 .demo-code > .prism-code.language-css {
   border-top: 1px dashed #e6e6e6;
@@ -3430,6 +3495,7 @@
   max-width: 100%;
   display: flex;
   flex-wrap: wrap;
+  line-height: 1.4;
 }
 .zeroUI-button-example .space-button .zeroUI-button {
   margin: 5px;
