@@ -46,6 +46,7 @@ export type NotificationConfig = {
     body?: React.ReactNode
     wait?: number
     autoClose?: boolean
+    placement?: NotificationPlacement
 }
 
 const getDefaultContainer = () => document.body
@@ -139,7 +140,11 @@ class Notification {
     mountNode: Element
     seed = 1
     notifications: NotificationItem[] = []
-    private constructor(config?: InstanceConfig) {
+    instance: Notification | null = null
+    private constructor() {
+        this.initRoot()
+    }
+    private initRoot(config?: InstanceConfig): void {
         this.container =
             config && config.getContainer
                 ? config.getContainer()
@@ -147,10 +152,10 @@ class Notification {
         this.container.className = containerClass
         this.root = document.createElement('div')
         this.root.classList.add(laneClass)
-        if (config && config.placement) {
-            this.root.classList.add(placementClassMap[config.placement])
-        }
         this.container.appendChild(this.root)
+    }
+    private adjustPlacement(placement: NotificationPlacement = 'topRight') {
+        this.root.classList.add(placementClassMap[placement])
     }
     remove(seed: number): void {
         this.notifications = this.notifications.filter(
@@ -164,6 +169,8 @@ class Notification {
     open(config: NotificationConfig): void {
         config = Object.assign({}, defaultConfig, config)
 
+        this.adjustPlacement(config.placement)
+
         const seed = this.seed++
         this.notifications.push({
             ...config,
@@ -175,8 +182,8 @@ class Notification {
             this.root
         )
     }
-    static getIntance(config?: InstanceConfig): Notification {
-        return new Notification(config)
+    static getIntance(): Notification {
+        return new Notification()
     }
     static destroy(instance: Notification): undefined {
         ReactDOM.unmountComponentAtNode(instance.root)
