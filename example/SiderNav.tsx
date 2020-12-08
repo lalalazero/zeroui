@@ -75,6 +75,11 @@ export default class SiderNav extends Component {
                                 <p>Notification 通知框</p>
                             </NavLink>
                         </MenuItem>
+                        <MenuItem>
+                            <NavLink to="/card">
+                                <p>Card 卡片</p>
+                            </NavLink>
+                        </MenuItem>
                     </SubMenu>
                 </Menu>
             </Fragment>

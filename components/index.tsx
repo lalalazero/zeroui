@@ -15,6 +15,7 @@ const message = {
     alert,
 }
 
+export { default as Card } from './card'
 export { default as Col } from './grid/Col'
 export { default as Row } from './grid/Row'
 export { default as Input } from './input/index'

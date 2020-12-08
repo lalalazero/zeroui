@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import { HashRouter as Router, NavLink, Route } from 'react-router-dom'
 import { Content, Footer, Header, Layout, Sider } from '../components'
 import ButtonDemo from './button'
+import CardExample from './card'
 import ColorExample from './color/Color.example'
 import DialogExample from './dialog/Dialog.example'
 import './Example.scss'
@@ -56,6 +57,7 @@ ReactDOM.render(
                             path="/notification"
                             component={NotificationExample}
                         ></Route>
+                        <Route path="/card" component={CardExample}></Route>
                     </div>
                 </Content>
             </Layout>
