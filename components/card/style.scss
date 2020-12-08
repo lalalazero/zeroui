@@ -2,6 +2,7 @@ $border-color: #e2e2e2;
 
 .zeroUI-card {
     border: 1px solid $border-color;
+    background: #fff;
     &-title-panel,
     &-content-panel {
         padding-left: 24px;
@@ -12,10 +13,33 @@ $border-color: #e2e2e2;
         border-bottom: 1px solid $border-color;
         min-height: 48px;
         line-height: 48px;
+        font-weight: bold;
     }
 
     &-content-panel {
         padding-top: 20px;
         padding-bottom: 20px;
+    }
+}
+
+.zeroUI-card-small {
+    .zeroUI-card {
+        &-title-panel,
+        &-content-panel {
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+
+        &-title-panel {
+            min-height: 38px;
+            line-height: 38px;
+            font-size: 14px;
+        }
+
+        &-content-panel {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            font-size: 14px;
+        }
     }
 }
