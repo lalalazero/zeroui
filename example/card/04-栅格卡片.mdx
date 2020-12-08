@@ -1,0 +1,36 @@
+## 栅格卡片
+
+和栅格进行配合
+
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Card, Row, Col } from 'zero-ui-react'
+
+const App = () => {
+    return (
+        <>
+            <div style={{ background: '#ccc', padding: 20 }}>
+                <Row gutter={16}>
+                    <Col span={8}>
+                        <Card title="标题" bordered={false}>
+                            <p>卡片内容</p>
+                        </Card>
+                    </Col>
+                    <Col span={8}>
+                        <Card title="标题" bordered={false}>
+                            <p>卡片内容</p>
+                        </Card>
+                    </Col>
+                    <Col span={8}>
+                        <Card title="标题" bordered={false}>
+                            <p>卡片内容</p>
+                        </Card>
+                    </Col>
+                </Row>
+            </div>
+        </>
+    )
+}
+export default App
+```

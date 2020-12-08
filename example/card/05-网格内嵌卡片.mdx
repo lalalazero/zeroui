@@ -1,0 +1,32 @@
+## 网格内嵌卡片
+
+常见卡片展示方式
+
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Card } from 'zero-ui-react'
+
+const App = () => {
+    const gridStyle = {
+        width: '25%',
+        textAlign: 'center',
+        height: 100,
+    }
+    return (
+        <div>
+            <Card title={'标题'}>
+                <Card.Grid style={gridStyle}>卡片内容</Card.Grid>
+                <Card.Grid style={gridStyle}>卡片内容</Card.Grid>
+                <Card.Grid style={gridStyle} hoverable={false}>
+                    卡片内容
+                </Card.Grid>
+                <Card.Grid style={gridStyle}>卡片内容</Card.Grid>
+                <Card.Grid style={gridStyle}>卡片内容</Card.Grid>
+                <Card.Grid style={gridStyle}>卡片内容</Card.Grid>
+            </Card>
+        </div>
+    )
+}
+export default App
+```

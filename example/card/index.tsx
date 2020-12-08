@@ -14,6 +14,8 @@ export default class ButtonDemo extends React.Component<any, any> {
             await import('./01-基本使用.mdx'),
             await import('./02-无边框.mdx'),
             await import('./03-简洁卡片.mdx'),
+            await import('./04-栅格卡片.mdx'),
+            await import('./05-网格内嵌卡片.mdx'),
         ] as any
         // const api = await import('./api.mdx')
         this.setState({
