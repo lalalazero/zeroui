@@ -1,5 +1,6 @@
 import React, {
     AnimationEventHandler,
+    ReactNode,
     useEffect,
     useRef,
     useState,
@@ -49,9 +50,18 @@ export type NotificationConfig = {
 
 const getDefaultContainer = () => document.body
 
-const NotificationItem: React.FC<any> = (props) => {
+interface NotificationItemProps {
+    seed: string
+    title: string
+    body: ReactNode
+    onClose: () => void
+    wait: number
+    autoClose: boolean
+}
+
+const NotificationItem: React.FC<NotificationItemProps> = (props) => {
     const { seed, title, body, onClose, wait, autoClose } = props
-    const [timer, setTimerId] = useState<any>()
+    const [timer, setTimerId] = useState<NodeJS.Timeout>()
     const ref = useRef<HTMLDivElement>(null)
     useEffect(() => {
         if (autoClose) {
@@ -59,13 +69,13 @@ const NotificationItem: React.FC<any> = (props) => {
                 hanleClose()
             }, wait)
 
-            setTimerId(timerId)
+            setTimerId(timerId as any)
         }
-        return () => clearTimeout(timer)
+        return () => timer && clearTimeout(timer)
     }, [seed])
 
     useEffect(() => {
-        clearTimeout(timer)
+        timer && clearTimeout(timer)
     }, [])
 
     const hanleClose = () => {
@@ -118,12 +128,17 @@ export type InstanceConfig = {
     getContainer?: () => HTMLElement
 }
 
+interface NotificationItem extends NotificationConfig {
+    seed: number
+    onClose: any
+}
+
 class Notification {
     container: Element
     root: Element
     mountNode: Element
     seed = 1
-    notifications: any[] = []
+    notifications: NotificationItem[] = []
     private constructor(config?: InstanceConfig) {
         this.container =
             config && config.getContainer
@@ -137,7 +152,7 @@ class Notification {
         }
         this.container.appendChild(this.root)
     }
-    remove(seed: number) {
+    remove(seed: number): void {
         this.notifications = this.notifications.filter(
             (item) => item.seed !== seed
         )
@@ -146,7 +161,7 @@ class Notification {
             this.root
         )
     }
-    open(config: NotificationConfig) {
+    open(config: NotificationConfig): void {
         config = Object.assign({}, defaultConfig, config)
 
         const seed = this.seed++
@@ -160,10 +175,10 @@ class Notification {
             this.root
         )
     }
-    static getIntance(config?: InstanceConfig) {
+    static getIntance(config?: InstanceConfig): Notification {
         return new Notification(config)
     }
-    static destroy(instance: Notification) {
+    static destroy(instance: Notification): undefined {
         ReactDOM.unmountComponentAtNode(instance.root)
         instance.container &&
             (instance.container as Element).removeChild(instance.root)
