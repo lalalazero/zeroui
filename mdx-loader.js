@@ -54,9 +54,11 @@ function render(resource) {
         }
         return `export default ${JSON.stringify(a)}`
     }
+    let { code, demo, css } = stripExampleCode(content)
+    let index = content.indexOf('<codeToken>')
+    content = content.substring(0, index + 1)
     let subject = stripSubject(content)
     let desc = stripDescription(content)
-    let { code, demo, css } = stripExampleCode(content)
 
     let markdown = {
         subject,
