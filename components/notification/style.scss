@@ -10,8 +10,6 @@
     right: 1rem;
     display: flex;
     flex-direction: column;
-    &-top-left {
-    }
 }
 
 @keyframes fadeInDown {
@@ -54,6 +52,18 @@
     background-color: #fff;
     &[data-close] {
         animation: fadeOutUp 300ms linear;
+    }
+    &-top-right {
+    }
+    &-top-left {
+    }
+    &-bottom-right {
+    }
+    &-bottom-left {
+    }
+    &-top-center {
+    }
+    &-bottom-center {
     }
 }
 

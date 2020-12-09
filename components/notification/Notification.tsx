@@ -7,15 +7,15 @@ import React, {
 } from 'react'
 import ReactDOM from 'react-dom'
 import { Icon } from '../index'
-import { scopedClassMaker } from '../_util/classes'
+import { makeClassSwitchs, scopedClassMaker } from '../_util/classes'
 import { tuple } from '../_util/type'
 import './style.scss'
 
 const scopedClassName = scopedClassMaker('zeroUI-notification')
+const itemWrapperCls = scopedClassMaker('zeroUI-notification-item-wrapper')
 const sc = scopedClassName
 const containerClass = sc('container')
 const laneClass = sc('item-lane')
-const itemWrapperClass = sc('item-wrapper')
 const itemClass = sc('')
 const defaultConfig = {
     title: '',
@@ -32,14 +32,14 @@ const NotificationPlacementTypes = tuple(
     'bottomRight',
     'bottomCenter'
 )
-const placementClassMap = {
-    topRight: sc('top-right'),
-    topLeft: sc('top-left'),
-    topCenter: sc('top-center'),
-    bottomLeft: sc('bottom-left'),
-    bottomRight: sc('bottom-right'),
-    bottomCenter: sc('bottom-center'),
-}
+// const placementClassMap = {
+//     topRight: sc('top-right'),
+//     topLeft: sc('top-left'),
+//     topCenter: sc('top-center'),
+//     bottomLeft: sc('bottom-left'),
+//     bottomRight: sc('bottom-right'),
+//     bottomCenter: sc('bottom-center'),
+// }
 export type NotificationPlacement = typeof NotificationPlacementTypes[number]
 export type NotificationConfig = {
     title?: React.ReactNode
@@ -58,10 +58,11 @@ interface NotificationItemProps {
     onClose: () => void
     wait: number
     autoClose: boolean
+    placement: NotificationPlacement
 }
 
 const NotificationItem: React.FC<NotificationItemProps> = (props) => {
-    const { seed, title, body, onClose, wait, autoClose } = props
+    const { seed, title, body, onClose, wait, autoClose, placement } = props
     const [timer, setTimerId] = useState<NodeJS.Timeout>()
     const ref = useRef<HTMLDivElement>(null)
     useEffect(() => {
@@ -89,10 +90,14 @@ const NotificationItem: React.FC<NotificationItemProps> = (props) => {
         }
     }
 
+    const clsSwitch = makeClassSwitchs({
+        placement,
+    })
+
     return (
         <div
             ref={ref}
-            className={itemWrapperClass}
+            className={itemWrapperCls(clsSwitch)}
             data-seed={seed}
             onAnimationEnd={handleAnimationEnd}
         >
@@ -154,9 +159,9 @@ class Notification {
         this.root.classList.add(laneClass)
         this.container.appendChild(this.root)
     }
-    private adjustPlacement(placement: NotificationPlacement = 'topRight') {
-        this.root.classList.add(placementClassMap[placement])
-    }
+    // private adjustPlacement(placement: NotificationPlacement = 'topRight') {
+    //     this.root.classList.add(placementClassMap[placement])
+    // }
     remove(seed: number): void {
         this.notifications = this.notifications.filter(
             (item) => item.seed !== seed
@@ -169,7 +174,7 @@ class Notification {
     open(config: NotificationConfig): void {
         config = Object.assign({}, defaultConfig, config)
 
-        this.adjustPlacement(config.placement)
+        // this.adjustPlacement(config.placement)
 
         const seed = this.seed++
         this.notifications.push({

@@ -10,11 +10,12 @@ const App = () => {
     const defaultConfig = {
         title: '标题',
         body: '通知内容',
+        autoClose: false,
     }
     const open = (placement) =>
         notification.open({ ...defaultConfig, placement })
     return (
-        <div>
+        <div className="btn-wrapper">
             <Button onClick={() => open('topRight')}>右上角弹出</Button>
             <Button onClick={() => open('topLeft')}>左上角弹出</Button>
             <Button onClick={() => open('bottomRight')}>右下角弹出</Button>
@@ -25,4 +26,10 @@ const App = () => {
     )
 }
 export default App
+```
+
+```css
+.btn-wrapper > .zeroUI-button {
+    margin: 5px;
+}
 ```

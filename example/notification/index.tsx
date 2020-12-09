@@ -1,6 +1,6 @@
 import React from 'react'
 import DemoRenderer from '../DemoRenderer'
-// import './style.scss'
+import './style.scss'
 
 export default class Demo extends React.Component<any, any> {
     constructor(props: any) {
