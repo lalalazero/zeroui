@@ -16,6 +16,7 @@ interface NotificationItemProps {
     onClose: () => void;
     wait: number;
     autoClose: boolean;
+    placement: NotificationPlacement;
 }
 declare const NotificationItem: React.FC<NotificationItemProps>;
 export declare type InstanceConfig = {
@@ -35,7 +36,6 @@ declare class Notification {
     instance: Notification | null;
     private constructor();
     private initRoot;
-    private adjustPlacement;
     remove(seed: number): void;
     open(config: NotificationConfig): void;
     static getIntance(): Notification;

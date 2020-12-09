@@ -3179,6 +3179,7 @@
   display: flex;
   flex-direction: column;
 }
+
 @keyframes fadeInDown {
   0% {
     opacity: 0;
@@ -3217,7 +3218,6 @@
 .zeroUI-notification-item-wrapper[data-close] {
   animation: fadeOutUp 300ms linear;
 }
-
 .zeroUI-notification {
   padding: 16px;
   position: relative;
@@ -3835,6 +3835,9 @@ a {
   100% {
     transform: rotate(360deg);
   }
+}
+.btn-wrapper > .zeroUI-button {
+  margin: 5px;
 }
 .tooltip-example-02 .box-1, .tooltip-example-02 .box-2, .tooltip-example-02 .box-3 {
   display: flex;
