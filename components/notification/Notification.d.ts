@@ -1,45 +1,41 @@
 import React, { ReactNode } from 'react';
 import './style.scss';
-declare const NotificationPlacementTypes: ["topRight", "topLeft", "topCenter", "bottomLeft", "bottomRight", "bottomCenter"];
-export declare type NotificationPlacement = typeof NotificationPlacementTypes[number];
-export declare type NotificationConfig = {
-    title?: React.ReactNode;
-    body?: React.ReactNode;
-    wait?: number;
+export declare type NoticeContent = Pick<NoticeConfig, 'body' | 'title' | 'key'>;
+export declare type NoticeFunc = (noticeContent: NoticeContent) => void;
+export interface NotificationInstance {
+    notice: NoticeFunc;
+    component: Notification;
+    destroy: () => void;
+}
+interface NotificationState {
+    notices: NoticeContent[];
+}
+interface NotificationProps extends NoticeConfig {
+    style?: React.CSSProperties;
+}
+declare class Notification extends React.Component<NotificationProps, NotificationState> {
+    static newInstance: (properties: NotificationProps, callback: (instance: NotificationInstance) => void) => void;
+    state: NotificationState;
+    add: (notice: NotificationProps) => void;
+    render(): JSX.Element;
+}
+export declare type NoticePlacement = 'topRight' | 'topLeft' | 'bottomRight' | 'bottomLeft' | 'topCenter' | 'bottomCenter';
+export interface NoticeConfig {
+    title?: string;
+    body?: ReactNode;
     autoClose?: boolean;
-    placement?: NotificationPlacement;
-};
-interface NotificationItemProps {
-    seed: string;
-    title: string;
-    body: ReactNode;
-    onClose: () => void;
-    wait: number;
-    autoClose: boolean;
-    placement: NotificationPlacement;
-}
-declare const NotificationItem: React.FC<NotificationItemProps>;
-export declare type InstanceConfig = {
-    placement?: NotificationPlacement;
+    wait?: number;
+    placement?: NoticePlacement;
+    onClose?: () => void;
     getContainer?: () => HTMLElement;
-};
-interface NotificationItem extends NotificationConfig {
-    seed: number;
-    onClose: any;
+    key?: React.Key;
 }
-declare class Notification {
-    container: Element;
-    root: Element;
-    mountNode: Element;
-    seed: number;
-    notifications: NotificationItem[];
-    instance: Notification | null;
-    private constructor();
-    private initRoot;
-    remove(seed: number): void;
-    open(config: NotificationConfig): void;
-    static getIntance(): Notification;
-    static destroy(instance: Notification): undefined;
+export interface NotificationApi {
+    success(config: NoticeConfig): void;
+    error(config: NoticeConfig): void;
+    info(config: NoticeConfig): void;
+    warning(config: NoticeConfig): void;
+    open(config: NoticeConfig): void;
 }
-export default Notification;
-export declare const notification: Notification;
+declare const _default: NotificationApi;
+export default _default;
