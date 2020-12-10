@@ -18,10 +18,7 @@ export { default as Header } from './layout/Header'
 export { default as Layout } from './layout/Layout'
 export { default as Sider } from './layout/Sider'
 export { default as Menu } from './menu/index'
-export {
-    default as Notification,
-    notification,
-} from './notification/Notification'
+export { default as notification } from './notification/Notification'
 export { default as Pagination } from './pagination'
 export { default as Select } from './select/index'
 export { default as Tooltip } from './tooltip/Tooltip'

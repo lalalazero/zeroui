@@ -1,205 +1,206 @@
-import React, {
-    AnimationEventHandler,
-    ReactNode,
-    useEffect,
-    useRef,
-    useState,
-} from 'react'
+import React, { ReactNode } from 'react'
 import ReactDOM from 'react-dom'
-import { Icon } from '../index'
-import { makeClassSwitchs, scopedClassMaker } from '../_util/classes'
-import { tuple } from '../_util/type'
+import { scopedClassMaker } from '../_util/classes'
+import Notice from './Notice'
 import './style.scss'
 
-const scopedClassName = scopedClassMaker('zeroUI-notification')
-const itemWrapperCls = scopedClassMaker('zeroUI-notification-item-wrapper')
-const sc = scopedClassName
-const containerClass = sc('container')
-const laneClass = sc('item-lane')
-const itemClass = sc('')
-const defaultConfig = {
-    title: '',
-    body: '',
-    wait: 5000,
-    autoClose: true,
+export type NoticeContent = Pick<NoticeConfig, 'body' | 'title' | 'key'>
+export type NoticeFunc = (noticeContent: NoticeContent) => void
+export interface NotificationInstance {
+    notice: NoticeFunc
+    component: Notification
+    destroy: () => void
+}
+
+interface NotificationState {
+    notices: NoticeContent[]
+}
+
+interface NotificationProps extends NoticeConfig {
+    style?: React.CSSProperties
+}
+
+const containerClass = scopedClassMaker('zeroUI-notification')
+
+let seed = 0
+function getUUid() {
+    const id = seed
+    seed += 1
+    return `zeroUI_notice_${id}`
+}
+const defaultNoticeConfig: NoticeConfig = {
+    getContainer: () => document.body,
     placement: 'topRight',
-}
-const NotificationPlacementTypes = tuple(
-    'topRight',
-    'topLeft',
-    'topCenter',
-    'bottomLeft',
-    'bottomRight',
-    'bottomCenter'
-)
-// const placementClassMap = {
-//     topRight: sc('top-right'),
-//     topLeft: sc('top-left'),
-//     topCenter: sc('top-center'),
-//     bottomLeft: sc('bottom-left'),
-//     bottomRight: sc('bottom-right'),
-//     bottomCenter: sc('bottom-center'),
-// }
-export type NotificationPlacement = typeof NotificationPlacementTypes[number]
-export type NotificationConfig = {
-    title?: React.ReactNode
-    body?: React.ReactNode
-    wait?: number
-    autoClose?: boolean
-    placement?: NotificationPlacement
+    autoClose: false,
+    wait: 3000,
 }
 
-const getDefaultContainer = () => document.body
-
-interface NotificationItemProps {
-    seed: string
-    title: string
-    body: ReactNode
-    onClose: () => void
-    wait: number
-    autoClose: boolean
-    placement: NotificationPlacement
+const notificationApi: any = {
+    open: openNotice,
 }
 
-const NotificationItem: React.FC<NotificationItemProps> = (props) => {
-    const { seed, title, body, onClose, wait, autoClose, placement } = props
-    const [timer, setTimerId] = useState<NodeJS.Timeout>()
-    const ref = useRef<HTMLDivElement>(null)
-    useEffect(() => {
-        if (autoClose) {
-            const timerId = setTimeout(() => {
-                hanleClose()
-            }, wait)
+const notificationInstanceCacheMap: {
+    [key: string]: Promise<NotificationInstance>
+} = {}
 
-            setTimerId(timerId as any)
-        }
-        return () => timer && clearTimeout(timer)
-    }, [seed])
-
-    useEffect(() => {
-        timer && clearTimeout(timer)
-    }, [])
-
-    const hanleClose = () => {
-        ref.current && ref.current.setAttribute('data-close', 'true')
+function getPlacementStyle(placement: NoticePlacement | undefined) {
+    const placementMap: { [key in NoticePlacement]: React.CSSProperties } = {
+        topRight: {
+            top: 20,
+            right: 20,
+        },
+        topLeft: {
+            top: 20,
+            left: 20,
+        },
+        topCenter: {
+            top: 20,
+            left: '50%',
+        },
+        bottomLeft: {
+            bottom: 20,
+            left: 20,
+        },
+        bottomRight: {
+            bottom: 20,
+            right: 20,
+        },
+        bottomCenter: {
+            bottom: 20,
+            left: '50%',
+        },
     }
 
-    const handleAnimationEnd: AnimationEventHandler = (event) => {
-        if ((event.target as HTMLDivElement).getAttribute('data-close')) {
-            onClose && onClose()
-        }
-    }
-
-    const clsSwitch = makeClassSwitchs({
-        placement,
+    return placement ? placementMap[placement] : {}
+}
+function openNotice(userConfig: NoticeConfig) {
+    const config = { ...defaultNoticeConfig, ...userConfig }
+    getNotificationInstance(config, (instance) => {
+        // TODO fix any
+        instance.notice(config as any)
     })
-
-    return (
-        <div
-            ref={ref}
-            className={itemWrapperCls(clsSwitch)}
-            data-seed={seed}
-            onAnimationEnd={handleAnimationEnd}
-        >
-            <div className={itemClass}>
-                <div className={sc('title')}>{title}</div>
-                <div className={sc('body')}>{body}</div>
-                <div className={sc('close-icon')} onClick={hanleClose}>
-                    <Icon name="close"></Icon>
-                </div>
-            </div>
-        </div>
-    )
 }
+function getNotificationInstance(
+    properties: NoticeConfig = defaultNoticeConfig,
+    callback: (instance: NotificationInstance) => void
+) {
+    const { placement, ...config } = properties
 
-class NotificationInternal extends React.Component<any, any> {
-    constructor(props: any) {
-        super(props)
-    }
+    const cacheKey = `zeroUI-notification-${placement}`
+    const cachedInstance = notificationInstanceCacheMap[cacheKey]
 
-    render() {
-        const { items } = this.props
-        return (
-            <>
-                {items.map((item: any) => (
-                    <NotificationItem {...item} key={item.seed} />
-                ))}
-            </>
-        )
-    }
-}
-
-export type InstanceConfig = {
-    placement?: NotificationPlacement
-    getContainer?: () => HTMLElement
-}
-
-interface NotificationItem extends NotificationConfig {
-    seed: number
-    onClose: any
-}
-
-class Notification {
-    container: Element
-    root: Element
-    mountNode: Element
-    seed = 1
-    notifications: NotificationItem[] = []
-    instance: Notification | null = null
-    private constructor() {
-        this.initRoot()
-    }
-    private initRoot(config?: InstanceConfig): void {
-        this.container =
-            config && config.getContainer
-                ? config.getContainer()
-                : getDefaultContainer()
-        this.container.className = containerClass
-        this.root = document.createElement('div')
-        this.root.classList.add(laneClass)
-        this.container.appendChild(this.root)
-    }
-    // private adjustPlacement(placement: NotificationPlacement = 'topRight') {
-    //     this.root.classList.add(placementClassMap[placement])
-    // }
-    remove(seed: number): void {
-        this.notifications = this.notifications.filter(
-            (item) => item.seed !== seed
-        )
-        ReactDOM.render(
-            <NotificationInternal items={this.notifications} />,
-            this.root
-        )
-    }
-    open(config: NotificationConfig): void {
-        config = Object.assign({}, defaultConfig, config)
-
-        // this.adjustPlacement(config.placement)
-
-        const seed = this.seed++
-        this.notifications.push({
-            ...config,
-            seed,
-            onClose: () => this.remove(seed),
+    if (cachedInstance) {
+        Promise.resolve(cachedInstance).then((instance) => {
+            callback(instance)
         })
-        ReactDOM.render(
-            <NotificationInternal items={this.notifications} />,
-            this.root
+        return
+    }
+
+    notificationInstanceCacheMap[cacheKey] = new Promise((resolve) => {
+        Notification.newInstance(
+            {
+                style: getPlacementStyle(placement),
+                ...config,
+            },
+            (notificationInstance) => {
+                resolve(notificationInstance)
+                callback(notificationInstance)
+            }
         )
+    })
+}
+
+class Notification extends React.Component<
+    NotificationProps,
+    NotificationState
+> {
+    static newInstance: (
+        properties: NotificationProps,
+        callback: (instance: NotificationInstance) => void
+    ) => void
+    state: NotificationState = {
+        notices: [],
     }
-    static getIntance(): Notification {
-        return new Notification()
+    add = (notice: NotificationProps) => {
+        this.setState({
+            notices: this.state.notices.concat([notice]),
+        })
     }
-    static destroy(instance: Notification): undefined {
-        ReactDOM.unmountComponentAtNode(instance.root)
-        instance.container &&
-            (instance.container as Element).removeChild(instance.root)
-        return undefined
+    render() {
+        const { style } = this.props
+        return (
+            <div className={containerClass('')} style={style}>
+                {this.state.notices.map((noticeConfig) => (
+                    <Notice {...noticeConfig} key={noticeConfig.key} />
+                ))}
+            </div>
+        )
     }
 }
 
-export default Notification
+Notification.newInstance = function newNotificationInstance(
+    properties = {},
+    callback
+) {
+    const { getContainer, ...config } = properties
+    const div = document.createElement('div')
+    if (getContainer) {
+        const root = getContainer()
+        root.appendChild(div)
+    } else {
+        document.body.appendChild(div)
+    }
+    let called = false
+    function ref(notificationInstance: Notification) {
+        if (called) {
+            return
+        }
+        called = true
+        callback({
+            notice(noticeConfig) {
+                notificationInstance.add({
+                    ...noticeConfig,
+                    key: getUUid(),
+                })
+            },
+            component: notificationInstance,
+            destroy() {
+                ReactDOM.unmountComponentAtNode(div)
+                if (div.parentNode) {
+                    div.parentNode.removeChild(div)
+                }
+            },
+        })
+    }
 
-const defaultInstance = Notification.getIntance()
+    ReactDOM.render(<Notification ref={ref} {...config} />, div)
+}
 
-export const notification = defaultInstance
+export type NoticePlacement =
+    | 'topRight'
+    | 'topLeft'
+    | 'bottomRight'
+    | 'bottomLeft'
+    | 'topCenter'
+    | 'bottomCenter'
+
+export interface NoticeConfig {
+    title?: string
+    body?: ReactNode
+    autoClose?: boolean
+    wait?: number
+    placement?: NoticePlacement
+    onClose?: () => void
+    getContainer?: () => HTMLElement
+    key?: React.Key
+}
+
+export interface NotificationApi {
+    success(config: NoticeConfig): void
+    error(config: NoticeConfig): void
+    info(config: NoticeConfig): void
+    warning(config: NoticeConfig): void
+    open(config: NoticeConfig): void
+}
+
+export default notificationApi as NotificationApi
