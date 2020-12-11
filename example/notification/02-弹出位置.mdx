@@ -8,20 +8,19 @@ import { notification, Button } from 'zero-ui-react'
 
 const App = () => {
     const defaultConfig = {
-        title: '标题',
+        title: <h4>标题</h4>,
         body: '通知内容',
-        autoClose: false,
     }
     const open = (placement) =>
         notification.open({ ...defaultConfig, placement })
     return (
         <div className="btn-wrapper">
-            <Button onClick={() => open('topRight')}>右上角弹出</Button>
-            <Button onClick={() => open('topLeft')}>左上角弹出</Button>
-            <Button onClick={() => open('bottomRight')}>右下角弹出</Button>
-            <Button onClick={() => open('bottomLeft')}>左下角弹出</Button>
-            <Button onClick={() => open('topCenter')}>中间顶部弹出</Button>
-            <Button onClick={() => open('bottomCenter')}>中间底部弹出</Button>
+            <Button onClick={() => open('topRight')}>topRight</Button>
+            <Button onClick={() => open('topLeft')}>topLeft</Button>
+            <Button onClick={() => open('bottomRight')}>bottomRight</Button>
+            <Button onClick={() => open('bottomLeft')}>bottomLeft</Button>
+            <Button onClick={() => open('topCenter')}>topCenter</Button>
+            <Button onClick={() => open('bottomCenter')}>bottomCenter</Button>
         </div>
     )
 }

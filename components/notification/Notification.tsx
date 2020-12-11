@@ -4,12 +4,24 @@ import { scopedClassMaker } from '../_util/classes'
 import Notice from './Notice'
 import './style.scss'
 
-export type NoticeContent = Pick<NoticeConfig, 'body' | 'title' | 'key'>
+export type NoticeContent = Pick<
+    NoticeConfig,
+    | 'body'
+    | 'title'
+    | 'key'
+    | 'onClose'
+    | 'wait'
+    | 'autoClose'
+    | 'placement'
+    | 'closeable'
+> & { type?: buildInApiType }
+
 export type NoticeFunc = (noticeContent: NoticeContent) => void
 export interface NotificationInstance {
     notice: NoticeFunc
     component: Notification
     destroy: () => void
+    removeNotice: (key: React.Key) => void
 }
 
 interface NotificationState {
@@ -18,6 +30,7 @@ interface NotificationState {
 
 interface NotificationProps extends NoticeConfig {
     style?: React.CSSProperties
+    type?: buildInApiType
 }
 
 const containerClass = scopedClassMaker('zeroUI-notification')
@@ -31,13 +44,59 @@ function getUUid() {
 const defaultNoticeConfig: NoticeConfig = {
     getContainer: () => document.body,
     placement: 'topRight',
-    autoClose: false,
-    wait: 3000,
+    autoClose: true,
+    wait: 5000,
+    closeable: true,
+}
+
+function openNotice(props: NotificationProps) {
+    const config = { ...defaultNoticeConfig, ...props }
+    getNotificationInstance(config, (instance) => {
+        // TODO fix any
+        instance.notice(config as any)
+    })
 }
 
 const notificationApi: any = {
     open: openNotice,
+    close: (key: React.Key) => {
+        Object.keys(notificationInstanceCacheMap).forEach((cacheKey) => {
+            Promise.resolve(notificationInstanceCacheMap[cacheKey]).then(
+                (instance) => {
+                    instance.removeNotice(key)
+                }
+            )
+        })
+    },
+    destroy() {
+        Object.keys(notificationInstanceCacheMap).forEach((cacheKey) => {
+            Promise.resolve(notificationInstanceCacheMap[cacheKey]).then(
+                (instance) => {
+                    instance.destroy()
+                }
+            )
+            delete notificationInstanceCacheMap[cacheKey]
+        })
+    },
 }
+
+const otherApi = [
+    'success',
+    'warn',
+    'info',
+    'error',
+    'success2',
+    'warn2',
+    'info2',
+    'error2',
+] as const
+
+type buildInApiType = typeof otherApi[number]
+
+otherApi.forEach((type) => {
+    notificationApi[type] = (userConfig: NoticeConfig) =>
+        openNotice({ ...userConfig, type })
+})
 
 const notificationInstanceCacheMap: {
     [key: string]: Promise<NotificationInstance>
@@ -56,6 +115,7 @@ function getPlacementStyle(placement: NoticePlacement | undefined) {
         topCenter: {
             top: 20,
             left: '50%',
+            translate: '-50%, 0',
         },
         bottomLeft: {
             bottom: 20,
@@ -73,13 +133,7 @@ function getPlacementStyle(placement: NoticePlacement | undefined) {
 
     return placement ? placementMap[placement] : {}
 }
-function openNotice(userConfig: NoticeConfig) {
-    const config = { ...defaultNoticeConfig, ...userConfig }
-    getNotificationInstance(config, (instance) => {
-        // TODO fix any
-        instance.notice(config as any)
-    })
-}
+
 function getNotificationInstance(
     properties: NoticeConfig = defaultNoticeConfig,
     callback: (instance: NotificationInstance) => void
@@ -121,9 +175,17 @@ class Notification extends React.Component<
     state: NotificationState = {
         notices: [],
     }
-    add = (notice: NotificationProps) => {
+    add = (originNotice: NotificationProps) => {
         this.setState({
-            notices: this.state.notices.concat([notice]),
+            notices: this.state.notices.concat([originNotice]),
+        })
+    }
+    remove = (key: React.Key) => {
+        const filterNotices = this.state.notices.filter(
+            (notice) => notice.key !== key
+        )
+        this.setState({
+            notices: filterNotices,
         })
     }
     render() {
@@ -131,7 +193,14 @@ class Notification extends React.Component<
         return (
             <div className={containerClass('')} style={style}>
                 {this.state.notices.map((noticeConfig) => (
-                    <Notice {...noticeConfig} key={noticeConfig.key} />
+                    <Notice
+                        {...noticeConfig}
+                        key={noticeConfig.key}
+                        onClose={() => {
+                            this.remove(noticeConfig.key as React.Key)
+                            noticeConfig.onClose && noticeConfig.onClose()
+                        }}
+                    />
                 ))}
             </div>
         )
@@ -160,10 +229,13 @@ Notification.newInstance = function newNotificationInstance(
             notice(noticeConfig) {
                 notificationInstance.add({
                     ...noticeConfig,
-                    key: getUUid(),
+                    key: noticeConfig.key || getUUid(),
                 })
             },
             component: notificationInstance,
+            removeNotice: (key) => {
+                notificationInstance.remove(key)
+            },
             destroy() {
                 ReactDOM.unmountComponentAtNode(div)
                 if (div.parentNode) {
@@ -188,6 +260,7 @@ export interface NoticeConfig {
     title?: string
     body?: ReactNode
     autoClose?: boolean
+    closeable?: boolean
     wait?: number
     placement?: NoticePlacement
     onClose?: () => void
@@ -195,11 +268,9 @@ export interface NoticeConfig {
     key?: React.Key
 }
 
-export interface NotificationApi {
-    success(config: NoticeConfig): void
-    error(config: NoticeConfig): void
-    info(config: NoticeConfig): void
-    warning(config: NoticeConfig): void
+type buildInApi = { [key in buildInApiType]: (config: NoticeConfig) => void }
+
+export interface NotificationApi extends buildInApi {
     open(config: NoticeConfig): void
 }
 

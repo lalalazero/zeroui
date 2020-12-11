@@ -15,8 +15,9 @@ export default class Demo extends React.Component<any, any> {
         const demos = [
             await import('./01-基本用法.mdx'),
             await import('./02-弹出位置.mdx'),
-            // await import('./03-水平菜单.mdx'),
-            // await import('./04-天花板菜单.mdx'),
+            await import('./03-手动关闭.mdx'),
+            await import('./04-内置类型.mdx'),
+            await import('./05-自定义内容.mdx'),
         ]
         // const api = await import('./api.mdx')
         this.setState({

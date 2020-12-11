@@ -1,0 +1,45 @@
+## 内置类型
+
+提供了常用的四种通知类型，区分了两种样式。
+
+```jsx
+import React from 'react'
+import { Button, notification } from 'zero-ui-react'
+
+const App = () => {
+    const buildInApi = [
+        'success',
+        'warn',
+        'info',
+        'error',
+        'success2',
+        'warn2',
+        'info2',
+        'error2',
+    ]
+    return (
+        <div className="btn-wrapper">
+            {buildInApi.map((apiType, idx) => {
+                const onClick = () =>
+                    notification[apiType]({
+                        title: <h4>标题</h4>,
+                        body: '通知内容',
+                        autoClose: false,
+                    })
+                return (
+                    <Button onClick={onClick} key={idx}>
+                        {apiType}
+                    </Button>
+                )
+            })}
+        </div>
+    )
+}
+export default App
+```
+
+```css
+.btn-wrapper > .zeroUI-button {
+    margin: 5px;
+}
+```

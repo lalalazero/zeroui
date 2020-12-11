@@ -1,0 +1,45 @@
+## 手动关闭
+
+设置 autoClose 属性为 false 则通知不会自动关闭。
+
+```jsx
+import React from 'react'
+import { Button, notification } from 'zero-ui-react'
+
+const App = () => {
+    const [opened, setOpen] = React.useState(false)
+    const onClick = () => {
+        notification.open({
+            title: <h4>标题</h4>,
+            body: '通知内容',
+            autoClose: false,
+            key: 'test',
+            onClose: () => {
+                setOpen(false)
+            },
+        })
+
+        setOpen(true)
+    }
+
+    const onClose = () => {
+        notification.close('test')
+        setOpen(false)
+    }
+    return (
+        <div>
+            <Button
+                onClick={onClick}
+                style={{ marginRight: 10 }}
+                disabled={opened}
+            >
+                打开
+            </Button>
+            <Button onClick={onClose} disabled={!opened}>
+                关闭
+            </Button>
+        </div>
+    )
+}
+export default App
+```

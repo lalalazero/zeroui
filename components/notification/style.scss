@@ -3,91 +3,169 @@
 .zeroUI-notification {
     position: fixed;
     height: auto;
+    z-index: 1000;
 }
 
-// .zeroUI-notification-container {
-//     position: relative;
-// }
+$prefix: zeroUI-notice;
+$icon-prefix: zeroUI-icon;
 
-// .zeroUI-notification-item-lane {
-//     position: absolute;
-//     top: 1rem;
-//     right: 1rem;
-//     display: flex;
-//     flex-direction: column;
-// }
+.zeroUI-notice {
+    padding: 16px 20px;
+    position: relative;
+    border-radius: 4px;
+    min-width: 300px;
+    max-width: 500px;
+    margin: 10px 0;
+    display: flex;
+    background-color: #fff;
+    &-close-icon {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        font-size: 1.2em;
+        padding: 2px;
+        &:hover {
+            background-color: #eee;
+            cursor: pointer;
+        }
+    }
+    @extend %box-shadow;
+    transition: all 300ms;
 
-// @keyframes fadeInDown {
-//     0% {
-//         opacity: 0;
-//         top: -100px;
-//     }
+    &-content {
+        flex-grow: 1;
+    }
 
-//     50% {
-//         opacity: 0.5;
-//         top: -50px;
-//     }
+    &-title {
+        margin-bottom: 16px;
+    }
 
-//     100% {
-//         opacity: 1;
-//         top: 0px;
-//     }
-// }
+    &-top-right,
+    &-top-left,
+    &-top-center {
+        animation: fadeInDown 300ms linear;
+    }
 
-// @keyframes fadeOutUp {
-//     0% {
-//         opacity: 1;
-//         top: 0px;
-//     }
-//     50% {
-//         opacity: 0.5;
-//         top: -50px;
-//     }
-//     100% {
-//         opacity: 0;
-//         top: -100px;
-//     }
-// }
+    &[notice-close].#{$prefix}-top-right,
+    &[notice-close].#{$prefix}-top-left,
+    &[notice-close].#{$prefix}-top-center {
+        animation: fadeOutUp 300ms linear;
+    }
 
-// .zeroUI-notification-item-wrapper {
-//     margin-bottom: 10px;
-//     animation: fadeInDown 300ms linear;
-//     animation-fill-mode: both;
-//     position: relative;
-//     background-color: #fff;
-//     &[data-close] {
-//         animation: fadeOutUp 300ms linear;
-//     }
-//     &-top-right {
-//     }
-//     &-top-left {
-//     }
-//     &-bottom-right {
-//     }
-//     &-bottom-left {
-//     }
-//     &-top-center {
-//     }
-//     &-bottom-center {
-//     }
-// }
+    &-bottom-right,
+    &-bottom-left,
+    &-bottom-center {
+        animation: fadeInBottomUp 300ms linear;
+    }
 
-// .zeroUI-notification {
-//     padding: 16px;
-//     position: relative;
-//     border-radius: 4px;
-//     min-width: 240px;
-//     &-close-icon {
-//         position: absolute;
-//         top: 10px;
-//         right: 20px;
-//         font-size: 1.2em;
-//         padding: 2px;
-//         &:hover {
-//             background-color: #eee;
-//             cursor: pointer;
-//         }
-//     }
-//     @extend %box-shadow;
-//     transition: all 300ms;
-// }
+    &[notice-close].#{$prefix}-bottom-right,
+    &[notice-close].#{$prefix}-bottom-left,
+    &[notice-close].#{$prefix}-bottom-center {
+        animation: fadeOutBottomDown 300ms linear;
+    }
+
+    & > &-type-icon {
+        display: inline-flex;
+        margin-right: 10px;
+    }
+
+    & > &-type-icon > .#{$icon-prefix} {
+        font-size: 1.8rem;
+    }
+
+    &-success > &-type-icon > .#{$icon-prefix} {
+        fill: $success-color;
+    }
+
+    &-warn > &-type-icon > .#{$icon-prefix} {
+        fill: $warn-color;
+    }
+
+    &-info > &-type-icon > .#{$icon-prefix} {
+        fill: $info-color;
+    }
+
+    &-error > &-type-icon > .#{$icon-prefix} {
+        fill: $error-color;
+    }
+
+    &-success2 {
+        background-color: $success-color;
+    }
+
+    &-warn2 {
+        background-color: $warn-color;
+    }
+
+    &-info2 {
+        background-color: $info-color;
+    }
+
+    &-error2 {
+        background-color: $error-color;
+    }
+}
+
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        top: -100px;
+    }
+
+    50% {
+        opacity: 0.5;
+        top: -50px;
+    }
+
+    100% {
+        opacity: 1;
+        top: 0px;
+    }
+}
+
+@keyframes fadeOutUp {
+    0% {
+        opacity: 1;
+        top: 0px;
+    }
+    50% {
+        opacity: 0.5;
+        top: -50px;
+    }
+    100% {
+        opacity: 0;
+        top: -100px;
+    }
+}
+
+@keyframes fadeInBottomUp {
+    0% {
+        opacity: 0;
+        bottom: -100px;
+    }
+    50% {
+        opacity: 0.5;
+        bottom: -50px;
+    }
+    100% {
+        opacity: 1;
+        bottom: 0px;
+    }
+}
+
+@keyframes fadeOutBottomDown {
+    0% {
+        opacity: 1;
+        bottom: 0px;
+    }
+
+    50% {
+        opacity: 0.5;
+        bottom: -50px;
+    }
+
+    100% {
+        opacity: 0;
+        bottom: -100px;
+    }
+}

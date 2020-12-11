@@ -1,0 +1,38 @@
+## 自定义内容
+
+设置通知不可关闭结合自定义通知内容按钮。
+
+```jsx
+import React from 'react'
+import { Button, notification } from 'zero-ui-react'
+
+const App = () => {
+    const onClick = () => {
+        notification.success({
+            title: <h4>不可关闭的通知</h4>,
+            key: 'test',
+            body: (
+                <div>
+                    <p style={{ marginBottom: 10 }}>
+                        通知内容通知内容通知内容通知内容
+                    </p>
+                    <Button
+                        type="primary"
+                        onClick={() => notification.close('test')}
+                        style={{ float: 'right' }}
+                    >
+                        确定
+                    </Button>
+                </div>
+            ),
+            closeable: false,
+        })
+    }
+    return (
+        <div>
+            <Button onClick={onClick}>打开通知</Button>
+        </div>
+    )
+}
+export default App
+```

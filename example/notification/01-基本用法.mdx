@@ -7,17 +7,15 @@ import React from 'react'
 import { Button, notification } from 'zero-ui-react'
 
 const App = () => {
-    const onClick2 = () => {
+    const onClick = () => {
         notification.open({
-            title: '标题222',
-            body: '通知内容222',
+            title: <h4>标题</h4>,
+            body: '通知内容',
         })
     }
     return (
         <div>
-            <Button onClick={onClick2} style={{ marginLeft: 10 }}>
-                打开通知-2
-            </Button>
+            <Button onClick={onClick}>打开通知</Button>
         </div>
     )
 }

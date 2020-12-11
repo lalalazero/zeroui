@@ -5,7 +5,6 @@ import {
     Input,
     Menu,
     notification,
-    Notification,
     Pagination,
     Select,
 } from '../components'
@@ -14,7 +13,6 @@ import './App.scss'
 const { SubMenu, MenuGroup, MenuItem } = Menu
 
 const App = () => {
-    let notification2: any = Notification.getIntance()
     const [value, setValue] = React.useState('')
     const handleSearch = () => {
         console.log('handle search')
@@ -34,83 +32,6 @@ const App = () => {
         notification.open({
             title: '通知',
             body: '记得今天晚上看快乐8开奖',
-        })
-    }
-
-    const openNotification2 = () => {
-        if (!notification2) {
-            notification2 = Notification.getIntance()
-        }
-        notification2.open({
-            title: <Button type="danger">danger</Button>,
-            body: <p style={{ color: 'red' }}>禁止操作</p>,
-            autoClose: false,
-            // wait: 2000,
-        })
-    }
-
-    const open3 = () => {
-        if (!notification2) {
-            notification2 = Notification.getIntance()
-        }
-        notification2.open({
-            title: <Button type="primary">通知</Button>,
-            body: <p>在其他地方打开的通知</p>,
-            placement: 'topLeft',
-            // autoClose: false,
-            // wait: 2000,
-        })
-    }
-
-    const open4 = () => {
-        if (!notification2) {
-            notification2 = Notification.getIntance()
-        }
-        notification2.open({
-            title: <Button type="primary">通知</Button>,
-            body: <p>在其他地方打开的通知</p>,
-            placement: 'topCenter',
-            // autoClose: false,
-            // wait: 2000,
-        })
-    }
-
-    const open5 = () => {
-        if (!notification2) {
-            notification2 = Notification.getIntance()
-        }
-        notification2.open({
-            title: <Button type="primary">通知</Button>,
-            body: <p>在其他地方打开的通知</p>,
-            placement: 'bottomLeft',
-            // autoClose: false,
-            // wait: 2000,
-        })
-    }
-
-    const open6 = () => {
-        if (!notification2) {
-            notification2 = Notification.getIntance()
-        }
-        notification2.open({
-            title: <Button type="primary">通知</Button>,
-            body: <p>在其他地方打开的通知</p>,
-            placement: 'bottomRight',
-            // autoClose: false,
-            // wait: 2000,
-        })
-    }
-
-    const open7 = () => {
-        if (!notification2) {
-            notification2 = Notification.getIntance()
-        }
-        notification2.open({
-            title: <Button type="primary">通知</Button>,
-            body: <p>在其他地方打开的通知</p>,
-            placement: 'bottomCenter',
-            // autoClose: false,
-            // wait: 2000,
         })
     }
 
@@ -135,31 +56,7 @@ const App = () => {
     return (
         <div className="app app3">
             <div>
-                <Button type="primary" onClick={openNotification2}>
-                    notification2
-                </Button>
-                <Button type="primary" onClick={open3}>
-                    topLeft
-                </Button>
-                <Button type="primary" onClick={open4}>
-                    topCenter
-                </Button>
-                <Button type="primary" onClick={open5}>
-                    bottomLeft
-                </Button>
-                <Button type="primary" onClick={open6}>
-                    bottomRight
-                </Button>
-                <Button type="primary" onClick={open7}>
-                    bottomCenter
-                </Button>
-                <Button
-                    onClick={() =>
-                        (notification2 = Notification.destroy(notification2))
-                    }
-                >
-                    clear
-                </Button>
+                <Button onClick={openNotification}>notification</Button>
             </div>
 
             <Button onClick={openNotification}>notification</Button>
