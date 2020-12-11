@@ -1,21 +1,56 @@
 import React from 'react'
+import { scopedClassMaker } from '../_util/classes'
 // import './importIcons'
 import './Icon.scss'
 // import '../icons/icons.js'
 
-const scriptElement = document.createElement('script')
-scriptElement.src = "//at.alicdn.com/t/font_1353479_bo8lfvikrrl.js"
-document.body.appendChild(scriptElement)
+export const ICONS = [
+    'like',
+    'edit',
+    'copy',
+    'info',
+    'error',
+    'loading',
+    'alipay',
+    'wechat',
+    'code-open',
+    'code-close',
+    'left',
+    'right',
+    'down',
+    'setting',
+    'emptysearch',
+    'filled-up',
+    'filled-down',
+    'download',
+    'next-double',
+    'prev-double',
+    'search',
+    'zoom-in',
+    'zoom-out',
+    'close',
+    'rotate-left',
+    'rotate-right',
+    'check',
+    'check-filled',
+] as const
 
-import { scopedClassMaker } from '../_util/classes'
+const scriptElement = document.createElement('script')
+scriptElement.src = 'http://at.alicdn.com/t/font_1353479_qvt7hp9r4uh.js'
+document.body.appendChild(scriptElement)
 
 const scopedClassName = scopedClassMaker('zeroUI-icon')
 const sc = scopedClassName
 
+export type ICON = typeof ICONS[number]
 export interface IconProps extends React.SVGAttributes<SVGElement> {
-    name: string;
+    name: ICON
 }
-const Icon: React.FunctionComponent<IconProps> = ({ className, name, ...restProps }) => {
+const Icon: React.FunctionComponent<IconProps> = ({
+    className,
+    name,
+    ...restProps
+}) => {
     return (
         <svg className={sc('', className)} {...restProps}>
             <use xlinkHref={`#icon-${name}`}></use>
@@ -23,4 +58,4 @@ const Icon: React.FunctionComponent<IconProps> = ({ className, name, ...restProp
     )
 }
 
-export default Icon;
+export default Icon

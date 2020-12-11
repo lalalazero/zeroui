@@ -1,5 +1,5 @@
 import React, { ReactNode, useEffect, useState } from 'react'
-import Icon from '../icon/Icon'
+import Icon, { ICON } from '../icon/Icon'
 import { makeClassSwitchs, scopedClassMaker } from '../_util/classes'
 import './style.scss'
 
@@ -20,7 +20,7 @@ export interface TextInputProps extends FilterdProps {
     name: string
     value?: string
     size?: 'default' | 'large' | 'small'
-    icon?: string | React.ComponentType<any>
+    icon?: ICON | React.ComponentType<any>
     prefix?: ReactNode
     suffix?: ReactNode
     label?: string
@@ -93,7 +93,7 @@ const TextInput: React.FC<TextInputProps> = (
                 name={name}
             ></input>
             {icon && typeof icon === 'string' ? (
-                <Icon name={icon as string}></Icon>
+                <Icon name={icon}></Icon>
             ) : (
                 <>{icon}</>
             )}

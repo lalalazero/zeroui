@@ -25,8 +25,7 @@
     },
     "lint-staged": {
         "./**/*.ts?(x)": [
-            "eslint --fix --quiet --ext .ts,.tsx",
-            "git add ."
+            "eslint --fix --quiet --ext .ts,.tsx"
         ]
     },
     "repository": {

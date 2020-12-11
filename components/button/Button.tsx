@@ -1,4 +1,5 @@
 import React, { HTMLAttributes } from 'react'
+import { ICON } from '../icon/Icon'
 import { Icon } from '../index'
 import { makeClassSwitchs, scopedClassMaker } from '../_util/classes'
 import { tuple } from '../_util/type'
@@ -14,17 +15,17 @@ export type ButtonPosition = 'left' | 'right'
 export type ButtonSize = 'large' | 'small' | 'default'
 
 export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
-  type?: ButtonType
-  icon?: string
-  position?: ButtonPosition
-  loading?: boolean
-  className?: string
-  shape?: ButtonShape
-  size?: ButtonSize
-  disabled?: boolean
-  ghost?: boolean
-  block?: boolean
-  onClick?: React.MouseEventHandler<HTMLElement>
+    type?: ButtonType
+    icon?: ICON
+    position?: ButtonPosition
+    loading?: boolean
+    className?: string
+    shape?: ButtonShape
+    size?: ButtonSize
+    disabled?: boolean
+    ghost?: boolean
+    block?: boolean
+    onClick?: React.MouseEventHandler<HTMLElement>
 }
 
 const Button: React.FunctionComponent<ButtonProps> = (props) => {
