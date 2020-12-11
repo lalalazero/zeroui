@@ -1,4 +1,5 @@
 import React, { HTMLAttributes } from 'react';
+import { ICON } from '../icon/Icon';
 import './Button.scss';
 declare const ButtonTypes: ["normal", "primary", "dashed", "text", "danger"];
 export declare type ButtonType = typeof ButtonTypes[number];
@@ -7,7 +8,7 @@ export declare type ButtonPosition = 'left' | 'right';
 export declare type ButtonSize = 'large' | 'small' | 'default';
 export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
     type?: ButtonType;
-    icon?: string;
+    icon?: ICON;
     position?: ButtonPosition;
     loading?: boolean;
     className?: string;
