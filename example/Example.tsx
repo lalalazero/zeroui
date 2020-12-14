@@ -17,6 +17,7 @@ import NotificationExample from './notification'
 import PaginationExample from './pagination'
 import SelectExample from './select'
 import SiderNav from './SiderNav'
+import SwitchExample from './switch'
 import TooltipExample from './tooltip'
 
 ReactDOM.render(
@@ -58,6 +59,7 @@ ReactDOM.render(
                             component={NotificationExample}
                         ></Route>
                         <Route path="/card" component={CardExample}></Route>
+                        <Route path="/switch" component={SwitchExample}></Route>
                     </div>
                 </Content>
             </Layout>

@@ -80,6 +80,11 @@ export default class SiderNav extends Component {
                                 <p>Card 卡片</p>
                             </NavLink>
                         </MenuItem>
+                        <MenuItem>
+                            <NavLink to="/switch">
+                                <p>Switch 开关</p>
+                            </NavLink>
+                        </MenuItem>
                     </SubMenu>
                 </Menu>
             </Fragment>

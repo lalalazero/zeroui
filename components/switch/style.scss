@@ -1,0 +1,96 @@
+@import '../index';
+
+$width-base: 52px;
+$width-sm: 36px;
+$width-lg: 68px;
+
+$height-base: 22px;
+$height-sm: 16px;
+$height-lg: 28px;
+
+.zeroUI-switch {
+    border: none;
+    user-select: none;
+    position: relative;
+    font-size: 14px;
+    background-color: #aaa;
+    cursor: pointer;
+    &:focus,
+    &:checked {
+        outline: none;
+    }
+    &[aria-checked='true'] {
+        background-color: $brand-color;
+    }
+
+    &-default,
+    &[disabled]:before {
+        border-radius: 80px;
+    }
+    &-small,
+    &[disabled]:before {
+        border-radius: 60px;
+    }
+    &-large,
+    &[disabled]:before {
+        border-radius: 100px;
+    }
+    &[disabled] {
+        cursor: not-allowed;
+    }
+    &[disabled]:before {
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        content: '';
+        background: #fff;
+        opacity: 0.5;
+    }
+
+    &-default {
+        height: $height-base;
+        line-height: $height-base;
+        font-size: $font-size-base;
+        min-width: $width-base;
+        border-radius: 80px;
+    }
+    &-large {
+        height: $height-lg;
+        line-height: $height-lg;
+        font-size: $font-size-lg;
+        min-width: $width-lg;
+        border-radius: 100px;
+    }
+    &-small {
+        height: $height-sm;
+        line-height: $height-sm;
+        font-size: $font-size-sm;
+        min-width: $width-sm;
+        border-radius: 60px;
+    }
+
+    &-handler {
+        position: absolute;
+        left: 2px;
+        display: inline-block;
+        top: 2px;
+        bottom: 2px;
+        border-radius: 50%;
+        background-color: #fff;
+    }
+    &[aria-checked='true'] &-handler {
+        right: 2px;
+        left: unset;
+    }
+    &-default &-handler {
+        width: $height-base - 4px;
+    }
+    &-large &-handler {
+        width: $height-lg - 4px;
+    }
+    &-small &-handler {
+        width: $height-sm - 4px;
+    }
+}

@@ -1,0 +1,25 @@
+## 基本用法
+
+状态切换开关
+
+```jsx
+import React, { useState } from 'react'
+import { Switch } from 'zero-ui-react'
+
+const App = () => {
+    const [checked, setChecked] = useState(false)
+    const onClick = () => {
+        setChecked(!checked)
+    }
+
+    const handleChange = (name, newCheck) => {
+        setChecked(newCheck)
+    }
+    return (
+        <div>
+            <Switch checked={checked} onChange={handleChange}></Switch>
+        </div>
+    )
+}
+export default App
+```

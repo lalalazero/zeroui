@@ -1,0 +1,23 @@
+## 不同大小
+
+支持三种不同大小设置
+
+```jsx
+import React, { useState } from 'react'
+import { Switch } from 'zero-ui-react'
+
+const App = () => {
+    const [checked, setChecked] = useState(false)
+    const onClick = () => {
+        setChecked(!checked)
+    }
+    return (
+        <div>
+            <Switch onClick={onClick} checked={checked} size="large"></Switch>
+            <Switch onClick={onClick} checked={checked}></Switch>
+            <Switch onClick={onClick} checked={checked} size="small"></Switch>
+        </div>
+    )
+}
+export default App
+```
