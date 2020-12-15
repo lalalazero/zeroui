@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { scopedClassMaker } from '../_util/classes'
+import { classname } from '../_util/classes'
 import './style.scss'
 
-const sc = scopedClassMaker('zeroUI-checkbox')
+const prefix = 'zeroUI-checkbox'
 
 interface CheckBoxProps {
     name?: string
@@ -27,16 +27,22 @@ const Checkbox: React.FC<CheckBoxProps> = (props = {}) => {
     }
 
     return (
-        <span className={sc('wrapper')} data-disabled={disabled.valueOf()}>
+        <span
+            className={classname(prefix + '-wrapper')}
+            data-disabled={disabled.valueOf()}
+        >
             <input
                 type="checkbox"
-                className={sc('')}
+                className={classname(prefix)}
                 name={props.name}
                 checked={checked}
                 onChange={handleChange}
                 disabled={disabled}
             ></input>
-            <label htmlFor={props.name} className={sc('label')}>
+            <label
+                htmlFor={props.name}
+                className={classname(prefix + '-label')}
+            >
                 {props.children}
             </label>
         </span>
