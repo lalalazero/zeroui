@@ -336,6 +336,30 @@
   position: relative;
   z-index: 1;
 }
+[class^=zeroUI-] {
+  box-sizing: border-box;
+}
+[class^=zeroUI-]::before {
+  box-sizing: border-box;
+}
+[class^=zeroUI-]::after {
+  box-sizing: border-box;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.zeroUI-checkbox-wrapper[data-disabled=true] {
+  cursor: not-allowed;
+}
+.zeroUI-checkbox-label {
+  margin-left: 5px;
+}
 .zeroUI-col {
   position: relative;
 }
