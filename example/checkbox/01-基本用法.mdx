@@ -1,0 +1,20 @@
+## 基本用法
+
+一个简单的 checkbox
+
+```jsx
+import React, { useState } from 'react'
+import { Checkbox } from 'zero-ui-react'
+
+const App = () => {
+    const handleChange = (name, newCheck) => {
+        console.log('checkbox change: ', newCheck)
+    }
+    return (
+        <div>
+            <Checkbox onChange={handleChange}>单身狗</Checkbox>
+        </div>
+    )
+}
+export default App
+```

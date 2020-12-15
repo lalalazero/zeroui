@@ -7,6 +7,7 @@ const message = {
 }
 export { Button, ButtonGroup } from './button/index'
 export { default as Card } from './card'
+export { default as Checkbox } from './checkbox/index'
 export { default as Dialog } from './dialog/Dialog'
 export { default as Col } from './grid/Col'
 export { default as Row } from './grid/Row'

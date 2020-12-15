@@ -85,6 +85,11 @@ export default class SiderNav extends Component {
                                 <p>Switch 开关</p>
                             </NavLink>
                         </MenuItem>
+                        <MenuItem>
+                            <NavLink to="/checkbox">
+                                <p>Checkbox 多选框</p>
+                            </NavLink>
+                        </MenuItem>
                     </SubMenu>
                 </Menu>
             </Fragment>

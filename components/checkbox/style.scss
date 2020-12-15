@@ -1,0 +1,12 @@
+@import '../index.scss';
+
+.zeroUI-checkbox {
+    &-wrapper {
+        &[data-disabled='true'] {
+            cursor: not-allowed;
+        }
+    }
+    &-label {
+        margin-left: 5px;
+    }
+}

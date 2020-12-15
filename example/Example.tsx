@@ -4,6 +4,7 @@ import { HashRouter as Router, NavLink, Route } from 'react-router-dom'
 import { Content, Footer, Header, Layout, Sider } from '../components'
 import ButtonDemo from './button'
 import CardExample from './card'
+import CheckboxExample from './checkbox'
 import ColorExample from './color/Color.example'
 import DialogExample from './dialog/Dialog.example'
 import './Example.scss'
@@ -60,6 +61,10 @@ ReactDOM.render(
                         ></Route>
                         <Route path="/card" component={CardExample}></Route>
                         <Route path="/switch" component={SwitchExample}></Route>
+                        <Route
+                            path="/checkbox"
+                            component={CheckboxExample}
+                        ></Route>
                     </div>
                 </Content>
             </Layout>

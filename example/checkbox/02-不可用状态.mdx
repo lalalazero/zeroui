@@ -1,0 +1,26 @@
+## 不可用状态
+
+checkbox 不可用
+
+```jsx
+import React, { useState } from 'react'
+import { Checkbox } from 'zero-ui-react'
+
+const App = () => {
+    const handleChange = (name, newCheck) => {
+        console.log('checkbox change: ', newCheck)
+    }
+    return (
+        <div>
+            <Checkbox onChange={handleChange} disabled>
+                单身狗
+            </Checkbox>
+            <span style={{ marginLeft: 10 }}></span>
+            <Checkbox onChange={handleChange} disabled checked>
+                单身狗
+            </Checkbox>
+        </div>
+    )
+}
+export default App
+```
