@@ -59,7 +59,9 @@ const Switch: React.FC<SwitchProps> = (props) => {
             aria-checked={checkStatus}
             disabled={isDisabled}
         >
-            <span className={sc('handler')}></span>
+            <span className={sc('handler')}>
+                <span className={sc('spin')}></span>
+            </span>
         </button>
     )
 }

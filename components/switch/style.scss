@@ -8,6 +8,15 @@ $height-base: 22px;
 $height-sm: 16px;
 $height-lg: 28px;
 
+@keyframes spinner {
+    0% {
+        transform: translate3d(-50%, -50%, 0) rotate(0deg);
+    }
+    100% {
+        transform: translate3d(-50%, -50%, 0) rotate(360deg);
+    }
+}
+
 .zeroUI-switch {
     border: none;
     user-select: none;
@@ -92,5 +101,21 @@ $height-lg: 28px;
     }
     &-small &-handler {
         width: $height-sm - 4px;
+    }
+    &-loading &-spin {
+        animation: 1.5s linear infinite spinner;
+        animation-play-state: inherit;
+        border: solid 1px #fff;
+        border-bottom-color: #aaa;
+        border-radius: 50%;
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        height: calc(100% - 4px);
+        width: calc(100% - 4px);
+    }
+    &[aria-checked='true'] &-spin {
+        border-bottom-color: $brand-color;
     }
 }
