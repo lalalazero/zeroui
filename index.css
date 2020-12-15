@@ -3444,6 +3444,14 @@
     transform: rotate(360deg);
   }
 }
+@keyframes spinner {
+  0% {
+    transform: translate3d(-50%, -50%, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate3d(-50%, -50%, 0) rotate(360deg);
+  }
+}
 .zeroUI-switch {
   border: none;
   user-select: none;
@@ -3522,6 +3530,22 @@
 }
 .zeroUI-switch-small .zeroUI-switch-handler {
   width: 12px;
+}
+.zeroUI-switch-loading .zeroUI-switch-spin {
+  animation: 1.5s linear infinite spinner;
+  animation-play-state: inherit;
+  border: solid 1px #fff;
+  border-bottom-color: #aaa;
+  border-radius: 50%;
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: calc(100% - 4px);
+  width: calc(100% - 4px);
+}
+.zeroUI-switch[aria-checked=true] .zeroUI-switch-spin {
+  border-bottom-color: #13c2c2;
 }
 .zeroUI-tooltip-wrapper {
   position: relative;
