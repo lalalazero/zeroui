@@ -1,10 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { makeClassSwitchs, scopedClassMaker } from '../_util/classes'
+import { classname } from '../_util/classes'
 import { tuple } from '../_util/type'
 import './Tooltip.scss'
 
-const scopedClassName = scopedClassMaker('zeroUI-tooltip-wrapper')
-const sc = scopedClassName
+const PREFIX = 'zeroUI-tooltip-wrapper'
 
 const TooltipPlacements = tuple('top', 'bottom', 'left', 'right')
 export type TooltipPlacementType = typeof TooltipPlacements[number]
@@ -86,10 +85,10 @@ const Tooltip: React.FC<ToolTipProps> = (props) => {
             }, mouseLeaveDelay * 1000)
         }
     }
-    const clsSwitches = makeClassSwitchs({ placement })
+    const classes = classname(PREFIX, `${PREFIX}-${placement}`)
     const visibilityObj = visible ? {} : { display: 'none' }
     return (
-        <div className={sc(clsSwitches, '')} ref={tooltipWrapperRef}>
+        <div className={classes} ref={tooltipWrapperRef}>
             <span
                 className={`zeroUI-tooltip-content-wrapper zeroUI-tooltip-content-placement-${placement}`}
                 ref={contentWrapperRef}

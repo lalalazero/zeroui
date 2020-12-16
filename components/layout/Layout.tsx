@@ -1,10 +1,9 @@
-import React, {ReactElement} from 'react'
-import {scopedClassMaker} from "../_util/classes";
+import React, { ReactElement } from 'react'
+import { classname } from '../_util/classes'
 import './Layout.scss'
-import Sider from "./Sider";
+import Sider from './Sider'
 
-const scopedClassName = scopedClassMaker('zeroUI-layout')
-const sc = scopedClassName
+const PREFIX = 'zeroUI-layout'
 
 interface Props extends React.HTMLAttributes<HTMLElement> {
     children: ReactElement | Array<ReactElement>
@@ -13,14 +12,23 @@ interface Props extends React.HTMLAttributes<HTMLElement> {
 const Layout: React.FunctionComponent<Props> = (props) => {
     const { className, ...rest } = props
 
-    const childrenArr = (props.children as Array<ReactElement>)
+    const childrenArr = props.children as Array<ReactElement>
 
-    const hasSider = !!(childrenArr.length &&
-        childrenArr.reduce((result, node) =>
-            result || node.type === Sider
-        , false))
+    const hasSider = !!(
+        childrenArr.length &&
+        childrenArr.reduce(
+            (result, node) => result || node.type === Sider,
+            false
+        )
+    )
+
+    const classes = classname(className, PREFIX, {
+        [`${PREFIX}-has-sider`]: hasSider,
+    })
     return (
-        <div className={sc({ hasSider }, className )} {...rest}>{ props.children }</div>
+        <div className={classes} {...rest}>
+            {props.children}
+        </div>
     )
 }
 

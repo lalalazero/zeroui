@@ -1,5 +1,5 @@
 import React from 'react'
-import { scopedClassMaker } from '../_util/classes'
+import { classname } from '../_util/classes'
 // import './importIcons'
 import './Icon.scss'
 // import '../icons/icons.js'
@@ -39,8 +39,7 @@ const scriptElement = document.createElement('script')
 scriptElement.src = 'http://at.alicdn.com/t/font_1353479_qvt7hp9r4uh.js'
 document.body.appendChild(scriptElement)
 
-const scopedClassName = scopedClassMaker('zeroUI-icon')
-const sc = scopedClassName
+const prefix = 'zeroUI-icon'
 
 export type ICON = typeof ICONS[number]
 export interface IconProps extends React.SVGAttributes<SVGElement> {
@@ -52,7 +51,7 @@ const Icon: React.FunctionComponent<IconProps> = ({
     ...restProps
 }) => {
     return (
-        <svg className={sc('', className)} {...restProps}>
+        <svg className={classname(className, prefix)} {...restProps}>
             <use xlinkHref={`#icon-${name}`}></use>
         </svg>
     )

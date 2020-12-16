@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { scopedClassMaker } from '../_util/classes'
+import { classname } from '../_util/classes'
 
-const scopedClassName = scopedClassMaker('zeroUI-menu-popup')
-const sc = scopedClassName
+const PREFIX = 'zeroUI-menu-popup'
 
 export default class SubMenuPopup extends Component<Record<string, unknown>> {
     constructor(props: Record<string, unknown>) {
@@ -10,6 +9,6 @@ export default class SubMenuPopup extends Component<Record<string, unknown>> {
     }
 
     render() {
-        return <div className={sc('')}>{this.props.children}</div>
+        return <div className={classname(PREFIX)}>{this.props.children}</div>
     }
 }

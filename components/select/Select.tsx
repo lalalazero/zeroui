@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react'
 import TextInput from '../input/TextInput'
-import { scopedClassMaker } from '../_util/classes'
+import { classname } from '../_util/classes'
 import './style.scss'
 
-const scopedClassName = scopedClassMaker('zeroUI-select')
-const sc = scopedClassName
+const PREFIX = 'zeroUI-select'
 
 interface OptionProps {
     title: string
@@ -73,7 +72,7 @@ const Select: React.FC<SelectProps> = (props) => {
     )
 
     return (
-        <div className={sc('')}>
+        <div className={classname(PREFIX)}>
             <TextInput
                 name={props.name as string}
                 value={inputValue}
@@ -83,13 +82,13 @@ const Select: React.FC<SelectProps> = (props) => {
                 onBlur={onBlur}
             ></TextInput>
             <div
-                className={sc('pop-wrapper')}
+                className={classname(PREFIX + '-pop-wrapper')}
                 pop-visible={poperVisible.toString()}
             >
                 <ul>
                     {props.options.map((item) => (
                         <li
-                            className={sc('option-item')}
+                            className={classname(PREFIX + '-option-item')}
                             data-selected={`${isSelected(item)}`}
                             key={item.value}
                             onClick={() => onSelectItem(item)}

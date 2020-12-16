@@ -1,6 +1,6 @@
 import React, { Component, HTMLAttributes } from 'react'
 import { Icon } from '../index'
-import { makeClassSwitchs, scopedClassMaker } from '../_util/classes'
+import { classname } from '../_util/classes'
 import { extraProps } from './MenuGroup'
 import { PADDING_BASE, renderChildren } from './utils'
 
@@ -12,8 +12,8 @@ interface InternalMenuState {
     itemsVisible: boolean
     isHighlighted: boolean
 }
-const scopedClassName = scopedClassMaker('zeroUI-submenu')
-const sc = scopedClassName
+
+const PREFIX = 'zeroUI-submenu'
 
 export class SubMenuInternal extends Component<
     InternalMenuProps,
@@ -110,26 +110,22 @@ export class SubMenuInternal extends Component<
             mode === 'inline'
                 ? { paddingLeft: `${(indentLevel as number) * PADDING_BASE}px` }
                 : { paddingLeft: `${PADDING_BASE}px` }
-        const clsObj = makeClassSwitchs({
-            // 'sub-item-selected': {
-            //     useKey: this.subItemKeys.indexOf(selectedKey) >= 0,
-            // },
-            mode,
-        })
+
+        const classes = classname(className, PREFIX, `${PREFIX}-${mode}`)
         return (
             <li
                 onMouseLeave={this.onMouseLeave}
                 onMouseEnter={this.onMouseEnter}
             >
                 <ul
-                    className={sc(clsObj, className)}
+                    className={classes}
                     is-highlighted={isHighlighted ? 'yes' : 'no'}
                     {...rest}
                     onMouseEnter={this.onMouseEnter}
                     item-key={itemKey}
                 >
                     <p
-                        className={sc('label')}
+                        className={classname(PREFIX + '-label')}
                         style={paddingLeftStyle}
                         onClick={this.toggle}
                         data-visible={itemsVisible}
@@ -140,7 +136,7 @@ export class SubMenuInternal extends Component<
                         </span>
                     </p>
                     <div
-                        className={sc('popup-wrapper')}
+                        className={classname(PREFIX + '-popup-wrapper')}
                         data-visible={itemsVisible}
                     >
                         {itemsVisible &&

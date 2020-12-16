@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 import ReactDOM from 'react-dom'
-import { scopedClassMaker } from '../_util/classes'
+import { classname } from '../_util/classes'
 import Notice from './Notice'
 import './style.scss'
 
@@ -33,7 +33,7 @@ interface NotificationProps extends NoticeConfig {
     type?: buildInApiType
 }
 
-const containerClass = scopedClassMaker('zeroUI-notification')
+const PREFIX = 'zeroUI-notification'
 
 let seed = 0
 function getUUid() {
@@ -191,7 +191,7 @@ class Notification extends React.Component<
     render() {
         const { style } = this.props
         return (
-            <div className={containerClass('')} style={style}>
+            <div className={classname(PREFIX)} style={style}>
                 {this.state.notices.map((noticeConfig) => (
                     <Notice
                         {...noticeConfig}

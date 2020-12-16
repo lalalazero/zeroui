@@ -1,10 +1,9 @@
 import React, { ReactNode, useEffect, useState } from 'react'
 import Icon, { ICON } from '../icon/Icon'
-import { makeClassSwitchs, scopedClassMaker } from '../_util/classes'
+import { classname } from '../_util/classes'
 import './style.scss'
 
-const scopedClassName = scopedClassMaker('zeroUI-input')
-const sc = scopedClassName
+const PREFIX = 'zeroUI-input'
 
 type EventHandler = (name: string, value: string) => void
 
@@ -48,11 +47,9 @@ const TextInput: React.FC<TextInputProps> = (
         label = '',
         ...rest
     } = props
-    const clsSwitchObj = makeClassSwitchs({
-        size,
-        'has-icon': {
-            useKey: !!icon,
-        },
+
+    const classes = classname(PREFIX, `${PREFIX}-${size}`, {
+        [`${PREFIX}-has-icon`]: !!icon,
     })
     const handleChange: React.ChangeEventHandler<HTMLInputElement> = (
         event
@@ -72,7 +69,7 @@ const TextInput: React.FC<TextInputProps> = (
     }
 
     return (
-        <span className={sc('wrapper')}>
+        <span className={classname(PREFIX + '-wrapper')}>
             {label && <label htmlFor={props.name}>{label}</label>}
             {prefix ? (
                 typeof prefix === 'object' ? (
@@ -83,7 +80,7 @@ const TextInput: React.FC<TextInputProps> = (
             ) : null}
             <input
                 {...rest}
-                className={sc(clsSwitchObj)}
+                className={classes}
                 autoComplete="off"
                 type="text"
                 value={inputValue}

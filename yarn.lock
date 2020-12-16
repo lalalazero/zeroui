@@ -3045,11 +3045,6 @@ domutils@^1.5.1:
     dom-serializer "0"
     domelementtype "1"
 
-dot-snake-camel-case-convertor@0.0.4:
-  version "0.0.4"
-  resolved "https://registry.npm.taobao.org/dot-snake-camel-case-convertor/download/dot-snake-camel-case-convertor-0.0.4.tgz#daac06623d1cf5781e56fcd0a97a87ed892e7a77"
-  integrity sha1-2qwGYj0c9XgeVvzQqXqH7Ykuenc=
-
 duplexify@^3.4.2, duplexify@^3.6.0:
   version "3.7.1"
   resolved "https://registry.npm.taobao.org/duplexify/download/duplexify-3.7.1.tgz#2a4df5317f6ccfd91f86d6fd25d8d8a103b88309"

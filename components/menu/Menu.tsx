@@ -1,5 +1,5 @@
 import React, { Component, HTMLAttributes } from 'react'
-import { makeClassSwitchs, scopedClassMaker } from '../_util/classes'
+import { classname } from '../_util/classes'
 import './Menu.scss'
 import MenuGroup from './MenuGroup'
 import MenuItem from './MenuItem'
@@ -16,8 +16,8 @@ export interface MenuState {
     selectedKey: string
     selectedKeys: string[]
 }
-const scopedClassName = scopedClassMaker('zeroUI-menu')
-const sc = scopedClassName
+
+const PREFIX = 'zeroUI-menu'
 
 class Menu extends Component<MenuProps, MenuState> {
     // static contextType = MenuContext
@@ -47,11 +47,10 @@ class Menu extends Component<MenuProps, MenuState> {
         const { className, mode, ...rest } = this.props
         const { indentLevel } = this
         const { selectedKey, selectedKeys } = this.state
-        const clsSwitch = makeClassSwitchs({
-            mode,
-        })
+        const classes = classname(className, PREFIX, `${PREFIX}-${mode}`)
+
         return (
-            <ul className={sc(clsSwitch, className)} {...rest}>
+            <ul className={classes} {...rest}>
                 {renderChildren('rootMenu', this.props.children, {
                     indentLevel,
                     mode,

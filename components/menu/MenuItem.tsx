@@ -1,10 +1,9 @@
 import React, { Component, HTMLAttributes } from 'react'
-import { makeClassSwitchs, scopedClassMaker } from '../_util/classes'
+import { classname } from '../_util/classes'
 import { extraProps } from './MenuGroup'
 import { PADDING_BASE } from './utils'
 
-const scopedClassName = scopedClassMaker('zeroUI-menu-item')
-const sc = scopedClassName
+const PREFIX = 'zeroUI-menu-item'
 
 export interface MenuItemProps extends HTMLAttributes<HTMLElement> {
     itemKey?: React.Key
@@ -41,15 +40,12 @@ class MenuItem extends Component<MenuItemProps, MenuItemState> {
                 ? { paddingLeft: `${PADDING_BASE}px` }
                 : { paddingLeft: PADDING_BASE, paddingRight: PADDING_BASE }
 
-        const clsObj = makeClassSwitchs({
-            selected: {
-                useKey: selectedKey === itemKey,
-            },
+        const classes = classname(className, PREFIX, {
+            [`${PREFIX}-selected`]: selectedKey === itemKey,
         })
-        const mergedClsName = sc(clsObj, className)
         return (
             <li
-                className={mergedClsName}
+                className={classes}
                 {...rest}
                 style={paddingLeftStyle}
                 onClick={this.onClick}

@@ -1,10 +1,9 @@
 import React, { HTMLProps } from 'react'
-import { makeClassSwitchs, scopedClassMaker } from '../_util/classes'
+import { classname } from '../_util/classes'
 import GutterContext from './GutterContext'
 import './Row.scss'
 
-const scopedClassName = scopedClassMaker('zeroUI-row')
-const sc = scopedClassName
+const prefix = 'zeroUI-row'
 
 export interface RowProps extends HTMLProps<HTMLDivElement> {
     justify?: 'start' | 'end' | 'center' | 'space-between' | 'space-around'
@@ -23,28 +22,21 @@ const Row: React.FC<RowProps> = (props) => {
         direction = 'horizontal',
         ...restProps
     } = props
-    const clsSwitch = makeClassSwitchs({
-        [`justify-${justify}`]: {
-            useKey: true,
-        },
-        [`align-${align}`]: {
-            useKey: true,
-        },
-        [`direction-${direction}`]: {
-            useKey: true,
-        },
-    })
+
+    const classes = classname(
+        className,
+        prefix,
+        `${prefix}-justify-${justify}`,
+        `${prefix}-align-${align}`,
+        `${prefix}-direction-${direction}`
+    )
     const styleObj = gutter
         ? { marginLeft: -gutter / 2, marginRight: -gutter / 2 }
         : {}
     const mergeStyle = Object.assign({}, style, styleObj)
     return (
         <GutterContext.Provider value={gutter}>
-            <div
-                {...restProps}
-                className={sc(clsSwitch, className)}
-                style={mergeStyle}
-            >
+            <div {...restProps} className={classes} style={mergeStyle}>
                 {props.children}
             </div>
         </GutterContext.Provider>

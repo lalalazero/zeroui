@@ -1,7 +1,7 @@
 import React, { Fragment, ReactElement, ReactNode } from 'react'
 import ReactDOM from 'react-dom'
 import Icon from '../icon/Icon'
-import { scopedClassMaker } from '../_util/classes'
+import { classname } from '../_util/classes'
 import './Dialog.scss'
 
 export interface DialogProps {
@@ -11,8 +11,7 @@ export interface DialogProps {
     maskClosable?: boolean
 }
 
-const scopedClassName = scopedClassMaker('zeroUI-dialog')
-const sc = scopedClassName
+const prefix = 'zeroUI-dialog'
 
 const Dialog: React.FunctionComponent<DialogProps> = (props) => {
     const onClickClose: React.MouseEventHandler = (e) => {
@@ -26,14 +25,24 @@ const Dialog: React.FunctionComponent<DialogProps> = (props) => {
     }
     const x = props.visible ? (
         <Fragment>
-            <div className={sc('mask')} onClick={onClickMask}></div>
-            <div className={sc('')}>
-                <div className={sc('close')} onClick={onClickClose}>
+            <div
+                className={classname(prefix + '-mask')}
+                onClick={onClickMask}
+            ></div>
+            <div className={classname(prefix)}>
+                <div
+                    className={classname(prefix + '-close')}
+                    onClick={onClickClose}
+                >
                     <Icon name="alipay"></Icon>
                 </div>
-                <header className={sc('header')}>提示</header>
-                <main className={sc('main')}>{props.children}</main>
-                <footer className={sc('footer')}>{props.buttons}</footer>
+                <header className={classname(prefix + '-header')}>提示</header>
+                <main className={classname(prefix + '-main')}>
+                    {props.children}
+                </main>
+                <footer className={classname(prefix + '-footer')}>
+                    {props.buttons}
+                </footer>
             </div>
         </Fragment>
     ) : null
@@ -48,7 +57,7 @@ const modal = (
     content: ReactNode,
     buttons?: Array<ReactElement>,
     afterClose?: any
-) => {
+): any => {
     const close = () => {
         console.log('close modal..')
         ReactDOM.render(React.cloneElement(component, { visible: false }), div)

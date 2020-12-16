@@ -1,10 +1,9 @@
 import React, { HTMLAttributes, ReactNode } from 'react'
-import { makeClassSwitchs, scopedClassMaker } from '../_util/classes'
+import { classname } from '../_util/classes'
 import './style.scss'
 
-const scopedClassName = scopedClassMaker('zeroUI-card')
-const sc = scopedClassName
-const gridClass = scopedClassMaker('zeroUI-card-grid')
+const cardPrefix = 'zeroUI-card'
+const gridPrefix = 'zeroUI-card-grid'
 
 export interface CardProps
     extends Omit<HTMLAttributes<HTMLDivElement>, 'title' | 'size'> {
@@ -21,13 +20,12 @@ export interface CardGridProps {
 
 const Grid: React.FC<CardGridProps> = (props) => {
     const { hoverable = true, children, style } = props
-    const clsSwithes = makeClassSwitchs({
-        hoverable: {
-            useKey: hoverable,
-        },
+
+    const classes = classname(gridPrefix, {
+        [`${gridPrefix}-hoverable`]: hoverable,
     })
     return (
-        <div className={gridClass(clsSwithes, '')} style={style}>
+        <div className={classes} style={style}>
             {children}
         </div>
     )
@@ -58,23 +56,23 @@ const Card: CardInterface = (props) => {
         return containGrid
     }
 
-    const clsSwithes = makeClassSwitchs({
-        size,
-        noborder: {
-            useKey: !bordered,
-        },
-        hoverable: {
-            useKey: hoverable,
-        },
-        'has-grid': {
-            useKey: isContainGrid(),
-        },
+    const classes = classname(cardPrefix, `${cardPrefix}-${size}`, {
+        [`${cardPrefix}-noborder`]: !bordered,
+        [`${cardPrefix}-hoverable`]: hoverable,
+        [`${cardPrefix}-has-grid`]: isContainGrid(),
     })
-    return (
-        <div className={sc(clsSwithes, '')} {...rest}>
-            {title && <div className={sc('title-panel')}>{title}</div>}
 
-            <div className={sc('content-panel')}>{children}</div>
+    return (
+        <div className={classes} {...rest}>
+            {title && (
+                <div className={classname(cardPrefix + '-title-panel')}>
+                    {title}
+                </div>
+            )}
+
+            <div className={classname(cardPrefix + '-content-panel')}>
+                {children}
+            </div>
         </div>
     )
 }

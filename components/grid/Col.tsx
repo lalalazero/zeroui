@@ -1,30 +1,29 @@
-import React, { useContext, HTMLProps } from 'react'
-import { scopedClassMaker, makeClassSwitchs } from '../_util/classes'
-import GutterContext from './GutterContext'
+import React, { HTMLProps, useContext } from 'react'
+import { classname } from '../_util/classes'
 import './Col.scss'
+import GutterContext from './GutterContext'
 
-const scopedClassName = scopedClassMaker('zeroUI-col')
-const sc = scopedClassName
+const prefix = 'zeroUI-col'
 
 interface ResponseProps {
-    span?: number,
-    offset?: number,
-    push?: number,
-    pull?: number,
-    order?: number,
+    span?: number
+    offset?: number
+    push?: number
+    pull?: number
+    order?: number
 }
 
 export interface ColProps extends HTMLProps<HTMLDivElement> {
-    span?: number,
-    offset?: number,
-    push?: number,
-    pull?: number,
-    order?: number,
-    xs?: number | ResponseProps,
-    sm?: number | ResponseProps,
-    md?: number | ResponseProps,
-    lg?: number | ResponseProps,
-    xl?: number | ResponseProps,
+    span?: number
+    offset?: number
+    push?: number
+    pull?: number
+    order?: number
+    xs?: number | ResponseProps
+    sm?: number | ResponseProps
+    md?: number | ResponseProps
+    lg?: number | ResponseProps
+    xl?: number | ResponseProps
     xxl?: number | ResponseProps
 }
 
@@ -35,109 +34,107 @@ const Col: React.FC<ColProps> = (props) => {
     const cls1 = makeResponsiveCls(props)
     const cls2 = makeResponsiveCls2(props)
 
-    const clsSwitch = makeClassSwitchs(Object.assign(cls2, cls1))
-    const styleObj = gutter ? { paddingLeft: gutter / 2, paddingRight: gutter / 2 } : {}
+    const classes = classname(className, prefix, cls1, cls2)
+
+    const styleObj = gutter
+        ? { paddingLeft: gutter / 2, paddingRight: gutter / 2 }
+        : {}
     const mergeStyle = Object.assign({}, style, styleObj)
     return (
-        <div className={sc(clsSwitch, className)} style={mergeStyle}>
+        <div className={classes} style={mergeStyle}>
             {props.children}
         </div>
     )
 }
 
-export default Col;
+export default Col
 
 function makeResponsiveCls(props: ColProps) {
     const { xs, sm, md, lg, xl, xxl } = props
     let responsiveCls: { [key: string]: any } = {}
     if (typeof xs === 'number') {
-        responsiveCls[`xs-span-${xs}`] = {
-            useKey: true
-        }
+        responsiveCls[`${prefix}-xs-span-${xs}`] = true
     } else {
         if (xs) {
-            responsiveCls = { ...responsiveCls, ...makeResponsiveCls2(xs as ResponseProps, 'xs-') }
+            responsiveCls = {
+                ...responsiveCls,
+                ...makeResponsiveCls2(xs as ResponseProps, 'xs-'),
+            }
         }
     }
     if (typeof sm === 'number') {
-        responsiveCls[`sm-span-${sm}`] = {
-            useKey: true
-        }
+        responsiveCls[`${prefix}-sm-span-${sm}`] = true
     } else {
         if (sm) {
-            responsiveCls = { ...responsiveCls, ...makeResponsiveCls2(sm as ResponseProps, 'sm-') }
+            responsiveCls = {
+                ...responsiveCls,
+                ...makeResponsiveCls2(sm as ResponseProps, 'sm-'),
+            }
         }
     }
     if (typeof md === 'number') {
-        responsiveCls[`md-span-${md}`] = {
-            useKey: true
-        }
+        responsiveCls[`${prefix}-md-span-${md}`] = true
     } else {
         if (md) {
-            responsiveCls = { ...responsiveCls, ...makeResponsiveCls2(md as ResponseProps, 'md-') }
+            responsiveCls = {
+                ...responsiveCls,
+                ...makeResponsiveCls2(md as ResponseProps, 'md-'),
+            }
         }
     }
     if (typeof lg === 'number') {
-        responsiveCls[`lg-span-${lg}`] = {
-            useKey: true
-        }
+        responsiveCls[`${prefix}-lg-span-${lg}`] = true
     } else {
         if (lg) {
-            responsiveCls = { ...responsiveCls, ...makeResponsiveCls2(lg as ResponseProps, 'lg-') }
+            responsiveCls = {
+                ...responsiveCls,
+                ...makeResponsiveCls2(lg as ResponseProps, 'lg-'),
+            }
         }
     }
 
     if (typeof xl === 'number') {
-        responsiveCls[`xl-span-${xl}`] = {
-            useKey: true
-        }
+        responsiveCls[`${prefix}-xl-span-${xl}`] = true
     } else {
         if (xl) {
-            responsiveCls = { ...responsiveCls, ...makeResponsiveCls2(xl as ResponseProps, 'xl-') }
+            responsiveCls = {
+                ...responsiveCls,
+                ...makeResponsiveCls2(xl as ResponseProps, 'xl-'),
+            }
         }
     }
 
     if (typeof xxl === 'number') {
-        responsiveCls[`xxl-span-${xxl}`] = {
-            useKey: true
-        }
+        responsiveCls[`${prefix}-xxl-span-${xxl}`] = true
     } else {
         if (xxl) {
-            responsiveCls = { ...responsiveCls, ...makeResponsiveCls2(xxl as ResponseProps, 'xxl-') }
+            responsiveCls = {
+                ...responsiveCls,
+                ...makeResponsiveCls2(xxl as ResponseProps, 'xxl-'),
+            }
         }
     }
     return responsiveCls
 }
 
-function makeResponsiveCls2(props: ResponseProps, prefix = '') {
+function makeResponsiveCls2(props: ResponseProps, type = '') {
     const responsiveCls: { [key: string]: any } = {}
     const { span, offset, push, pull, order } = props
     if (span as number) {
-        responsiveCls[`${prefix}span-${span}`] = {
-            useKey: true
-        }
+        responsiveCls[`${prefix}-${type}span-${span}`] = true
     }
     if (offset as number) {
-        responsiveCls[`${prefix}offset-${offset}`] = {
-            useKey: true
-        }
+        responsiveCls[`${prefix}-${type}offset-${offset}`] = true
     }
     if (push as number) {
-        responsiveCls[`${prefix}push-${push}`] = {
-            useKey: true
-        }
+        responsiveCls[`${prefix}-${type}push-${push}`] = true
     }
     if (pull as number) {
-        responsiveCls[`${prefix}pull-${pull}`] = {
-            useKey: true
-        }
+        responsiveCls[`${prefix}-${type}pull-${pull}`] = true
     }
     if (order as number) {
-        responsiveCls[`${prefix}order-${order}`] = {
-            useKey: true
-        }
+        responsiveCls[`${prefix}-${type}order-${order}`] = true
     }
 
     return responsiveCls
-
 }

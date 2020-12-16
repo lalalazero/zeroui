@@ -1,9 +1,23 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Icon } from '../index'
-import { makeClassSwitchs, scopedClassMaker } from '../_util/classes'
-import { NoticeContent } from './Notification'
+import { classname } from '../_util/classes'
+import { NoticeContent, NoticePlacement } from './Notification'
 
-const sc = scopedClassMaker('zeroUI-notice')
+const PREFIX = 'zeroUI-notice'
+
+const getPlacementCls = (placement: NoticePlacement) => {
+    const map = {
+        topRight: 'top-right',
+        topLeft: 'top-left',
+        topCenter: 'top-center',
+        bottomRight: 'bottom-right',
+        bottomLeft: 'bottom-left',
+        bottomCenter: 'bottom-center',
+    }
+
+    return map[placement]
+}
+
 const Notice: React.FC<NoticeContent> = ({
     title,
     body,
@@ -14,12 +28,13 @@ const Notice: React.FC<NoticeContent> = ({
     type = '',
     closeable = true,
 }) => {
-    const clsSwitch = makeClassSwitchs({
-        placement,
-        [type]: {
-            useKey: !!type,
-        },
-    })
+    const classes = classname(
+        PREFIX,
+        `${PREFIX}-${getPlacementCls(placement as NoticePlacement)}`,
+        {
+            [`${PREFIX}-${type}`]: !!type,
+        }
+    )
     const [timerId, setTimerId] = useState<any>(null)
     const ref = useRef<HTMLDivElement>(null)
 
@@ -60,23 +75,26 @@ const Notice: React.FC<NoticeContent> = ({
                 info: <Icon name="info" />,
                 error: <Icon name="error" />,
             }
-            return <div className={sc('type-icon')}>{typeIcon[type]}</div>
+            return (
+                <div className={classname(PREFIX + '-type-icon')}>
+                    {typeIcon[type]}
+                </div>
+            )
         }
         return ''
     }
     return (
-        <div
-            className={sc(clsSwitch, '')}
-            ref={ref}
-            onAnimationEnd={handleAnimationEnd}
-        >
+        <div className={classes} ref={ref} onAnimationEnd={handleAnimationEnd}>
             {renderIcon()}
-            <div className={sc('content')}>
-                <div className={sc('title')}>{title}</div>
-                <div className={sc('body')}>{body}</div>
+            <div className={classname(PREFIX + '-content')}>
+                <div className={classname(PREFIX + '-title')}>{title}</div>
+                <div className={classname(PREFIX + '-body')}>{body}</div>
             </div>
             {closeable && (
-                <div className={sc('close-icon')} onClick={handleClose}>
+                <div
+                    className={classname(PREFIX + '-close-icon')}
+                    onClick={handleClose}
+                >
                     <Icon name="close"></Icon>
                 </div>
             )}

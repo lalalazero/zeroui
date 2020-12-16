@@ -1,10 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { Icon } from '../index'
-import { makeClassSwitchs, scopedClassMaker } from '../_util/classes'
+import { classname } from '../_util/classes'
 import './Pagination.scss'
 
-const scopedClassName = scopedClassMaker('zeroUI-pagination')
-const sc = scopedClassName
+const PREFIX = 'zeroUI-pagination'
 
 interface PaginationProps {
     total?: number
@@ -51,13 +50,10 @@ const Pagination: React.FC<PaginationProps> = (props) => {
                 : 0
         setEndPage(pages)
     }, [total, pageSize])
-    const clsSwithes = makeClassSwitchs({
-        simple: {
-            useKey: simple,
-        },
-        hideIfOnePage: {
-            useKey: hideIfOnePage,
-        },
+
+    const classes = classname(PREFIX, {
+        [`${PREFIX}-simple`]: simple,
+        [`${PREFIX}-hide-if-one-page`]: hideIfOnePage,
     })
 
     useEffect(() => {
@@ -114,8 +110,10 @@ const Pagination: React.FC<PaginationProps> = (props) => {
                 className={
                     item === PAGE_ELIPSIS
                         ? ''
-                        : `${sc('item')} ${
-                              currentPage === item ? sc('active-page') : ''
+                        : `${classname(PREFIX + '-item')} ${
+                              currentPage === item
+                                  ? classname(PREFIX + '-active-page')
+                                  : ''
                           }`
                 }
                 onClick={() => item !== PAGE_ELIPSIS && onSelectPage(item)}
@@ -128,11 +126,11 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     }, [currentPage, displayPages])
 
     return hideIfOnePage ? (
-        <div className={sc(clsSwithes)}></div>
+        <div className={classes}></div>
     ) : (
-        <div className={sc(clsSwithes)}>
+        <div className={classes}>
             <span
-                className={sc('nav prev')}
+                className={classname(PREFIX + '-nav prev')}
                 onClick={onSelectPagePrev}
                 nav-disabled={`${currentPage === 1 || total <= 0}`}
             >
@@ -141,11 +139,13 @@ const Pagination: React.FC<PaginationProps> = (props) => {
             {total > 0 ? (
                 renderPages
             ) : (
-                <span className={`${sc('item')} active-page`}>1</span>
+                <span className={`${classname(PREFIX + '-item')} active-page`}>
+                    1
+                </span>
             )}
             <span
                 onClick={onSelectPageNext}
-                className={sc('nav next')}
+                className={classname(PREFIX + '-nav next')}
                 nav-disabled={`${total <= 0 || currentPage === endPage}`}
             >
                 <Icon name="right"></Icon>

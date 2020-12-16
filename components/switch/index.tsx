@@ -4,7 +4,7 @@ import React, {
     useEffect,
     useState,
 } from 'react'
-import { makeClassSwitchs, scopedClassMaker } from '../_util/classes'
+import { classname } from '../_util/classes'
 import './style.scss'
 
 interface SwitchProps {
@@ -16,7 +16,7 @@ interface SwitchProps {
     onChange?: (name: string, checked: boolean) => void
     loading?: boolean
 }
-const sc = scopedClassMaker('zeroUI-switch')
+const PREFIX = 'zeroUI-switch'
 
 const Switch: React.FC<SwitchProps> = (props) => {
     const {
@@ -31,11 +31,9 @@ const Switch: React.FC<SwitchProps> = (props) => {
     useEffect(() => {
         setCheckStatus(checked)
     }, [checked])
-    const clsSwitch = makeClassSwitchs({
-        size,
-        loading: {
-            useKey: loading,
-        },
+
+    const classes = classname(PREFIX, `${PREFIX}-${size}`, {
+        [`${PREFIX}-loading`]: loading,
     })
 
     const triggerChange = (newCheck: boolean) => {
@@ -53,14 +51,14 @@ const Switch: React.FC<SwitchProps> = (props) => {
 
     return (
         <button
-            className={sc(clsSwitch, '')}
+            className={classes}
             type="button"
             onClick={handleClick}
             aria-checked={checkStatus}
             disabled={isDisabled}
         >
-            <span className={sc('handler')}>
-                <span className={sc('spin')}></span>
+            <span className={classname(PREFIX + '-handler')}>
+                <span className={classname(PREFIX + '-spin')}></span>
             </span>
         </button>
     )
