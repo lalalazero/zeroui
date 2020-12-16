@@ -3405,6 +3405,7 @@
 .zeroUI-pagination-simple .zeroUI-pagination-nav[nav-disabled=true] .zeroUI-icon {
   fill: #ccc;
 }
+
 [class^=zeroUI-] {
   box-sizing: border-box;
 }

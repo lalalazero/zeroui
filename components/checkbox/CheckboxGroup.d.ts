@@ -1,6 +1,6 @@
 import React from 'react';
 import './style.scss';
-interface CheckboxGroupProps {
+export interface CheckboxGroupProps {
     options: {
         label: string;
         value: string;
