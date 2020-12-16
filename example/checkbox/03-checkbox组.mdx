@@ -1,0 +1,76 @@
+## checkbox 组
+
+多个 checkbox 组成一组
+
+```jsx
+import React, { useState } from 'react'
+import { Checkbox } from 'zero-ui-react'
+
+const App = () => {
+    const [checkAll, setCheckAll] = useState(false)
+    const [indeterminate, setIndeterminate] = useState(null)
+    const [checkGroup, setCheckGroup] = useState([])
+
+    const handleChange = (checkedValue) => {
+        console.log('checkbox change: ', checkedValue)
+        setCheckGroup(checkedValue)
+
+        if (checkedValue.length > 0 && checkedValue.length < 3) {
+            setIndeterminate(true)
+        } else {
+            setIndeterminate(false)
+        }
+
+        if (checkedValue.length === 3) {
+            setCheckAll(true)
+        } else {
+            setCheckAll(false)
+        }
+    }
+
+    const handleCheckAll = (name, checked) => {
+        setCheckAll(checked)
+        setIndeterminate(null)
+
+        if (checked) {
+            setCheckGroup(['Vue', 'React', 'jQuery'])
+        } else {
+            setCheckGroup([])
+        }
+    }
+
+    const options = [
+        {
+            label: 'Vue',
+            value: 'Vue',
+        },
+        {
+            label: 'React',
+            value: 'React',
+        },
+        {
+            label: 'jQuery',
+            value: 'jQuery',
+        },
+    ]
+    return (
+        <div>
+            <div>
+                <Checkbox
+                    checked={checkAll}
+                    indeterminate={indeterminate}
+                    onChange={handleCheckAll}
+                >
+                    全选
+                </Checkbox>
+            </div>
+            <Checkbox.Group
+                onChange={handleChange}
+                options={options}
+                value={checkGroup}
+            ></Checkbox.Group>
+        </div>
+    )
+}
+export default App
+```
