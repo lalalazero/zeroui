@@ -2,7 +2,7 @@
 import './index.scss';
 declare const message: {
     confirm: (content: string, yes?: (() => void) | undefined, no?: (() => void) | undefined) => void;
-    modal: (content: import("react").ReactNode, buttons?: import("react").ReactElement<any, string | ((props: any) => import("react").ReactElement<any, string | any | (new (props: any) => import("react").Component<any, any, any>)> | null) | (new (props: any) => import("react").Component<any, any, any>)>[] | undefined, afterClose?: any) => () => void;
+    modal: (content: import("react").ReactNode, buttons?: import("react").ReactElement<any, string | ((props: any) => import("react").ReactElement<any, string | any | (new (props: any) => import("react").Component<any, any, any>)> | null) | (new (props: any) => import("react").Component<any, any, any>)>[] | undefined, afterClose?: any) => any;
     alert: (content: string) => void;
 };
 export { Button, ButtonGroup } from './button/index';
