@@ -1,18 +1,17 @@
 import React, { HTMLAttributes } from 'react'
 import { ICON } from '../icon/Icon'
 import { Icon } from '../index'
-import { makeClassSwitchs, scopedClassMaker } from '../_util/classes'
+import { classname } from '../_util/classes'
 import { tuple } from '../_util/type'
 import './Button.scss'
-
-const scopedClassName = scopedClassMaker('zeroUI-button')
-const sc = scopedClassName
 
 const ButtonTypes = tuple('normal', 'primary', 'dashed', 'text', 'danger')
 export type ButtonType = typeof ButtonTypes[number]
 export type ButtonShape = 'circle'
 export type ButtonPosition = 'left' | 'right'
 export type ButtonSize = 'large' | 'small' | 'default'
+
+const prefix = 'zeroUI-button'
 
 export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
     type?: ButtonType
@@ -43,40 +42,32 @@ const Button: React.FunctionComponent<ButtonProps> = (props) => {
         block,
         ...restProps
     } = props
-    const clsSwithes = makeClassSwitchs({
-        type,
-        shape,
-        position,
-        size,
-        loading: {
-            useKey: loading,
-        },
-        disabled: {
-            useKey: disabled,
-        },
-        ghost: {
-            useKey: ghost,
-        },
-        block: {
-            useKey: block,
-        },
-        circleLarge: {
-            useKey: shape === 'circle' && size === 'large',
-        },
-        circleSmall: {
-            useKey: shape === 'circle' && size === 'small',
-        },
-    })
+
     const nativeProps = { disabled, ...restProps }
+    const classes = classname(
+        className,
+        prefix,
+        `${prefix}-${type}`,
+        `${prefix}-${position}`,
+        `${prefix}-${shape}`,
+        `${prefix}-${size}`,
+        {
+            [`${prefix}-loading`]: loading,
+            [`${prefix}-disabled`]: disabled,
+            [`${prefix}-ghost`]: ghost,
+            [`${prefix}-block`]: block,
+            [`${prefix}-circle-large`]: shape === 'circle' && size === 'large',
+            [`${prefix}-circle-small`]: shape === 'circle' && size === 'small',
+        }
+    )
+
     return (
-        <button
-            onClick={onClick}
-            className={sc(clsSwithes, className)}
-            {...nativeProps}
-        >
+        <button onClick={onClick} className={classes} {...nativeProps}>
             {loading ? <Icon name="loading"></Icon> : ''}
             {icon && !loading ? <Icon name={icon}></Icon> : ''}
-            <div className={sc('content')}>{props.children}</div>
+            <div className={classname(prefix + '-content')}>
+                {props.children}
+            </div>
         </button>
     )
 }

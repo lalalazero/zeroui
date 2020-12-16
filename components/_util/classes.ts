@@ -59,7 +59,7 @@ function classnames(...names: (string | undefined)[]) {
 export default classnames
 export { scopedClassMaker, makeClassSwitchs }
 
-type classnameArg = string | { [x: string]: boolean | undefined }
+type classnameArg = undefined | string | { [x: string]: boolean | undefined }
 
 type classnameProp = classnameArg[]
 
@@ -67,6 +67,7 @@ export function classname(...arg: classnameProp): string {
     let result: any[] = []
     for (let i = 0; i < arg.length; i++) {
         const cls = arg[i]
+        if (false === !!cls) continue
         if (typeof cls === 'string') {
             result.push(cls)
         } else if (Array.isArray(cls)) {
@@ -78,6 +79,7 @@ export function classname(...arg: classnameProp): string {
                 if (false === !!value) continue
                 if (typeof value === 'string') {
                     result.push(value)
+                    continue
                 }
                 if (typeof value === 'boolean' && value) {
                     result.push(key)
@@ -94,5 +96,6 @@ export function classname(...arg: classnameProp): string {
             return acc
         }, [])
         .filter(Boolean)
+        .filter((item: string) => item.indexOf('undefined') < 0)
         .join(' ')
 }
