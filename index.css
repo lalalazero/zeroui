@@ -360,6 +360,13 @@
 .zeroUI-checkbox-label {
   margin-left: 5px;
 }
+
+.zeroUI-checkbox-group {
+  display: inline-block;
+}
+.zeroUI-checkbox-group > .zeroUI-checkbox-wrapper {
+  margin-right: 5px;
+}
 .zeroUI-col {
   position: relative;
 }
