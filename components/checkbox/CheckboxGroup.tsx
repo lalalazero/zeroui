@@ -5,7 +5,7 @@ import './style.scss'
 
 const PREFIX = 'zeroUI-checkbox-group'
 
-interface CheckboxGroupProps {
+export interface CheckboxGroupProps {
     options: { label: string; value: string }[]
     onChange?: (value: string[]) => void
     value?: string[]
