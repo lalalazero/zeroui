@@ -3405,7 +3405,15 @@
 .zeroUI-pagination-simple .zeroUI-pagination-nav[nav-disabled=true] .zeroUI-icon {
   fill: #ccc;
 }
-
+.zeroUI-radio {
+  margin: 0 5px;
+}
+.zeroUI-radio:hover {
+  cursor: pointer;
+}
+.zeroUI-radio-label {
+  margin-left: 5px;
+}
 [class^=zeroUI-] {
   box-sizing: border-box;
 }
