@@ -1,0 +1,41 @@
+## 一组互斥的单选框
+
+只能选择一个
+
+```jsx
+import React from 'react'
+import { Radio } from 'zero-ui-react'
+
+const App = () => {
+    const handleChange = (checked) => {
+        console.log('checked..', checked)
+    }
+
+    const options = [
+        {
+            label: 'A',
+            value: 'A',
+        },
+        {
+            label: 'B',
+            value: 'B',
+        },
+        {
+            label: 'C',
+            value: 'C',
+        },
+        {
+            label: 'D',
+            value: 'D',
+        },
+    ]
+    return (
+        <div>
+            <Radio.Group onChange={handleChange} options={options}>
+                单身狗
+            </Radio.Group>
+        </div>
+    )
+}
+export default App
+```

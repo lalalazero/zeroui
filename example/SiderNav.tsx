@@ -90,6 +90,11 @@ export default class SiderNav extends Component {
                                 <p>Checkbox 多选框</p>
                             </NavLink>
                         </MenuItem>
+                        <MenuItem>
+                            <NavLink to="/radio">
+                                <p>Radio 单选框</p>
+                            </NavLink>
+                        </MenuItem>
                     </SubMenu>
                 </Menu>
             </Fragment>

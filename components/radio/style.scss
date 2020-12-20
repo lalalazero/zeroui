@@ -1,2 +1,9 @@
 .zeroUI-radio {
+    &:hover {
+        cursor: pointer;
+    }
+    &-label {
+        margin-left: 5px;
+    }
+    margin: 0 5px;
 }

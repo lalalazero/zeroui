@@ -16,6 +16,7 @@ import logo from './logo.png'
 import MenuExample from './menu'
 import NotificationExample from './notification'
 import PaginationExample from './pagination'
+import RadioExample from './radio'
 import SelectExample from './select'
 import SiderNav from './SiderNav'
 import SwitchExample from './switch'
@@ -65,6 +66,7 @@ ReactDOM.render(
                             path="/checkbox"
                             component={CheckboxExample}
                         ></Route>
+                        <Route path="/radio" component={RadioExample} />
                     </div>
                 </Content>
             </Layout>

@@ -1,0 +1,20 @@
+## 基本用法
+
+一个简单的单选框
+
+```jsx
+import React from 'react'
+import { Radio } from 'zero-ui-react'
+
+const App = () => {
+    const handleChange = (name, checked) => {
+        console.log('checked..', checked)
+    }
+    return (
+        <div>
+            <Radio onChange={handleChange}>单身狗</Radio>
+        </div>
+    )
+}
+export default App
+```
