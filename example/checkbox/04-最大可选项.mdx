@@ -1,0 +1,49 @@
+## 最大可选项
+
+限定复选框可选个数
+
+```jsx
+import React, { useState } from 'react'
+import { Checkbox } from 'zero-ui-react'
+
+const App = () => {
+    const handleChange = (name, checked) => {
+        console.log('handle change..', checked)
+    }
+    const options = [
+        {
+            label: '苹果',
+            value: '苹果',
+        },
+        {
+            label: '橘子',
+            value: '橘子',
+        },
+        {
+            label: '梨',
+            value: '梨',
+        },
+        {
+            label: '香蕉',
+            value: '香蕉',
+        },
+        {
+            label: '西瓜',
+            value: '西瓜',
+        },
+    ]
+    return (
+        <div>
+            <p>选择最喜欢吃的三种水果</p>
+            <Checkbox.Group
+                onChange={handleChange}
+                options={options}
+                maxLen={3}
+            >
+                单身狗
+            </Checkbox.Group>
+        </div>
+    )
+}
+export default App
+```

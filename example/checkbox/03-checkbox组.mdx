@@ -11,7 +11,7 @@ const App = () => {
     const [indeterminate, setIndeterminate] = useState(null)
     const [checkGroup, setCheckGroup] = useState([])
 
-    const handleChange = (checkedValue) => {
+    const handleChange = (name, checkedValue) => {
         console.log('checkbox change: ', checkedValue)
         setCheckGroup(checkedValue)
 

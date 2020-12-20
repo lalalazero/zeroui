@@ -15,6 +15,7 @@ export default class Demo extends React.Component<any, any> {
             await import('./01-基本用法.mdx'),
             await import('./02-不可用状态.mdx'),
             await import('./03-checkbox组.mdx'),
+            await import('./04-最大可选项.mdx'),
         ]
         // const api = await import('./api.mdx')
         this.setState({

@@ -17,11 +17,7 @@ export interface RadioInterface extends React.FC<RadioProps> {
 
 const Radio: RadioInterface = (props) => {
     const ref = useRef<HTMLInputElement>(null)
-    const [checked, setChecked] = useState(
-        typeof props.checked === null || typeof props.checked === undefined
-            ? false
-            : props.checked
-    )
+    const [checked, setChecked] = useState(false)
 
     useEffect(() => {
         if (typeof props.checked === 'boolean') {

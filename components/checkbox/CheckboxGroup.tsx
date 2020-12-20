@@ -7,8 +7,10 @@ const PREFIX = 'zeroUI-checkbox-group'
 
 export interface CheckboxGroupProps {
     options: { label: string; value: string }[]
-    onChange?: (value: string[]) => void
+    onChange?: (name: string, value: string[]) => void
     value?: string[]
+    maxLen?: number
+    name?: string
 }
 
 const CheckboxGroup: React.FC<CheckboxGroupProps> = (
@@ -31,6 +33,15 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = (
             ...checkedMap,
             [optionValue]: checked,
         }
+        if (props.maxLen) {
+            if (
+                Object.entries(newCheck).filter(([_, value]) => value === true)
+                    .length > props.maxLen
+            ) {
+                setCheckedMap({ ...checkedMap })
+                return
+            }
+        }
         setCheckedMap(newCheck)
 
         if (props.onChange) {
@@ -38,7 +49,7 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = (
                 .filter((entry) => entry[1])
                 .map((entry) => entry[0])
 
-            props.onChange(checkedValues)
+            props.onChange(props.name || '', checkedValues)
         }
     }
 

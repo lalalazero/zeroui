@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { classname } from '../_util/classes'
 import CheckboxGroup from './CheckboxGroup'
 import './style.scss'
@@ -17,18 +17,24 @@ interface CheckBoxProps {
     indeterminate?: boolean
 }
 const Checkbox: CheckboxInterface = (props = {}) => {
+    const ref = useRef<HTMLInputElement>(null)
     const { disabled = false } = props
-    const [checked, setChecked] = useState(
-        props.checked === undefined || props.checked === null
-            ? false
-            : props.checked
-    )
+    const [checked, setChecked] = useState(false)
 
     useEffect(() => {
         if (typeof props.checked === 'boolean') {
             setChecked(props.checked)
+            if (ref.current) {
+                ref.current.checked = props.checked
+            }
         }
-    }, [props.checked])
+    })
+
+    useEffect(() => {
+        if (typeof props.indeterminate === 'boolean' && ref.current) {
+            ref.current.indeterminate = props.indeterminate
+        }
+    }, [props.indeterminate])
 
     const handleChange: React.ChangeEventHandler<HTMLInputElement> = (
         event
@@ -45,16 +51,12 @@ const Checkbox: CheckboxInterface = (props = {}) => {
         >
             <input
                 type="checkbox"
+                ref={ref}
                 className={classname(prefix)}
                 name={props.name}
                 checked={checked}
                 onChange={handleChange}
                 disabled={disabled}
-                ref={(ref) => {
-                    if (ref && typeof props.indeterminate === 'boolean') {
-                        ref.indeterminate = props.indeterminate
-                    }
-                }}
             ></input>
             <label
                 htmlFor={props.name}
