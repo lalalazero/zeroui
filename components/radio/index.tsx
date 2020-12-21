@@ -1,4 +1,10 @@
-import React, { ChangeEventHandler, useEffect, useRef, useState } from 'react'
+import React, {
+    ChangeEventHandler,
+    CSSProperties,
+    useEffect,
+    useRef,
+    useState,
+} from 'react'
 import { classname } from '../_util/classes'
 import RadioGroup from './RadioGroup'
 import './style.scss'
@@ -7,8 +13,10 @@ const PREFIX = 'zeroUI-radio'
 
 export interface RadioProps {
     name?: string
+    value?: string
     checked?: boolean
-    onChange?: (name: string, checked: boolean) => void
+    onChange?: (name: string, value: string, checked: boolean) => void
+    style?: CSSProperties
 }
 
 export interface RadioInterface extends React.FC<RadioProps> {
@@ -31,11 +39,12 @@ const Radio: RadioInterface = (props) => {
     const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
         const newCheck = event.target.checked
         setChecked(newCheck)
-        props.onChange && props.onChange(props.name || '', newCheck)
+        props.onChange &&
+            props.onChange(props.name || '', props.value || '', newCheck)
     }
 
     return (
-        <span className={classname(PREFIX + '-wrapper')}>
+        <span className={classname(PREFIX + '-wrapper')} style={props.style}>
             <input
                 ref={ref}
                 type="radio"

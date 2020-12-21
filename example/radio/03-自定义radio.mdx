@@ -1,0 +1,36 @@
+## 自定义 Radio
+
+可以对 Radio 的样式和内容进行定制
+
+```jsx
+import React from 'react'
+import { Radio } from 'zero-ui-react'
+
+const App = () => {
+    const handleChange = (name, checked) => {
+        console.log('checked..', checked)
+    }
+
+    const radioStyle = { display: 'block' }
+
+    return (
+        <div>
+            <Radio.Group onChange={handleChange} name="test">
+                <Radio value={'A'} style={radioStyle}>
+                    <span style={{ color: 'red' }}>A</span>
+                </Radio>
+                <Radio value={'B'} style={radioStyle}>
+                    <span style={{ color: 'green' }}>B</span>
+                </Radio>
+                <Radio value={'C'} style={radioStyle}>
+                    <span style={{ color: 'blue' }}>C</span>
+                </Radio>
+                <Radio value={'D'} style={radioStyle}>
+                    <span style={{ color: 'purple' }}>D</span>
+                </Radio>
+            </Radio.Group>
+        </div>
+    )
+}
+export default App
+```

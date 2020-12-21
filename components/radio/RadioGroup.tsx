@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useState } from 'react'
+import React, { ReactElement, useEffect, useMemo, useState } from 'react'
 import { classname } from '../_util/classes'
 import Radio from './index'
 import './style.scss'
@@ -10,16 +10,20 @@ const DEFAULT_GROUP_NAME = 'zeroui-radio-group'
 export interface RadioGroupProps {
     options: { label: string; value: string }[]
     name?: string
-    onChange?: (checked: string) => void
+    onChange?: (name: string, checked: string) => void
     checked?: string
 }
 
 const RadioGroup: React.FC<RadioGroupProps> = (props = { options: [] }) => {
     const [checkedValue, setCheckedValue] = useState<string>('')
-    const handleChange = (checkedItem: string, checked: boolean) => {
+    const handleChange = (
+        name: string,
+        checkedItem: string,
+        checked: boolean
+    ) => {
         if (checked) {
             setCheckedValue(checkedItem)
-            props.onChange && props.onChange(checkedItem)
+            props.onChange && props.onChange(props.name || '', checkedItem)
         }
     }
 
@@ -27,26 +31,35 @@ const RadioGroup: React.FC<RadioGroupProps> = (props = { options: [] }) => {
         setCheckedValue(props.checked || '')
     }, [props.checked])
 
+    const customRadio = useMemo(() => {
+        if (!props.options || props.options.length === 0) {
+            return React.Children.map(props.children, (child: ReactElement) => {
+                return React.cloneElement(child, {
+                    name: props.name || DEFAULT_GROUP_NAME,
+                    onChange: handleChange,
+                    checked: child.props.value === checkedValue,
+                })
+            })
+        }
+
+        return ''
+    }, [props.options, checkedValue])
+
     return (
         <div className={classname(PREFIX)}>
-            {props.options.map((option) => (
-                <Radio
-                    key={option.value}
-                    name={props.name || DEFAULT_GROUP_NAME}
-                    checked={option.value === checkedValue}
-                    onChange={(name, checked) =>
-                        handleChange(option.value, checked)
-                    }
-                >
-                    {option.label}
-                </Radio>
-            ))}
-            {props.options.length === 0 &&
-                React.Children.map(props.children, (child: ReactElement) =>
-                    React.cloneElement(child, {
-                        name: props.name || DEFAULT_GROUP_NAME,
-                    })
-                )}
+            {props.options &&
+                props.options.map((option) => (
+                    <Radio
+                        key={option.value}
+                        value={option.value}
+                        name={props.name || DEFAULT_GROUP_NAME}
+                        checked={option.value === checkedValue}
+                        onChange={handleChange}
+                    >
+                        {option.label}
+                    </Radio>
+                ))}
+            {customRadio}
         </div>
     )
 }
