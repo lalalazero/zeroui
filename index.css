@@ -3650,6 +3650,92 @@
   border-right-color: rgba(0, 0, 0, 0.75);
   transform: translateX(-100%);
 }
+[class^=zeroUI-] {
+  box-sizing: border-box;
+}
+[class^=zeroUI-]::before {
+  box-sizing: border-box;
+}
+[class^=zeroUI-]::after {
+  box-sizing: border-box;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.zeroui-tree-item-checkbox-wrapper {
+  position: relative;
+}
+.zeroui-tree-item-checkbox-wrapper > input[type=checkbox] {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.zeroui-tree-item-checkbox-wrapper > .zeroui-tree-item-checkbox-indeterminate {
+  position: absolute;
+  user-select: none;
+  pointer-events: none;
+  left: 8px;
+  top: 8px;
+  width: 8px;
+  height: 8px;
+  transform: translate(-4px);
+  background-color: #13c2c2;
+  display: none;
+}
+.zeroui-tree-item-checkbox-wrapper > .zeroui-tree-item-checkbox-indeterminate[data-visible=true] {
+  display: inline-block;
+}
+.zeroui-tree-item-checkbox-wrapper > input[type=checkbox] {
+  margin-right: 5px;
+  position: relative;
+  cursor: pointer;
+}
+.zeroui-tree-item-checkbox-wrapper > input[type=checkbox]:hover::before {
+  border-color: #13c2c2;
+}
+.zeroui-tree-item-checkbox-wrapper > input[type=checkbox]:before {
+  box-sizing: border-box;
+  content: "";
+  display: block;
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 0;
+  left: 0;
+  border: 1px solid;
+  border-radius: 2px;
+  background-color: white;
+}
+.zeroui-tree-item-checkbox-wrapper > input[type=checkbox]:checked:before {
+  background-color: #13c2c2;
+  border: none;
+}
+.zeroui-tree-item-checkbox-wrapper > input[type=checkbox]:checked:after {
+  content: "";
+  display: block;
+  width: 5px;
+  height: 10px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  position: absolute;
+  top: 2px;
+  left: 6px;
+}
+.zeroui-tree-label {
+  display: inline-block;
+  padding: 4px;
+}
+.zeroui-tree-label:hover {
+  background-color: #eee;
+  cursor: pointer;
+}
 .demo-card {
   border: 1px solid #e6e6e6;
   margin: 20px;
