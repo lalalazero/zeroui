@@ -3,7 +3,7 @@
 一个基本的 Tree 展示
 
 ```jsx
-import React from 'react'
+import React, { useState } from 'react'
 import { Tree } from 'zero-ui-react'
 
 const App = () => {
@@ -64,9 +64,15 @@ const App = () => {
         },
     ]
 
+    const handleCheck = (checkedKeys, checkItem, event) => {
+        console.log('checkedKeys ', checkedKeys)
+        console.log('checkItem ', checkItem)
+        console.log('event ', event)
+    }
+
     return (
         <div>
-            <Tree treeData={treeData}>单身狗</Tree>
+            <Tree treeData={treeData} onCheck={handleCheck} />
         </div>
     )
 }
