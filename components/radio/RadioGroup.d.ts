@@ -6,8 +6,9 @@ export interface RadioGroupProps {
         value: string;
     }[];
     name?: string;
-    onChange?: (checked: string) => void;
+    onChange?: (name: string, checked: string) => void;
     checked?: string;
+    disabled?: boolean;
 }
 declare const RadioGroup: React.FC<RadioGroupProps>;
 export default RadioGroup;
