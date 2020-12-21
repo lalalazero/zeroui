@@ -1,0 +1,38 @@
+## 禁用态
+
+单个禁用和整组禁用
+
+```jsx
+import React from 'react'
+import { Radio } from 'zero-ui-react'
+
+const App = () => {
+    const radioStyle = { display: 'block' }
+    return (
+        <div>
+            <p>
+                单个禁用
+                <Radio disabled>单身狗</Radio>
+            </p>
+            <div>
+                整组禁用
+                <Radio.Group name="radio-group" disabled>
+                    <Radio value={'A'} style={radioStyle}>
+                        <span style={{ color: 'red' }}>A</span>
+                    </Radio>
+                    <Radio value={'B'} style={radioStyle}>
+                        <span style={{ color: 'green' }}>B</span>
+                    </Radio>
+                    <Radio value={'C'} style={radioStyle}>
+                        <span style={{ color: 'blue' }}>C</span>
+                    </Radio>
+                    <Radio value={'D'} style={radioStyle}>
+                        <span style={{ color: 'purple' }}>D</span>
+                    </Radio>
+                </Radio.Group>
+            </div>
+        </div>
+    )
+}
+export default App
+```

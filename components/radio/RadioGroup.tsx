@@ -12,6 +12,7 @@ export interface RadioGroupProps {
     name?: string
     onChange?: (name: string, checked: string) => void
     checked?: string
+    disabled?: boolean
 }
 
 const RadioGroup: React.FC<RadioGroupProps> = (props = { options: [] }) => {
@@ -38,6 +39,7 @@ const RadioGroup: React.FC<RadioGroupProps> = (props = { options: [] }) => {
                     name: props.name || DEFAULT_GROUP_NAME,
                     onChange: handleChange,
                     checked: child.props.value === checkedValue,
+                    disabled: props.disabled,
                 })
             })
         }
@@ -55,6 +57,7 @@ const RadioGroup: React.FC<RadioGroupProps> = (props = { options: [] }) => {
                         name={props.name || DEFAULT_GROUP_NAME}
                         checked={option.value === checkedValue}
                         onChange={handleChange}
+                        disabled={props.disabled}
                     >
                         {option.label}
                     </Radio>

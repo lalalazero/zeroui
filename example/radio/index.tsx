@@ -15,6 +15,7 @@ export default class Demo extends React.Component<any, any> {
             await import('./01-基本使用.mdx'),
             await import('./02-一组单选框.mdx'),
             await import('./03-自定义radio.mdx'),
+            await import('./04-disabled.mdx'),
         ]
         // const api = await import('./api.mdx')
         this.setState({

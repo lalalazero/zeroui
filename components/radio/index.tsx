@@ -17,6 +17,7 @@ export interface RadioProps {
     checked?: boolean
     onChange?: (name: string, value: string, checked: boolean) => void
     style?: CSSProperties
+    disabled?: boolean
 }
 
 export interface RadioInterface extends React.FC<RadioProps> {
@@ -53,6 +54,7 @@ const Radio: RadioInterface = (props) => {
                 onChange={handleChange}
                 name={props.name}
                 data-checked={checked}
+                disabled={props.disabled}
             />
             <label htmlFor={props.name} className={PREFIX + '-label'}>
                 {props.children}
