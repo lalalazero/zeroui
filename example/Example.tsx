@@ -21,6 +21,7 @@ import SelectExample from './select'
 import SiderNav from './SiderNav'
 import SwitchExample from './switch'
 import TooltipExample from './tooltip'
+import TreeExample from './tree'
 
 ReactDOM.render(
     <Router>
@@ -67,6 +68,7 @@ ReactDOM.render(
                             component={CheckboxExample}
                         ></Route>
                         <Route path="/radio" component={RadioExample} />
+                        <Route path="/tree" component={TreeExample} />
                     </div>
                 </Content>
             </Layout>

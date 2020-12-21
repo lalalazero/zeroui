@@ -95,6 +95,11 @@ export default class SiderNav extends Component {
                                 <p>Radio 单选框</p>
                             </NavLink>
                         </MenuItem>
+                        <MenuItem>
+                            <NavLink to="/tree">
+                                <p>Tree 树</p>
+                            </NavLink>
+                        </MenuItem>
                     </SubMenu>
                 </Menu>
             </Fragment>

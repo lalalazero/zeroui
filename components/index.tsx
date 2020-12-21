@@ -25,4 +25,5 @@ export { default as Radio } from './radio/index'
 export { default as Select } from './select/index'
 export { default as Switch } from './switch/index'
 export { default as Tooltip } from './tooltip/Tooltip'
+export { default as Tree } from './tree/index'
 export { message }

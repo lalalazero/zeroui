@@ -1,0 +1,13 @@
+.zeroui-tree {
+    &-item {
+        outline: 1px solid;
+    }
+    &-label {
+        display: inline-block;
+        padding: 4px;
+        &:hover {
+            background-color: #eee;
+            cursor: pointer;
+        }
+    }
+}
