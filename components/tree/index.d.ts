@@ -9,7 +9,7 @@ export declare type TreeData = TreeNode[];
 export declare type TreeProps = {
     treeData: TreeNode[];
     checkedKeys?: string[];
-    onCheck?: (newCheckedKeys: string[], checkItem?: TreeNode, e?: ChangeEvent<HTMLInputElement>) => void;
+    onCheck?: (newCheckedKeys: string[], checkNode: TreeNode, event: ChangeEvent<HTMLInputElement>) => void;
 };
 declare const Tree: React.FC<TreeProps>;
 export default Tree;
