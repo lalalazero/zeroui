@@ -3,7 +3,6 @@ import React, {
     ChangeEventHandler,
     useEffect,
     useMemo,
-    useRef,
     useState,
 } from 'react'
 import { classname } from '../_util/classes'
@@ -24,8 +23,8 @@ export type TreeProps = {
     checkedKeys?: string[]
     onCheck?: (
         newCheckedKeys: string[],
-        checkItem?: TreeNode,
-        e?: ChangeEvent<HTMLInputElement>
+        checkNode: TreeNode,
+        event: ChangeEvent<HTMLInputElement>
     ) => void
 }
 
@@ -47,7 +46,6 @@ const getChildrenKeys = (parentNode: TreeNode) => {
 interface TreeNodeProps {
     treeNode: TreeNode
     checkedKeys: string[]
-    setCheckedKeysFn: (checkedKeys: string[]) => void
     onCheck?: (
         newCheckedKeys: string[],
         checkItem?: TreeNode,
@@ -57,7 +55,15 @@ interface TreeNodeProps {
 }
 
 const TreeNode: React.FC<TreeNodeProps> = (props) => {
-    const ref = useRef<HTMLInputElement>(null)
+    const [indeterminate, setIndeterminate] = useState(false)
+    const [checked, setChecked] = useState(false)
+
+    const isLeaf = useMemo(() => {
+        return props.treeNode.children && props.treeNode.children.length > 0
+            ? false
+            : true
+    }, [props.treeNode])
+
     const childrenKeys = useMemo(() => {
         if (props.treeNode) {
             return getChildrenKeys(props.treeNode)
@@ -65,50 +71,73 @@ const TreeNode: React.FC<TreeNodeProps> = (props) => {
         return []
     }, [props.treeNode])
 
-    const isChildrenAllChecked =
-        childrenKeys.length > 0 &&
-        childrenKeys.every((key) => props.checkedKeys.indexOf(key) >= 0)
-
-    const isChildrenAllUnchecked =
-        childrenKeys.length > 0 &&
-        childrenKeys.every((key) => props.checkedKeys.indexOf(key) < 0)
-
-    const isChecked = props.checkedKeys.indexOf(props.treeNode.key) >= 0
-
-    const isHalfCheck =
-        !isChecked &&
-        childrenKeys.some((key) => props.checkedKeys.indexOf(key) >= 0)
-
     useEffect(() => {
-        if (isChildrenAllChecked && !isChecked) {
-            props.setCheckedKeysFn([...props.checkedKeys, props.treeNode.key])
-        }
-        if (isChildrenAllUnchecked && isChecked) {
-            props.setCheckedKeysFn(
-                props.checkedKeys.filter((key) => key !== props.treeNode.key)
-            )
-        }
-    }, [isChildrenAllChecked, isChildrenAllUnchecked, isChecked, isHalfCheck])
+        if (props.checkedKeys) {
+            if (props.checkedKeys.indexOf(props.treeNode.key) >= 0) {
+                setChecked(true)
+            } else {
+                setChecked(false)
+            }
 
-    useEffect(() => {
-        if (ref.current) {
-            ref.current.checked = isChecked
-            ref.current.indeterminate = isHalfCheck
+            if (
+                childrenKeys.length > 0 &&
+                childrenKeys.some((key) => props.checkedKeys.indexOf(key) >= 0)
+            ) {
+                setIndeterminate(true)
+            } else {
+                setIndeterminate(false)
+            }
         }
-    }, [isChecked, isHalfCheck])
+    }, [props.checkedKeys])
 
     const handleCheck: ChangeEventHandler<HTMLInputElement> = (event) => {
         let newCheckedKeys = [...props.checkedKeys]
-        if (event.target.checked) {
-            newCheckedKeys.push(props.treeNode.key, ...childrenKeys)
+        const checked = event.target.checked
+        const nodeKey = props.treeNode.key
+
+        if (checked) {
+            newCheckedKeys.push(nodeKey)
         } else {
-            newCheckedKeys = newCheckedKeys.filter(
-                (key) =>
-                    key !== props.treeNode.key && childrenKeys.indexOf(key) < 0
-            )
+            newCheckedKeys = newCheckedKeys.filter((key) => key !== nodeKey)
         }
-        props.setCheckedKeysFn(newCheckedKeys)
+
+        if (!isLeaf) {
+            if (checked) {
+                newCheckedKeys.push(...childrenKeys)
+            } else {
+                newCheckedKeys = newCheckedKeys.filter(
+                    (key) => childrenKeys.indexOf(key) < 0
+                )
+            }
+        }
+
         props.onCheck && props.onCheck(newCheckedKeys, props.treeNode, event)
+    }
+
+    const onNodeCheck = (
+        checkedKeys: string[],
+        checkNode: TreeNode,
+        event: ChangeEvent<HTMLInputElement>
+    ) => {
+        const newCheckedKeys = [...checkedKeys]
+
+        const subChildrenKeys = props.treeNode.children
+            ? props.treeNode.children.map((child) => child.key)
+            : []
+
+        const isAllChecked =
+            subChildrenKeys.length > 0 &&
+            subChildrenKeys.every((key) => newCheckedKeys.indexOf(key) >= 0)
+
+        if (isAllChecked) {
+            newCheckedKeys.push(props.treeNode.key)
+        } else {
+            const index = newCheckedKeys.indexOf(props.treeNode.key)
+            if (index >= 0) {
+                newCheckedKeys.splice(index, 1)
+            }
+        }
+        props.onCheck && props.onCheck(newCheckedKeys, checkNode, event)
     }
 
     const key = `level/${props.level}-value/${props.treeNode.key}`
@@ -124,13 +153,13 @@ const TreeNode: React.FC<TreeNodeProps> = (props) => {
                 <span className={PREFIX + '-item-checkbox-wrapper'}>
                     <input
                         type="checkbox"
-                        checked={isChecked}
+                        checked={checked}
                         onChange={handleCheck}
-                        data-checked={isChecked}
+                        data-checked={checked}
                     ></input>
                     <span
                         className={PREFIX + '-item-checkbox-indeterminate'}
-                        data-visible={isHalfCheck}
+                        data-visible={!checked && indeterminate}
                     ></span>
                 </span>
                 <span className={PREFIX + '-label'}>
@@ -142,8 +171,7 @@ const TreeNode: React.FC<TreeNodeProps> = (props) => {
                             key={child.key}
                             treeNode={child}
                             checkedKeys={props.checkedKeys}
-                            setCheckedKeysFn={props.setCheckedKeysFn}
-                            onCheck={props.onCheck}
+                            onCheck={onNodeCheck}
                             level={props.level + 1}
                         ></TreeNode>
                     ))}
@@ -161,8 +189,14 @@ const Tree: React.FC<TreeProps> = (props) => {
         }
     }, [props.checkedKeys])
 
-    const setCheckedKeysFn = (newCheckedKeys: string[]) =>
-        setCheckedKeys(newCheckedKeys)
+    const handleCheck = (
+        checkedKeys: string[],
+        checkNode: TreeNode,
+        event: ChangeEvent<HTMLInputElement>
+    ) => {
+        setCheckedKeys(checkedKeys)
+        props.onCheck && props.onCheck(checkedKeys, checkNode, event)
+    }
 
     return (
         <div className={PREFIX}>
@@ -171,8 +205,7 @@ const Tree: React.FC<TreeProps> = (props) => {
                     key={item.key}
                     treeNode={item}
                     checkedKeys={checkedKeys}
-                    setCheckedKeysFn={setCheckedKeysFn}
-                    onCheck={props.onCheck}
+                    onCheck={handleCheck}
                     level={1}
                 ></TreeNode>
             ))}
