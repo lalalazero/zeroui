@@ -5,9 +5,16 @@
         &[data-disabled='true'] {
             cursor: not-allowed;
         }
+        position: relative;
     }
     &-label {
         margin-left: 5px;
+    }
+
+    @extend %checkbox-base;
+
+    &-indeterminate {
+        @extend %checkbox-indeterminate;
     }
 }
 

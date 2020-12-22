@@ -147,6 +147,73 @@ $table-row-hover-color: rgb(230, 247, 255);
     overflow: hidden;
 }
 
+%checkbox-base {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin-right: 5px;
+    position: relative;
+    cursor: pointer;
+
+    &:hover::before {
+        border-color: $brand-color;
+    }
+    &:before {
+        box-sizing: border-box;
+        content: '';
+        display: block;
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        top: 0;
+        left: 0;
+        border: 1px solid;
+        border-radius: 2px;
+        background-color: white;
+    }
+    &:checked:before {
+        background-color: $brand-color;
+        border: none;
+    }
+    &:checked:after {
+        content: '';
+        display: block;
+        width: 5px;
+        height: 10px;
+        border: solid #fff;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+        position: absolute;
+        top: 2px;
+        left: 6px;
+    }
+    &:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+        user-select: none;
+        pointer-events: none;
+    }
+    &:disabled::before {
+        border-color: #ccc;
+    }
+}
+
+%checkbox-indeterminate {
+    position: absolute;
+    user-select: none;
+    pointer-events: none;
+    left: 8px;
+    top: 8px;
+    width: 8px;
+    height: 8px;
+    transform: translate(-4px);
+    background-color: $brand-color;
+    display: none;
+    &[data-visible='true'] {
+        display: inline-block;
+    }
+}
+
 @keyframes spin {
     0% {
         transform: rotate(0deg);

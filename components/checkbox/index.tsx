@@ -20,6 +20,7 @@ const Checkbox: CheckboxInterface = (props = {}) => {
     const ref = useRef<HTMLInputElement>(null)
     const { disabled = false } = props
     const [checked, setChecked] = useState(false)
+    const [indeterminate, setIndeterminate] = useState(false)
 
     useEffect(() => {
         if (typeof props.checked === 'boolean') {
@@ -32,7 +33,9 @@ const Checkbox: CheckboxInterface = (props = {}) => {
 
     useEffect(() => {
         if (typeof props.indeterminate === 'boolean' && ref.current) {
-            ref.current.indeterminate = props.indeterminate
+            setIndeterminate(props.indeterminate)
+        } else {
+            setIndeterminate(false)
         }
     }, [props.indeterminate])
 
@@ -58,6 +61,10 @@ const Checkbox: CheckboxInterface = (props = {}) => {
                 onChange={handleChange}
                 disabled={disabled}
             ></input>
+            <span
+                className={prefix + '-indeterminate'}
+                data-visible={!checked && indeterminate}
+            ></span>
             <label
                 htmlFor={props.name}
                 className={classname(prefix + '-label')}
