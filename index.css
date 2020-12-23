@@ -3872,6 +3872,7 @@
 .zeroui-tree-expand-span {
   font-size: 10px;
   margin: 0 5px;
+  user-select: none;
 }
 .demo-card {
   border: 1px solid #e6e6e6;
