@@ -1,6 +1,7 @@
 import React, {
     ChangeEvent,
     ChangeEventHandler,
+    ReactNode,
     useEffect,
     useMemo,
     useState,
@@ -12,7 +13,7 @@ import './style.scss'
 const PREFIX = 'zeroui-tree'
 
 export type TreeNode = {
-    title: string
+    title: string | ReactNode
     key: string
     children?: TreeNode[]
     expandable?: boolean
@@ -23,6 +24,8 @@ export type TreeData = TreeNode[]
 export type TreeProps = {
     treeData: TreeNode[]
     checkedKeys?: string[]
+    defaultCheckedKeys?: string[]
+    defaultExpandKeys?: string[]
     expandKeys?: string[]
     defaultExpandAll?: boolean
     onCheck?: (
@@ -257,10 +260,21 @@ const TreeNode: React.FC<TreeNodeProps> = (props) => {
     )
 }
 
+const uniq = (arr: string[]) => Array.from(new Set(arr))
+
 const Tree: React.FC<TreeProps> = (props) => {
-    const { defaultExpandAll = true } = props
     const [checkedKeys, setCheckedKeys] = useState<string[]>([])
     const [expandKeys, setExpandKeys] = useState<string[]>()
+
+    useEffect(() => {
+        if (props.defaultExpandKeys) {
+            setExpandKeys(props.defaultExpandKeys)
+        }
+
+        if (props.defaultCheckedKeys) {
+            setCheckedKeys(props.defaultCheckedKeys)
+        }
+    }, [])
 
     useEffect(() => {
         if (props.checkedKeys) {
@@ -269,11 +283,11 @@ const Tree: React.FC<TreeProps> = (props) => {
     }, [props.checkedKeys])
 
     useEffect(() => {
-        if (defaultExpandAll) {
+        if (props.defaultExpandAll) {
             const expandableKeys = getExpandableChildrenKeys(props.treeData)
             expandableKeys.length > 0 && setExpandKeys(expandableKeys)
         }
-    }, [defaultExpandAll])
+    }, [props.defaultExpandAll])
 
     useEffect(() => {
         if (props.expandKeys) {
@@ -286,12 +300,12 @@ const Tree: React.FC<TreeProps> = (props) => {
         checkNode: TreeNode,
         event: ChangeEvent<HTMLInputElement>
     ) => {
-        setCheckedKeys(checkedKeys)
+        setCheckedKeys(uniq(checkedKeys))
         props.onCheck && props.onCheck(checkedKeys, checkNode, event)
     }
 
     const handleExpand = (expandKeys: string[], expandNode: TreeNode) => {
-        setExpandKeys(expandKeys)
+        setExpandKeys(uniq(expandKeys))
         props.onExpand && props.onExpand(expandKeys, expandNode)
     }
 
@@ -306,7 +320,7 @@ const Tree: React.FC<TreeProps> = (props) => {
                     level={1}
                     expandKeys={expandKeys}
                     onExpand={handleExpand}
-                    defaultExpandAll={defaultExpandAll}
+                    defaultExpandAll={props.defaultExpandAll}
                 ></TreeNode>
             ))}
         </div>

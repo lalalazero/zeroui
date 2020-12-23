@@ -1,6 +1,6 @@
 ## 基本用法
 
-一个基本的 Tree 展示
+一个基本的 Tree，包含可勾选、可展开、禁用等功能
 
 ```jsx
 import React, { useState } from 'react'
@@ -9,60 +9,32 @@ import { Tree } from 'zero-ui-react'
 const App = () => {
     const treeData = [
         {
-            title: '1',
+            title: 'parent 1',
             key: '1',
             children: [
                 {
-                    title: '1-1',
+                    title: 'parent 1-1',
                     key: '1-1',
+                    children: [
+                        {
+                            title: 'leaf',
+                            key: '1-1-1',
+                        },
+                        {
+                            title: 'leaf',
+                            key: '1-1-2',
+                        },
+                    ],
                 },
                 {
-                    title: '1-2',
+                    title: <span style={{ color: 'pink' }}>parent 1-2</span>,
                     key: '1-2',
                     children: [
                         {
-                            title: '1-2-1',
+                            title: 'sss',
                             key: '1-2-1',
                         },
-                        {
-                            title: '1-2-2',
-                            key: '1-2-2',
-                        },
                     ],
-                },
-                {
-                    title: '1-3',
-                    key: '1-3',
-                    children: [
-                        {
-                            title: '1-3-1',
-                            key: '1-3-1',
-                        },
-                    ],
-                },
-            ],
-        },
-        {
-            title: '2',
-            key: '2',
-            children: [
-                {
-                    title: '2-1',
-                    key: '2-1',
-                },
-                {
-                    title: '2-2',
-                    key: '2-2',
-                    children: [
-                        {
-                            title: '2-2-1',
-                            key: '2-2-1',
-                        },
-                    ],
-                },
-                {
-                    title: '2-3',
-                    key: '2-3',
                 },
             ],
         },
@@ -76,7 +48,12 @@ const App = () => {
 
     return (
         <div>
-            <Tree treeData={treeData} onCheck={handleCheck} />
+            <Tree
+                treeData={treeData}
+                onCheck={handleCheck}
+                defaultExpandKeys={['1', '1-1']}
+                defaultCheckedKeys={['1', '1-2', '1-1-2']}
+            />
         </div>
     )
 }
