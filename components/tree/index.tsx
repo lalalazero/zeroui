@@ -17,6 +17,7 @@ export type TreeNode = {
     key: string
     children?: TreeNode[]
     expandable?: boolean
+    checkable?: boolean
 }
 
 export type TreeData = TreeNode[]
@@ -26,7 +27,10 @@ export type TreeProps = {
     checkedKeys?: string[]
     defaultCheckedKeys?: string[]
     defaultExpandKeys?: string[]
+    defaultSelectedKeys?: string[]
     expandKeys?: string[]
+    selectedKeys?: string[]
+    checkable: boolean
     defaultExpandAll?: boolean
     onCheck?: (
         newCheckedKeys: string[],
@@ -34,6 +38,7 @@ export type TreeProps = {
         event: ChangeEvent<HTMLInputElement>
     ) => void
     onExpand?: (expandKeys: string[], expandNode: TreeNode) => void
+    onSelect?: (selectedKeys: string[], selectNode: TreeNode) => void
 }
 
 const getChildrenKeys = (parentNode: TreeNode) => {
@@ -78,6 +83,7 @@ interface TreeNodeProps {
     ) => void
     level: number
     onExpand: (expandKeys: string[], expandNode: TreeNode) => void
+    treeCheckable: boolean
 }
 
 const useExpand = (props: TreeNodeProps) => {
@@ -180,6 +186,31 @@ const TreeNode: React.FC<TreeNodeProps> = (props) => {
         return ''
     }, [props.treeNode.children, isExpand])
 
+    const checkable = useMemo(() => {
+        return props.treeCheckable && props.treeNode.checkable !== false
+    }, [props.treeNode.checkable, props.treeCheckable])
+
+    const renderCheckbox = useMemo(() => {
+        if (checkable) {
+            return (
+                <span className={PREFIX + '-item-checkbox-wrapper'}>
+                    <input
+                        type="checkbox"
+                        checked={checked}
+                        onChange={handleCheck}
+                        data-checked={checked}
+                    ></input>
+                    <span
+                        className={PREFIX + '-item-checkbox-indeterminate'}
+                        data-visible={!checked && indeterminate}
+                    ></span>
+                </span>
+            )
+        }
+
+        return ''
+    }, [checkable, checked, indeterminate, handleCheck])
+
     const handleExpand = () => {
         const newExpandKeys = props.expandKeys ? [...props.expandKeys] : []
         if (!isExpand) {
@@ -236,18 +267,8 @@ const TreeNode: React.FC<TreeNodeProps> = (props) => {
                 >
                     {expandIcon}
                 </span>
-                <span className={PREFIX + '-item-checkbox-wrapper'}>
-                    <input
-                        type="checkbox"
-                        checked={checked}
-                        onChange={handleCheck}
-                        data-checked={checked}
-                    ></input>
-                    <span
-                        className={PREFIX + '-item-checkbox-indeterminate'}
-                        data-visible={!checked && indeterminate}
-                    ></span>
-                </span>
+
+                {renderCheckbox}
                 <span className={PREFIX + '-label'}>
                     {props.treeNode.title}
                 </span>
@@ -263,6 +284,7 @@ const TreeNode: React.FC<TreeNodeProps> = (props) => {
                             expandKeys={props.expandKeys}
                             onExpand={props.onExpand}
                             defaultExpandAll={props.defaultExpandAll}
+                            treeCheckable={props.treeCheckable}
                         ></TreeNode>
                     ))}
             </div>
@@ -331,10 +353,16 @@ const Tree: React.FC<TreeProps> = (props) => {
                     expandKeys={expandKeys}
                     onExpand={handleExpand}
                     defaultExpandAll={props.defaultExpandAll}
+                    treeCheckable={props.checkable}
                 ></TreeNode>
             ))}
         </div>
     )
+}
+
+Tree.defaultProps = {
+    checkable: true,
+    defaultExpandAll: false,
 }
 
 export default Tree

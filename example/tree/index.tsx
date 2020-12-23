@@ -11,7 +11,12 @@ export default class Demo extends React.Component<any, any> {
         }
     }
     async componentDidMount() {
-        const demos = [await import('./01-基本用法.mdx')]
+        const demos = [
+            await import('./01-基本用法.mdx'),
+            await import('./02-自定义tree.mdx'),
+            await import('./03-异步加载.mdx'),
+            await import('./04-限制高度滚动.mdx'),
+        ]
         // const api = await import('./api.mdx')
         this.setState({
             // api: api.default.apiContent,

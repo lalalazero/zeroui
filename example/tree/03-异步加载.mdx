@@ -1,0 +1,54 @@
+## 异步加载数据
+
+异步加载数据
+
+```jsx
+import React, { useState } from 'react'
+import { Tree } from 'zero-ui-react'
+
+const App = () => {
+    const treeData = [
+        {
+            title: 'parent 1',
+            key: '1',
+            children: [
+                {
+                    title: 'parent 1-1',
+                    key: '1-1',
+                    children: [
+                        {
+                            title: 'leaf',
+                            key: '1-1-1',
+                        },
+                        {
+                            title: 'leaf',
+                            key: '1-1-2',
+                        },
+                    ],
+                },
+                {
+                    title: <span style={{ color: 'pink' }}>parent 1-2</span>,
+                    key: '1-2',
+                    children: [
+                        {
+                            title: 'sss',
+                            key: '1-2-1',
+                        },
+                    ],
+                },
+            ],
+        },
+    ]
+
+    return (
+        <div>
+            <Tree
+                treeData={treeData}
+                checkable={false}
+                defaultExpandKeys={['1', '1-1']}
+            />
+        </div>
+    )
+}
+export default App
+```
