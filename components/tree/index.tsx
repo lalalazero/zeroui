@@ -96,18 +96,7 @@ const useExpand = (props: TreeNodeProps) => {
     return expandable && isExpand
 }
 
-const TreeNode: React.FC<TreeNodeProps> = (props) => {
-    const [indeterminate, setIndeterminate] = useState(false)
-    const [checked, setChecked] = useState(false)
-
-    const isExpand = useExpand(props)
-
-    const isLeaf = useMemo(() => {
-        return props.treeNode.children && props.treeNode.children.length > 0
-            ? false
-            : true
-    }, [props.treeNode])
-
+const useChildrenKeys = (props: TreeNodeProps) => {
     const childrenKeys = useMemo(() => {
         if (props.treeNode) {
             return getChildrenKeys(props.treeNode)
@@ -115,6 +104,13 @@ const TreeNode: React.FC<TreeNodeProps> = (props) => {
         return []
     }, [props.treeNode])
 
+    return childrenKeys
+}
+
+const useCheck = (props: TreeNodeProps) => {
+    const [checked, setChecked] = useState(false)
+    const [indeterminate, setIndeterminate] = useState(false)
+    const childrenKeys = useChildrenKeys(props)
     useEffect(() => {
         if (props.checkedKeys) {
             if (props.checkedKeys.indexOf(props.treeNode.key) >= 0) {
@@ -133,6 +129,20 @@ const TreeNode: React.FC<TreeNodeProps> = (props) => {
             }
         }
     }, [props.checkedKeys])
+
+    return [checked, indeterminate]
+}
+
+const TreeNode: React.FC<TreeNodeProps> = (props) => {
+    const [checked, indeterminate] = useCheck(props)
+    const isExpand = useExpand(props)
+    const childrenKeys = useChildrenKeys(props)
+
+    const isLeaf = useMemo(() => {
+        return props.treeNode.children && props.treeNode.children.length > 0
+            ? false
+            : true
+    }, [props.treeNode])
 
     const handleCheck: ChangeEventHandler<HTMLInputElement> = (event) => {
         let newCheckedKeys = [...props.checkedKeys]
