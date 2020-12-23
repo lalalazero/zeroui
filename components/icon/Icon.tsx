@@ -22,6 +22,8 @@ export const ICONS = [
     'emptysearch',
     'filled-up',
     'filled-down',
+    'filled-left',
+    'filled-right',
     'download',
     'next-double',
     'prev-double',
@@ -36,7 +38,7 @@ export const ICONS = [
 ] as const
 
 const scriptElement = document.createElement('script')
-scriptElement.src = 'http://at.alicdn.com/t/font_1353479_qvt7hp9r4uh.js'
+scriptElement.src = 'http://at.alicdn.com/t/font_1353479_az771xld3q6.js'
 document.body.appendChild(scriptElement)
 
 const prefix = 'zeroUI-icon'
