@@ -3869,6 +3869,10 @@
   background-color: #eee;
   cursor: pointer;
 }
+.zeroui-tree-expand-span {
+  font-size: 10px;
+  margin: 0 5px;
+}
 .demo-card {
   border: 1px solid #e6e6e6;
   margin: 20px;
