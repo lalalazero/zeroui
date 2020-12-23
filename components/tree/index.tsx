@@ -5,6 +5,7 @@ import React, {
     useMemo,
     useState,
 } from 'react'
+import { Icon } from '../index'
 import { classname } from '../_util/classes'
 import './style.scss'
 
@@ -14,6 +15,7 @@ export type TreeNode = {
     title: string
     key: string
     children?: TreeNode[]
+    expandable?: boolean
 }
 
 export type TreeData = TreeNode[]
@@ -21,11 +23,14 @@ export type TreeData = TreeNode[]
 export type TreeProps = {
     treeData: TreeNode[]
     checkedKeys?: string[]
+    expandKeys?: string[]
+    defaultExpandAll?: boolean
     onCheck?: (
         newCheckedKeys: string[],
         checkNode: TreeNode,
         event: ChangeEvent<HTMLInputElement>
     ) => void
+    onExpand?: (expandKeys: string[], expandNode: TreeNode) => void
 }
 
 const getChildrenKeys = (parentNode: TreeNode) => {
@@ -43,20 +48,56 @@ const getChildrenKeys = (parentNode: TreeNode) => {
     return collectChildrenKey(parentNode.children || [])
 }
 
+const getExpandableChildrenKeys = (treeData: TreeData) => {
+    const keys: string[] = []
+    const getKey = (parentNode: TreeNode) => {
+        if (parentNode.children && parentNode.children.length > 0) {
+            if (parentNode.expandable === false) return
+            keys.push(parentNode.key)
+            parentNode.children.forEach((child) => getKey(child))
+        }
+    }
+
+    treeData.forEach((node: TreeNode) => getKey(node))
+
+    return keys
+}
+
 interface TreeNodeProps {
     treeNode: TreeNode
     checkedKeys: string[]
+    expandKeys: string[] | undefined | null
+    defaultExpandAll?: boolean
     onCheck?: (
         newCheckedKeys: string[],
         checkItem?: TreeNode,
         e?: ChangeEvent<HTMLInputElement>
     ) => void
     level: number
+    onExpand: (expandKeys: string[], expandNode: TreeNode) => void
+}
+
+const useExpand = (props: TreeNodeProps) => {
+    const [isExpand, setIsExpand] = useState(false)
+    const expandable =
+        props.treeNode.children && props.treeNode.children.length > 0
+
+    useEffect(() => {
+        if (!expandable) return
+        if (props.expandKeys) {
+            const found = props.expandKeys.find((i) => i === props.treeNode.key)
+            setIsExpand(!!found)
+        }
+    }, [props.expandKeys])
+
+    return expandable && isExpand
 }
 
 const TreeNode: React.FC<TreeNodeProps> = (props) => {
     const [indeterminate, setIndeterminate] = useState(false)
     const [checked, setChecked] = useState(false)
+
+    const isExpand = useExpand(props)
 
     const isLeaf = useMemo(() => {
         return props.treeNode.children && props.treeNode.children.length > 0
@@ -114,6 +155,32 @@ const TreeNode: React.FC<TreeNodeProps> = (props) => {
         props.onCheck && props.onCheck(newCheckedKeys, props.treeNode, event)
     }
 
+    const expandIcon = useMemo(() => {
+        if (props.treeNode.children && props.treeNode.children.length > 0) {
+            if (isExpand) {
+                return <Icon name="filled-down"></Icon>
+            } else {
+                return <Icon name="filled-right"></Icon>
+            }
+        }
+
+        return ''
+    }, [props.treeNode.children, isExpand])
+
+    const handleExpand = () => {
+        const newExpandKeys = props.expandKeys ? [...props.expandKeys] : []
+        if (!isExpand) {
+            newExpandKeys.push(props.treeNode.key)
+        } else {
+            const index = newExpandKeys.indexOf(props.treeNode.key)
+            if (index >= 0) {
+                newExpandKeys.splice(index, 1)
+            }
+        }
+
+        props.onExpand(newExpandKeys, props.treeNode)
+    }
+
     const onNodeCheck = (
         checkedKeys: string[],
         checkNode: TreeNode,
@@ -150,6 +217,12 @@ const TreeNode: React.FC<TreeNodeProps> = (props) => {
                 style={{ marginLeft: props.level * 10 }}
                 className={classname(PREFIX + '-item')}
             >
+                <span
+                    className={PREFIX + '-expand-span'}
+                    onClick={handleExpand}
+                >
+                    {expandIcon}
+                </span>
                 <span className={PREFIX + '-item-checkbox-wrapper'}>
                     <input
                         type="checkbox"
@@ -165,7 +238,8 @@ const TreeNode: React.FC<TreeNodeProps> = (props) => {
                 <span className={PREFIX + '-label'}>
                     {props.treeNode.title}
                 </span>
-                {props.treeNode.children &&
+                {isExpand &&
+                    props.treeNode.children &&
                     props.treeNode.children.map((child) => (
                         <TreeNode
                             key={child.key}
@@ -173,6 +247,9 @@ const TreeNode: React.FC<TreeNodeProps> = (props) => {
                             checkedKeys={props.checkedKeys}
                             onCheck={onNodeCheck}
                             level={props.level + 1}
+                            expandKeys={props.expandKeys}
+                            onExpand={props.onExpand}
+                            defaultExpandAll={props.defaultExpandAll}
                         ></TreeNode>
                     ))}
             </div>
@@ -181,13 +258,28 @@ const TreeNode: React.FC<TreeNodeProps> = (props) => {
 }
 
 const Tree: React.FC<TreeProps> = (props) => {
+    const { defaultExpandAll = true } = props
     const [checkedKeys, setCheckedKeys] = useState<string[]>([])
+    const [expandKeys, setExpandKeys] = useState<string[]>()
 
     useEffect(() => {
         if (props.checkedKeys) {
             setCheckedKeys(props.checkedKeys)
         }
     }, [props.checkedKeys])
+
+    useEffect(() => {
+        if (defaultExpandAll) {
+            const expandableKeys = getExpandableChildrenKeys(props.treeData)
+            expandableKeys.length > 0 && setExpandKeys(expandableKeys)
+        }
+    }, [defaultExpandAll])
+
+    useEffect(() => {
+        if (props.expandKeys) {
+            setExpandKeys(props.expandKeys)
+        }
+    }, [props.expandKeys])
 
     const handleCheck = (
         checkedKeys: string[],
@@ -196,6 +288,11 @@ const Tree: React.FC<TreeProps> = (props) => {
     ) => {
         setCheckedKeys(checkedKeys)
         props.onCheck && props.onCheck(checkedKeys, checkNode, event)
+    }
+
+    const handleExpand = (expandKeys: string[], expandNode: TreeNode) => {
+        setExpandKeys(expandKeys)
+        props.onExpand && props.onExpand(expandKeys, expandNode)
     }
 
     return (
@@ -207,6 +304,9 @@ const Tree: React.FC<TreeProps> = (props) => {
                     checkedKeys={checkedKeys}
                     onCheck={handleCheck}
                     level={1}
+                    expandKeys={expandKeys}
+                    onExpand={handleExpand}
+                    defaultExpandAll={defaultExpandAll}
                 ></TreeNode>
             ))}
         </div>
