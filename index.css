@@ -3473,14 +3473,70 @@
 .zeroUI-pagination-simple .zeroUI-pagination-nav[nav-disabled=true] .zeroUI-icon {
   fill: #ccc;
 }
+[class^=zeroUI-] {
+  box-sizing: border-box;
+}
+[class^=zeroUI-]::before {
+  box-sizing: border-box;
+}
+[class^=zeroUI-]::after {
+  box-sizing: border-box;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.zeroUI-radio {
+  position: relative;
+}
+.zeroUI-radio::before {
+  content: " ";
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid #333;
+  background-color: #fff;
+  transform: translate(-1px, -1px);
+  cursor: pointer;
+}
+.zeroUI-radio:disabled::before {
+  border-color: #ccc;
+  cursor: not-allowed;
+}
+.zeroUI-radio:checked::before {
+  border-color: #13c2c2;
+}
+.zeroUI-radio:checked::after {
+  position: absolute;
+  left: 7px;
+  top: 7px;
+  content: " ";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: #13c2c2;
+  border-radius: 50%;
+  transform: translate(-5px, -5px);
+}
+
 .zeroUI-radio {
   margin: 0 5px;
-}
-.zeroUI-radio:hover {
-  cursor: pointer;
+  border: none;
 }
 .zeroUI-radio-label {
   margin-left: 5px;
+}
+.zeroUI-radio-wrapper {
+  position: relative;
 }
 [class^=zeroUI-] {
   box-sizing: border-box;
