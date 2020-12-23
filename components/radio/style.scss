@@ -1,9 +1,50 @@
-.zeroUI-radio {
-    &:hover {
+@import '../index.scss';
+
+%radio-base {
+    position: relative;
+    &::before {
+        content: ' ';
+        display: inline-block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        border: 1px solid #333;
+        background-color: #fff;
+        transform: translate(-1px, -1px);
         cursor: pointer;
     }
+    &:disabled::before {
+        border-color: #ccc;
+        cursor: not-allowed;
+    }
+    &:checked::before {
+        border-color: $brand-color;
+    }
+    &:checked::after {
+        position: absolute;
+        left: 7px;
+        top: 7px;
+        content: ' ';
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background-color: $brand-color;
+        border-radius: 50%;
+        transform: translate(-5px, -5px);
+    }
+}
+
+.zeroUI-radio {
+    @extend %radio-base;
     &-label {
         margin-left: 5px;
     }
+    &-wrapper {
+        position: relative;
+    }
     margin: 0 5px;
+    border: none;
 }
