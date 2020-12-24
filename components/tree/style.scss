@@ -39,4 +39,7 @@
         align-items: center;
         font-size: 1.2em;
     }
+    &-loading {
+        animation: $spinAnimation;
+    }
 }

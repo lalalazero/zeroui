@@ -26,7 +26,7 @@ export type TreeProps = {
     onSelect?: (selectedKeys: string[], selectNode: TreeNodeType) => void
     expandIcon?: ReactNode
     collapseIcon?: ReactNode
-    loadData?: (node: TreeNodeType) => void
+    loadData?: (node: TreeNodeType) => Promise<any>
 }
 
 const Tree: React.FC<TreeProps> = (props) => {
@@ -122,6 +122,7 @@ const Tree: React.FC<TreeProps> = (props) => {
                     onDeselect={handleDeselect}
                     expandIcon={props.expandIcon}
                     collapseIcon={props.collapseIcon}
+                    loadData={props.loadData}
                 ></TreeNode>
             ))}
         </div>

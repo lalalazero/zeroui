@@ -40,6 +40,7 @@ interface TreeNodeProps {
     treeCheckable: boolean
     expandIcon?: ReactNode
     collapseIcon?: ReactNode
+    loadData?: (node: TreeNodeType) => Promise<any>
 }
 
 const TreeNode: React.FC<TreeNodeProps> = (props) => {
@@ -47,12 +48,16 @@ const TreeNode: React.FC<TreeNodeProps> = (props) => {
     const selected = useSelect(props)
     const isExpand = useExpand(props)
     const childrenKeys = useChildrenKeys(props)
+    const [loading, setLoading] = useState(false)
 
     const isLeaf = useMemo(() => {
-        return props.treeNode.children && props.treeNode.children.length > 0
-            ? false
-            : true
-    }, [props.treeNode])
+        return props.treeNode.isLeaf !== undefined &&
+            props.treeNode.isLeaf !== null
+            ? props.treeNode.isLeaf
+            : props.treeNode.children && props.treeNode.children.length > 0
+                ? false
+                : true
+    }, [props.treeNode.isLeaf, props.treeNode.children])
 
     const handleCheck: ChangeEventHandler<HTMLInputElement> = (event) => {
         let newCheckedKeys = [...props.checkedKeys]
@@ -79,7 +84,7 @@ const TreeNode: React.FC<TreeNodeProps> = (props) => {
     }
 
     const expandIcon = useMemo(() => {
-        if (props.treeNode.children && props.treeNode.children.length > 0) {
+        if (!isLeaf) {
             if (isExpand) {
                 return props.expandIcon || <Icon name="filled-down"></Icon>
             } else {
@@ -115,7 +120,7 @@ const TreeNode: React.FC<TreeNodeProps> = (props) => {
         return ''
     }, [checkable, checked, indeterminate, handleCheck])
 
-    const handleExpand = () => {
+    const doSyncExpand = () => {
         const newExpandKeys = props.expandKeys ? [...props.expandKeys] : []
         if (!isExpand) {
             newExpandKeys.push(props.treeNode.key)
@@ -128,6 +133,34 @@ const TreeNode: React.FC<TreeNodeProps> = (props) => {
 
         props.onExpand(newExpandKeys, props.treeNode)
     }
+
+    const doAsyncExpand = () => {
+        setLoading(true)
+        props.loadData &&
+            props
+                .loadData(props.treeNode)
+                .then(() => doSyncExpand())
+                .catch((err) => console.warn('loadData err', err))
+                .finally(() => setLoading(false))
+    }
+
+    const handleExpand = () => {
+        if (props.loadData) {
+            doAsyncExpand()
+        } else {
+            doSyncExpand()
+        }
+    }
+
+    const renderExpandIcon = useMemo(() => {
+        return loading ? (
+            <Icon name="loading" className={PREFIX + '-loading'}></Icon>
+        ) : (
+            <span className={PREFIX + '-expand-span'} onClick={handleExpand}>
+                {expandIcon}
+            </span>
+        )
+    }, [expandIcon, loading, handleExpand])
 
     const onNodeCheck = (
         checkedKeys: string[],
@@ -173,12 +206,7 @@ const TreeNode: React.FC<TreeNodeProps> = (props) => {
                 style={{ marginLeft: props.level * 10 }}
                 className={classname(PREFIX + '-item')}
             >
-                <span
-                    className={PREFIX + '-expand-span'}
-                    onClick={handleExpand}
-                >
-                    {expandIcon}
-                </span>
+                {renderExpandIcon}
 
                 {renderCheckbox}
                 <span
@@ -210,6 +238,7 @@ const TreeNode: React.FC<TreeNodeProps> = (props) => {
                             onDeselect={props.onDeselect}
                             expandIcon={props.expandIcon}
                             collapseIcon={props.collapseIcon}
+                            loadData={props.loadData}
                         ></TreeNode>
                     ))}
             </div>
@@ -220,7 +249,8 @@ const TreeNode: React.FC<TreeNodeProps> = (props) => {
 const useExpand = (props: TreeNodeProps) => {
     const [isExpand, setIsExpand] = useState(false)
     const expandable =
-        props.treeNode.children && props.treeNode.children.length > 0
+        props.treeNode.isLeaf !== true ||
+        (props.treeNode.children && props.treeNode.children.length > 0)
 
     useEffect(() => {
         if (!expandable) return
