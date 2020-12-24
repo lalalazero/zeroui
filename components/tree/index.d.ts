@@ -1,16 +1,9 @@
 import React, { ChangeEvent, ReactNode } from 'react';
 import './style.scss';
-export declare type TreeNode = {
-    title: string | ReactNode;
-    key: string;
-    children?: TreeNode[];
-    expandable?: boolean;
-    checkable?: boolean;
-    icon?: ReactNode;
-};
-export declare type TreeData = TreeNode[];
+import { TreeNodeType } from './TreeNode';
+export declare type TreeData = TreeNodeType[];
 export declare type TreeProps = {
-    treeData: TreeNode[];
+    treeData: TreeNodeType[];
     checkedKeys?: string[];
     defaultCheckedKeys?: string[];
     defaultExpandKeys?: string[];
@@ -20,11 +13,12 @@ export declare type TreeProps = {
     multiple?: boolean;
     checkable: boolean;
     defaultExpandAll?: boolean;
-    onCheck?: (newCheckedKeys: string[], checkNode: TreeNode, event: ChangeEvent<HTMLInputElement>) => void;
-    onExpand?: (expandKeys: string[], expandNode: TreeNode) => void;
-    onSelect?: (selectedKeys: string[], selectNode: TreeNode) => void;
+    onCheck?: (newCheckedKeys: string[], checkNode: TreeNodeType, event: ChangeEvent<HTMLInputElement>) => void;
+    onExpand?: (expandKeys: string[], expandNode: TreeNodeType) => void;
+    onSelect?: (selectedKeys: string[], selectNode: TreeNodeType) => void;
     expandIcon?: ReactNode;
     collapseIcon?: ReactNode;
+    loadData?: (node: TreeNodeType) => Promise<any>;
 };
 declare const Tree: React.FC<TreeProps>;
 export default Tree;

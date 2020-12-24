@@ -3885,6 +3885,9 @@
   align-items: center;
   font-size: 1.2em;
 }
+.zeroui-tree-loading {
+  animation: spin 1s infinite linear;
+}
 .demo-card {
   border: 1px solid #e6e6e6;
   margin: 20px;
