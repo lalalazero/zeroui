@@ -30,6 +30,7 @@ export type TreeProps = {
     defaultSelectedKeys?: string[]
     expandKeys?: string[]
     selectedKeys?: string[]
+    multiple?: boolean
     checkable: boolean
     defaultExpandAll?: boolean
     onCheck?: (
@@ -75,6 +76,7 @@ interface TreeNodeProps {
     treeNode: TreeNode
     checkedKeys: string[]
     expandKeys: string[] | undefined | null
+    selectedKeys: string[]
     defaultExpandAll?: boolean
     onCheck?: (
         newCheckedKeys: string[],
@@ -83,6 +85,8 @@ interface TreeNodeProps {
     ) => void
     level: number
     onExpand: (expandKeys: string[], expandNode: TreeNode) => void
+    onSelect: (selectNode: TreeNode) => void
+    onDeselect: (selectNode: TreeNode) => void
     treeCheckable: boolean
 }
 
@@ -139,8 +143,26 @@ const useCheck = (props: TreeNodeProps) => {
     return [checked, indeterminate]
 }
 
+const useSelect = (props: TreeNodeProps) => {
+    const [selected, setSelected] = useState(false)
+
+    useEffect(() => {
+        if (
+            props.selectedKeys &&
+            props.selectedKeys.indexOf(props.treeNode.key) >= 0
+        ) {
+            setSelected(true)
+        } else {
+            setSelected(false)
+        }
+    }, [props.selectedKeys, props.treeNode.key])
+
+    return selected
+}
+
 const TreeNode: React.FC<TreeNodeProps> = (props) => {
     const [checked, indeterminate] = useCheck(props)
+    const selected = useSelect(props)
     const isExpand = useExpand(props)
     const childrenKeys = useChildrenKeys(props)
 
@@ -251,6 +273,14 @@ const TreeNode: React.FC<TreeNodeProps> = (props) => {
         props.onCheck && props.onCheck(newCheckedKeys, checkNode, event)
     }
 
+    const handleSelect = (selectNode: TreeNode) => {
+        if (selected) {
+            props.onDeselect(selectNode)
+        } else {
+            props.onSelect(selectNode)
+        }
+    }
+
     const key = `level/${props.level}-value/${props.treeNode.key}`
 
     return (
@@ -269,7 +299,12 @@ const TreeNode: React.FC<TreeNodeProps> = (props) => {
                 </span>
 
                 {renderCheckbox}
-                <span className={PREFIX + '-label'}>
+                <span
+                    className={classname(PREFIX + '-label', {
+                        [`${PREFIX}-item-selected`]: selected,
+                    })}
+                    onClick={() => handleSelect(props.treeNode)}
+                >
                     {props.treeNode.title}
                 </span>
                 {isExpand &&
@@ -285,6 +320,9 @@ const TreeNode: React.FC<TreeNodeProps> = (props) => {
                             onExpand={props.onExpand}
                             defaultExpandAll={props.defaultExpandAll}
                             treeCheckable={props.treeCheckable}
+                            selectedKeys={props.selectedKeys}
+                            onSelect={props.onSelect}
+                            onDeselect={props.onDeselect}
                         ></TreeNode>
                     ))}
             </div>
@@ -297,6 +335,13 @@ const uniq = (arr: string[]) => Array.from(new Set(arr))
 const Tree: React.FC<TreeProps> = (props) => {
     const [checkedKeys, setCheckedKeys] = useState<string[]>([])
     const [expandKeys, setExpandKeys] = useState<string[]>()
+    const [selectedKeys, setSelectedKeys] = useState<string[]>([])
+
+    useEffect(() => {
+        if (props.selectedKeys) {
+            setSelectedKeys(props.selectedKeys)
+        }
+    }, [props.selectedKeys])
 
     useEffect(() => {
         if (props.defaultExpandKeys) {
@@ -305,6 +350,10 @@ const Tree: React.FC<TreeProps> = (props) => {
 
         if (props.defaultCheckedKeys) {
             setCheckedKeys(props.defaultCheckedKeys)
+        }
+
+        if (props.defaultSelectedKeys) {
+            setSelectedKeys(props.defaultSelectedKeys)
         }
     }, [])
 
@@ -341,6 +390,23 @@ const Tree: React.FC<TreeProps> = (props) => {
         props.onExpand && props.onExpand(expandKeys, expandNode)
     }
 
+    const handleSelect = (selectNode: TreeNode) => {
+        let newSelectedKeys = [selectNode.key]
+        if (props.multiple) {
+            newSelectedKeys = uniq(selectedKeys.concat([selectNode.key]))
+        }
+        setSelectedKeys(newSelectedKeys)
+        props.onSelect && props.onSelect(newSelectedKeys, selectNode)
+    }
+
+    const handleDeselect = (deselectNode: TreeNode) => {
+        const newSelectedKeys = selectedKeys.filter(
+            (key) => key !== deselectNode.key
+        )
+        setSelectedKeys(newSelectedKeys)
+        props.onSelect && props.onSelect(newSelectedKeys, deselectNode)
+    }
+
     return (
         <div className={PREFIX}>
             {props.treeData.map((item) => (
@@ -354,6 +420,9 @@ const Tree: React.FC<TreeProps> = (props) => {
                     onExpand={handleExpand}
                     defaultExpandAll={props.defaultExpandAll}
                     treeCheckable={props.checkable}
+                    selectedKeys={selectedKeys}
+                    onSelect={handleSelect}
+                    onDeselect={handleDeselect}
                 ></TreeNode>
             ))}
         </div>
@@ -363,6 +432,7 @@ const Tree: React.FC<TreeProps> = (props) => {
 Tree.defaultProps = {
     checkable: true,
     defaultExpandAll: false,
+    multiple: false,
 }
 
 export default Tree

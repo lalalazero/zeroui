@@ -1,6 +1,6 @@
-## 基本用法
+## 完全受控
 
-一个基本的 Tree，包含可勾选、可展开、可选中、禁用等功能
+完全受控示例
 
 ```jsx
 import React, { useState } from 'react'
@@ -40,15 +40,23 @@ const App = () => {
         },
     ]
 
+    const [selectedKeys, setSelectedKeys] = useState(['1-1-1'])
+    const [checkedKeys, setCheckedKeys] = useState(['1-1-1'])
+    const [expandKeys, setExpandKeys] = useState(['1', '1-2'])
+
     const handleCheck = (checkedKeys, checkItem, event) => {
-        console.log('checkedKeys ', checkedKeys)
-        console.log('checkItem ', checkItem)
-        console.log('event ', event)
+        console.log('handleCheck..', checkedKeys)
+        setCheckedKeys(checkedKeys)
     }
 
     const handleSelect = (selectedKeys, node) => {
-        console.log('selectedKeys ', selectedKeys)
-        console.log('node ', node)
+        console.log('handleSelect..', selectedKeys)
+        setSelectedKeys(selectedKeys)
+    }
+
+    const handleExpand = (expandKeys, node) => {
+        console.log('handleExpand..', expandKeys)
+        setExpandKeys(expandKeys)
     }
 
     return (
@@ -57,9 +65,10 @@ const App = () => {
                 treeData={treeData}
                 onCheck={handleCheck}
                 onSelect={handleSelect}
-                defaultExpandKeys={['1', '1-1']}
-                defaultCheckedKeys={['1', '1-2', '1-1-2']}
-                defaultSelectedKeys={['1-1-1']}
+                onExpand={handleExpand}
+                selectedKeys={selectedKeys}
+                checkedKeys={checkedKeys}
+                expandKeys={expandKeys}
             />
         </div>
     )
