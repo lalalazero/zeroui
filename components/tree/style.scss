@@ -31,4 +31,12 @@
         margin: 0 5px;
         user-select: none;
     }
+
+    &-node-icon {
+        vertical-align: middle;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.2em;
+    }
 }

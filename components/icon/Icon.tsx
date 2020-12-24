@@ -35,10 +35,12 @@ export const ICONS = [
     'rotate-right',
     'check',
     'check-filled',
+    'happy',
+    'joy',
 ] as const
 
 const scriptElement = document.createElement('script')
-scriptElement.src = 'http://at.alicdn.com/t/font_1353479_az771xld3q6.js'
+scriptElement.src = 'http://at.alicdn.com/t/font_1353479_2q42sxdhtgu.js'
 document.body.appendChild(scriptElement)
 
 const prefix = 'zeroUI-icon'

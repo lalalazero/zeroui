@@ -18,6 +18,7 @@ export type TreeNode = {
     children?: TreeNode[]
     expandable?: boolean
     checkable?: boolean
+    icon?: ReactNode
 }
 
 export type TreeData = TreeNode[]
@@ -40,6 +41,8 @@ export type TreeProps = {
     ) => void
     onExpand?: (expandKeys: string[], expandNode: TreeNode) => void
     onSelect?: (selectedKeys: string[], selectNode: TreeNode) => void
+    expandIcon?: ReactNode
+    collapseIcon?: ReactNode
 }
 
 const getChildrenKeys = (parentNode: TreeNode) => {
@@ -88,6 +91,8 @@ interface TreeNodeProps {
     onSelect: (selectNode: TreeNode) => void
     onDeselect: (selectNode: TreeNode) => void
     treeCheckable: boolean
+    expandIcon?: ReactNode
+    collapseIcon?: ReactNode
 }
 
 const useExpand = (props: TreeNodeProps) => {
@@ -199,9 +204,9 @@ const TreeNode: React.FC<TreeNodeProps> = (props) => {
     const expandIcon = useMemo(() => {
         if (props.treeNode.children && props.treeNode.children.length > 0) {
             if (isExpand) {
-                return <Icon name="filled-down"></Icon>
+                return props.expandIcon || <Icon name="filled-down"></Icon>
             } else {
-                return <Icon name="filled-right"></Icon>
+                return props.collapseIcon || <Icon name="filled-right"></Icon>
             }
         }
 
@@ -305,6 +310,9 @@ const TreeNode: React.FC<TreeNodeProps> = (props) => {
                     })}
                     onClick={() => handleSelect(props.treeNode)}
                 >
+                    <span className={PREFIX + '-node-icon'}>
+                        {props.treeNode.icon}
+                    </span>
                     {props.treeNode.title}
                 </span>
                 {isExpand &&
@@ -323,6 +331,8 @@ const TreeNode: React.FC<TreeNodeProps> = (props) => {
                             selectedKeys={props.selectedKeys}
                             onSelect={props.onSelect}
                             onDeselect={props.onDeselect}
+                            expandIcon={props.expandIcon}
+                            collapseIcon={props.collapseIcon}
                         ></TreeNode>
                     ))}
             </div>
@@ -423,6 +433,8 @@ const Tree: React.FC<TreeProps> = (props) => {
                     selectedKeys={selectedKeys}
                     onSelect={handleSelect}
                     onDeselect={handleDeselect}
+                    expandIcon={props.expandIcon}
+                    collapseIcon={props.collapseIcon}
                 ></TreeNode>
             ))}
         </div>

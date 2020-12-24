@@ -14,7 +14,7 @@ export default class Demo extends React.Component<any, any> {
         const demos = [
             await import('./01-基本用法.mdx'),
             await import('./02-完全受控.mdx'),
-            await import('./03-自定义tree.mdx'),
+            await import('./03-自定义图标.mdx'),
             await import('./04-异步加载.mdx'),
             await import('./05-限制高度滚动.mdx'),
         ]

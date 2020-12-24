@@ -1,16 +1,17 @@
-## 自定义 tree
+## 自定义图标
 
-关闭勾选，自定义折叠按钮，支持多种渲染图标
+自定义折叠和节点图标
 
 ```jsx
 import React, { useState } from 'react'
-import { Tree } from 'zero-ui-react'
+import { Tree, Icon } from 'zero-ui-react'
 
 const App = () => {
     const treeData = [
         {
             title: 'parent 1',
             key: '1',
+            icon: <Icon name="happy" />,
             children: [
                 {
                     title: 'parent 1-1',
@@ -28,6 +29,7 @@ const App = () => {
                 },
                 {
                     title: <span style={{ color: 'pink' }}>parent 1-2</span>,
+                    icon: <Icon name="joy" />,
                     key: '1-2',
                     children: [
                         {
@@ -40,12 +42,16 @@ const App = () => {
         },
     ]
 
+    const expandIcon = <Icon name="down" />
+    const collapseIcon = <Icon name="right" />
+
     return (
         <div>
             <Tree
                 treeData={treeData}
                 checkable={false}
-                defaultExpandKeys={['1', '1-1']}
+                expandIcon={expandIcon}
+                collapseIcon={collapseIcon}
             />
         </div>
     )
