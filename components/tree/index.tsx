@@ -1,5 +1,6 @@
 import React, { ChangeEvent, ReactNode, useEffect, useState } from 'react'
 import './style.scss'
+import { connect, createStore, Provider } from './TreeContext'
 import TreeNode, { TreeNodeType } from './TreeNode'
 
 const PREFIX = 'zeroui-tree'
@@ -31,6 +32,10 @@ export type TreeProps = {
 }
 
 const Tree: React.FC<TreeProps> = (props) => {
+    // const context = useContext(Context)
+
+    // console.log('Tree context..', context)
+
     const [checkedKeys, setCheckedKeys] = useState<string[]>([])
     const [expandKeys, setExpandKeys] = useState<string[]>([])
     const [selectedKeys, setSelectedKeys] = useState<string[]>([])
@@ -207,4 +212,17 @@ Tree.defaultProps = {
     disabled: false,
 }
 
-export default Tree
+const mapStateToProps = () => ({ a: 'mapped' })
+
+const Connected = connect(mapStateToProps)(Tree)
+
+const ConnectedTree: React.FC<TreeProps> = (props) => {
+    const store = createStore({ xxx: 'firstStore' })
+    return (
+        <Provider store={store}>
+            <Connected {...props} />
+        </Provider>
+    )
+}
+
+export default ConnectedTree

@@ -44,7 +44,15 @@ interface TreeNodeProps {
     treeDisabled?: boolean
 }
 
+// @connect(() => ({ a: 'aaaaaaaa' }))
 const TreeNode: React.FC<TreeNodeProps> = (props) => {
+    // const store = useContext(Context)
+
+    console.log(`key=${props.treeNode.key}`)
+    console.log(`props.a`, (props as any).a)
+
+    // console.log(`${props.treeNode.title} context = `, store && store.getState())
+
     const [loading, setLoading] = useState(false)
 
     const childrenKeys = useMemo(() => {
@@ -299,4 +307,4 @@ const filterAutoCheckableKeys = (children: TreeData) => {
 
     return keys
 }
-export default TreeNode
+// export default connect(() => ({ a: 'bbbb' }))(TreeNode)
