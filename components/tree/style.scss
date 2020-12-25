@@ -15,6 +15,12 @@
         &-selected {
             background-color: #b5f7f3 !important;
         }
+        &-disabled {
+            & > .zeroui-tree-label {
+                color: #ccc;
+            }
+            cursor: not-allowed;
+        }
     }
     &-label {
         display: inline-block;

@@ -15,10 +15,12 @@ const App = () => {
                 {
                     title: 'parent 1-1',
                     key: '1-1',
+                    disabled: true,
                     children: [
                         {
                             title: 'leaf',
                             key: '1-1-1',
+                            disableCheckbox: true,
                         },
                         {
                             title: 'leaf',
@@ -58,7 +60,7 @@ const App = () => {
                 onCheck={handleCheck}
                 onSelect={handleSelect}
                 defaultExpandKeys={['1', '1-1']}
-                defaultCheckedKeys={['1', '1-2', '1-1-2']}
+                defaultCheckedKeys={['1', '1-1', '1-2', '1-1-2']}
                 defaultSelectedKeys={['1-1-1']}
             />
         </div>

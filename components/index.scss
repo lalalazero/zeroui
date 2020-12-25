@@ -196,6 +196,13 @@ $table-row-hover-color: rgb(230, 247, 255);
     &:disabled::before {
         border-color: #ccc;
     }
+
+    &:disabled:checked::after {
+        border-color: #eee;
+    }
+    &:disabled:checked::before {
+        background-color: #ccc;
+    }
 }
 
 %checkbox-indeterminate {
