@@ -2,7 +2,6 @@ import React, {
     ChangeEvent,
     ChangeEventHandler,
     ReactNode,
-    useEffect,
     useMemo,
     useState,
 } from 'react'
@@ -20,6 +19,8 @@ export type TreeNodeType = {
     checkable?: boolean
     icon?: ReactNode
     isLeaf?: boolean
+    disabled?: boolean
+    disableCheckbox?: boolean
 }
 
 interface TreeNodeProps {
@@ -40,13 +41,27 @@ interface TreeNodeProps {
     expandIcon?: ReactNode
     collapseIcon?: ReactNode
     loadData?: (node: TreeNodeType) => Promise<any>
+    treeDisabled?: boolean
 }
 
 const TreeNode: React.FC<TreeNodeProps> = (props) => {
+    const [loading, setLoading] = useState(false)
+
     const childrenKeys = useMemo(() => {
         return getChildrenKeys(props.treeNode)
     }, [props.treeNode.children])
-    const [checked, indeterminate] = useCheck(props, childrenKeys)
+
+    const checked = useMemo(() => {
+        return props.checkedKeys.indexOf(props.treeNode.key) >= 0
+    }, [props.checkedKeys])
+
+    const indeterminate = useMemo(() => {
+        return (
+            childrenKeys.length > 0 &&
+            childrenKeys.some((key) => props.checkedKeys.indexOf(key) >= 0)
+        )
+    }, [props.checkedKeys, childrenKeys])
+
     const selected = useMemo(() => {
         return props.selectedKeys.indexOf(props.treeNode.key) >= 0
     }, [props.treeNode.key, props.selectedKeys])
@@ -55,7 +70,11 @@ const TreeNode: React.FC<TreeNodeProps> = (props) => {
         return props.expandKeys.indexOf(props.treeNode.key) >= 0
     }, [props.expandKeys, props.treeNode.key])
 
-    const [loading, setLoading] = useState(false)
+    const nodeDisabled =
+        props.treeDisabled === true || props.treeNode.disabled === true
+
+    const checkboxDisabled =
+        nodeDisabled || props.treeNode.disableCheckbox === true
 
     const isLeaf = useMemo(() => {
         if (typeof props.treeNode.isLeaf === 'boolean') {
@@ -64,7 +83,12 @@ const TreeNode: React.FC<TreeNodeProps> = (props) => {
         return !props.treeNode.children || props.treeNode.children.length <= 0
     }, [props.treeNode.isLeaf, props.treeNode.children])
 
+    const autoCheckableChildrenKeys = filterAutoCheckableKeys(
+        props.treeNode.children || []
+    )
+
     const handleCheck: ChangeEventHandler<HTMLInputElement> = (event) => {
+        if (nodeDisabled || checkboxDisabled) return
         let newCheckedKeys = [...props.checkedKeys]
         const checked = event.target.checked
         const nodeKey = props.treeNode.key
@@ -77,10 +101,12 @@ const TreeNode: React.FC<TreeNodeProps> = (props) => {
 
         if (!isLeaf) {
             if (checked) {
-                newCheckedKeys.push(...childrenKeys)
+                newCheckedKeys = newCheckedKeys.concat(
+                    autoCheckableChildrenKeys
+                )
             } else {
                 newCheckedKeys = newCheckedKeys.filter(
-                    (key) => childrenKeys.indexOf(key) < 0
+                    (key) => autoCheckableChildrenKeys.indexOf(key) < 0
                 )
             }
         }
@@ -115,6 +141,7 @@ const TreeNode: React.FC<TreeNodeProps> = (props) => {
                         checked={checked}
                         onChange={handleCheck}
                         data-checked={checked}
+                        disabled={checkboxDisabled}
                     ></input>
                     <span
                         className={PREFIX + '-item-checkbox-indeterminate'}
@@ -186,6 +213,7 @@ const TreeNode: React.FC<TreeNodeProps> = (props) => {
     }
 
     const handleSelect = () => {
+        if (nodeDisabled) return
         props.onSelect(props.treeNode, selected)
     }
 
@@ -197,7 +225,9 @@ const TreeNode: React.FC<TreeNodeProps> = (props) => {
                 key={key}
                 data-key={key}
                 style={{ marginLeft: props.level * 10 }}
-                className={classname(PREFIX + '-item')}
+                className={classname(PREFIX + '-item', {
+                    [`${PREFIX}-item-disabled`]: nodeDisabled,
+                })}
             >
                 {renderExpandIcon}
 
@@ -231,36 +261,12 @@ const TreeNode: React.FC<TreeNodeProps> = (props) => {
                             expandIcon={props.expandIcon}
                             collapseIcon={props.collapseIcon}
                             loadData={props.loadData}
+                            treeDisabled={props.treeDisabled}
                         ></TreeNode>
                     ))}
             </div>
         </>
     )
-}
-
-const useCheck = (props: TreeNodeProps, childrenKeys: string[]) => {
-    const [checked, setChecked] = useState(false)
-    const [indeterminate, setIndeterminate] = useState(false)
-    useEffect(() => {
-        if (props.checkedKeys) {
-            if (props.checkedKeys.indexOf(props.treeNode.key) >= 0) {
-                setChecked(true)
-            } else {
-                setChecked(false)
-            }
-
-            if (
-                childrenKeys.length > 0 &&
-                childrenKeys.some((key) => props.checkedKeys.indexOf(key) >= 0)
-            ) {
-                setIndeterminate(true)
-            } else {
-                setIndeterminate(false)
-            }
-        }
-    }, [props.checkedKeys])
-
-    return [checked, indeterminate]
 }
 
 const getChildrenKeys = (parentNode: TreeNodeType) => {
@@ -278,4 +284,19 @@ const getChildrenKeys = (parentNode: TreeNodeType) => {
     return collectChildrenKey(parentNode.children || [])
 }
 
+const filterAutoCheckableKeys = (children: TreeData) => {
+    const keys: string[] = []
+
+    const x = (node: TreeNodeType) => {
+        if (node.disabled || node.disableCheckbox) {
+            return
+        }
+        keys.push(node.key)
+        node.children && node.children.forEach((child) => x(child))
+    }
+
+    children.forEach((child) => x(child))
+
+    return keys
+}
 export default TreeNode

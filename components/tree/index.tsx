@@ -27,12 +27,23 @@ export type TreeProps = {
     expandIcon?: ReactNode
     collapseIcon?: ReactNode
     loadData?: (node: TreeNodeType) => Promise<any>
+    disabled?: boolean
 }
 
 const Tree: React.FC<TreeProps> = (props) => {
     const [checkedKeys, setCheckedKeys] = useState<string[]>([])
     const [expandKeys, setExpandKeys] = useState<string[]>([])
     const [selectedKeys, setSelectedKeys] = useState<string[]>([])
+
+    const [disabledKeys, setDisabledKeys] = useState<string[]>([])
+
+    useEffect(() => {
+        if (props.disabled) {
+            setDisabledKeys(getAllKeys(props.treeData))
+        } else {
+            setDisabledKeys(getDisabledKeys(props.treeData))
+        }
+    }, [props.treeData, props.disabled])
 
     useEffect(() => {
         if (props.selectedKeys) {
@@ -78,7 +89,9 @@ const Tree: React.FC<TreeProps> = (props) => {
         checkNode: TreeNodeType,
         event: ChangeEvent<HTMLInputElement>
     ) => {
-        setCheckedKeys(uniq(checkedKeys))
+        setCheckedKeys(
+            uniq(checkedKeys.filter((key) => disabledKeys.indexOf(key) < 0))
+        )
         props.onCheck && props.onCheck(checkedKeys, checkNode, event)
     }
 
@@ -137,6 +150,7 @@ const Tree: React.FC<TreeProps> = (props) => {
                     expandIcon={props.expandIcon}
                     collapseIcon={props.collapseIcon}
                     loadData={props.loadData}
+                    treeDisabled={props.disabled}
                 ></TreeNode>
             ))}
         </div>
@@ -158,12 +172,39 @@ const getExpandableChildrenKeys = (treeData: TreeData) => {
     return keys
 }
 
+const getDisabledKeys = (treeData: TreeData) => {
+    const keys: string[] = []
+    const getDisabledKey = (parentNode: TreeNodeType) => {
+        if (parentNode.disabled || parentNode.disableCheckbox) {
+            keys.push(parentNode.key)
+        }
+        if (parentNode.children && parentNode.children.length > 0) {
+            parentNode.children.forEach((child) => getDisabledKey(child))
+        }
+    }
+
+    treeData.forEach((node: TreeNodeType) => getDisabledKey(node))
+
+    return keys
+}
+
+const getAllKeys = (treeData: TreeData) => {
+    const keys: string[] = []
+    const x = (node: TreeNodeType) => {
+        keys.push(node.key)
+        node.children && node.children.forEach((c) => x(c))
+    }
+    treeData.forEach((d) => x(d))
+    return keys
+}
+
 const uniq = (arr: string[]) => Array.from(new Set(arr))
 
 Tree.defaultProps = {
     checkable: true,
     autoExpandParent: true,
     multiple: false,
+    disabled: false,
 }
 
 export default Tree
