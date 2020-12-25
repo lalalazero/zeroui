@@ -1,0 +1,34 @@
+## API
+
+### Tree Props
+
+| 属性                | 说明                               | 类型                                                                                           | 可选值 | 默认值          | 是否必填 |
+| ------------------- | ---------------------------------- | ---------------------------------------------------------------------------------------------- | ------ | --------------- | -------- |
+| treeData            | 源数据                             | TreeNodeType[]                                                                                 | --     | --              | 是       |
+| checkedKeys         | checkbox 勾选的节点                | string[]                                                                                       | --     | --              | 否       |
+| defaultCheckedKeys  | 初始化勾选节点(只会初始化一次)     | string[]                                                                                       | --     | --              | 否       |
+| expandKeys          | 展开的树节点                       | string[]                                                                                       | --     | --              | 否       |
+| defaultExpandKeys   | 初始化展开的树节点(只会初始化一次) | string[]                                                                                       | --     | --              | 否       |
+| selectedKeys        | 选中的树节点                       | string[]                                                                                       | --     | --              | 否       |
+| defaultSelectedKeys | 初始化选中的树节点(只会初始化一次) | string[]                                                                                       | --     | --              | 否       |
+| multiple            | 是否允许多选                       | boolean                                                                                        | --     | false(默认单选) | 否       |
+| checkable           | 整棵树是否出现 checkbox 勾选框     | boolean                                                                                        | --     | true            | 否       |
+| autoExpandParent    | 自动展开可展开的父节点             | boolean                                                                                        | --     | true            | 否       |
+| onCheck             | 点击 checkbox 触发                 | (checkedKeys: string[], checkNode: TreeNodeType, event: ChangeEvent<HTMLInputElement>) => void | --     | --              | 否       |
+| onExpand            | 点击折叠或者展开触发               | (expandKeys: string[], expandNode: TreeNodeType) => void                                       | --     | --              | 否       |
+| onSelect            | 点击树节点触发                     | (selectedKeys: string[], selectNode: TreeNodeType) => void                                     | --     | --              | 否       |
+| expandIcon          | 展开按钮                           | ReactNode                                                                                      | --     | --              | 否       |
+| collapseIcon        | 折叠按钮                           | ReactNode                                                                                      | --     | --              | 否       |
+| loadData            | 点击展开按钮，异步加载数据使用     | (node: TreeNodeType) => Promise<any>                                                           | --     | --              | 否       |
+
+### TreeNodeType Props
+
+| 属性       | 说明                                                                | 类型               | 可选值 | 默认值 | 是否必填 |
+| ---------- | ------------------------------------------------------------------- | ------------------ | ------ | ------ | -------- |
+| key        | 树节点唯一标识，整棵树的每个节点的 key 必须唯一                     | string             | --     | --     | 是       |
+| title      | 树节点渲染内容                                                      | string / ReactNode | --     | --     | 是       |
+| children   | 子树的内容                                                          | TreeNodeType[]     | --     | --     | 否       |
+| expandable | 节点是否可展开                                                      | boolean            | --     | --     | 否       |
+| checkable  | 是否显示 checkbox,只有整棵树 checkable 为 true 时才有用             | boolean            | --     | --     | 否       |
+| icon       | 节点渲染图标                                                        | ReactNode          | --     | --     | 否       |
+| isLeaf     | 配合 loadData 异步加载使用，只有 isLeaf 为 false 的节点才会异步加载 | boolean            | --     | --     | 否       |

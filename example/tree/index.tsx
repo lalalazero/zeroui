@@ -18,11 +18,11 @@ export default class Demo extends React.Component<any, any> {
             await import('./04-异步加载.mdx'),
             await import('./05-限制高度滚动.mdx'),
         ]
-        // const api = await import('./api.mdx')
+        const api = await import('./api.mdx')
         this.setState({
-            // api: api.default.apiContent,
+            api: api.default.apiContent,
             demos,
-            // apiCode: api.default.apiCode,
+            apiCode: api.default.apiCode,
         })
     }
 
