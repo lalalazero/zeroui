@@ -19,6 +19,7 @@ export declare type TreeProps = {
     expandIcon?: ReactNode;
     collapseIcon?: ReactNode;
     loadData?: (node: TreeNodeType) => Promise<any>;
+    disabled?: boolean;
 };
 declare const Tree: React.FC<TreeProps>;
 export default Tree;

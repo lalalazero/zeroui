@@ -7,6 +7,8 @@ export declare type TreeNodeType = {
     checkable?: boolean;
     icon?: ReactNode;
     isLeaf?: boolean;
+    disabled?: boolean;
+    disableCheckbox?: boolean;
 };
 interface TreeNodeProps {
     treeNode: TreeNodeType;
@@ -22,6 +24,7 @@ interface TreeNodeProps {
     expandIcon?: ReactNode;
     collapseIcon?: ReactNode;
     loadData?: (node: TreeNodeType) => Promise<any>;
+    treeDisabled?: boolean;
 }
 declare const TreeNode: React.FC<TreeNodeProps>;
 export default TreeNode;
