@@ -46,6 +46,9 @@ const App = () => {
 
     const loadData = ({ key, children }) => {
         return new Promise((resolve, reject) => {
+            if (children && children.length >= 0) {
+                resolve()
+            }
             setTimeout(() => {
                 setTreeData((origin) =>
                     updateTreeData(origin, key, [

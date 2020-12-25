@@ -16,7 +16,7 @@ export type TreeProps = {
     selectedKeys?: string[]
     multiple?: boolean
     checkable: boolean
-    defaultExpandAll?: boolean
+    autoExpandParent?: boolean
     onCheck?: (
         newCheckedKeys: string[],
         checkNode: TreeNodeType,
@@ -31,7 +31,7 @@ export type TreeProps = {
 
 const Tree: React.FC<TreeProps> = (props) => {
     const [checkedKeys, setCheckedKeys] = useState<string[]>([])
-    const [expandKeys, setExpandKeys] = useState<string[]>()
+    const [expandKeys, setExpandKeys] = useState<string[]>([])
     const [selectedKeys, setSelectedKeys] = useState<string[]>([])
 
     useEffect(() => {
@@ -61,11 +61,11 @@ const Tree: React.FC<TreeProps> = (props) => {
     }, [props.checkedKeys])
 
     useEffect(() => {
-        if (props.defaultExpandAll) {
+        if (props.autoExpandParent) {
             const expandableKeys = getExpandableChildrenKeys(props.treeData)
             expandableKeys.length > 0 && setExpandKeys(expandableKeys)
         }
-    }, [props.defaultExpandAll])
+    }, [props.autoExpandParent])
 
     useEffect(() => {
         if (props.expandKeys) {
@@ -82,26 +82,41 @@ const Tree: React.FC<TreeProps> = (props) => {
         props.onCheck && props.onCheck(checkedKeys, checkNode, event)
     }
 
-    const handleExpand = (expandKeys: string[], expandNode: TreeNodeType) => {
-        setExpandKeys(uniq(expandKeys))
-        props.onExpand && props.onExpand(expandKeys, expandNode)
+    const handleExpand = (expandNode: TreeNodeType, expanded: boolean) => {
+        const newExpandKeys = [...expandKeys]
+        if (!expanded) {
+            newExpandKeys.push(expandNode.key)
+        } else {
+            const index = newExpandKeys.indexOf(expandNode.key)
+            if (index >= 0) {
+                newExpandKeys.splice(index, 1)
+            }
+        }
+        setExpandKeys(uniq(newExpandKeys))
+        props.onExpand && props.onExpand(newExpandKeys, expandNode)
     }
 
-    const handleSelect = (selectNode: TreeNodeType) => {
-        let newSelectedKeys = [selectNode.key]
+    const handleSelect = (selectNode: TreeNodeType, selected: boolean) => {
+        let newSelectedKeys: string[] = props.multiple
+            ? [...selectedKeys]
+            : selected
+            ? []
+            : [selectNode.key]
+
         if (props.multiple) {
-            newSelectedKeys = uniq(selectedKeys.concat([selectNode.key]))
+            if (!selected) {
+                newSelectedKeys.push(selectNode.key)
+            } else {
+                const index = newSelectedKeys.indexOf(selectNode.key)
+                if (index >= 0) {
+                    newSelectedKeys.splice(index, 1)
+                }
+            }
+            newSelectedKeys = uniq(Array.from(new Set(newSelectedKeys)))
         }
+
         setSelectedKeys(newSelectedKeys)
         props.onSelect && props.onSelect(newSelectedKeys, selectNode)
-    }
-
-    const handleDeselect = (deselectNode: TreeNodeType) => {
-        const newSelectedKeys = selectedKeys.filter(
-            (key) => key !== deselectNode.key
-        )
-        setSelectedKeys(newSelectedKeys)
-        props.onSelect && props.onSelect(newSelectedKeys, deselectNode)
     }
 
     return (
@@ -115,11 +130,10 @@ const Tree: React.FC<TreeProps> = (props) => {
                     level={1}
                     expandKeys={expandKeys}
                     onExpand={handleExpand}
-                    defaultExpandAll={props.defaultExpandAll}
+                    autoExpandParent={props.autoExpandParent}
                     treeCheckable={props.checkable}
                     selectedKeys={selectedKeys}
                     onSelect={handleSelect}
-                    onDeselect={handleDeselect}
                     expandIcon={props.expandIcon}
                     collapseIcon={props.collapseIcon}
                     loadData={props.loadData}
@@ -148,7 +162,7 @@ const uniq = (arr: string[]) => Array.from(new Set(arr))
 
 Tree.defaultProps = {
     checkable: true,
-    defaultExpandAll: false,
+    autoExpandParent: true,
     multiple: false,
 }
 
