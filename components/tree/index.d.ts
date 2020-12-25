@@ -12,7 +12,7 @@ export declare type TreeProps = {
     selectedKeys?: string[];
     multiple?: boolean;
     checkable: boolean;
-    defaultExpandAll?: boolean;
+    autoExpandParent?: boolean;
     onCheck?: (newCheckedKeys: string[], checkNode: TreeNodeType, event: ChangeEvent<HTMLInputElement>) => void;
     onExpand?: (expandKeys: string[], expandNode: TreeNodeType) => void;
     onSelect?: (selectedKeys: string[], selectNode: TreeNodeType) => void;

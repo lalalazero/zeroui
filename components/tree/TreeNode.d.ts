@@ -11,14 +11,13 @@ export declare type TreeNodeType = {
 interface TreeNodeProps {
     treeNode: TreeNodeType;
     checkedKeys: string[];
-    expandKeys: string[] | undefined | null;
+    expandKeys: string[];
     selectedKeys: string[];
-    defaultExpandAll?: boolean;
+    autoExpandParent?: boolean;
     onCheck?: (newCheckedKeys: string[], checkItem?: TreeNodeType, e?: ChangeEvent<HTMLInputElement>) => void;
     level: number;
-    onExpand: (expandKeys: string[], expandNode: TreeNodeType) => void;
-    onSelect: (selectNode: TreeNodeType) => void;
-    onDeselect: (selectNode: TreeNodeType) => void;
+    onExpand: (expandNode: TreeNodeType, expanded: boolean) => void;
+    onSelect: (selectNode: TreeNodeType, selected: boolean) => void;
     treeCheckable: boolean;
     expandIcon?: ReactNode;
     collapseIcon?: ReactNode;
