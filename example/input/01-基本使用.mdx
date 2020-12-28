@@ -5,7 +5,7 @@
 ```jsx
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Input } from 'zero-ui-react'
+import { TextInput } from 'zero-ui-react'
 
 const App = () => {
     const [inputValue, setInputValue] = React.useState('')
@@ -13,11 +13,11 @@ const App = () => {
         setInputValue(value)
     }
     return (
-        <Input.TextInput
+        <TextInput
             placeholder={'enter your name'}
             value={inputValue}
             onChange={onChange}
-        ></Input.TextInput>
+        ></TextInput>
     )
 }
 export default App

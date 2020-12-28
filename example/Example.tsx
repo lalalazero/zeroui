@@ -11,6 +11,7 @@ import './Example.scss'
 import GridExample from './grid'
 import IconExample from './icon/Icon.example'
 import InputExample from './input'
+import InputNumberExample from './input-number'
 import LayoutExample from './layout'
 import logo from './logo.png'
 import MenuExample from './menu'
@@ -42,6 +43,11 @@ ReactDOM.render(
                         <div id="mountNode"></div>
                         <Route path="/icon" component={IconExample}></Route>
                         <Route path="/input" component={InputExample}></Route>
+                        <Route
+                            path="/input-number"
+                            component={InputNumberExample}
+                        ></Route>
+
                         <Route path="/select" component={SelectExample}></Route>
                         <Route path="/button" component={ButtonDemo}></Route>
                         <Route path="/dialog" component={DialogExample}></Route>

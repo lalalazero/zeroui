@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import TextInput from '../input/TextInput'
+import { TextInput } from '../index'
 import { classname } from '../_util/classes'
 import './style.scss'
 
