@@ -9,11 +9,14 @@ export interface TextInputProps extends FilterdProps {
     onInput?: EventHandler;
     name: string;
     value?: string;
+    defaultValue?: string;
     size?: 'default' | 'large' | 'small';
     icon?: ICON | React.ComponentType<any>;
     prefix?: ReactNode;
     suffix?: ReactNode;
     label?: string;
+    addonBefore?: ReactNode;
+    addonAfter?: ReactNode;
 }
 declare const TextInput: React.FC<TextInputProps>;
 export default TextInput;

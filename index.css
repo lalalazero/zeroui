@@ -3060,6 +3060,20 @@
   margin-left: -24px;
   margin-top: 0.5em;
 }
+.zeroUI-input-suffix-wrapper {
+  position: absolute;
+  right: 8px;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+}
+.zeroUI-input-prefix-wrapper {
+  position: absolute;
+  left: 8px;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+}
 .zeroUI-layout {
   display: flex;
   flex-direction: column;
@@ -3574,6 +3588,11 @@
 .zeroUI-select {
   position: relative;
   display: inline-block;
+  vertical-align: middle;
+}
+.zeroUI-select > .zeroUI-input-wrapper > input {
+  width: 100%;
+  overflow: hidden;
 }
 .zeroUI-select-pop-wrapper {
   z-index: 10;
@@ -3594,7 +3613,7 @@
   margin: 4px 0;
 }
 .zeroUI-select-option-item[data-selected=true] {
-  color: #13c2c2;
+  background-color: #e6fffb;
 }
 [class^=zeroUI-] {
   box-sizing: border-box;
@@ -4248,8 +4267,12 @@ a {
 .icon-example ul li:hover span {
   color: white;
 }
-.zeroUI-input-example .zeroUI-input {
-  margin-bottom: 10px;
+.zeroUI-input-example .select-before {
+  width: 100px;
+  border-right: none;
+  position: relative;
+  right: -1px;
+  top: -1px;
 }
 [class^=zeroUI-] {
   box-sizing: border-box;
