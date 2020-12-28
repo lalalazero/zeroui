@@ -1,0 +1,19 @@
+## 数字输入框
+
+基本的数字输入框
+
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { NumberInput } from 'zero-ui-react'
+
+const App = () => {
+    const [inputValue, setInputValue] = React.useState('')
+
+    const onChange = (name, value) => {
+        setInputValue(value)
+    }
+    return <NumberInput></Input.NumberInput>
+}
+export default App
+```

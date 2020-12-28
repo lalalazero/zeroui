@@ -1,6 +1,5 @@
 import React from 'react'
 import DemoRenderer from '../DemoRenderer'
-import './style.scss'
 
 export default class Demo extends React.Component<any, any> {
     constructor(props: any) {
@@ -12,12 +11,7 @@ export default class Demo extends React.Component<any, any> {
         }
     }
     async componentDidMount() {
-        const demos = [
-            await import('./01-基本使用.mdx'),
-            await import('./02-大小尺寸.mdx'),
-            await import('./03-前缀和后缀.mdx'),
-            await import('./04-数字输入框.mdx'),
-        ]
+        const demos = [await import('./01-基本使用.mdx')]
         // const api = await import('./api.mdx')
         this.setState({
             // api: api.default.apiContent,
@@ -28,7 +22,7 @@ export default class Demo extends React.Component<any, any> {
 
     render() {
         const { demos, api, apiCode } = this.state
-        const className = 'zeroUI-input-example'
+        const className = 'zeroUI-input-number-example'
         return (
             <DemoRenderer
                 className={className}

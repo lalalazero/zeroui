@@ -5,7 +5,7 @@
 ```jsx
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Input } from 'zero-ui-react'
+import { TextInput } from 'zero-ui-react'
 
 const App = () => {
     const [inputValue, setInputValue] = React.useState('')
@@ -15,28 +15,28 @@ const App = () => {
     return (
         <>
             <div style={{ marginBottom: 16 }}>
-                <Input.TextInput
+                <TextInput
                     placeholder="large"
                     size="large"
                     value={inputValue}
                     onChange={onChange}
-                ></Input.TextInput>
+                ></TextInput>
             </div>
 
             <div style={{ marginBottom: 16 }}>
-                <Input.TextInput
+                <TextInput
                     placeholder="default"
                     value={inputValue}
                     onChange={onChange}
-                ></Input.TextInput>
+                ></TextInput>
             </div>
             <div style={{ marginBottom: 16 }}>
-                <Input.TextInput
+                <TextInput
                     placeholder="small"
                     size="small"
                     value={inputValue}
                     onChange={onChange}
-                ></Input.TextInput>
+                ></TextInput>
             </div>
         </>
     )

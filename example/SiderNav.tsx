@@ -31,6 +31,11 @@ export default class SiderNav extends Component {
                             </NavLink>
                         </MenuItem>
                         <MenuItem>
+                            <NavLink to="/input-number">
+                                <p>InputNumber 数字输入框</p>
+                            </NavLink>
+                        </MenuItem>
+                        <MenuItem>
                             <NavLink to="/button">
                                 <p>Button 按钮</p>
                             </NavLink>
