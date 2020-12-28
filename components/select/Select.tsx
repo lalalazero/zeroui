@@ -13,9 +13,10 @@ interface OptionProps {
 export interface SelectProps {
     name?: string
     value?: string | OptionProps
-    options: OptionProps[]
+    options: OptionProps[] | string[]
     multiple?: boolean
-    onSelect?: (item: OptionProps) => void
+    onSelect?: (item: OptionProps | string) => void
+    className?: string
 }
 
 const Select: React.FC<SelectProps> = (props) => {
@@ -56,23 +57,28 @@ const Select: React.FC<SelectProps> = (props) => {
         }, 300)
     }
 
-    const onSelectItem = (item: OptionProps) => {
+    const onSelectItem = (item: OptionProps | string) => {
         setPoperVisible(false)
         props.onSelect && props.onSelect(item)
     }
 
     const isSelected = React.useCallback(
         (item) => {
-            if (typeof selectedItem === 'object') {
+            if (typeof item === 'object' && typeof selectedItem === 'object') {
                 return item.value === selectedItem.value
             }
-            return false
+
+            if (typeof item === 'object' && typeof selectedItem === 'string') {
+                return item.value === selectedItem
+            }
+
+            return item === selectedItem
         },
         [selectedItem]
     )
 
     return (
-        <div className={classname(PREFIX)}>
+        <div className={classname(PREFIX, props.className)}>
             <TextInput
                 name={props.name as string}
                 value={inputValue}
@@ -86,16 +92,31 @@ const Select: React.FC<SelectProps> = (props) => {
                 pop-visible={poperVisible.toString()}
             >
                 <ul>
-                    {props.options.map((item) => (
-                        <li
-                            className={classname(PREFIX + '-option-item')}
-                            data-selected={`${isSelected(item)}`}
-                            key={item.value}
-                            onClick={() => onSelectItem(item)}
-                        >
-                            {item.title}
-                        </li>
-                    ))}
+                    {props.options &&
+                        (props.options as []).map(
+                            (item: OptionProps | string) =>
+                                typeof item === 'string' ? (
+                                    <li
+                                        className={PREFIX + '-option-item'}
+                                        key={item}
+                                        data-selected={`${isSelected(item)}`}
+                                        onClick={() => onSelectItem(item)}
+                                    >
+                                        {item}
+                                    </li>
+                                ) : (
+                                    <li
+                                        className={classname(
+                                            PREFIX + '-option-item'
+                                        )}
+                                        data-selected={`${isSelected(item)}`}
+                                        key={item.value}
+                                        onClick={() => onSelectItem(item)}
+                                    >
+                                        {item.title}
+                                    </li>
+                                )
+                        )}
                 </ul>
             </div>
         </div>

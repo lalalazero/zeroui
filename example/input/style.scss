@@ -1,5 +1,9 @@
 .zeroUI-input-example {
-    .zeroUI-input {
-        margin-bottom: 10px;
+    .select-before {
+        width: 100px;
+        border-right: none;
+        position: relative;
+        right: -1px;
+        top: -1px;
     }
 }

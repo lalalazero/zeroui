@@ -5,19 +5,48 @@
 ```jsx
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Input } from 'zero-ui-react'
+import { Input, Icon, Select } from 'zero-ui-react'
 
 const App = () => {
     const [inputValue, setInputValue] = React.useState('')
     const onChange = (name, value) => {
         setInputValue(value)
     }
+
+    const addonBefore = (
+        <Select
+            options={['http://', 'https://']}
+            value="http://"
+            className="select-before"
+        />
+    )
+
+    const addonAfter = <Icon name="setting" />
     return (
-        <Input.TextInput
-            label="Name: "
-            value={inputValue}
-            onChange={onChange}
-        ></Input.TextInput>
+        <>
+            <div style={{ marginBottom: 16 }}>
+                <Input.TextInput
+                    label="name: "
+                    value={inputValue}
+                    onChange={onChange}
+                ></Input.TextInput>
+            </div>
+
+            <div style={{ marginBottom: 16 }}>
+                <Input.TextInput
+                    defaultValue="mysite"
+                    suffix=".com"
+                ></Input.TextInput>
+            </div>
+
+            <div style={{ marginBottom: 16 }}>
+                <Input.TextInput
+                    defaultValue="mysite"
+                    addonBefore={addonBefore}
+                    addonAfter={addonAfter}
+                ></Input.TextInput>
+            </div>
+        </>
     )
 }
 export default App

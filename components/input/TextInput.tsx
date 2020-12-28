@@ -18,11 +18,14 @@ export interface TextInputProps extends FilterdProps {
     onInput?: EventHandler
     name: string
     value?: string
+    defaultValue?: string
     size?: 'default' | 'large' | 'small'
     icon?: ICON | React.ComponentType<any>
     prefix?: ReactNode
     suffix?: ReactNode
     label?: string
+    addonBefore?: ReactNode
+    addonAfter?: ReactNode
 }
 
 const TextInput: React.FC<TextInputProps> = (
@@ -32,21 +35,30 @@ const TextInput: React.FC<TextInputProps> = (
         size: 'default',
     }
 ) => {
-    const [inputValue, setInputValue] = useState(props.value || '')
-    useEffect(() => {
-        setInputValue(props.value || '')
-    }, [props.value])
     const {
         name,
         size,
         icon,
-        onPressEnter,
-        onInput,
         prefix = '',
         suffix = '',
         label = '',
+        defaultValue = '',
+        addonAfter,
+        addonBefore,
         ...rest
     } = props
+
+    const [inputValue, setInputValue] = useState(props.value || '')
+
+    useEffect(() => {
+        if (defaultValue) {
+            setInputValue(defaultValue)
+        }
+    }, [])
+
+    useEffect(() => {
+        setInputValue(props.value || '')
+    }, [props.value])
 
     const classes = classname(PREFIX, `${PREFIX}-${size}`, {
         [`${PREFIX}-has-icon`]: !!icon,
@@ -60,24 +72,28 @@ const TextInput: React.FC<TextInputProps> = (
     const handleKeyDown: React.KeyboardEventHandler = (event) => {
         const { keyCode } = event
         if (keyCode === 13 || keyCode === 108) {
-            onPressEnter && onPressEnter()
+            props.onPressEnter && props.onPressEnter()
         }
     }
     const handleInput: React.ChangeEventHandler<HTMLInputElement> = (event) => {
         setInputValue(event.target.value)
-        onInput && onInput(props.name, event.target.value)
+        props.onInput && props.onInput(props.name, event.target.value)
     }
 
     return (
         <span className={classname(PREFIX + '-wrapper')}>
             {label && <label htmlFor={props.name}>{label}</label>}
-            {prefix ? (
-                typeof prefix === 'object' ? (
-                    prefix
-                ) : (
-                    <label>{prefix}</label>
-                )
-            ) : null}
+            {addonBefore}
+            {prefix && (
+                <span className={PREFIX + '-prefix-wrapper'}>
+                    {typeof prefix === 'object' ? (
+                        prefix
+                    ) : (
+                        <label>{prefix}</label>
+                    )}
+                </span>
+            )}
+
             <input
                 {...rest}
                 className={classes}
@@ -94,13 +110,16 @@ const TextInput: React.FC<TextInputProps> = (
             ) : (
                 <>{icon}</>
             )}
-            {suffix ? (
-                typeof suffix === 'object' ? (
-                    suffix
-                ) : (
-                    <label>{suffix}</label>
-                )
-            ) : null}
+            {suffix && (
+                <span className={PREFIX + '-suffix-wrapper'}>
+                    {typeof suffix === 'object' ? (
+                        suffix
+                    ) : (
+                        <label>{suffix}</label>
+                    )}
+                </span>
+            )}
+            {addonAfter}
         </span>
     )
 }

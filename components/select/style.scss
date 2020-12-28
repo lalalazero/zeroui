@@ -3,6 +3,11 @@
 .zeroUI-select {
     position: relative;
     display: inline-block;
+    vertical-align: middle;
+    & > .zeroUI-input-wrapper > input {
+        width: 100%;
+        overflow: hidden;
+    }
     &-pop-wrapper {
         z-index: 10;
         position: absolute;
@@ -25,7 +30,7 @@
             @extend %on-hover-bg-default;
         }
         &[data-selected='true'] {
-            color: $brand-color;
+            background-color: #e6fffb;
         }
     }
 }

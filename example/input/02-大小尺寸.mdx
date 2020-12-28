@@ -14,25 +14,30 @@ const App = () => {
     }
     return (
         <>
-            <Input.TextInput
-                placeholder="large"
-                size="large"
-                value={inputValue}
-                onChange={onChange}
-            ></Input.TextInput>
-            <br />
-            <Input.TextInput
-                placeholder="default"
-                value={inputValue}
-                onChange={onChange}
-            ></Input.TextInput>
-            <br />
-            <Input.TextInput
-                placeholder="small"
-                size="small"
-                value={inputValue}
-                onChange={onChange}
-            ></Input.TextInput>
+            <div style={{ marginBottom: 16 }}>
+                <Input.TextInput
+                    placeholder="large"
+                    size="large"
+                    value={inputValue}
+                    onChange={onChange}
+                ></Input.TextInput>
+            </div>
+
+            <div style={{ marginBottom: 16 }}>
+                <Input.TextInput
+                    placeholder="default"
+                    value={inputValue}
+                    onChange={onChange}
+                ></Input.TextInput>
+            </div>
+            <div style={{ marginBottom: 16 }}>
+                <Input.TextInput
+                    placeholder="small"
+                    size="small"
+                    value={inputValue}
+                    onChange={onChange}
+                ></Input.TextInput>
+            </div>
         </>
     )
 }
