@@ -19,6 +19,7 @@ export interface NumberInputProps {
     value?: number
     name?: string
     onChange?: (name: string, value: number) => void
+    disabled?: boolean
 }
 
 const NumberInput: React.FC<NumberInputProps> = (props) => {
@@ -40,21 +41,28 @@ const NumberInput: React.FC<NumberInputProps> = (props) => {
         if (!isNaN(number)) {
             setValue(parseInt(event.target.value))
         }
-
         props.onChange && props.onChange(props.name || '', number)
     }
 
     const handlePlus = () => {
+        if (props.disabled) return
+
         const newValue = parseInt(value) + (props.step as number)
         if (!props.max || props.max >= newValue) {
             setValue(newValue)
+
+            props.onChange && props.onChange(props.name || '', newValue)
         }
     }
 
     const handleMinus = () => {
+        if (props.disabled) return
+
         const newValue = parseInt(value) - (props.step as number)
         if (!props.min || props.min <= newValue) {
             setValue(newValue)
+
+            props.onChange && props.onChange(props.name || '', newValue)
         }
     }
 
@@ -64,12 +72,16 @@ const NumberInput: React.FC<NumberInputProps> = (props) => {
         setFakeFocused(false)
     }, [])
 
-    const plusDisable = props.max ? props.max <= value : false
-    const minusDisable = props.min ? props.min >= value : false
+    const plusDisable =
+        props.disabled || (props.max ? props.max <= value : false)
+    const minusDisable =
+        props.disabled || (props.min ? props.min >= value : false)
 
     return (
         <span
-            className={PREFIX + '-wrapper'}
+            className={classname(PREFIX + '-wrapper', {
+                [`${PREFIX}-wrapper-disabled`]: props.disabled === true,
+            })}
             onFocus={handleFocus}
             onMouseEnter={handleFocus}
             onMouseLeave={handleBlur}
@@ -85,6 +97,7 @@ const NumberInput: React.FC<NumberInputProps> = (props) => {
                 onChange={handleChange}
                 value={value || ''}
                 fake-focus={fakeFocused.toString()}
+                disabled={props.disabled}
             />
             <span className={PREFIX + '-handler-lane'}>
                 <span

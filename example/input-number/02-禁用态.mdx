@@ -8,10 +8,7 @@ import ReactDOM from 'react-dom'
 import { NumberInput } from 'zero-ui-react'
 
 const App = () => {
-    const handleChange = (name, value) => {
-        console.log('change..', value)
-    }
-    return <NumberInput min={1} max={10} onChange={handleChange}></NumberInput>
+    return <NumberInput min={1} max={10} disabled={true}></NumberInput>
 }
 export default App
 ```
