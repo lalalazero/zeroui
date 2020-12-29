@@ -14,6 +14,7 @@ export default class Demo extends React.Component<any, any> {
         const demos = [
             await import('./01-基本使用.mdx'),
             await import('./02-禁用态.mdx'),
+            await import('./03-增减按钮左右分开.mdx'),
         ]
         // const api = await import('./api.mdx')
         this.setState({

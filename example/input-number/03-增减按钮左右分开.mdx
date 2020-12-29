@@ -1,0 +1,24 @@
+## 增减按钮左右分开
+
+增减按钮在左右两边
+
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { NumberInput } from 'zero-ui-react'
+
+const App = () => {
+    const handleChange = (name, value) => {
+        console.log('change..', value)
+    }
+    return (
+        <NumberInput
+            min={1}
+            max={10}
+            onChange={handleChange}
+            type="type2"
+        ></NumberInput>
+    )
+}
+export default App
+```

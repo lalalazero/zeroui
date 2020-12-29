@@ -37,10 +37,12 @@ export const ICONS = [
     'check-filled',
     'happy',
     'joy',
+    'plus',
+    'minus',
 ] as const
 
 const scriptElement = document.createElement('script')
-scriptElement.src = 'http://at.alicdn.com/t/font_1353479_2q42sxdhtgu.js'
+scriptElement.src = 'http://at.alicdn.com/t/font_1353479_x08as1pdcd8.js'
 document.body.appendChild(scriptElement)
 
 const prefix = 'zeroUI-icon'
