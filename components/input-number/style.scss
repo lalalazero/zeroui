@@ -1,0 +1,73 @@
+@import '../index.scss';
+
+.zeroUI-number-input {
+    appearance: textfield;
+    padding: 0 10px;
+    height: 32px;
+    line-height: 32px;
+    border: 1px solid;
+    width: 100px;
+    &:focus,
+    &:hover,
+    &[fake-focus='true'] {
+        border-color: lightseagreen;
+        outline: none;
+        cursor: pointer;
+    }
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+        appearance: none;
+    }
+
+    &-wrapper {
+        position: relative;
+        overflow: hidden;
+    }
+
+    &-handler-lane {
+        position: absolute;
+        right: 0;
+        top: -2px;
+        bottom: -2px;
+        height: 32px;
+        line-height: 32px;
+        display: inline-flex;
+        flex-direction: column;
+        width: 30px;
+        border-left: 1px solid #ccc;
+        justify-content: center;
+        user-select: none;
+    }
+
+    &-handler {
+        width: 100%;
+        text-align: center;
+        height: 18px;
+        line-height: 18px;
+        font-size: 10px;
+        transition: all 300ms;
+        &:hover {
+            cursor: pointer;
+            transform: scale(1.1);
+            & > .zeroUI-icon {
+                fill: lightseagreen;
+            }
+        }
+        & > .zeroUI-icon {
+            fill: #ccc;
+        }
+        &-disabled {
+            &:hover {
+                cursor: not-allowed;
+                & > .zeroUI-icon {
+                    fill: #ccc;
+                }
+            }
+        }
+    }
+
+    &-handler-plus {
+        border-bottom: 1px solid #ccc;
+    }
+}
