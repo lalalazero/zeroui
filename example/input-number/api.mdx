@@ -1,0 +1,14 @@
+## API
+
+目前只是整数输入框，以下所有值相关属性都是整数
+
+| 属性         | 说明                                   | 类型                                 | 可选值          | 默认值  | 是否必填 |
+| ------------ | -------------------------------------- | ------------------------------------ | --------------- | ------- | -------- |
+| type         | 输入框类型，type2 是按钮分开在左右两边 | default / type2                      | default / type2 | default | --       |
+| value        | 数字值                                 | number                               | --              | --      | --       |
+| defaultValue | 初始数字，只设置一次                   | number                               | --              | --      | --       |
+| min          | 最小值                                 | number                               | --              | --      | --       |
+| max          | 最大值                                 | number                               | --              | --      | --       |
+| step         | 步长，整数                             | number                               | --              | --      | --       |
+| name         | 字段名，input 的 name 属性             | string                               | --              | --      | --       |
+| onChange     | change 函数                            | (name:string, value: number) => void | --              | --      | --       |
