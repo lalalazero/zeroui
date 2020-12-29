@@ -3097,7 +3097,7 @@
   padding: 0 10px;
   height: 32px;
   line-height: 32px;
-  border: 1px solid;
+  border: 1px solid #ccc;
   width: 100px;
 }
 .zeroUI-number-input:focus, .zeroUI-number-input:hover, .zeroUI-number-input[fake-focus=true] {
@@ -3111,6 +3111,13 @@
 .zeroUI-number-input-wrapper {
   position: relative;
   overflow: hidden;
+}
+.zeroUI-number-input-wrapper-disabled > .zeroUI-number-input:hover {
+  cursor: not-allowed;
+  border-color: #ccc;
+}
+.zeroUI-number-input-wrapper-disabled > .zeroUI-number-input[fake-focus=true] {
+  border-color: #ccc;
 }
 .zeroUI-number-input-handler-lane {
   position: absolute;
