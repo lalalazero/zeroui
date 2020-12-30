@@ -2,27 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { HashRouter as Router, NavLink, Route } from 'react-router-dom'
 import { Content, Footer, Header, Layout, Sider } from '../components'
-import ButtonDemo from './button'
-import CardExample from './card'
-import CheckboxExample from './checkbox'
-import ColorExample from './color/Color.example'
-import DialogExample from './dialog/Dialog.example'
 import './Example.scss'
-import GridExample from './grid'
-import IconExample from './icon/Icon.example'
-import InputExample from './input'
-import InputNumberExample from './input-number'
-import LayoutExample from './layout'
 import logo from './logo.png'
-import MenuExample from './menu'
-import NotificationExample from './notification'
-import PaginationExample from './pagination'
-import RadioExample from './radio'
-import SelectExample from './select'
+import { basicComponentsRoute } from './route'
 import SiderNav from './SiderNav'
-import SwitchExample from './switch'
-import TooltipExample from './tooltip'
-import TreeExample from './tree'
 
 ReactDOM.render(
     <Router>
@@ -41,40 +24,16 @@ ReactDOM.render(
                 <Content className="example-content-wrapper">
                     <div className="example-content">
                         <div id="mountNode"></div>
-                        <Route path="/icon" component={IconExample}></Route>
-                        <Route path="/input" component={InputExample}></Route>
-                        <Route
-                            path="/input-number"
-                            component={InputNumberExample}
-                        ></Route>
-
-                        <Route path="/select" component={SelectExample}></Route>
-                        <Route path="/button" component={ButtonDemo}></Route>
-                        <Route path="/dialog" component={DialogExample}></Route>
-                        <Route path="/layout" component={LayoutExample}></Route>
-                        <Route path="/color" component={ColorExample}></Route>
-                        <Route path="/grid" component={GridExample}></Route>
-                        <Route
-                            path="/tooltip"
-                            component={TooltipExample}
-                        ></Route>
-                        <Route path="/menu" component={MenuExample}></Route>
-                        <Route
-                            path="/pagination"
-                            component={PaginationExample}
-                        ></Route>
-                        <Route
-                            path="/notification"
-                            component={NotificationExample}
-                        ></Route>
-                        <Route path="/card" component={CardExample}></Route>
-                        <Route path="/switch" component={SwitchExample}></Route>
-                        <Route
-                            path="/checkbox"
-                            component={CheckboxExample}
-                        ></Route>
-                        <Route path="/radio" component={RadioExample} />
-                        <Route path="/tree" component={TreeExample} />
+                        {basicComponentsRoute
+                            .map((group) => group.children)
+                            .flat(1)
+                            .map((item: any, idx) => (
+                                <Route
+                                    key={idx}
+                                    path={item.path}
+                                    component={item.component}
+                                ></Route>
+                            ))}
                     </div>
                 </Content>
             </Layout>

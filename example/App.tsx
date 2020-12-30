@@ -1,13 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {
-    Button,
-    Input,
-    Menu,
-    notification,
-    Pagination,
-    Select,
-} from '../components'
+import { Button, Menu, notification, Pagination, Select } from '../components'
 import './App.scss'
 
 const { SubMenu, MenuGroup, MenuItem } = Menu
