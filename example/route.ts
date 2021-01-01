@@ -11,6 +11,7 @@ import MenuExample from './menu'
 import NotificationExample from './notification'
 import PaginationExample from './pagination'
 import RadioExample from './radio'
+import RateExample from './rate'
 import SelectExample from './select'
 import SwitchExample from './switch'
 import TooltipExample from './tooltip'
@@ -79,6 +80,11 @@ export const basicComponentsRoute = [
                 title: 'Radio 单选框',
                 path: '/radio',
                 component: RadioExample,
+            },
+            {
+                title: 'Rate 评分',
+                path: '/rate',
+                component: RateExample,
             },
         ],
     },
