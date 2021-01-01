@@ -121,7 +121,7 @@ export function connect<
     TOwnProps = {},
     State = DefaultRootState
 >(
-    mapStateToProps?: (
+    mapStateToProps: (
         state: State,
         ownProps: TOwnProps
     ) => TStateProps = defaultMapStateToProps
@@ -140,7 +140,7 @@ export function connect<
         > {
             store: Store<State>
             static contextType = Context
-            constructor(props, context) {
+            constructor(props: any, context: any) {
                 super(props, context)
                 this.store = this.context
 
