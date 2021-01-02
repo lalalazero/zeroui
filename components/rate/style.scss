@@ -1,0 +1,22 @@
+.zeroUI-rate {
+    &-star {
+        color: #ccc;
+        display: inline-block;
+        padding: 4px;
+        & > .zeroUI-icon {
+            fill: #ccc;
+            font-size: 1.2em;
+            transition: all 300ms;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+    &-star-full {
+        // border: 1px solid red;
+        & > .zeroUI-icon {
+            fill: #fadb14;
+            font-size: 1.3em;
+        }
+    }
+}
