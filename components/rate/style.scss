@@ -1,5 +1,7 @@
 .zeroUI-rate {
     &-star {
+        width: 28px;
+        height: 32px;
         color: #ccc;
         display: inline-block;
         padding: 4px;
@@ -12,11 +14,70 @@
             }
         }
     }
+    &-disabled {
+        & > .zeroUI-icon {
+            &:hover {
+                cursor: unset;
+            }
+        }
+    }
     &-star-full {
         // border: 1px solid red;
         & > .zeroUI-icon {
             fill: #fadb14;
             font-size: 1.3em;
+        }
+    }
+    &-half-wrapper {
+        position: relative;
+        // border: 1px solid yellowgreen;
+        display: inline-flex;
+        // padding: 4px;
+        // width: 28px;
+        // height: 32px;
+        padding: 0;
+        // margin-right: -30px;
+        overflow: hidden;
+        &:hover {
+            z-index: 10;
+            background-color: rosybrown;
+        }
+    }
+    &-star-first {
+        // border: 1px solid red;
+        overflow: hidden;
+        display: inline-block;
+        position: relative;
+        background-color: #ccc;
+        width: 30px;
+        height: 32px;
+        & > .zeroUI-icon {
+            fill: blue;
+            position: absolute;
+            left: 50%;
+            transform: translateX(25%);
+            &:hover {
+                fill: red;
+            }
+        }
+    }
+    &-star-second {
+        // padding: 0;
+        width: 30px;
+        height: 32px;
+        position: relative;
+        background-color: pink;
+        display: inline-block;
+        // border: 1px solid purple;
+        overflow: hidden;
+        & > .zeroUI-icon {
+            fill: green;
+            position: absolute;
+            right: 50%;
+            transform: translateX(-25%);
+            &:hover {
+                fill: red;
+            }
         }
     }
 }
