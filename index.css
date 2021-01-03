@@ -3645,6 +3645,8 @@
   position: relative;
 }
 .zeroUI-rate-star {
+  width: 28px;
+  height: 32px;
   color: #ccc;
   display: inline-block;
   padding: 4px;
@@ -3657,9 +3659,56 @@
 .zeroUI-rate-star > .zeroUI-icon:hover {
   cursor: pointer;
 }
+.zeroUI-rate-disabled > .zeroUI-icon:hover {
+  cursor: unset;
+}
 .zeroUI-rate-star-full > .zeroUI-icon {
   fill: #fadb14;
   font-size: 1.3em;
+}
+.zeroUI-rate-half-wrapper {
+  position: relative;
+  display: inline-flex;
+  padding: 0;
+  overflow: hidden;
+}
+.zeroUI-rate-half-wrapper:hover {
+  z-index: 10;
+  background-color: rosybrown;
+}
+.zeroUI-rate-star-first {
+  overflow: hidden;
+  display: inline-block;
+  position: relative;
+  background-color: #ccc;
+  width: 30px;
+  height: 32px;
+}
+.zeroUI-rate-star-first > .zeroUI-icon {
+  fill: blue;
+  position: absolute;
+  left: 50%;
+  transform: translateX(25%);
+}
+.zeroUI-rate-star-first > .zeroUI-icon:hover {
+  fill: red;
+}
+.zeroUI-rate-star-second {
+  width: 30px;
+  height: 32px;
+  position: relative;
+  background-color: pink;
+  display: inline-block;
+  overflow: hidden;
+}
+.zeroUI-rate-star-second > .zeroUI-icon {
+  fill: green;
+  position: absolute;
+  right: 50%;
+  transform: translateX(-25%);
+}
+.zeroUI-rate-star-second > .zeroUI-icon:hover {
+  fill: red;
 }
 [class^=zeroUI-] {
   box-sizing: border-box;
