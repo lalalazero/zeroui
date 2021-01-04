@@ -1,31 +1,49 @@
+$default-color: #ccc;
+$rated-color: #fadb14;
+
 .zeroUI-rate {
     &-star {
         width: 28px;
         height: 32px;
-        color: #ccc;
+        color: $default-color;
         display: inline-block;
         padding: 4px;
-        & > .zeroUI-icon {
-            fill: #ccc;
+        & .zeroUI-icon {
+            fill: $default-color;
             font-size: 1.2em;
+            display: inline-block;
             transition: all 300ms;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+        .zeroUI-rate-custom-icon {
+            color: $default-color;
             &:hover {
                 cursor: pointer;
             }
         }
     }
     &-disabled {
-        & > .zeroUI-icon {
+        & .zeroUI-icon,
+        &-custom-icon {
             &:hover {
                 cursor: unset;
             }
         }
     }
     &-star-full {
-        // border: 1px solid red;
-        & > .zeroUI-icon {
-            fill: #fadb14;
-            font-size: 1.3em;
+        & .zeroUI-icon {
+            fill: $rated-color;
+            transform: scale(1.2);
+        }
+        .zeroUI-rate-custom-icon {
+            color: $rated-color;
+            transform: scale(1.2);
+            display: inline-block;
+            .zeroUI-icon {
+                transform: unset;
+            }
         }
     }
     &-half-wrapper {
@@ -40,7 +58,7 @@
         overflow: hidden;
         &:hover {
             z-index: 10;
-            background-color: rosybrown;
+            // background-color: rosybrown;
         }
     }
     &-star-first {
@@ -48,16 +66,16 @@
         overflow: hidden;
         display: inline-block;
         position: relative;
-        background-color: #ccc;
+        // background-color: $default-color;
         width: 30px;
         height: 32px;
-        & > .zeroUI-icon {
-            fill: blue;
+        & .zeroUI-icon {
+            fill: $default-color;
             position: absolute;
             left: 50%;
             transform: translateX(25%);
             &:hover {
-                fill: red;
+                fill: $rated-color;
             }
         }
     }
@@ -66,17 +84,17 @@
         width: 30px;
         height: 32px;
         position: relative;
-        background-color: pink;
+        // background-color: pink;
         display: inline-block;
         // border: 1px solid purple;
         overflow: hidden;
-        & > .zeroUI-icon {
-            fill: green;
+        & .zeroUI-icon {
+            fill: $default-color;
             position: absolute;
             right: 50%;
             transform: translateX(-25%);
             &:hover {
-                fill: red;
+                fill: $rated-color;
             }
         }
     }

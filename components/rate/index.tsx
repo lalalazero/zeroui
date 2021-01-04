@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { Icon } from '../index'
+import React, { ReactNode, useEffect, useState } from 'react'
+import { Icon, Tooltip } from '../index'
 import { classname } from '../_util/classes'
 import './style.scss'
 
@@ -10,6 +10,9 @@ export interface RateProps {
     value?: number
     disabled?: boolean
     allowHalf?: boolean
+    allowClear?: boolean
+    tooltips?: string[]
+    charactor?: string | ((index: number) => ReactNode)
 }
 
 const Rate: React.FC<RateProps> = (props) => {
@@ -40,10 +43,26 @@ const Rate: React.FC<RateProps> = (props) => {
     const handleRate = (index: number) => {
         if (props.disabled) return
         setValue(index)
-        if (value === index) {
+        if (value === index && props.allowClear) {
             setValue(null)
             setRate(-1)
         }
+    }
+
+    const renderIcon = (idx: number) => {
+        return props.charactor ? (
+            typeof props.charactor === 'string' ? (
+                <span className={classname(PREFIX + '-custom-icon')}>
+                    {props.charactor}
+                </span>
+            ) : (
+                <span className={classname(PREFIX + '-custom-icon')}>
+                    {props.charactor(idx)}
+                </span>
+            )
+        ) : (
+            <Icon name="star" />
+        )
     }
 
     const stars = new Array(5).fill(1).map((item, idx) => {
@@ -58,7 +77,13 @@ const Rate: React.FC<RateProps> = (props) => {
                     [`${PREFIX}-disabled`]: props.disabled,
                 })}
             >
-                <Icon name="star" />
+                {props.tooltips
+                    ? props.tooltips[idx] && (
+                          <Tooltip title={props.tooltips[idx]}>
+                              {renderIcon(idx)}
+                          </Tooltip>
+                      )
+                    : renderIcon(idx)}
             </span>
         )
     })
@@ -110,4 +135,8 @@ const Rate: React.FC<RateProps> = (props) => {
     )
 }
 
+Rate.defaultProps = {
+    allowClear: true,
+    allowHalf: false,
+}
 export default Rate

@@ -1,0 +1,21 @@
+## 清除
+
+允许或者禁用清除
+
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Rate } from 'zero-ui-react'
+
+const App = () => {
+    return (
+        <div>
+            <Rate allowClear={false} defaultValue={1}></Rate> <span>
+                禁用清除
+            </span>
+            <Rate allowClear={true} defaultValue={1}></Rate> <span>允许清除</span>
+        </div>
+    )
+}
+export default App
+```

@@ -1,0 +1,16 @@
+## 文案展示
+
+评分带上文案说明
+
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Rate } from 'zero-ui-react'
+
+const desc = ['很差', '差评', '中评', '好评', '非常棒']
+
+const App = () => {
+    return <Rate tooltips={desc}></Rate>
+}
+export default App
+```

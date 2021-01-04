@@ -15,6 +15,9 @@ export default class Demo extends React.Component<any, any> {
             await import('./01-基本使用.mdx'),
             await import('./02-半星.mdx'),
             await import('./03-禁用态.mdx'),
+            await import('./04-不允许清除.mdx'),
+            await import('./05-文案.mdx'),
+            await import('./06-自定义图标.mdx'),
         ]
         // const api = await import('./api.mdx')
         this.setState({
