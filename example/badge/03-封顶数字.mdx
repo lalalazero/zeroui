@@ -1,0 +1,29 @@
+## 封顶数字
+
+超过了封顶数字会展示为+号，默认封顶数字是 99
+
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Badge, Icon } from 'zero-ui-react'
+
+const App = () => {
+    return (
+        <div>
+            <Badge count={99}>
+                <a href="#" className="badge-example" />
+            </Badge>
+            <Badge count={102}>
+                <a href="#" className="badge-example" />
+            </Badge>
+            <Badge count={12} overCount={10}>
+                <a href="#" className="badge-example" />
+            </Badge>
+            <Badge count={1000} overCount={999}>
+                <a href="#" className="badge-example" />
+            </Badge>
+        </div>
+    )
+}
+export default App
+```

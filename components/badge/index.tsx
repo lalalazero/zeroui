@@ -19,6 +19,11 @@ const Badge: React.FC<BadgeProps> = (props) => {
 
     const isCustom = !isNumber(count)
 
+    const isOvered =
+        isNumber(count) &&
+        isNumber(overCount) &&
+        (count as number) > (overCount as number)
+
     const getCount = useMemo(() => {
         if (isNumber(count)) {
             const countNum = count as number
@@ -36,6 +41,8 @@ const Badge: React.FC<BadgeProps> = (props) => {
         return count
     }, [props.showZero, props.count, props.overCount])
 
+    const shouldRenderIcon = count !== 0 || (count === 0 && showZero)
+
     return (
         <div className={classname(PREFIX + '-wrapper')}>
             {isSolo ? (
@@ -47,17 +54,22 @@ const Badge: React.FC<BadgeProps> = (props) => {
                 </span>
             ) : (
                 <>
-                    {(count !== 0 || (count === 0 && showZero)) && (
+                    {shouldRenderIcon && (
                         <span
                             className={
                                 isCustom
-                                    ? classname(PREFIX + '-custom')
-                                    : classname(PREFIX)
+                                    ? classname(PREFIX + '-custom', {
+                                          [`${PREFIX}-over-max`]: isOvered,
+                                      })
+                                    : classname(PREFIX, {
+                                          [`${PREFIX}-over-max`]: isOvered,
+                                      })
                             }
                         >
                             {getCount}
                         </span>
                     )}
+
                     {children}
                 </>
             )}
