@@ -13,6 +13,8 @@ export interface RateProps {
     allowClear?: boolean
     tooltips?: string[]
     charactor?: string | ((index: number) => ReactNode)
+    onChange?: (name: string, value: number | null) => void
+    name?: string
 }
 
 const Rate: React.FC<RateProps> = (props) => {
@@ -42,11 +44,14 @@ const Rate: React.FC<RateProps> = (props) => {
 
     const handleRate = (index: number) => {
         if (props.disabled) return
-        setValue(index)
+        let newValue: number | null = index
         if (value === index && props.allowClear) {
-            setValue(null)
+            newValue = null
             setRate(-1)
         }
+
+        setValue(newValue)
+        props.onChange && props.onChange(props.name || '', newValue)
     }
 
     const renderIcon = (idx: number) => {
@@ -138,5 +143,6 @@ const Rate: React.FC<RateProps> = (props) => {
 Rate.defaultProps = {
     allowClear: true,
     allowHalf: false,
+    disabled: false,
 }
 export default Rate

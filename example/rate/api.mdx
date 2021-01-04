@@ -1,0 +1,15 @@
+## API
+
+支持的属性设置如下
+
+| 属性         | 说明                              | 类型                                   | 可选值 | 默认值 | 是否必填 |
+| ------------ | --------------------------------- | -------------------------------------- | ------ | ------ | -------- | --- |
+| defaultValue | 初始评分值，只设置一次            | number                                 | --     | --     | --       | --  |
+| value        | 评分值                            | number                                 | --     | --     | --       | --  |
+| name         | 属性名，onChange 回调的第一个参数 | string                                 | --     | --     | --       | --  |
+| onChange     | 评分改变的回调                    | (name: string, value: number)=>void    | --     | --     | --       | --  |
+| disabled     | 禁用交互，不可修改                | boolean                                | --     | false  | --       | --  |
+| allowHalf    | 开启半星                          | boolean                                | --     | false  | --       | --  |
+| allowClear   | 允许取消评分                      | boolean                                | --     | true   | --       | --  |
+| tooltips     | 文案展示                          | string[]                               | --     | --     | --       | --  |
+| charactor    | 自定义图标                        | string 或 (index: number) => ReactNode | --     | --     | --       | --  |
