@@ -110,6 +110,17 @@
   right: -15px;
   font-size: 12px;
 }
+.zeroUI-badge-dot:after {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  background-color: red;
+  border-radius: 50%;
+  position: absolute;
+  right: -2px;
+  top: -2px;
+}
 [class^=zeroUI-] {
   box-sizing: border-box;
 }
