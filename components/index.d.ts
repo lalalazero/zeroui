@@ -5,6 +5,7 @@ declare const message: {
     modal: (content: import("react").ReactNode, buttons?: import("react").ReactElement<any, string | ((props: any) => import("react").ReactElement<any, string | any | (new (props: any) => import("react").Component<any, any, any>)> | null) | (new (props: any) => import("react").Component<any, any, any>)>[] | undefined, afterClose?: any) => any;
     alert: (content: string) => void;
 };
+export { default as Badge } from './badge/index';
 export { Button, ButtonGroup } from './button/index';
 export { default as Card } from './card';
 export { default as Checkbox } from './checkbox/index';
