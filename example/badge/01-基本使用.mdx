@@ -1,6 +1,6 @@
 ## 基本
 
-简单的用法
+简单的用法，当 count=0 时默认不展示徽章，可以通过 showZero 修改为显示。
 
 ```jsx
 import React from 'react'
@@ -16,7 +16,7 @@ const App = () => {
             <Badge count={0} showZero={true}>
                 <a href="#" className="badge-example" />
             </Badge>
-            <Badge count={<Icon name="happy" />}>
+            <Badge count={<Icon name="joy" style={{ fill: 'red' }} />}>
                 <a href="#" className="badge-example" />
             </Badge>
         </div>
