@@ -10,10 +10,19 @@ export interface BadgeProps extends CSSProperties {
     className?: string
     showZero?: boolean
     overCount?: number
+    dot?: boolean
 }
 
 const Badge: React.FC<BadgeProps> = (props) => {
-    const { className, children, showZero, overCount, count, ...style } = props
+    const {
+        className,
+        children,
+        showZero,
+        overCount,
+        count,
+        dot,
+        ...style
+    } = props
 
     const isSolo = !children
 
@@ -41,10 +50,17 @@ const Badge: React.FC<BadgeProps> = (props) => {
         return count
     }, [props.showZero, props.count, props.overCount])
 
-    const shouldRenderIcon = count !== 0 || (count === 0 && showZero)
+    const shouldRenderIcon =
+        count !== undefined && count !== null
+            ? count !== 0 || (count === 0 && showZero)
+            : false
 
     return (
-        <div className={classname(PREFIX + '-wrapper')}>
+        <div
+            className={classname(PREFIX + '-wrapper', {
+                [`${PREFIX}-dot`]: dot,
+            })}
+        >
             {isSolo ? (
                 <span
                     className={classname(PREFIX + '-solo', className)}

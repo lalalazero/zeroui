@@ -16,6 +16,7 @@ export default class Demo extends React.Component<any, any> {
             await import('./01-基本使用.mdx'),
             await import('./02-独立使用.mdx'),
             await import('./03-封顶数字.mdx'),
+            await import('./04-小红点.mdx'),
         ]
         // const api = await import('./api.mdx')
         this.setState({

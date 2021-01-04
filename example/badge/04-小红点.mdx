@@ -1,0 +1,26 @@
+## 小红点
+
+没有具体的通知数字
+
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Badge, Icon } from 'zero-ui-react'
+
+const App = () => {
+    return (
+        <div>
+            <Badge dot>
+                <Icon name="laba" />
+            </Badge>
+
+            <Badge dot>
+                <a href="#" style={{ marginLeft: 20 }}>
+                    查看更新
+                </a>
+            </Badge>
+        </div>
+    )
+}
+export default App
+```
