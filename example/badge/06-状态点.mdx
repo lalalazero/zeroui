@@ -1,0 +1,33 @@
+## 状态点
+
+支持常用的表示状态的小圆点，还可以自定义颜色和文案
+
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Badge } from 'zero-ui-react'
+
+const status = ['success', 'warning', 'default', 'processing', 'error']
+
+const App = () => {
+    return (
+        <div>
+            <div>
+                {status.map((i, idx) => (
+                    <Badge status={i} key={idx} className="mr-5" />
+                ))}
+            </div>
+            <ul>
+                {status.map((i, idx) => (
+                    <li key={idx}>
+                        <Badge status={i} text={i} />
+                    </li>
+                ))}
+            </ul>
+            <div style={{ margin: 10, borderBottom: '1px solid #ccc ' }}></div>
+            <Badge color="blue" text="自定义状态" />
+        </div>
+    )
+}
+export default App
+```

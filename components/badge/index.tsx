@@ -5,6 +5,14 @@ import './style.scss'
 
 const PREFIX = 'zeroUI-badge'
 
+export const BadgeStatus = [
+    'success',
+    'warning',
+    'default',
+    'processing',
+    'error',
+] as const
+
 export interface BadgeProps extends Omit<CSSProperties, 'offset'> {
     count?: number
     className?: string
@@ -12,6 +20,9 @@ export interface BadgeProps extends Omit<CSSProperties, 'offset'> {
     overCount?: number
     dot?: boolean
     offset?: [number | string, number | string]
+    status?: typeof BadgeStatus[number]
+    color?: string
+    text?: string
 }
 
 const Badge: React.FC<BadgeProps> = (props) => {
@@ -22,6 +33,9 @@ const Badge: React.FC<BadgeProps> = (props) => {
         overCount,
         count,
         dot,
+        status = '',
+        text = '',
+        color = '',
         offset = [],
         ...style
     } = props
@@ -39,6 +53,8 @@ const Badge: React.FC<BadgeProps> = (props) => {
         isNumber(count) &&
         isNumber(overCount) &&
         (count as number) > (overCount as number)
+
+    const isStatusDot = status || text || color
 
     const getCount = useMemo(() => {
         if (isNumber(count)) {
@@ -72,7 +88,25 @@ const Badge: React.FC<BadgeProps> = (props) => {
         return isCustom ? cls1 : cls2
     }, [isCustom])
 
-    return (
+    const renderStatusDot = useMemo(() => {
+        return (
+            <>
+                <span
+                    className={classname(
+                        PREFIX + '-status-dot',
+                        `${PREFIX}-status-dot-${status}`,
+                        className
+                    )}
+                    style={color ? { backgroundColor: color } : undefined}
+                ></span>
+                {text && <span style={{ marginLeft: 5 }}>{text}</span>}
+            </>
+        )
+    }, [color, text, status])
+
+    return isStatusDot ? (
+        renderStatusDot
+    ) : (
         <div
             className={classname(PREFIX + '-wrapper', {
                 [`${PREFIX}-dot`]: dot,
