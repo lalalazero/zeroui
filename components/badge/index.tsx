@@ -24,7 +24,7 @@ const Badge: React.FC<BadgeProps> = (props) => {
             const countNum = count as number
             const max = overCount as number
 
-            if ((countNum <= 0 && showZero) || countNum < max) {
+            if (countNum < max) {
                 return countNum
             }
 
@@ -47,7 +47,7 @@ const Badge: React.FC<BadgeProps> = (props) => {
                 </span>
             ) : (
                 <>
-                    {
+                    {(count !== 0 || (count === 0 && showZero)) && (
                         <span
                             className={
                                 isCustom
@@ -57,7 +57,7 @@ const Badge: React.FC<BadgeProps> = (props) => {
                         >
                             {getCount}
                         </span>
-                    }
+                    )}
                     {children}
                 </>
             )}
