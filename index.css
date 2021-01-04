@@ -67,6 +67,24 @@
     transform: rotate(360deg);
   }
 }
+[class^=zeroUI-] {
+  box-sizing: border-box;
+}
+[class^=zeroUI-]::before {
+  box-sizing: border-box;
+}
+[class^=zeroUI-]::after {
+  box-sizing: border-box;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .zeroUI-badge {
   position: absolute;
   min-width: 20px;
@@ -113,13 +131,35 @@
 .zeroUI-badge-dot:after {
   content: "";
   display: inline-block;
-  width: 5px;
-  height: 5px;
+  width: 8px;
+  height: 8px;
   background-color: red;
   border-radius: 50%;
   position: absolute;
-  right: -2px;
-  top: -2px;
+  right: -4px;
+  top: -4px;
+}
+.zeroUI-badge-status-dot {
+  width: 8px;
+  height: 8px;
+  background-color: red;
+  border-radius: 50%;
+  display: inline-block;
+}
+.zeroUI-badge-status-dot-success {
+  background-color: #52c41a;
+}
+.zeroUI-badge-status-dot-warning {
+  background-color: #faad14;
+}
+.zeroUI-badge-status-dot-default {
+  background-color: #ccc;
+}
+.zeroUI-badge-status-dot-processing {
+  background-color: #13c2c2;
+}
+.zeroUI-badge-status-dot-error {
+  background-color: red;
 }
 [class^=zeroUI-] {
   box-sizing: border-box;
@@ -4367,6 +4407,10 @@ a {
   background-color: #fff !important;
   color: #000;
   border: 1px solid #ccc;
+}
+
+.mr-5 {
+  margin-right: 5px;
 }
 .zeroUI-button-example .space-button .zeroUI-button {
   margin: 5px;
