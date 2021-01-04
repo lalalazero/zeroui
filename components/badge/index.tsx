@@ -5,12 +5,13 @@ import './style.scss'
 
 const PREFIX = 'zeroUI-badge'
 
-export interface BadgeProps extends CSSProperties {
+export interface BadgeProps extends Omit<CSSProperties, 'offset'> {
     count?: number
     className?: string
     showZero?: boolean
     overCount?: number
     dot?: boolean
+    offset?: [number | string, number | string]
 }
 
 const Badge: React.FC<BadgeProps> = (props) => {
@@ -21,12 +22,18 @@ const Badge: React.FC<BadgeProps> = (props) => {
         overCount,
         count,
         dot,
+        offset = [],
         ...style
     } = props
 
     const isSolo = !children
 
     const isCustom = !isNumber(count)
+
+    const offsetRight = offset[0]
+    const offsetTop = offset[1]
+
+    const offsetStyle = { right: offsetRight, top: offsetTop }
 
     const isOvered =
         isNumber(count) &&
@@ -55,6 +62,16 @@ const Badge: React.FC<BadgeProps> = (props) => {
             ? count !== 0 || (count === 0 && showZero)
             : false
 
+    const badgeClassName = useMemo(() => {
+        const cls1 = classname(PREFIX + '-custom', {
+            [`${PREFIX}-over-max`]: isOvered,
+        })
+        const cls2 = classname(PREFIX, {
+            [`${PREFIX}-over-max`]: isOvered,
+        })
+        return isCustom ? cls1 : cls2
+    }, [isCustom])
+
     return (
         <div
             className={classname(PREFIX + '-wrapper', {
@@ -71,17 +88,7 @@ const Badge: React.FC<BadgeProps> = (props) => {
             ) : (
                 <>
                     {shouldRenderIcon && (
-                        <span
-                            className={
-                                isCustom
-                                    ? classname(PREFIX + '-custom', {
-                                          [`${PREFIX}-over-max`]: isOvered,
-                                      })
-                                    : classname(PREFIX, {
-                                          [`${PREFIX}-over-max`]: isOvered,
-                                      })
-                            }
-                        >
+                        <span className={badgeClassName} style={offsetStyle}>
                             {getCount}
                         </span>
                     )}

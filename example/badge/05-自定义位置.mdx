@@ -1,0 +1,20 @@
+## 自定义位置
+
+可以自定义徽章离定位点（右上角）的距离 offset=[offsetRight, offsetTop]
+
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Badge } from 'zero-ui-react'
+
+const App = () => {
+    return (
+        <div>
+            <Badge count={5} offset={[-10, 10]}>
+                <a href="#" className="badge-example" />
+            </Badge>
+        </div>
+    )
+}
+export default App
+```
