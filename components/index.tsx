@@ -5,6 +5,7 @@ const message = {
     modal,
     alert,
 }
+export { default as Badge } from './badge/index'
 export { Button, ButtonGroup } from './button/index'
 export { default as Card } from './card'
 export { default as Checkbox } from './checkbox/index'

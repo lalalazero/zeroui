@@ -1,0 +1,26 @@
+## 基本
+
+简单的用法
+
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Badge, Icon } from 'zero-ui-react'
+
+const App = () => {
+    return (
+        <div>
+            <Badge count={5}>
+                <a href="#" className="badge-example" />
+            </Badge>
+            <Badge count={0} showZero={true}>
+                <a href="#" className="badge-example" />
+            </Badge>
+            <Badge count={<Icon name="happy" />}>
+                <a href="#" className="badge-example" />
+            </Badge>
+        </div>
+    )
+}
+export default App
+```

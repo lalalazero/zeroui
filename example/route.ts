@@ -1,3 +1,4 @@
+import BadgeExample from './badge'
 import ButtonDemo from './button'
 import CardExample from './card'
 import CheckboxExample from './checkbox'
@@ -91,6 +92,11 @@ export const basicComponentsRoute = [
     {
         title: '数据展示',
         children: [
+            {
+                title: 'Badge 徽标数',
+                path: '/badge',
+                component: BadgeExample,
+            },
             {
                 title: 'Tooltip 文字提示',
                 path: '/tooltip',
