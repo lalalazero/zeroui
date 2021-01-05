@@ -1,13 +1,31 @@
 .zeroUI-breadcrumb {
     &-wrapper {
-        border: 1px solid;
+        // border: 1px solid;
         padding: 4px 0;
     }
-
     display: inline-flex;
+    justify-content: center;
+    align-items: center;
     margin: 0 5px;
     &-seperator {
         margin-left: 5px;
         vertical-align: middle;
+    }
+    color: #ccc;
+    & {
+        .zeroUI-icon {
+            fill: #ccc;
+        }
+    }
+    &:last-child {
+        color: unset;
+        .zeroUI-breadcrumb-seperator {
+            display: none;
+        }
+        & {
+            .zeroUI-icon {
+                fill: inherit;
+            }
+        }
     }
 }

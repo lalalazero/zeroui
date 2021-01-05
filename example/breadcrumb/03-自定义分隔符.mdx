@@ -1,0 +1,27 @@
+## 自定义分隔符
+
+通过 seperator=">"设置自定义分隔符
+
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Breadcrumb } from 'zero-ui-react'
+
+const App = () => {
+    return (
+        <div>
+            <Breadcrumb seperator=">">
+                <Breadcrumb.Item>首页</Breadcrumb.Item>
+                <Breadcrumb.Item>
+                    <a href="">应用中心</a>
+                </Breadcrumb.Item>
+                <Breadcrumb.Item>
+                    <a href="">应用列表</a>
+                </Breadcrumb.Item>
+                <Breadcrumb.Item>zeroUI 组件库</Breadcrumb.Item>
+            </Breadcrumb>
+        </div>
+    )
+}
+export default App
+```
