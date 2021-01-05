@@ -163,15 +163,29 @@
 }
 .zeroUI-breadcrumb {
   display: inline-flex;
+  justify-content: center;
+  align-items: center;
   margin: 0 5px;
+  color: #ccc;
 }
 .zeroUI-breadcrumb-wrapper {
-  border: 1px solid;
   padding: 4px 0;
 }
 .zeroUI-breadcrumb-seperator {
   margin-left: 5px;
   vertical-align: middle;
+}
+.zeroUI-breadcrumb .zeroUI-icon {
+  fill: #ccc;
+}
+.zeroUI-breadcrumb:last-child {
+  color: unset;
+}
+.zeroUI-breadcrumb:last-child .zeroUI-breadcrumb-seperator {
+  display: none;
+}
+.zeroUI-breadcrumb:last-child .zeroUI-icon {
+  fill: inherit;
 }
 [class^=zeroUI-] {
   box-sizing: border-box;
