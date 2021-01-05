@@ -161,6 +161,18 @@
 .zeroUI-badge-status-dot-error {
   background-color: red;
 }
+.zeroUI-breadcrumb {
+  display: inline-flex;
+  margin: 0 5px;
+}
+.zeroUI-breadcrumb-wrapper {
+  border: 1px solid;
+  padding: 4px 0;
+}
+.zeroUI-breadcrumb-seperator {
+  margin-left: 5px;
+  vertical-align: middle;
+}
 [class^=zeroUI-] {
   box-sizing: border-box;
 }
