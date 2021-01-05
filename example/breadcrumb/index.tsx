@@ -17,11 +17,11 @@ export default class Demo extends React.Component<any, any> {
             await import('./02-带图标.mdx'),
             await import('./03-自定义分隔符.mdx'),
         ]
-        // const api = await import('./api.mdx')
+        const api = await import('./api.mdx')
         this.setState({
-            // api: api.default.apiContent,
+            api: api.default.apiContent,
             demos,
-            // apiCode: api.default.apiCode,
+            apiCode: api.default.apiCode,
         })
     }
 
