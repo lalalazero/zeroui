@@ -1,4 +1,5 @@
 import BadgeExample from './badge'
+import BreadcrumbExample from './breadcrumb'
 import ButtonDemo from './button'
 import CardExample from './card'
 import CheckboxExample from './checkbox'
@@ -37,6 +38,11 @@ export const basicComponentsRoute = [
     {
         title: '导航',
         children: [
+            {
+                title: 'Breadcrumb 面包屑',
+                path: '/breadcrumb',
+                component: BreadcrumbExample,
+            },
             {
                 title: 'Menu 导航菜单',
                 path: '/menu',

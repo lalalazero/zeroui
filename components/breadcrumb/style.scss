@@ -1,0 +1,13 @@
+.zeroUI-breadcrumb {
+    &-wrapper {
+        border: 1px solid;
+        padding: 4px 0;
+    }
+
+    display: inline-flex;
+    margin: 0 5px;
+    &-seperator {
+        margin-left: 5px;
+        vertical-align: middle;
+    }
+}

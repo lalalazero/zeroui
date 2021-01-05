@@ -6,6 +6,7 @@ const message = {
     alert,
 }
 export { default as Badge } from './badge/index'
+export { default as Breadcrumb } from './breadcrumb/index'
 export { Button, ButtonGroup } from './button/index'
 export { default as Card } from './card'
 export { default as Checkbox } from './checkbox/index'
