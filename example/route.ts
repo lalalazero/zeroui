@@ -15,6 +15,7 @@ import PaginationExample from './pagination'
 import RadioExample from './radio'
 import RateExample from './rate'
 import SelectExample from './select'
+import StepsExample from './steps'
 import SwitchExample from './switch'
 import TooltipExample from './tooltip'
 import TreeExample from './tree'
@@ -52,6 +53,11 @@ export const basicComponentsRoute = [
                 title: 'Pagination 分页',
                 path: '/pagination',
                 component: PaginationExample,
+            },
+            {
+                title: 'Steps 步骤条',
+                path: '/steps',
+                component: StepsExample,
             },
         ],
     },
