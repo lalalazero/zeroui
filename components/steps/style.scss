@@ -1,3 +1,85 @@
+@import '../index.scss';
+
 .zeroUI-steps {
-    border: 1px solid;
+    display: flex;
+    min-height: 100px;
+    min-width: 100px;
+    justify-content: space-around;
+}
+
+.zeroUI-step {
+    flex-grow: 1;
+    display: inline-flex;
+    margin-right: 5px;
+    &-icon {
+        & > span {
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 5px;
+            text-align: center;
+            color: #ccc;
+        }
+        margin: 10px 0;
+        display: inline-block;
+    }
+    &-content {
+        min-height: 40px;
+        line-height: 40px;
+        margin: 0px 5px;
+        position: relative;
+        & .zeroUI-step-desc {
+            position: absolute;
+            min-width: 260px;
+            font-size: 14px;
+            margin-top: -10px;
+            color: #aaa;
+        }
+    }
+    &-line {
+        height: 1px;
+        background-color: #ccc;
+        flex-grow: 1;
+        margin: 20px 0;
+    }
+    &:last-child {
+        flex-grow: 0.5;
+        .zeroUI-step-line {
+            display: none;
+        }
+    }
+
+    &-status-finished {
+        .zeroUI-step {
+            &-icon {
+                color: $brand-color;
+                & > span {
+                    border-color: $brand-color;
+                }
+                .zeroUI-icon {
+                    fill: $brand-color;
+                }
+            }
+
+            &-line {
+                background-color: $brand-color;
+            }
+        }
+    }
+
+    &-status-active {
+        .zeroUI-step {
+            &-icon {
+                & > span {
+                    background-color: $brand-color;
+                    color: #fff;
+                    border-color: $brand-color;
+                }
+            }
+        }
+    }
 }
