@@ -16,6 +16,9 @@
         .zeroUI-icon {
             fill: #ccc;
         }
+        a {
+            color: #ccc;
+        }
     }
     &:last-child {
         color: unset;
@@ -25,6 +28,9 @@
         & {
             .zeroUI-icon {
                 fill: inherit;
+            }
+            a {
+                color: inherit;
             }
         }
     }
