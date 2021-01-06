@@ -27,6 +27,7 @@ export { default as Pagination } from './pagination';
 export { default as Radio } from './radio/index';
 export { default as Rate } from './rate/index';
 export { default as Select } from './select/index';
+export { default as Steps } from './steps/index';
 export { default as Switch } from './switch/index';
 export { default as Tooltip } from './tooltip/Tooltip';
 export { default as Tree } from './tree/index';

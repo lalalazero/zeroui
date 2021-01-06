@@ -178,6 +178,9 @@
 .zeroUI-breadcrumb .zeroUI-icon {
   fill: #ccc;
 }
+.zeroUI-breadcrumb a {
+  color: #ccc;
+}
 .zeroUI-breadcrumb:last-child {
   color: unset;
 }
@@ -186,6 +189,9 @@
 }
 .zeroUI-breadcrumb:last-child .zeroUI-icon {
   fill: inherit;
+}
+.zeroUI-breadcrumb:last-child a {
+  color: inherit;
 }
 [class^=zeroUI-] {
   box-sizing: border-box;
@@ -3898,6 +3904,94 @@
 }
 .zeroUI-select-option-item[data-selected=true] {
   background-color: #e6fffb;
+}
+[class^=zeroUI-] {
+  box-sizing: border-box;
+}
+[class^=zeroUI-]::before {
+  box-sizing: border-box;
+}
+[class^=zeroUI-]::after {
+  box-sizing: border-box;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.zeroUI-steps {
+  display: flex;
+  min-height: 100px;
+  min-width: 100px;
+  justify-content: space-around;
+}
+
+.zeroUI-step {
+  flex-grow: 1;
+  display: inline-flex;
+  margin-right: 5px;
+}
+.zeroUI-step-icon {
+  margin: 10px 0;
+  display: inline-block;
+}
+.zeroUI-step-icon > span {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 5px;
+  text-align: center;
+  color: #ccc;
+}
+.zeroUI-step-content {
+  min-height: 40px;
+  line-height: 40px;
+  margin: 0px 5px;
+  position: relative;
+}
+.zeroUI-step-content .zeroUI-step-desc {
+  position: absolute;
+  min-width: 260px;
+  font-size: 14px;
+  margin-top: -10px;
+  color: #aaa;
+}
+.zeroUI-step-line {
+  height: 1px;
+  background-color: #ccc;
+  flex-grow: 1;
+  margin: 20px 0;
+}
+.zeroUI-step:last-child {
+  flex-grow: 0.5;
+}
+.zeroUI-step:last-child .zeroUI-step-line {
+  display: none;
+}
+.zeroUI-step-status-finished .zeroUI-step-icon {
+  color: #13c2c2;
+}
+.zeroUI-step-status-finished .zeroUI-step-icon > span {
+  border-color: #13c2c2;
+}
+.zeroUI-step-status-finished .zeroUI-step-icon .zeroUI-icon {
+  fill: #13c2c2;
+}
+.zeroUI-step-status-finished .zeroUI-step-line {
+  background-color: #13c2c2;
+}
+.zeroUI-step-status-active .zeroUI-step-icon > span {
+  background-color: #13c2c2;
+  color: #fff;
+  border-color: #13c2c2;
 }
 [class^=zeroUI-] {
   box-sizing: border-box;
