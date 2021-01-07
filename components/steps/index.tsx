@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { ReactNode, useMemo } from 'react'
 import { Icon } from '../index'
 import { classname } from '../_util/classes'
 import './style.scss'
@@ -10,6 +10,7 @@ const PREFIX_STEP = 'zeroUI-step'
 export interface StepProps {
     title?: string
     desc?: string
+    icon?: ReactNode
 }
 
 const STATUS = {
@@ -44,14 +45,19 @@ const Step: React.FC<StepProps & { current?: number; idx: number }> = (
             )}
         >
             <div className={classname(`${PREFIX_STEP}-icon`)}>
-                <span>
-                    {status === STATUS.FINISHED ? (
-                        <Icon name="check"></Icon>
-                    ) : (
-                        props.idx
-                    )}
-                </span>
+                {props.icon ? (
+                    props.icon
+                ) : (
+                    <span>
+                        {status === STATUS.FINISHED ? (
+                            <Icon name="check"></Icon>
+                        ) : (
+                            props.idx
+                        )}
+                    </span>
+                )}
             </div>
+
             <div className={classname(`${PREFIX_STEP}-content`)}>
                 <h4 className={classname(`${PREFIX_STEP}-title`)}>
                     {props.title || ''}

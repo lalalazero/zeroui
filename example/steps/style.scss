@@ -1,0 +1,29 @@
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+$spinAnimation: spin 2s infinite linear;
+
+.zeroUI-steps-example {
+    .step-icon {
+        &-1,
+        &-2,
+        &-3 {
+            // transform: scale(1.5);
+            height: 1.5em;
+            width: 1.5em;
+        }
+        &-2 {
+            fill: lightblue;
+            animation: $spinAnimation;
+        }
+        &-3 {
+            fill: #ccc;
+        }
+    }
+}
