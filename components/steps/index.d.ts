@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import './style.scss';
 export interface StepProps {
     title?: string;
     desc?: string;
+    icon?: ReactNode;
 }
 declare const Step: React.FC<StepProps & {
     current?: number;

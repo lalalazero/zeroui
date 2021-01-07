@@ -4734,6 +4734,25 @@ a {
 .btn-wrapper > .zeroUI-button {
   margin: 5px;
 }
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.zeroUI-steps-example .step-icon-1, .zeroUI-steps-example .step-icon-2, .zeroUI-steps-example .step-icon-3 {
+  height: 1.5em;
+  width: 1.5em;
+}
+.zeroUI-steps-example .step-icon-2 {
+  fill: lightblue;
+  animation: spin 2s infinite linear;
+}
+.zeroUI-steps-example .step-icon-3 {
+  fill: #ccc;
+}
 .tooltip-example-02 .box-1, .tooltip-example-02 .box-2, .tooltip-example-02 .box-3 {
   display: flex;
 }
