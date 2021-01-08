@@ -3993,6 +3993,27 @@
   color: #fff;
   border-color: #13c2c2;
 }
+.zeroUI-step-clickable.zeroUI-step-status-finished:hover, .zeroUI-step-clickable.zeroUI-step-status-waiting:hover {
+  cursor: pointer;
+  color: #13c2c2;
+}
+.zeroUI-step-clickable.zeroUI-step-status-finished:hover .zeroUI-step-desc, .zeroUI-step-clickable.zeroUI-step-status-waiting:hover .zeroUI-step-desc {
+  color: #13c2c2;
+}
+.zeroUI-step-clickable.zeroUI-step-status-finished:hover .zeroUI-step-icon > span, .zeroUI-step-clickable.zeroUI-step-status-waiting:hover .zeroUI-step-icon > span {
+  color: #13c2c2;
+  border-color: #13c2c2;
+}
+.zeroUI-step-clickable.zeroUI-step-status-active:hover {
+  cursor: pointer;
+  color: #13c2c2;
+}
+.zeroUI-step-clickable.zeroUI-step-status-active:hover .zeroUI-step-desc {
+  color: #13c2c2;
+}
+.zeroUI-step-clickable.zeroUI-step-status-active:hover .zeroUI-step-icon > span {
+  border-color: #13c2c2;
+}
 [class^=zeroUI-] {
   box-sizing: border-box;
 }

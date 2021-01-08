@@ -5,13 +5,16 @@ export interface StepProps {
     desc?: string;
     icon?: ReactNode;
 }
-declare const Step: React.FC<StepProps & {
+interface InternalStepProps {
     current?: number;
     idx: number;
-}>;
+    onChange?: (idx: number) => void;
+}
+declare const Step: React.FC<StepProps & InternalStepProps>;
 export interface StepsProps {
     current?: number;
     className?: string;
+    onChange?: (newStep: number) => void;
 }
 export interface StepsInterface extends React.FC<StepsProps> {
     Step: typeof Step;
