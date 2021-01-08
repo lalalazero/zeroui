@@ -20,9 +20,13 @@ const STATUS = {
     WAITING: 'waiting',
 }
 
-const Step: React.FC<StepProps & { current?: number; idx: number }> = (
-    props
-) => {
+interface InternalStepProps {
+    current?: number
+    idx: number
+    onChange?: (idx: number) => void
+}
+
+const Step: React.FC<StepProps & InternalStepProps> = (props) => {
     const status = useMemo(() => {
         if (props.current) {
             const delta = props.current - props.idx
@@ -37,12 +41,22 @@ const Step: React.FC<StepProps & { current?: number; idx: number }> = (
         return STATUS.DEFAULT
     }, [props.current, props.idx])
 
+    const handleChange = () => {
+        if (props.onChange) {
+            props.onChange(props.idx)
+        }
+    }
+
     return (
         <div
             className={classname(
                 `${PREFIX_STEP}`,
-                `${PREFIX_STEP}-status-${status}`
+                `${PREFIX_STEP}-status-${status}`,
+                {
+                    [`${PREFIX_STEP}-clickable`]: !!props.onChange,
+                }
             )}
+            onClick={handleChange}
         >
             <div className={classname(`${PREFIX_STEP}-icon`)}>
                 {props.icon ? (
@@ -74,6 +88,7 @@ const Step: React.FC<StepProps & { current?: number; idx: number }> = (
 export interface StepsProps {
     current?: number
     className?: string
+    onChange?: (newStep: number) => void
 }
 
 export interface StepsInterface extends React.FC<StepsProps> {
@@ -87,6 +102,7 @@ const Steps: StepsInterface = (props) => {
                 React.cloneElement(child, {
                     current: props.current,
                     idx: idx + 1,
+                    onChange: props.onChange,
                 })
             )}
         </div>

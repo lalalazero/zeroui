@@ -1,0 +1,26 @@
+## 可点击
+
+设置 onChange 之后节点变为可点击。
+
+```jsx
+import React, { useState } from 'react'
+import ReactDOM from 'react-dom'
+import { Steps } from 'zero-ui-react'
+
+const { Step } = Steps
+
+const App = () => {
+    const [current, setCurrent] = useState(1)
+
+    const onChange = (newCurrent) => setCurrent(newCurrent)
+
+    return (
+        <Steps current={current} onChange={onChange}>
+            <Step title="第一步" desc="第一步需要身份证"></Step>
+            <Step title="第二步" desc="第二步需要社保证明"></Step>
+            <Step title="第三步" desc="等待审核结果"></Step>
+        </Steps>
+    )
+}
+export default App
+```

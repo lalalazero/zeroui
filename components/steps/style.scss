@@ -82,4 +82,36 @@
             }
         }
     }
+
+    &-clickable {
+        &.zeroUI-step-status {
+            &-finished,
+            &-waiting {
+                &:hover {
+                    cursor: pointer;
+                    color: $brand-color;
+                    .zeroUI-step-desc {
+                        color: $brand-color;
+                    }
+                    .zeroUI-step-icon > span {
+                        color: $brand-color;
+                        border-color: $brand-color;
+                    }
+                }
+            }
+
+            &-active {
+                &:hover {
+                    cursor: pointer;
+                    color: $brand-color;
+                    .zeroUI-step-desc {
+                        color: $brand-color;
+                    }
+                    .zeroUI-step-icon > span {
+                        border-color: $brand-color;
+                    }
+                }
+            }
+        }
+    }
 }
