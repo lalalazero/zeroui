@@ -1,0 +1,22 @@
+.zeroUI-tag {
+    border: 1px solid #ccc;
+    background-color: #eee;
+    color: #000;
+    display: inline-flex;
+    padding: 0 6px;
+    font-size: 12px;
+    height: 24px;
+    line-height: 24px;
+    font-weight: 300;
+    &-close-icon {
+        padding: 0 4px;
+        vertical-align: middle;
+        cursor: pointer;
+    }
+    &-closeable {
+        padding-right: 0;
+    }
+    &-hidden {
+        display: none;
+    }
+}

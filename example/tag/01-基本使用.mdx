@@ -1,0 +1,27 @@
+## 基本
+
+最基本的用法
+
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Tag } from 'zero-ui-react'
+
+const App = () => {
+    const log = () => {
+        console.log('close')
+    }
+    return (
+        <div>
+            <Tag>Tag1</Tag>
+            <Tag>
+                <a href="#">Link</a>
+            </Tag>
+            <Tag closeable onClose={log}>
+                Tag2
+            </Tag>
+        </div>
+    )
+}
+export default App
+```

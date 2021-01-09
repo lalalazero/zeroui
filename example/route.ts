@@ -17,6 +17,7 @@ import RateExample from './rate'
 import SelectExample from './select'
 import StepsExample from './steps'
 import SwitchExample from './switch'
+import TagExample from './tag'
 import TooltipExample from './tooltip'
 import TreeExample from './tree'
 
@@ -123,6 +124,11 @@ export const basicComponentsRoute = [
                 title: 'Tree 树',
                 path: '/tree',
                 component: TreeExample,
+            },
+            {
+                title: 'Tag 标签',
+                path: '/tag',
+                component: TagExample,
             },
         ],
     },
