@@ -4135,6 +4135,28 @@
 .zeroUI-switch[aria-checked=true] .zeroUI-switch-spin {
   border-bottom-color: #13c2c2;
 }
+.zeroUI-tag {
+  border: 1px solid #ccc;
+  background-color: #eee;
+  color: #000;
+  display: inline-flex;
+  padding: 0 6px;
+  font-size: 12px;
+  height: 24px;
+  line-height: 24px;
+  font-weight: 300;
+}
+.zeroUI-tag-close-icon {
+  padding: 0 4px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.zeroUI-tag-closeable {
+  padding-right: 0;
+}
+.zeroUI-tag-hidden {
+  display: none;
+}
 .zeroUI-tooltip-wrapper {
   position: relative;
   display: inline-block;
@@ -4773,6 +4795,9 @@ a {
 }
 .zeroUI-steps-example .step-icon-3 {
   fill: #ccc;
+}
+.zeroUI-tag-example .zeroUI-tag {
+  margin: 0 6px;
 }
 .tooltip-example-02 .box-1, .tooltip-example-02 .box-2, .tooltip-example-02 .box-3 {
   display: flex;
