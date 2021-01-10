@@ -9,6 +9,7 @@ export interface TagProps {
     visible?: boolean
     closeable?: boolean
     onClose?: () => void
+    color?: string
 }
 
 const Tag: React.FC<TagProps> = (props) => {
@@ -35,6 +36,11 @@ const Tag: React.FC<TagProps> = (props) => {
                 [`${PREFIX}-closeable`]: props.closeable,
                 [`${PREFIX}-hidden`]: !visible,
             })}
+            style={{
+                backgroundColor: props.color,
+                borderColor: props.color ? '#fff' : undefined,
+                color: props.color ? '#fff' : undefined,
+            }}
         >
             {props.children}
             {props.closeable && closeIcon}
