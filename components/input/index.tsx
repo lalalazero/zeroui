@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState } from 'react'
+import React, { KeyboardEvent, ReactNode, useEffect, useState } from 'react'
 import Icon, { ICON } from '../icon/Icon'
 import { classname } from '../_util/classes'
 import './style.scss'
@@ -14,7 +14,7 @@ type FilterdProps = Omit<
 
 export interface TextInputProps extends FilterdProps {
     onChange?: EventHandler
-    onPressEnter?: () => void
+    onPressEnter?: (event: KeyboardEvent) => void
     onInput?: EventHandler
     name: string
     value?: string
@@ -45,6 +45,7 @@ const TextInput: React.FC<TextInputProps> = (
         defaultValue = '',
         addonAfter,
         addonBefore,
+        onPressEnter,
         ...rest
     } = props
 
@@ -72,7 +73,7 @@ const TextInput: React.FC<TextInputProps> = (
     const handleKeyDown: React.KeyboardEventHandler = (event) => {
         const { keyCode } = event
         if (keyCode === 13 || keyCode === 108) {
-            props.onPressEnter && props.onPressEnter()
+            onPressEnter && onPressEnter(event)
         }
     }
     const handleInput: React.ChangeEventHandler<HTMLInputElement> = (event) => {

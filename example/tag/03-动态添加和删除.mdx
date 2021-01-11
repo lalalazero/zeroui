@@ -1,0 +1,60 @@
+## 动态添加和删除
+
+用数组生成一组标签，可以动态添加和删除
+
+```jsx
+import React, { useState } from 'react'
+import ReactDOM from 'react-dom'
+import { Tag, TextInput } from 'zero-ui-react'
+
+const App = () => {
+    const [input, setInput] = useState('')
+    const [tags, setTags] = useState([
+        {
+            value: 'Tag 1',
+            closeable: false,
+        },
+        {
+            value: 'Tag 2',
+            closeable: true,
+        },
+    ])
+    const handleClose = (value) => {
+        console.log('close')
+        const newTags = tags.filter((t) => t !== value)
+        setTags(newTags)
+    }
+    const addTag = (event) => {
+        console.log('event', event.target.value)
+        const newTag = {
+            value: event.target.value,
+            closeable: true,
+        }
+        setTags([...tags, newTag])
+        setInput('')
+    }
+    return (
+        <div>
+            <TextInput
+                icon="plus"
+                placeholder="New Tag"
+                onPressEnter={addTag}
+                value={input}
+                onChange={(name, v) => setInput(v)}
+            ></TextInput>
+            <div style={{ marginTop: 10 }}>
+                {tags.map((t, idx) => (
+                    <Tag
+                        key={idx}
+                        closeable={t.closeable}
+                        onClose={() => handleClose(t.value)}
+                    >
+                        {t.value}
+                    </Tag>
+                ))}
+            </div>
+        </div>
+    )
+}
+export default App
+```
