@@ -4157,6 +4157,16 @@
 .zeroUI-tag-hidden {
   display: none;
 }
+.zeroUI-tag-checkable {
+  user-select: none;
+  border: none !important;
+  background-color: #fff !important;
+  cursor: pointer;
+}
+.zeroUI-tag-checked {
+  background-color: lightblue !important;
+  color: #fff !important;
+}
 .zeroUI-tooltip-wrapper {
   position: relative;
   display: inline-block;
