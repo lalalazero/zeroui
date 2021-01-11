@@ -19,4 +19,14 @@
     &-hidden {
         display: none;
     }
+    &-checkable {
+        user-select: none;
+        border: none !important;
+        background-color: #fff !important;
+        cursor: pointer;
+    }
+    &-checked {
+        background-color: lightblue !important;
+        color: #fff !important;
+    }
 }

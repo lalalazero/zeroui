@@ -5,14 +5,46 @@ import './style.scss'
 
 const PREFIX = 'zeroUI-tag'
 
-export interface TagProps {
+interface TagProps {
     visible?: boolean
     closeable?: boolean
     onClose?: () => void
     color?: string
 }
 
-const Tag: React.FC<TagProps> = (props) => {
+export interface TagInterface extends React.FC<TagProps> {
+    CheckableTag: typeof CheckableTag
+}
+
+export interface CheckableTagProps {
+    checked?: boolean
+    onChange?: (checked: boolean) => void
+}
+const CheckableTag: React.FC<CheckableTagProps> = (props) => {
+    const [checked, setChecked] = useState(false)
+
+    useEffect(() => {
+        if (props.checked !== null && props.checked !== undefined) {
+            setChecked(props.checked)
+        }
+    }, [props.checked])
+    const toggleChecked = () => {
+        setChecked(!checked)
+        props.onChange && props.onChange(!checked)
+    }
+    return (
+        <span
+            onClick={toggleChecked}
+            className={classname(PREFIX, `${PREFIX}-checkable`, {
+                [`${PREFIX}-checked`]: checked,
+            })}
+        >
+            {props.children}
+        </span>
+    )
+}
+
+const Tag: TagInterface = (props) => {
     useEffect(() => {
         if (typeof props.visible === 'boolean') {
             setVisible(props.visible)
@@ -47,5 +79,5 @@ const Tag: React.FC<TagProps> = (props) => {
         </span>
     )
 }
-
+Tag.CheckableTag = CheckableTag
 export default Tag

@@ -1,0 +1,54 @@
+## 可选择标签
+
+通过 CheckableTag 实现类似 Checkbox 效果，点击切换选中效果。
+
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Tag } from 'zero-ui-react'
+
+const { CheckableTag } = Tag
+const App = () => {
+    const [checked, setChecked] = React.useState([])
+    const isChecked = (i) => checked.indexOf(i) >= 0
+    const toggle = (check, id) => {
+        if (checked) {
+            setChecked(new Array(new Set([...checked, id])))
+        } else {
+            setChecked(checked.filter((c) => c !== id))
+        }
+    }
+    return (
+        <div>
+            <span style={{ fontSize: 14 }}>订阅类别</span>
+            <CheckableTag
+                checked={isChecked(1)}
+                onChange={(check) => toggle(check, 1)}
+            >
+                电影
+            </CheckableTag>
+
+            <CheckableTag
+                checked={isChecked(2)}
+                onChange={(check) => toggle(check, 2)}
+            >
+                书籍
+            </CheckableTag>
+
+            <CheckableTag
+                checked={isChecked(3)}
+                onChange={(check) => toggle(check, 3)}
+            >
+                音乐
+            </CheckableTag>
+            <CheckableTag
+                checked={isChecked(4)}
+                onChange={(check) => toggle(check, 4)}
+            >
+                运动
+            </CheckableTag>
+        </div>
+    )
+}
+export default App
+```

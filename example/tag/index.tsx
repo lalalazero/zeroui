@@ -16,6 +16,7 @@ export default class Demo extends React.Component<any, any> {
             await import('./01-基本使用.mdx'),
             await import('./02-颜色定制.mdx'),
             await import('./03-动态添加和删除.mdx'),
+            await import('./04-可选择标签.mdx'),
         ]
         // const api = await import('./api.mdx')
         this.setState({
