@@ -1,11 +1,11 @@
-import React, { ReactNode } from 'react';
+import React, { KeyboardEvent, ReactNode } from 'react';
 import { ICON } from '../icon/Icon';
 import './style.scss';
 declare type EventHandler = (name: string, value: string) => void;
 declare type FilterdProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'name' | 'onInput' | 'size' | 'onKeyDown' | 'prefix'>;
 export interface TextInputProps extends FilterdProps {
     onChange?: EventHandler;
-    onPressEnter?: () => void;
+    onPressEnter?: (event: KeyboardEvent) => void;
     onInput?: EventHandler;
     name: string;
     value?: string;
