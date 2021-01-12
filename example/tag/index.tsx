@@ -18,11 +18,11 @@ export default class Demo extends React.Component<any, any> {
             await import('./03-动态添加和删除.mdx'),
             await import('./04-可选择标签.mdx'),
         ]
-        // const api = await import('./api.mdx')
+        const api = await import('./api.mdx')
         this.setState({
-            // api: api.default.apiContent,
+            api: api.default.apiContent,
             demos,
-            // apiCode: api.default.apiCode,
+            apiCode: api.default.apiCode,
         })
     }
 
