@@ -1,9 +1,25 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Button, Menu, notification, Pagination, Select } from '../components'
+import { testConnect } from '../components/_util/zero-store'
 import './App.scss'
 
 const { SubMenu, MenuGroup, MenuItem } = Menu
+
+
+class Test {
+    /*eslint-disable-next-line*/
+    @testConnect
+    constructor(a, b){
+
+        console.log('构造新的test对象,参数是', a, b)
+    }
+}
+
+new Test(1,2)
+new Test(333,2)
+
+
 
 const App = () => {
     const [value, setValue] = React.useState('')
@@ -53,33 +69,6 @@ const App = () => {
             </div>
 
             <Button onClick={openNotification}>notification</Button>
-            <p>
-                <Input.TextInput
-                    placeholder={'placeholer'}
-                    name="xxx"
-                    value={value}
-                    onPressEnter={handleSearch}
-                    onChange={handleChange}
-                ></Input.TextInput>
-            </p>
-            <p>
-                <Input.TextInput
-                    name="name"
-                    size="large"
-                    value={value}
-                    onPressEnter={handleSearch}
-                    onChange={handleChange}
-                ></Input.TextInput>
-            </p>
-            <p>
-                <Input.TextInput
-                    name="name"
-                    size="small"
-                    value={value}
-                    onPressEnter={handleSearch}
-                    onChange={handleChange}
-                ></Input.TextInput>
-            </p>
             <div>
                 <Select
                     value={selectedItem}
