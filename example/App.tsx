@@ -1,10 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {
-    connect,
-    createStore,
-    Provider,
-} from '../components/_util/mini-store.jsx'
+import { connect, createStore, Provider } from '../components/_util/mini-store'
 import './App.scss'
 
 const store = createStore({ n: 1 })
@@ -30,7 +26,7 @@ const Foo = (props) => {
     )
 }
 const mapStateToProps: any = (store) => ({ counter: store.n })
-const MappedFoo: React.FC<any> = connect(mapStateToProps)(Foo)
+const MappedFoo = connect(mapStateToProps)(Foo)
 const App = () => {
     return (
         <div>

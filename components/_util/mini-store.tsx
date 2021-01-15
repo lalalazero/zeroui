@@ -48,11 +48,11 @@ export function connect<TStateProps = {}, TOwnProps = {}>(
     return function wrapHOC<
         C extends React.FC<ConnectedProps<TStateProps, TOwnProps>>
     >(WrapComponent: C) {
-        const InnerFC = (props) => {
+        const InnerFC = (props: ConnectedProps<TStateProps, TOwnProps>) => {
             const store = useContext(Context)
             // console.log('connect, store=', store.getState())
 
-            let mappedState = null
+            let mappedState: Partial<TStateProps> | null = null
 
             if (store) {
                 mappedState = mapStateToProps(store.getState())
@@ -85,7 +85,7 @@ export function connect<TStateProps = {}, TOwnProps = {}>(
 
             return (
                 <WrapComponent
-                    {...mappedState}
+                    {...(mappedState as any)}
                     {...props}
                     store={store}
                 ></WrapComponent>
