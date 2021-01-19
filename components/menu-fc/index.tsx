@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { classname } from '../_util/classes'
 import { createStore, Provider, Store } from '../_util/mini-store'
 import MenuGroup from './MenuGroup'
 import MenuItem from './MenuItem'
 import './style.scss'
 import SubMenu from './SubMenu'
-import { collectMenuKeys, renderMenu } from './util'
+import { renderMenu } from './util'
 
 const PREFIX = 'zeroUI-menu'
 
@@ -60,9 +60,19 @@ const Menu: MenuInterface = (props) => {
         })
     )
 
+    useEffect(() => {
+        if (props.openKeys) {
+            stateStore.setState({ openKeys: props.openKeys })
+        }
+
+        if (props.selectedKeys) {
+            stateStore.setState({ selectedKeys: props.selectedKeys })
+        }
+    }, [props.openKeys, props.selectedKeys])
+
     const classes = classname(className, PREFIX, `${PREFIX}-${type}`)
 
-    const childrenKeys = collectMenuKeys(props.children)
+    // const childrenKeys = collectMenuKeys(props.children)
 
     // console.log('root childrenKeys..', childrenKeys)
 
