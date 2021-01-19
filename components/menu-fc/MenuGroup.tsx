@@ -14,7 +14,15 @@ export interface MenuGroupProps {
 type MenuGroupInnerProps = CommonMenuProps & MenuGroupProps
 
 const MenuGroup: React.FC<MenuGroupInnerProps> = (props) => {
-    const { indentLevel, type, title, generateKey } = props
+    const {
+        indentLevel,
+        type,
+        title,
+        generateKey,
+        onSelect,
+        onOpenChange,
+        multiple,
+    } = props
 
     const paddingLeftStyle = useMemo(() => {
         if (type === 'inline') {
@@ -41,6 +49,9 @@ const MenuGroup: React.FC<MenuGroupInnerProps> = (props) => {
                     indentLevel,
                     type,
                     generateKey,
+                    onOpenChange,
+                    onSelect,
+                    multiple,
                 })}
             </div>
         </div>

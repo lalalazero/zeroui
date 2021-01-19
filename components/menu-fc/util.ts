@@ -23,7 +23,8 @@ export const collectMenuKeys = (menuChildren: ReactNode, prefix = 'root') => {
             if (child && child.type) {
                 const generateKey = child.key || `${prefix}-${idx}`
 
-                if (['InnerFC', 'MenuItem'].indexOf(child.type.name) >= 0) {
+                // TODO fix InnerFC
+                if (['InnerFC'].indexOf(child.type.name) >= 0) {
                     keys.push(generateKey)
                 }
 

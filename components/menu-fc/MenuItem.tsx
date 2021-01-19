@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react'
-import { CommonMenuProps } from '../menu-fc'
+import { CommonMenuProps, MenuStore } from '.'
 import { classname } from '../_util/classes'
+import { connect, Store } from '../_util/mini-store'
 import { PADDING_BASE } from './SubMenu'
 
 const PREFIX = 'zeroUI-menu-item'
@@ -10,10 +11,11 @@ export interface MenuItemProps {
     className?: string
 }
 
-type MenuItemInnerProps = CommonMenuProps & MenuItemProps
+type MenuItemInnerProps = CommonMenuProps &
+    MenuItemProps & { store: Store<MenuStore> }
 
 const MenuItem: React.FC<MenuItemInnerProps> = (props) => {
-    const { indentLevel, type, className, generateKey } = props
+    const { indentLevel, type, className, generateKey, store } = props
 
     const itemKey = generateKey
 
@@ -31,15 +33,68 @@ const MenuItem: React.FC<MenuItemInnerProps> = (props) => {
         return { paddingLeft: PADDING_BASE, paddingRight: PADDING_BASE }
     }, [type])
 
+    const isSelected = useMemo(() => {
+        const { selectedKeys } = store.getState()
+
+        if (
+            selectedKeys &&
+            selectedKeys.length > 0 &&
+            selectedKeys.indexOf(generateKey) >= 0
+        ) {
+            return true
+        }
+
+        return false
+    }, [store.getState()])
+
+    const toggleSelected = () => {
+        let selectedKeys = store.getState().selectedKeys || []
+
+        if (props.multiple) {
+            if (isSelected) {
+                // menu 不需要取消选中
+                // const index = selectedKeys.indexOf(generateKey)
+                // if (index >= 0) {
+                //     selectedKeys.splice(index, 1)
+                // }
+            } else {
+                selectedKeys.push(generateKey)
+            }
+        } else {
+            if (isSelected) {
+                // menu 不需要取消选中
+                // selectedKeys = []
+            } else {
+                selectedKeys = [generateKey]
+            }
+        }
+
+        store.setState({ selectedKeys })
+
+        props.onSelect &&
+            props.onSelect({
+                key: generateKey,
+                keyPath: [generateKey],
+                selectedKeys,
+            })
+    }
+
     const classes = classname(className, PREFIX, {
-        [`${PREFIX}-selected`]: false, // selectedKey === itemKey,
+        [`${PREFIX}-selected`]: isSelected, // selectedKey === itemKey,
     })
     return (
-        <li className={classes} style={paddingLeftStyle} data-key={itemKey}>
+        <li
+            className={classes}
+            style={paddingLeftStyle}
+            data-key={itemKey}
+            onClick={toggleSelected}
+        >
             {props.children}
             <span style={{ marginLeft: 20 }}>{itemKey}</span>
         </li>
     )
 }
 
-export default MenuItem
+const ConnectedMenuItem = connect<{}, MenuItemInnerProps>()(MenuItem)
+
+export default ConnectedMenuItem

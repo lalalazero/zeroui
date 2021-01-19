@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { CommonMenuProps, MenuStore } from '.'
+import { CommonMenuProps, MenuStore, TSelectParam } from '.'
 import { Icon } from '../index'
 import { classname } from '../_util/classes'
 import { connect, Store } from '../_util/mini-store'
@@ -18,7 +18,15 @@ type SubMenuInnerProps = CommonMenuProps &
     SubMenuProps & { store: Store<MenuStore> }
 
 const SubMenu: React.FC<SubMenuInnerProps> = (props) => {
-    const { indentLevel, type, className, title, generateKey, store } = props
+    const {
+        indentLevel,
+        type,
+        className,
+        title,
+        generateKey,
+        store,
+        multiple,
+    } = props
 
     const childrenKeys = collectMenuKeys(props.children, generateKey)
 
@@ -63,7 +71,6 @@ const SubMenu: React.FC<SubMenuInnerProps> = (props) => {
             }
         }
 
-        console.log('new OpenKeys..', newOpenKeys)
         store.setState({ openKeys: newOpenKeys })
 
         props.onOpenChange && props.onOpenChange(newOpenKeys)
@@ -77,6 +84,16 @@ const SubMenu: React.FC<SubMenuInnerProps> = (props) => {
             : { paddingLeft: `${PADDING_BASE}px` }
 
     const classes = classname(className, PREFIX, `${PREFIX}-${type}`)
+
+    const handleSelect = (param: TSelectParam) => {
+        const { key, keyPath, selectedKeys } = param
+        props.onSelect &&
+            props.onSelect({
+                key,
+                keyPath: keyPath.concat(generateKey),
+                selectedKeys,
+            })
+    }
 
     return (
         <li>
@@ -103,6 +120,8 @@ const SubMenu: React.FC<SubMenuInnerProps> = (props) => {
                         indentLevel: indentLevel + 1,
                         type,
                         generateKey,
+                        onSelect: handleSelect,
+                        multiple,
                     })}
                 </div>
             </ul>

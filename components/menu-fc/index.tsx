@@ -16,7 +16,9 @@ export interface CommonMenuProps {
     type: MenuType
     generateKey: string
     key: React.Key
-    onOpenChange: (openKeys: string[]) => void | undefined
+    onOpenChange?: (openKeys: string[]) => void
+    onSelect?: (selectParams: TSelectParam) => void
+    multiple: boolean
 }
 
 export interface TSelectParam {
@@ -34,6 +36,7 @@ export interface MenuProps {
     defaultOpenKeys?: string[]
     onSelect?: (selectParams: TSelectParam) => void
     onOpenChange?: (openKeys: string[]) => void
+    multiple?: boolean
 }
 
 export interface MenuInterface extends React.FC<MenuProps> {
@@ -71,6 +74,8 @@ const Menu: MenuInterface = (props) => {
                     type,
                     generateKey: 'root',
                     onOpenChange: props.onOpenChange,
+                    onSelect: props.onSelect,
+                    multiple: props.multiple,
                 })}
             </ul>
         </Provider>
@@ -83,6 +88,7 @@ Menu.MenuGroup = MenuGroup
 
 Menu.defaultProps = {
     type: 'inline',
+    multiple: false,
 }
 
 export default Menu
