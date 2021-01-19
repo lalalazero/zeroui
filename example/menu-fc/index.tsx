@@ -13,15 +13,15 @@ export default class Demo extends React.Component<any, any> {
     async componentDidMount() {
         const demos = [
             await import('./01-内嵌菜单.mdx'),
-            await import('./02-垂直菜单.mdx'),
-            await import('./03-水平菜单.mdx'),
-            await import('./04-天花板菜单.mdx'),
+            // await import('./02-垂直菜单.mdx'),
+            // await import('./03-水平菜单.mdx'),
+            // await import('./04-天花板菜单.mdx'),
         ]
-        const api = await import('./api.mdx')
+        // const api = await import('./api.mdx')
         this.setState({
-            api: api.default.apiContent,
+            // api: api.default.apiContent,
             demos,
-            apiCode: api.default.apiCode,
+            // apiCode: api.default.apiCode,
         })
     }
 

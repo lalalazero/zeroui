@@ -1,0 +1,44 @@
+```jsx
+<MenuFC>
+    <MenuItem />
+    <SubMenu>
+        <MenuItem />
+        <MenuItem />
+        <MenuGroup>
+            <MenuItem />
+            <MenuItem />
+        </MenuGroup>
+    </SubMenu>
+    <MenuGroup>
+        <MenuItem />
+        <MenuItem />
+    </MenuGroup>
+</MenuFC>
+```
+
+## API
+
+### MenuFC
+
+| 属性 | 说明         | 类型   | 可选值                               | 默认值 | 是否必填 |
+| ---- | ------------ | ------ | ------------------------------------ | ------ | -------- |
+| mode | 菜单展现形式 | string | inline/vertical/horizontal/ceilinged | inline | 是       |
+
+### SubMenu
+
+| 属性  | 说明     | 类型   | 可选值 | 默认值 | 是否必填 |
+| ----- | -------- | ------ | ------ | ------ | -------- |
+| key   | 唯一标识 | string | --     | --     | --       |
+| title | 菜单标题 | string | --     | --     | 是       |
+
+### MenuGroup
+
+| 属性  | 说明     | 类型   | 可选值 | 默认值 | 是否必填 |
+| ----- | -------- | ------ | ------ | ------ | -------- |
+| title | 菜单标题 | string | --     | --     | 是       |
+
+### MenuItem
+
+| 属性 | 说明     | 类型   | 可选值 | 默认值 | 是否必填 |
+| ---- | -------- | ------ | ------ | ------ | -------- |
+| key  | 唯一标识 | string | --     | --     | --       |
