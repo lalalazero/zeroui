@@ -4,11 +4,21 @@ import MenuGroup from './MenuGroup'
 import MenuItem from './MenuItem'
 import './style.scss'
 import SubMenu from './SubMenu'
+import { collectMenuKeys, renderMenu } from './util'
 
 const PREFIX = 'zeroUI-menu'
 
+export type MenuType = 'inline' | 'vertical' | 'horizontal' | 'ceilinged'
+
+export interface CommonMenuProps {
+    indentLevel: number
+    type: MenuType
+    generateKey: string
+    key: React.Key
+}
+
 export interface MenuProps {
-    type?: 'inline' | 'vertical' | 'horizontal' | 'ceilinged'
+    type?: MenuType
     className?: string
 }
 
@@ -20,17 +30,20 @@ export interface MenuInterface extends React.FC<MenuProps> {
 
 const Menu: MenuInterface = (props) => {
     const { className, type } = props
-    const indentLevel = 1
+
     const classes = classname(className, PREFIX, `${PREFIX}-${type}`)
+
+    const childrenKeys = collectMenuKeys(props.children)
+
+    console.log('root childrenKeys..', childrenKeys)
 
     return (
         <ul className={classname(classes)}>
-            {React.Children.map(props.children, (child: any) =>
-                React.cloneElement(child, {
-                    indentLevel,
-                    type: props.type,
-                })
-            )}
+            {renderMenu(props.children, {
+                indentLevel: 1,
+                type,
+                generateKey: 'root',
+            })}
         </ul>
     )
 }

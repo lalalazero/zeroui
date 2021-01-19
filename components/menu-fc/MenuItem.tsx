@@ -1,11 +1,21 @@
 import React, { useMemo } from 'react'
+import { CommonMenuProps } from '../menu-fc'
 import { classname } from '../_util/classes'
 import { PADDING_BASE } from './SubMenu'
 
 const PREFIX = 'zeroUI-menu-item'
 
-const MenuItem: React.FC<any> = (props) => {
-    const { indentLevel, type, className } = props
+export interface MenuItemProps {
+    key?: React.Key
+    className?: string
+}
+
+type MenuItemInnerProps = CommonMenuProps & MenuItemProps
+
+const MenuItem: React.FC<MenuItemInnerProps> = (props) => {
+    const { indentLevel, type, className, generateKey } = props
+
+    const itemKey = generateKey
 
     const paddingLeftStyle = useMemo(() => {
         if (type === 'inline') {
@@ -25,8 +35,9 @@ const MenuItem: React.FC<any> = (props) => {
         [`${PREFIX}-selected`]: false, // selectedKey === itemKey,
     })
     return (
-        <li className={classes} style={paddingLeftStyle}>
+        <li className={classes} style={paddingLeftStyle} data-key={itemKey}>
             {props.children}
+            <span style={{ marginLeft: 20 }}>{itemKey}</span>
         </li>
     )
 }

@@ -182,9 +182,7 @@ $defalt-width: 168px;
             left: 100%;
             top: 0;
             margin-left: 4px;
-            &[data-visible='true'] {
-                @include submenu-popup-wrapper-base-style();
-            }
+            @include submenu-popup-wrapper-base-style();
         }
     }
     &-horizontal,
@@ -198,9 +196,7 @@ $defalt-width: 168px;
             left: 0;
             right: 0;
             top: 45px;
-            &[data-visible='true'] {
-                @include submenu-popup-wrapper-base-style();
-            }
+            @include submenu-popup-wrapper-base-style();
         }
         .zeroUI-menu-item {
             position: relative;
@@ -208,5 +204,8 @@ $defalt-width: 168px;
                 @extend %on-hover;
             }
         }
+    }
+    &-popup-wrapper-hide {
+        display: none;
     }
 }

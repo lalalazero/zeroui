@@ -1,17 +1,28 @@
 import React from 'react'
+import { CommonMenuProps } from '.'
 import { Icon } from '../index'
 import { classname } from '../_util/classes'
+import { collectMenuKeys, renderMenu } from './util'
 
 const PREFIX = 'zeroUI-submenu'
 
 export const PADDING_BASE = 14
 
-const SubMenu: React.FC<any> = (props) => {
+export interface SubMenuProps {
+    title?: string
+    className?: string
+}
+
+type SubMenuInnerProps = CommonMenuProps & SubMenuProps
+
+const SubMenu: React.FC<SubMenuInnerProps> = (props) => {
     const isHighlighted = false
 
-    const itemsVisible = true
+    const itemsVisible = false
 
-    const { indentLevel, type, className, title } = props
+    const { indentLevel, type, className, title, generateKey } = props
+
+    const itemKey = generateKey
 
     const paddingLeftStyle =
         type === 'inline'
@@ -19,6 +30,10 @@ const SubMenu: React.FC<any> = (props) => {
             : { paddingLeft: `${PADDING_BASE}px` }
 
     const classes = classname(className, PREFIX, `${PREFIX}-${type}`)
+
+    const childrenKeys = collectMenuKeys(props.children, generateKey)
+
+    console.log(`${itemKey} childrenKeys..`, childrenKeys)
 
     return (
         <li>
@@ -31,26 +46,29 @@ const SubMenu: React.FC<any> = (props) => {
                     style={paddingLeftStyle}
                     data-visible={itemsVisible}
                 >
+                    <span>item-key={itemKey}</span>
                     {title}
                     <span>
                         <Icon name="down"></Icon>
                     </span>
                 </p>
                 <div
-                    className={classname(PREFIX + '-popup-wrapper')}
-                    data-visible={itemsVisible}
+                    className={classname(PREFIX + '-popup-wrapper', {
+                        [`${PREFIX}-popup-wrapper-hide`]: !itemsVisible,
+                    })}
+                    data-key={itemKey}
                 >
-                    {itemsVisible &&
-                        React.Children.map(props.children, (child: any) =>
-                            React.cloneElement(child, {
-                                indentLevel,
-                                type,
-                            })
-                        )}
+                    {renderMenu(props.children, {
+                        indentLevel: indentLevel + 1,
+                        type,
+                        generateKey,
+                    })}
                 </div>
             </ul>
         </li>
     )
 }
+
+SubMenu
 
 export default SubMenu

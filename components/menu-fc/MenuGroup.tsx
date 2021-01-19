@@ -1,12 +1,20 @@
 import React, { useMemo } from 'react'
+import { CommonMenuProps } from '.'
 import { classname } from '../_util/classes'
+import { renderMenu } from './util'
 
 const PREFIX = 'zeroUI-menu-group'
 
 export const PADDING_BASE_GROUP = 8
 
-const MenuGroup: React.FC<any> = (props) => {
-    const { indentLevel, type, title } = props
+export interface MenuGroupProps {
+    title?: string
+}
+
+type MenuGroupInnerProps = CommonMenuProps & MenuGroupProps
+
+const MenuGroup: React.FC<MenuGroupInnerProps> = (props) => {
+    const { indentLevel, type, title, generateKey } = props
 
     const paddingLeftStyle = useMemo(() => {
         if (type === 'inline') {
@@ -29,7 +37,11 @@ const MenuGroup: React.FC<any> = (props) => {
                 {title}
             </p>
             <div className={classname(PREFIX + '-item-wrapper')}>
-                {props.children}
+                {renderMenu(props.children, {
+                    indentLevel,
+                    type,
+                    generateKey,
+                })}
             </div>
         </div>
     )
