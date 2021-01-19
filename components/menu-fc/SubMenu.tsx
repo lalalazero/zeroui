@@ -1,7 +1,8 @@
-import React from 'react'
-import { CommonMenuProps } from '.'
+import React, { useMemo } from 'react'
+import { CommonMenuProps, MenuStore } from '.'
 import { Icon } from '../index'
 import { classname } from '../_util/classes'
+import { connect, Store } from '../_util/mini-store'
 import { collectMenuKeys, renderMenu } from './util'
 
 const PREFIX = 'zeroUI-submenu'
@@ -13,14 +14,60 @@ export interface SubMenuProps {
     className?: string
 }
 
-type SubMenuInnerProps = CommonMenuProps & SubMenuProps
+type SubMenuInnerProps = CommonMenuProps &
+    SubMenuProps & { store: Store<MenuStore> }
 
 const SubMenu: React.FC<SubMenuInnerProps> = (props) => {
-    const isHighlighted = false
+    const { indentLevel, type, className, title, generateKey, store } = props
 
-    const itemsVisible = false
+    const childrenKeys = collectMenuKeys(props.children, generateKey)
 
-    const { indentLevel, type, className, title, generateKey } = props
+    const itemsVisible = useMemo(() => {
+        const { openKeys } = store.getState()
+
+        if (
+            openKeys &&
+            openKeys.length > 0 &&
+            openKeys.indexOf(generateKey) >= 0
+        ) {
+            return true
+        }
+
+        return false
+    }, [store.getState()])
+
+    const isSelected = useMemo(() => {
+        const { selectedKeys } = store.getState()
+
+        if (
+            selectedKeys &&
+            selectedKeys.length > 0 &&
+            selectedKeys.some((key: string) => childrenKeys.indexOf(key) >= 0)
+        ) {
+            return true
+        }
+
+        return false
+    }, [store.getState()])
+
+    const togglePopper = () => {
+        const newItemVisible = !itemsVisible
+        const newOpenKeys = store.getState().openKeys || []
+        if (newItemVisible) {
+            newOpenKeys.push(generateKey)
+        } else {
+            const index = newOpenKeys.indexOf(generateKey)
+
+            if (index >= 0) {
+                newOpenKeys.splice(index, 1)
+            }
+        }
+
+        console.log('new OpenKeys..', newOpenKeys)
+        store.setState({ openKeys: newOpenKeys })
+
+        props.onOpenChange && props.onOpenChange(newOpenKeys)
+    }
 
     const itemKey = generateKey
 
@@ -31,20 +78,14 @@ const SubMenu: React.FC<SubMenuInnerProps> = (props) => {
 
     const classes = classname(className, PREFIX, `${PREFIX}-${type}`)
 
-    const childrenKeys = collectMenuKeys(props.children, generateKey)
-
-    console.log(`${itemKey} childrenKeys..`, childrenKeys)
-
     return (
         <li>
-            <ul
-                className={classes}
-                is-highlighted={isHighlighted ? 'yes' : 'no'}
-            >
+            <ul className={classes} is-highlighted={isSelected ? 'yes' : 'no'}>
                 <p
                     className={classname(PREFIX + '-label')}
                     style={paddingLeftStyle}
                     data-visible={itemsVisible}
+                    onClick={togglePopper}
                 >
                     <span>item-key={itemKey}</span>
                     {title}
@@ -69,6 +110,6 @@ const SubMenu: React.FC<SubMenuInnerProps> = (props) => {
     )
 }
 
-SubMenu
+const ConnectedSubMenu = connect<{}, SubMenuInnerProps>()(SubMenu)
 
-export default SubMenu
+export default ConnectedSubMenu

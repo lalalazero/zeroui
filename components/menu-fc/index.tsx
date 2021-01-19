@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { classname } from '../_util/classes'
+import { createStore, Provider, Store } from '../_util/mini-store'
 import MenuGroup from './MenuGroup'
 import MenuItem from './MenuItem'
 import './style.scss'
@@ -15,11 +16,24 @@ export interface CommonMenuProps {
     type: MenuType
     generateKey: string
     key: React.Key
+    onOpenChange: (openKeys: string[]) => void | undefined
+}
+
+export interface TSelectParam {
+    key: string
+    keyPath: string[]
+    selectedKeys: string[]
 }
 
 export interface MenuProps {
     type?: MenuType
     className?: string
+    selectedKeys?: string[]
+    openKeys?: string[]
+    defaultSelectedKeys?: string[]
+    defaultOpenKeys?: string[]
+    onSelect?: (selectParams: TSelectParam) => void
+    onOpenChange?: (openKeys: string[]) => void
 }
 
 export interface MenuInterface extends React.FC<MenuProps> {
@@ -28,23 +42,38 @@ export interface MenuInterface extends React.FC<MenuProps> {
     MenuGroup: typeof MenuGroup
 }
 
+export type MenuStore = {
+    openKeys: string[]
+    selectedKeys: string[]
+}
+
 const Menu: MenuInterface = (props) => {
     const { className, type } = props
+
+    const [stateStore] = useState<Store<MenuStore>>(
+        createStore<MenuStore>({
+            openKeys: props.defaultOpenKeys || props.openKeys || [],
+            selectedKeys: props.defaultSelectedKeys || props.selectedKeys || [],
+        })
+    )
 
     const classes = classname(className, PREFIX, `${PREFIX}-${type}`)
 
     const childrenKeys = collectMenuKeys(props.children)
 
-    console.log('root childrenKeys..', childrenKeys)
+    // console.log('root childrenKeys..', childrenKeys)
 
     return (
-        <ul className={classname(classes)}>
-            {renderMenu(props.children, {
-                indentLevel: 1,
-                type,
-                generateKey: 'root',
-            })}
-        </ul>
+        <Provider store={stateStore as any}>
+            <ul className={classname(classes)}>
+                {renderMenu(props.children, {
+                    indentLevel: 1,
+                    type,
+                    generateKey: 'root',
+                    onOpenChange: props.onOpenChange,
+                })}
+            </ul>
+        </Provider>
     )
 }
 

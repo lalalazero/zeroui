@@ -6,12 +6,11 @@ export const renderMenu = (
     props: Partial<CommonMenuProps>
 ) => {
     return React.Children.map(children, (child: any, idx) => {
-        const { indentLevel, type, generateKey } = props
+        const { generateKey, ...rest } = props
         return React.cloneElement(child, {
-            indentLevel,
-            type,
             key: child.key,
-            generateKey: `${generateKey}-${idx}`,
+            generateKey: child.key || `${generateKey}-${idx}`,
+            ...rest,
         })
     })
 }
@@ -22,12 +21,13 @@ export const collectMenuKeys = (menuChildren: ReactNode, prefix = 'root') => {
     const loopChildrenKeys = (children: ReactNode, prefix: string) => {
         React.Children.map(children, (child: any, idx) => {
             if (child && child.type) {
-                const generateKey = `${prefix}-${idx}`
-                if (['SubMenu', 'MenuItem'].indexOf(child.type.name) >= 0) {
+                const generateKey = child.key || `${prefix}-${idx}`
+
+                if (['InnerFC', 'MenuItem'].indexOf(child.type.name) >= 0) {
                     keys.push(generateKey)
                 }
 
-                if (['SubMenu', 'MenuGroup'].indexOf(child.type.name) >= 0) {
+                if (['InnerFC', 'MenuGroup'].indexOf(child.type.name) >= 0) {
                     loopChildrenKeys(child.props.children, generateKey)
                 }
             }
@@ -36,5 +36,5 @@ export const collectMenuKeys = (menuChildren: ReactNode, prefix = 'root') => {
 
     loopChildrenKeys(menuChildren, prefix)
 
-    return keys
+    return Array.from(new Set(keys))
 }

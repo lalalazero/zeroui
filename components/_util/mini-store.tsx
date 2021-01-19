@@ -7,9 +7,9 @@ type Listener = () => void
 // eslint-disable-next-line
 interface DefaultRootState {}
 
-export interface StoreProps<S = DefaultRootState> {
-    store: Store<S>
-}
+// export interface StoreProps<S = DefaultRootState> {
+//     store: Store<S>
+// }
 
 export type Store<S = DefaultRootState> = {
     getState: () => S
@@ -32,7 +32,8 @@ type ConnectedProps<TStateProps, TOwnProps> = Matching<TStateProps, TOwnProps>
 // =========== type definition end ============
 
 const Context = React.createContext<Store | null>(null)
-export const Provider: React.FC<StoreProps> = (props) => {
+
+export const Provider: React.FC<{ store: Store }> = (props) => {
     return (
         <Context.Provider value={props.store}>
             {props.children}
