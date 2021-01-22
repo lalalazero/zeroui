@@ -58,7 +58,9 @@ const SubMenu: ConnectedComponent<MenuStore, MenuStore, SubMenuInnerProps> = (
             ? { paddingLeft: `${(indentLevel as number) * PADDING_BASE}px` }
             : { paddingLeft: `${PADDING_BASE}px` }
 
-    const classes = classname(className, PREFIX, `${PREFIX}-${type}`)
+    const classes = classname(className, PREFIX, `${PREFIX}-${type}`, {
+        [`${PREFIX}-selected`]: isSelected,
+    })
 
     const handleSelect = (param: TSelectParam) => {
         const { key, keyPath, selectedKeys } = param
@@ -72,22 +74,21 @@ const SubMenu: ConnectedComponent<MenuStore, MenuStore, SubMenuInnerProps> = (
 
     return (
         <li>
-            <ul className={classes} is-highlighted={isSelected ? 'yes' : 'no'}>
+            <ul className={classes}>
                 <p
                     className={classname(PREFIX + '-label')}
                     style={paddingLeftStyle}
-                    data-visible={itemsVisible}
                     onClick={togglePopper}
                 >
                     <span>item-key={generateKey}</span>
                     {title}
-                    <span>
+                    <span className={classname(PREFIX + '-icon')}>
                         <Icon name="down"></Icon>
                     </span>
                 </p>
                 <div
-                    className={classname(PREFIX + '-popup-wrapper', {
-                        [`${PREFIX}-popup-wrapper-hide`]: !itemsVisible,
+                    className={classname(PREFIX + '-popper', {
+                        [`${PREFIX}-popper-hide`]: !itemsVisible,
                     })}
                     data-key={generateKey}
                 >

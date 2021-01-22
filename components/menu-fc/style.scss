@@ -53,24 +53,12 @@ $defalt-width: 168px;
 }
 
 .zeroUI-menu {
-    min-width: $defalt-width;
-    user-select: none;
-    display: inline-block;
-    &-group {
-        &-label {
-            font-size: 14px;
-            color: #ccc;
-            @include default-padding();
-        }
-    }
-    &-item {
-        @include menu-item-base-style();
-    }
+    border: 1px solid red;
     &-inline {
         border-right: 1px solid $border-color-1;
-        .zeroUI-submenu {
-            &-label[data-visible='false'] {
-                & > span > svg {
+        .zeroUI-submenu-selected {
+            &-label {
+                svg {
                     transform: rotate(180deg);
                 }
             }
@@ -90,68 +78,25 @@ $defalt-width: 168px;
             }
         }
     }
+
     &-vertical {
-        border-right: 1px solid $border-color-1;
-        .zeroUI-submenu {
-            &-label {
-                & > span > svg {
-                    transform: rotate(-90deg);
-                }
-            }
-        }
-        .zeroUI-menu-item {
-            @include vertical-and-inline-menu-item-base-style();
-        }
-    }
-    &-horizontal,
-    &-ceilinged {
-        display: flex;
-        padding-top: 4px;
-        padding-bottom: 4px;
-        .zeroUI-menu-item {
-            @include horizontal-menu-item-base-style();
-        }
-        & > .zeroUI-menu-item,
-        & > li > .zeroUI-submenu {
-            margin-left: 4px;
-            margin-right: 4px;
-            position: relative;
-        }
     }
 
     &-horizontal {
-        border-bottom: 1px solid $border-color-1;
-        & > .zeroUI-menu-item,
-        & > li > .zeroUI-submenu {
-            &:hover,
-            &-selected,
-            &[is-highlighted='yes'] {
-                &:after {
-                    bottom: -4px;
-                    left: 0;
-                    right: 0;
-                    height: 4px;
-                    @extend %indicator-line-base-style;
-                }
-            }
-        }
     }
+
     &-ceilinged {
-        border-top: 1px solid $border-color-1;
-        & > .zeroUI-menu-item,
-        & > li > .zeroUI-submenu {
-            &:hover,
-            &-selected,
-            &[is-highlighted='yes'] {
-                &:after {
-                    top: -4px;
-                    left: 0;
-                    right: 0;
-                    height: 4px;
-                    @extend %indicator-line-base-style;
-                }
-            }
-        }
+    }
+}
+
+.zeroUI-menu-group {
+    &-label {
+        font-size: 14px;
+        color: #ccc;
+        @include default-padding();
+    }
+
+    &-content-wrapper {
     }
 }
 
@@ -161,43 +106,53 @@ $defalt-width: 168px;
         @extend %on-hover;
         @include default-padding();
         padding-right: $item-default-padding-left;
-        & > span {
-            float: right;
-            margin-left: 16px;
-        }
-        & > span > svg {
-            transition: all 300ms;
-        }
     }
-    &[is-highlighted='yes'] > &-label {
+
+    &-selected > &-label {
         color: $brand-color;
         .zeroUI-icon {
             fill: $brand-color;
+            transform: rotate(180deg);
         }
     }
 
-    &-vertical {
-        .zeroUI-submenu-popup-wrapper {
-            right: 10px;
-            left: 100%;
-            top: 0;
-            margin-left: 4px;
-            @include submenu-popup-wrapper-base-style();
+    &-icon {
+        float: right;
+        margin-left: 16px;
+        svg {
+            transition: all 300ms;
         }
     }
+
+    &-popper-hide {
+        display: none;
+    }
+
+    &-inline {
+    }
+
+    &-vertical &-popper {
+        border: 1px solid red;
+        right: 10px;
+        left: 100%;
+        top: 0;
+        margin-left: 4px;
+        @include submenu-popup-wrapper-base-style();
+    }
+
     &-horizontal,
     &-ceilinged {
-        .zeroUI-submenu-label {
-            & > span > svg {
-                display: none;
-            }
+        .zeroUI-submenu-label > svg {
+            display: none;
         }
-        .zeroUI-submenu-popup-wrapper {
+
+        .zeroUI-submenu-popper {
             left: 0;
             right: 0;
             top: 45px;
             @include submenu-popup-wrapper-base-style();
         }
+
         .zeroUI-menu-item {
             position: relative;
             &:hover {
@@ -205,7 +160,8 @@ $defalt-width: 168px;
             }
         }
     }
-    &-popup-wrapper-hide {
-        display: none;
-    }
+}
+
+.zeroUI-menu-item {
+    @include menu-item-base-style();
 }

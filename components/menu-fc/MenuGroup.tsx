@@ -44,7 +44,7 @@ const MenuGroup: React.FC<MenuGroupInnerProps> = (props) => {
             >
                 {title}
             </p>
-            <div className={classname(PREFIX + '-item-wrapper')}>
+            <div className={classname(PREFIX + '-content-wrapper')}>
                 {renderMenu(props.children, {
                     indentLevel,
                     type,

@@ -1,6 +1,6 @@
 import React, { Component, HTMLAttributes } from 'react'
 import { classname } from '../_util/classes'
-import './Menu.scss'
+// import './Menu.scss'
 import MenuGroup from './MenuGroup'
 import MenuItem from './MenuItem'
 import SubMenu from './SubMenu'
