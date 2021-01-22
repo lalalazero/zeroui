@@ -2,6 +2,7 @@ import React, { useMemo } from 'react'
 import { CommonMenuProps, MenuStore } from '.'
 import { classname } from '../_util/classes'
 import { connect, ConnectedComponent } from '../_util/zero-store'
+import { useSelected } from './hooks'
 import { PADDING_BASE } from './SubMenu'
 
 const PREFIX = 'zeroUI-menu-item'
@@ -25,7 +26,7 @@ const MenuItem: ConnectedComponent<MenuStore, MenuStore, MenuItemInnerProps> = (
         selectedKeys,
     } = props
 
-    const itemKey = generateKey
+    const isSelected = useSelected(props)
 
     const paddingLeftStyle = useMemo(() => {
         if (type === 'inline') {
@@ -40,18 +41,6 @@ const MenuItem: ConnectedComponent<MenuStore, MenuStore, MenuItemInnerProps> = (
 
         return { paddingLeft: PADDING_BASE, paddingRight: PADDING_BASE }
     }, [type])
-
-    const isSelected = useMemo(() => {
-        if (
-            selectedKeys &&
-            selectedKeys.length > 0 &&
-            selectedKeys.indexOf(generateKey) >= 0
-        ) {
-            return true
-        }
-
-        return false
-    }, [selectedKeys])
 
     const toggleSelected = () => {
         let newSelectedKeys = [...selectedKeys]
@@ -92,11 +81,11 @@ const MenuItem: ConnectedComponent<MenuStore, MenuStore, MenuItemInnerProps> = (
         <li
             className={classes}
             style={paddingLeftStyle}
-            data-key={itemKey}
+            data-key={generateKey}
             onClick={toggleSelected}
         >
             {props.children}
-            <span style={{ marginLeft: 20 }}>{itemKey}</span>
+            <span style={{ marginLeft: 20 }}>{generateKey}</span>
         </li>
     )
 }

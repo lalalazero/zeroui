@@ -75,7 +75,7 @@ const Menu: MenuInterface = (props) => {
     // const childrenKeys = collectMenuKeys(props.children)
 
     return (
-        <Provider store={stateStore as any}>
+        <Provider store={stateStore}>
             <ul className={classname(classes)}>
                 {renderMenu(props.children, {
                     indentLevel: 1,

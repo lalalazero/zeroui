@@ -1,9 +1,10 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import { CommonMenuProps, MenuStore, TSelectParam } from '.'
 import { Icon } from '../index'
 import { classname } from '../_util/classes'
 import { connect, ConnectedComponent } from '../_util/zero-store'
-import { collectMenuKeys, renderMenu } from './util'
+import { useChildSelected, useVisible } from './hooks'
+import { renderMenu } from './util'
 
 const PREFIX = 'zeroUI-submenu'
 
@@ -27,35 +28,12 @@ const SubMenu: ConnectedComponent<MenuStore, MenuStore, SubMenuInnerProps> = (
         generateKey,
         store,
         multiple,
-        selectedKeys,
         openKeys,
     } = props
 
-    const childrenKeys = collectMenuKeys(props.children, generateKey)
+    const itemsVisible = useVisible(props)
 
-    const itemsVisible = useMemo(() => {
-        if (
-            openKeys &&
-            openKeys.length > 0 &&
-            openKeys.indexOf(generateKey) >= 0
-        ) {
-            return true
-        }
-
-        return false
-    }, [openKeys])
-
-    const isSelected = useMemo(() => {
-        if (
-            selectedKeys &&
-            selectedKeys.length > 0 &&
-            selectedKeys.some((key: string) => childrenKeys.indexOf(key) >= 0)
-        ) {
-            return true
-        }
-
-        return false
-    }, [selectedKeys])
+    const isSelected = useChildSelected(props)
 
     const togglePopper = () => {
         const newItemVisible = !itemsVisible
@@ -74,8 +52,6 @@ const SubMenu: ConnectedComponent<MenuStore, MenuStore, SubMenuInnerProps> = (
 
         props.onOpenChange && props.onOpenChange(newOpenKeys)
     }
-
-    const itemKey = generateKey
 
     const paddingLeftStyle =
         type === 'inline'
@@ -103,7 +79,7 @@ const SubMenu: ConnectedComponent<MenuStore, MenuStore, SubMenuInnerProps> = (
                     data-visible={itemsVisible}
                     onClick={togglePopper}
                 >
-                    <span>item-key={itemKey}</span>
+                    <span>item-key={generateKey}</span>
                     {title}
                     <span>
                         <Icon name="down"></Icon>
@@ -113,7 +89,7 @@ const SubMenu: ConnectedComponent<MenuStore, MenuStore, SubMenuInnerProps> = (
                     className={classname(PREFIX + '-popup-wrapper', {
                         [`${PREFIX}-popup-wrapper-hide`]: !itemsVisible,
                     })}
-                    data-key={itemKey}
+                    data-key={generateKey}
                 >
                     {renderMenu(props.children, {
                         indentLevel: indentLevel + 1,

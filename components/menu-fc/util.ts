@@ -4,7 +4,7 @@ import { CommonMenuProps } from '.'
 export const renderMenu = (
     children: ReactNode,
     props: Partial<CommonMenuProps>
-) => {
+): ReactNode[] => {
     return React.Children.map(children, (child: any, idx) => {
         const { generateKey, ...rest } = props
         return React.cloneElement(child, {
@@ -15,7 +15,10 @@ export const renderMenu = (
     })
 }
 
-export const collectMenuKeys = (menuChildren: ReactNode, prefix = 'root') => {
+export const collectMenuKeys = (
+    menuChildren: ReactNode,
+    prefix = 'root'
+): string[] => {
     const keys: string[] = []
 
     const loopChildrenKeys = (children: ReactNode, prefix: string) => {
