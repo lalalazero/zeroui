@@ -1,27 +1,37 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, {
+    FunctionComponent,
+    useContext,
+    useEffect,
+    useState,
+} from 'react'
 import shallowEqual from 'shallowequal'
 
 // =========== type definition begin ============
 
 type Listener = () => void
 
-export type Store<S = {}> = {
+// eslint-disable-next-line
+type DefaultRootState = {}
+
+export type Store<S = DefaultRootState> = {
     getState: () => S
     setState: (partialState: Partial<S>) => void
     subscribe: (fn: Listener) => () => void
 }
 
-type TMapStateToProps<S = {}> = (state?: S) => Partial<S> | null
+type TMapStateToProps<TStateProps, State = DefaultRootState> = (
+    state: State
+) => TStateProps
 
-type Matching<InjectedProps, DecorationTargetProps> = {
-    [P in keyof DecorationTargetProps]: P extends keyof InjectedProps
-        ? InjectedProps[P] extends DecorationTargetProps[P]
-            ? DecorationTargetProps[P]
-            : InjectedProps[P]
-        : DecorationTargetProps[P]
-}
+export type ConnectedProps<TStateProps, State, TOwnProps> = TStateProps & {
+    store: Store<State>
+} & TOwnProps
 
-type ConnectedProps<TStateProps, TOwnProps> = Matching<TStateProps, TOwnProps>
+export type ConnectedComponent<
+    TStateProps,
+    State,
+    TOwnProps
+> = FunctionComponent<ConnectedProps<TStateProps, State, TOwnProps>>
 
 // =========== type definition end ============
 
@@ -37,22 +47,25 @@ export const Provider: React.FC<{ store: Store }> = (props) => {
 
 const defaultMapStateToProps: any = () => ({})
 
-export function connect<TStateProps = {}, TOwnProps = {}>(
-    mapStateToProps: TMapStateToProps<TStateProps> = defaultMapStateToProps
+export function connect<
+    TStateProps = {},
+    State = DefaultRootState,
+    TOwnProps = {}
+>(
+    mapStateToProps: TMapStateToProps<
+        TStateProps,
+        State
+    > = defaultMapStateToProps
 ) {
-    return function wrapHOC<
-        C extends React.FC<ConnectedProps<TStateProps, TOwnProps>>
-    >(WrapComponent: C) {
-        const InnerFC = (props: ConnectedProps<TStateProps, TOwnProps>) => {
+    return function connectHOC<C extends React.FC<TOwnProps>>(
+        WrapComponent: C
+    ): ConnectedComponent<TStateProps, State, TOwnProps> {
+        const InnerFC = (ownProps: any) => {
             const store = useContext(Context)
-
             const storeState = store ? store.getState() : undefined
 
-            const [
-                mappedState,
-                setMappedState,
-            ] = useState<Partial<TStateProps> | null>(
-                mapStateToProps(storeState as TStateProps)
+            const [mappedState, setMappedState] = useState<TStateProps>(
+                mapStateToProps(storeState as State)
             )
 
             useEffect(() => {
@@ -61,7 +74,7 @@ export function connect<TStateProps = {}, TOwnProps = {}>(
                     unsub = store.subscribe(() => {
                         const newStoreState = store.getState()
                         const newMappedState = mapStateToProps(
-                            newStoreState as TStateProps
+                            newStoreState as State
                         )
                         if (!shallowEqual(newMappedState, mappedState)) {
                             setMappedState(newMappedState)
@@ -76,17 +89,21 @@ export function connect<TStateProps = {}, TOwnProps = {}>(
 
             return (
                 <WrapComponent
-                    {...(mappedState as any)}
-                    {...props}
+                    {...mappedState}
+                    {...ownProps}
                     store={store}
                 ></WrapComponent>
             )
         }
+
+        ;(InnerFC as FunctionComponent).displayName =
+            WrapComponent.displayName || WrapComponent.name
+
         return InnerFC
     }
 }
 
-export function createStore<S>(initialStore: S = {} as any): Store<S> {
+export function createStore<S>(initialStore: S = {} as S): Store<S> {
     let store: S = initialStore
     const listeners: Listener[] = []
 

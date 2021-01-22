@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 import { CommonMenuProps, MenuStore, TSelectParam } from '.'
 import { Icon } from '../index'
 import { classname } from '../_util/classes'
-import { connect, Store } from '../_util/zero-store'
+import { connect, ConnectedComponent } from '../_util/zero-store'
 import { collectMenuKeys, renderMenu } from './util'
 
 const PREFIX = 'zeroUI-submenu'
@@ -14,10 +14,11 @@ export interface SubMenuProps {
     className?: string
 }
 
-type SubMenuInnerProps = CommonMenuProps &
-    SubMenuProps & { store: Store<MenuStore> } & MenuStore
+type SubMenuInnerProps = CommonMenuProps & SubMenuProps
 
-const SubMenu: React.FC<SubMenuInnerProps> = (props) => {
+const SubMenu: ConnectedComponent<MenuStore, MenuStore, SubMenuInnerProps> = (
+    props
+) => {
     const {
         indentLevel,
         type,
@@ -127,8 +128,6 @@ const SubMenu: React.FC<SubMenuInnerProps> = (props) => {
     )
 }
 
-const ConnectedSubMenu = connect<MenuStore, SubMenuInnerProps>(
-    (state: MenuStore) => state
+export default connect<MenuStore, MenuStore, SubMenuInnerProps>(
+    (state) => state
 )(SubMenu)
-
-export default ConnectedSubMenu

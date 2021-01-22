@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { CommonMenuProps, MenuStore } from '.'
 import { classname } from '../_util/classes'
-import { connect, Store } from '../_util/zero-store'
+import { connect, ConnectedComponent } from '../_util/zero-store'
 import { PADDING_BASE } from './SubMenu'
 
 const PREFIX = 'zeroUI-menu-item'
@@ -11,10 +11,11 @@ export interface MenuItemProps {
     className?: string
 }
 
-type MenuItemInnerProps = CommonMenuProps &
-    MenuItemProps & { store: Store<MenuStore> } & MenuStore
+type MenuItemInnerProps = CommonMenuProps & MenuItemProps
 
-const MenuItem: React.FC<MenuItemInnerProps> = (props) => {
+const MenuItem: ConnectedComponent<MenuStore, MenuStore, MenuItemInnerProps> = (
+    props
+) => {
     const {
         indentLevel,
         type,
@@ -100,8 +101,6 @@ const MenuItem: React.FC<MenuItemInnerProps> = (props) => {
     )
 }
 
-const ConnectedMenuItem = connect<MenuStore, MenuItemInnerProps>(
-    (state: MenuStore) => state
+export default connect<MenuStore, MenuStore, MenuItemInnerProps>(
+    (state) => state
 )(MenuItem)
-
-export default ConnectedMenuItem

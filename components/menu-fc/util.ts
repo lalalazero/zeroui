@@ -23,12 +23,13 @@ export const collectMenuKeys = (menuChildren: ReactNode, prefix = 'root') => {
             if (child && child.type) {
                 const generateKey = child.key || `${prefix}-${idx}`
 
-                // TODO fix InnerFC
-                if (['InnerFC'].indexOf(child.type.name) >= 0) {
+                const name = child.type.displayName || child.type.name
+
+                if (['MenuItem', 'SubMenu'].indexOf(name) >= 0) {
                     keys.push(generateKey)
                 }
 
-                if (['InnerFC', 'MenuGroup'].indexOf(child.type.name) >= 0) {
+                if (['SubMenu', 'MenuGroup'].indexOf(name) >= 0) {
                     loopChildrenKeys(child.props.children, generateKey)
                 }
             }

@@ -74,8 +74,6 @@ const Menu: MenuInterface = (props) => {
 
     // const childrenKeys = collectMenuKeys(props.children)
 
-    // console.log('root childrenKeys..', childrenKeys)
-
     return (
         <Provider store={stateStore as any}>
             <ul className={classname(classes)}>
