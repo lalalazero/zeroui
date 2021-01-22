@@ -1,5 +1,4 @@
 import { Component, HTMLAttributes } from 'react';
-import './Menu.scss';
 import MenuGroup from './MenuGroup';
 import MenuItem from './MenuItem';
 import SubMenu from './SubMenu';
