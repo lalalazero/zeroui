@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 import { CommonMenuProps, MenuStore, TSelectParam } from '.'
 import { Icon } from '../index'
 import { classname } from '../_util/classes'
-import { connect, Store } from '../_util/mini-store'
+import { connect, Store } from '../_util/zero-store'
 import { collectMenuKeys, renderMenu } from './util'
 
 const PREFIX = 'zeroUI-submenu'
@@ -15,7 +15,7 @@ export interface SubMenuProps {
 }
 
 type SubMenuInnerProps = CommonMenuProps &
-    SubMenuProps & { store: Store<MenuStore> }
+    SubMenuProps & { store: Store<MenuStore> } & MenuStore
 
 const SubMenu: React.FC<SubMenuInnerProps> = (props) => {
     const {
@@ -26,13 +26,13 @@ const SubMenu: React.FC<SubMenuInnerProps> = (props) => {
         generateKey,
         store,
         multiple,
+        selectedKeys,
+        openKeys,
     } = props
 
     const childrenKeys = collectMenuKeys(props.children, generateKey)
 
     const itemsVisible = useMemo(() => {
-        const { openKeys } = store.getState()
-
         if (
             openKeys &&
             openKeys.length > 0 &&
@@ -42,11 +42,9 @@ const SubMenu: React.FC<SubMenuInnerProps> = (props) => {
         }
 
         return false
-    }, [store.getState()])
+    }, [openKeys])
 
     const isSelected = useMemo(() => {
-        const { selectedKeys } = store.getState()
-
         if (
             selectedKeys &&
             selectedKeys.length > 0 &&
@@ -56,11 +54,11 @@ const SubMenu: React.FC<SubMenuInnerProps> = (props) => {
         }
 
         return false
-    }, [store.getState()])
+    }, [selectedKeys])
 
     const togglePopper = () => {
         const newItemVisible = !itemsVisible
-        const newOpenKeys = store.getState().openKeys || []
+        const newOpenKeys = [...openKeys]
         if (newItemVisible) {
             newOpenKeys.push(generateKey)
         } else {
@@ -129,6 +127,8 @@ const SubMenu: React.FC<SubMenuInnerProps> = (props) => {
     )
 }
 
-const ConnectedSubMenu = connect<{}, SubMenuInnerProps>()(SubMenu)
+const ConnectedSubMenu = connect<MenuStore, SubMenuInnerProps>(
+    (state: MenuStore) => state
+)(SubMenu)
 
 export default ConnectedSubMenu

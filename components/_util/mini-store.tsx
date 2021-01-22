@@ -1,15 +1,20 @@
-import React, { useContext, useEffect, useState } from 'react'
+import hoistNonReactStatics from 'hoist-non-react-statics'
+import React, {
+    ClassAttributes,
+    ComponentClass,
+    ComponentType,
+    createContext,
+    NamedExoticComponent,
+} from 'react'
 
 // =========== type definition begin ============
-
 type Listener = () => void
-
 // eslint-disable-next-line
 interface DefaultRootState {}
 
-// export interface StoreProps<S = DefaultRootState> {
-//     store: Store<S>
-// }
+export interface StoreProps<S = DefaultRootState> {
+    store: Store<S>
+}
 
 export type Store<S = DefaultRootState> = {
     getState: () => S
@@ -17,7 +22,33 @@ export type Store<S = DefaultRootState> = {
     subscribe: (fn: Listener) => () => void
 }
 
-type TMapStateToProps<S = DefaultRootState> = (state: S) => Partial<S> | null
+export type ConnectedComponent<
+    C extends ComponentType<any>,
+    P
+> = NamedExoticComponent<JSX.LibraryManagedAttributes<C, P>> &
+    hoistNonReactStatics.NonReactStatics<C> & {
+        WrappedComponent: C
+    }
+
+type MapStateToProps<TStateProps, TOwnProps, State = DefaultRootState> = (
+    state: State,
+    ownProps: TOwnProps
+) => TStateProps
+
+type MapStateToPropsFactory<
+    TStateProps,
+    TOwnProps,
+    State = DefaultRootState
+> = (
+    initialState: State,
+    ownProps: TOwnProps
+) => MapStateToProps<TStateProps, TOwnProps, State>
+
+type MapStateToPropsParam<TStateProps, TOwnProps, State = DefaultRootState> =
+    | MapStateToPropsFactory<TStateProps, TOwnProps, State>
+    | MapStateToProps<TStateProps, TOwnProps, State>
+    | null
+    | undefined
 
 type Matching<InjectedProps, DecorationTargetProps> = {
     [P in keyof DecorationTargetProps]: P extends keyof InjectedProps
@@ -27,82 +58,124 @@ type Matching<InjectedProps, DecorationTargetProps> = {
         : DecorationTargetProps[P]
 }
 
-type ConnectedProps<TStateProps, TOwnProps> = Matching<TStateProps, TOwnProps>
+type DistributiveOmit<T, K extends keyof T> = T extends unknown
+    ? Omit<T, K>
+    : never
 
-// =========== type definition end ============
-
-const Context = React.createContext<Store | null>(null)
-
-export const Provider: React.FC<{ store: Store }> = (props) => {
-    return (
-        <Context.Provider value={props.store}>
-            {props.children}
-        </Context.Provider>
-    )
+type Shared<InjectedProps, DecorationTargetProps> = {
+    [P in Extract<
+        keyof InjectedProps,
+        keyof DecorationTargetProps
+    >]?: InjectedProps[P] extends DecorationTargetProps[P]
+        ? DecorationTargetProps[P]
+        : never
 }
 
-const defaultMapStateToProps: any = () => null
+type GetProps<C> = C extends ComponentType<infer P>
+    ? C extends ComponentClass<P>
+        ? ClassAttributes<InstanceType<C>> & P
+        : P
+    : never
 
-export function connect<TStateProps = {}, TOwnProps = {}>(
-    mapStateToProps: TMapStateToProps = defaultMapStateToProps
+type InferableComponentEnhancerWithProps<TInjectedProps, TNeedsProps> = <
+    C extends ComponentType<Matching<TInjectedProps, GetProps<C>>>
+>(
+    component: C
+) => ConnectedComponent<
+    C,
+    DistributiveOmit<GetProps<C>, keyof Shared<TInjectedProps, GetProps<C>>> &
+        TNeedsProps
+>
+
+export interface Connect<DefaultState = DefaultRootState> {
+    <TStateProps = {}, TOwnProps = {}, State = DefaultState>(
+        mapStateToProps: MapStateToPropsParam<TStateProps, TOwnProps, State>
+    ): InferableComponentEnhancerWithProps<TStateProps, TOwnProps>
+}
+
+interface StoreProp<S = {}> {
+    store: Store<S>
+}
+
+interface ConnectedState<TStateProps = {}, Store = {}, TOwnProps = {}> {
+    subscribed: TStateProps
+    store: Store
+    props: TOwnProps
+}
+// =========== type definition end ============
+
+const Context = createContext<Store | null>(null)
+const Provider: React.FC<StoreProps> = (props) => {
+    return (
+        <div>
+            <Context.Provider value={props.store}>
+                {props.children}
+            </Context.Provider>
+        </div>
+    )
+}
+const defaultMapStateToProps: any = () => ({})
+
+export function connect<
+    TStateProps = {},
+    TOwnProps = {},
+    State = DefaultRootState
+>(
+    mapStateToProps: (
+        state: State,
+        ownProps: TOwnProps
+    ) => TStateProps = defaultMapStateToProps
 ) {
-    return function wrapHOC<
-        C extends React.FC<ConnectedProps<TStateProps, TOwnProps>>
-    >(WrapComponent: C) {
-        const InnerFC = (props: ConnectedProps<TStateProps, TOwnProps>) => {
-            const store = useContext(Context)
-            // console.log('connect, store=', store.getState())
+    return function connectHOC<
+        C extends React.ComponentType<
+            Matching<TStateProps & StoreProp<State>, GetProps<C>>
+        >
+    >(WrappedComponent: C) {
+        const finalMapStateToProps =
+            mapStateToProps || (defaultMapStateToProps as () => TStateProps)
+        class Connected extends React.Component<
+            TOwnProps,
+            ConnectedState<TStateProps, Store<State>, TOwnProps>,
+            Store<State>
+        > {
+            store: Store<State>
+            static contextType = Context
+            constructor(props: any, context: any) {
+                super(props, context)
+                this.store = this.context
 
-            let mappedState: Partial<TStateProps> | null = null
-
-            if (store) {
-                mappedState = mapStateToProps(store.getState())
+                this.state = {
+                    subscribed: finalMapStateToProps(
+                        this.store.getState(),
+                        props
+                    ),
+                    store: this.store,
+                    props,
+                }
             }
 
-            // console.log('mappedState,', mappedState)
-
-            // const [finalState, setFinalState] = useState(mappedState)
-
-            const [_, setX] = useState({})
-
-            useEffect(() => {
-                let unsub: Listener | null = null
-                if (store) {
-                    unsub = store.subscribe(() => {
-                        // const newState = store.getState()
-                        // console.log('newState = ', newState)
-
-                        // const mappedStateNew = mapStateToProps(newState)
-                        // setFinalState(mappedStateNew)
-                        setX({})
-                    })
-                }
-
-                return () => {
-                    unsub && unsub()
-                    // console.log('清理 store 的订阅')
-                }
-            }, [])
-
-            return (
-                <WrapComponent
-                    {...(mappedState as any)}
-                    {...props}
-                    store={store}
-                ></WrapComponent>
-            )
+            render() {
+                const props = {
+                    ...this.props,
+                    ...this.state.subscribed,
+                    store: this.store,
+                } as any
+                return <WrappedComponent {...props} />
+            }
         }
-        return InnerFC
+
+        return hoistNonReactStatics(Connected, WrappedComponent) as any
     }
 }
 
-export function createStore<S>(initialStore: S = {} as any): Store<S> {
+export { Provider }
+
+export function createStore<S>(initialStore: S): Store<S> {
     let store: S = initialStore
     const listeners: Listener[] = []
 
     function subscribe(listener: Listener) {
         listeners.push(listener)
-
         return function unsubscribe() {
             const index = listeners.indexOf(listener)
             if (index >= 0) {
@@ -114,13 +187,12 @@ export function createStore<S>(initialStore: S = {} as any): Store<S> {
     function getState() {
         return store
     }
-    function setState(partialStore: Partial<S>) {
-        // console.log('setState..,partialState', partialStore)
 
+    function setState(partialStore: Partial<S>) {
         store = { ...store, ...partialStore }
-        // console.log('after..store', store)
         listeners.forEach((fn) => fn())
     }
+
     return {
         subscribe,
         getState,

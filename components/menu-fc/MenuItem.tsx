@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { CommonMenuProps, MenuStore } from '.'
 import { classname } from '../_util/classes'
-import { connect, Store } from '../_util/mini-store'
+import { connect, Store } from '../_util/zero-store'
 import { PADDING_BASE } from './SubMenu'
 
 const PREFIX = 'zeroUI-menu-item'
@@ -12,10 +12,17 @@ export interface MenuItemProps {
 }
 
 type MenuItemInnerProps = CommonMenuProps &
-    MenuItemProps & { store: Store<MenuStore> }
+    MenuItemProps & { store: Store<MenuStore> } & MenuStore
 
 const MenuItem: React.FC<MenuItemInnerProps> = (props) => {
-    const { indentLevel, type, className, generateKey, store } = props
+    const {
+        indentLevel,
+        type,
+        className,
+        generateKey,
+        store,
+        selectedKeys,
+    } = props
 
     const itemKey = generateKey
 
@@ -34,8 +41,6 @@ const MenuItem: React.FC<MenuItemInnerProps> = (props) => {
     }, [type])
 
     const isSelected = useMemo(() => {
-        const { selectedKeys } = store.getState()
-
         if (
             selectedKeys &&
             selectedKeys.length > 0 &&
@@ -45,31 +50,31 @@ const MenuItem: React.FC<MenuItemInnerProps> = (props) => {
         }
 
         return false
-    }, [store.getState()])
+    }, [selectedKeys])
 
     const toggleSelected = () => {
-        let selectedKeys = store.getState().selectedKeys || []
+        let newSelectedKeys = [...selectedKeys]
 
         if (props.multiple) {
             if (isSelected) {
-                // menu 不需要取消选中
+                // TODO 单选的 menu不需要取消选中，多选的需要
                 // const index = selectedKeys.indexOf(generateKey)
                 // if (index >= 0) {
                 //     selectedKeys.splice(index, 1)
                 // }
             } else {
-                selectedKeys.push(generateKey)
+                newSelectedKeys.push(generateKey)
             }
         } else {
             if (isSelected) {
-                // menu 不需要取消选中
+                // TODO 单选的 menu不需要取消选中，多选的需要
                 // selectedKeys = []
             } else {
-                selectedKeys = [generateKey]
+                newSelectedKeys = [generateKey]
             }
         }
 
-        store.setState({ selectedKeys })
+        store.setState({ selectedKeys: newSelectedKeys })
 
         props.onSelect &&
             props.onSelect({
@@ -80,7 +85,7 @@ const MenuItem: React.FC<MenuItemInnerProps> = (props) => {
     }
 
     const classes = classname(className, PREFIX, {
-        [`${PREFIX}-selected`]: isSelected, // selectedKey === itemKey,
+        [`${PREFIX}-selected`]: isSelected,
     })
     return (
         <li
@@ -95,6 +100,8 @@ const MenuItem: React.FC<MenuItemInnerProps> = (props) => {
     )
 }
 
-const ConnectedMenuItem = connect<{}, MenuItemInnerProps>()(MenuItem)
+const ConnectedMenuItem = connect<MenuStore, MenuItemInnerProps>(
+    (state: MenuStore) => state
+)(MenuItem)
 
 export default ConnectedMenuItem

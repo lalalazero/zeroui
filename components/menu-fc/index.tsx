@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { classname } from '../_util/classes'
-import { createStore, Provider, Store } from '../_util/mini-store'
+import { createStore, Provider, Store } from '../_util/zero-store'
 import MenuGroup from './MenuGroup'
 import MenuItem from './MenuItem'
 import './style.scss'
