@@ -1,174 +1,163 @@
-import React, { Component, HTMLAttributes } from 'react'
+import React, { useMemo, useState } from 'react'
+import { CommonMenuProps, MenuStore, TSelectParam } from '.'
 import { Icon } from '../index'
 import { classname } from '../_util/classes'
-import { extraProps } from './MenuGroup'
-import { PADDING_BASE, renderChildren } from './utils'
-
-interface InternalMenuProps extends SubMenuProps {
-    extraProps: extraProps
-    itemKey: string
-}
-interface InternalMenuState {
-    itemsVisible: boolean
-    isHighlighted: boolean
-}
+import { connect, ConnectedComponent } from '../_util/zero-store'
+import { useChildSelected, useVisible } from './hooks'
+import { renderMenu } from './util'
 
 const PREFIX = 'zeroUI-submenu'
 
-export class SubMenuInternal extends Component<
-    InternalMenuProps,
-    InternalMenuState
-> {
-    static isSubMenuInternal = true
-    // private subItemKeys: string[] = []
-    private timerId: any = null
-    constructor(props: InternalMenuProps) {
-        super(props)
-        this.state = {
-            itemsVisible: false,
-            isHighlighted: false,
+export const PADDING_BASE = 14
+
+const mouseEnterDelay = 200
+
+export interface SubMenuProps {
+    title?: string
+    className?: string
+}
+
+type SubMenuInnerProps = CommonMenuProps & SubMenuProps
+
+const SubMenu: React.FC<SubMenuProps> = (props) => {
+    return <ConnectedSubMenu {...(props as any)} />
+}
+
+const SubMenuInternal: ConnectedComponent<
+    MenuStore,
+    MenuStore,
+    SubMenuInnerProps
+> = (props) => {
+    const {
+        indentLevel,
+        type,
+        className,
+        title,
+        generateKey,
+        store,
+        multiple,
+        openKeys,
+    } = props
+
+    const itemsVisible = useVisible(props)
+    const [timer, setTimer] = useState<any>()
+    const [popperVisible, setPopperVisible] = useState(false)
+
+    const isSelected = useChildSelected(props)
+
+    const togglePopper = () => {
+        const newItemVisible = !itemsVisible
+        const newOpenKeys = [...openKeys]
+        if (newItemVisible) {
+            newOpenKeys.push(generateKey)
+        } else {
+            const index = newOpenKeys.indexOf(generateKey)
+
+            if (index >= 0) {
+                newOpenKeys.splice(index, 1)
+            }
         }
+
+        store.setState({ openKeys: newOpenKeys })
+
+        props.onOpenChange && props.onOpenChange(newOpenKeys)
     }
-    static getDerivedStateFromProps(
-        props: InternalMenuProps
-        // state: InternalMenuState
-    ): Partial<InternalMenuState> {
-        const { itemKey, extraProps = {} } = props
-        const { selectedKeys = [] } = extraProps as extraProps
-        const isHighlighted = !!selectedKeys.find(
-            (key: string) => key === itemKey
+
+    const paddingLeftStyle =
+        type === 'inline'
+            ? { paddingLeft: `${(indentLevel as number) * PADDING_BASE}px` }
+            : { paddingLeft: `${PADDING_BASE}px` }
+
+    const popperHide = useMemo(() => {
+        if (type === 'inline') {
+            return !itemsVisible
+        }
+
+        return !popperVisible
+    }, [itemsVisible, popperVisible, type])
+
+    const classes = classname(className, PREFIX, `${PREFIX}-${type}`, {
+        [`${PREFIX}-selected`]: isSelected,
+        [`${PREFIX}-open`]: !popperHide,
+    })
+
+    const handleSelect = (param: TSelectParam) => {
+        const { key, keyPath, selectedKeys } = param
+        props.onSelect &&
+            props.onSelect({
+                key,
+                keyPath: keyPath.concat(generateKey),
+                selectedKeys,
+            })
+    }
+
+    const showPopper = () => {
+        if (type === 'inline') {
+            return
+        }
+
+        timer && clearTimeout(timer)
+        setTimer(
+            setTimeout(() => {
+                setPopperVisible(true)
+            }, mouseEnterDelay)
         )
-        return {
-            isHighlighted,
-        }
-    }
-    toggle = () => {
-        const { extraProps = {} } = this.props
-        const { mode } = extraProps as extraProps
-        if (mode !== 'inline') {
-            return
-        }
-        this.setState({
-            itemsVisible: !this.state.itemsVisible,
-        })
     }
 
-    open = () => {
-        this.setState({
-            itemsVisible: true,
-        })
-    }
-    close = () => {
-        this.setState({
-            itemsVisible: false,
-        })
-    }
-    // componentDidMount() {
-    //     loopChildren(this.props.children, (itemKey: string) => {
-    //         this.subItemKeys.push(itemKey)
-    //     })
-    // }
-    onMouseEnter = () => {
-        const { extraProps = {} } = this.props
-        const { mode } = extraProps as extraProps
-        if (mode === 'inline') {
+    const hidePopper = () => {
+        if (type === 'inline') {
             return
         }
-        if (this.timerId) {
-            clearTimeout(this.timerId)
+        if (popperVisible) {
+            timer && clearTimeout(timer)
+            setTimer(
+                setTimeout(() => {
+                    setPopperVisible(false)
+                }, mouseEnterDelay)
+            )
         }
-        this.open()
     }
-    onMouseLeave = () => {
-        const { extraProps = {} } = this.props
-        const { mode } = extraProps as extraProps
-        if (mode === 'inline') {
-            return
-        }
-        if (this.timerId) {
-            clearTimeout(this.timerId)
-        }
-        this.timerId = setTimeout(() => {
-            this.close()
-        }, 100)
-    }
-    changeKey = (key: string, keyPath: string[]) => {
-        keyPath.push(this.props.itemKey as string)
-        this.props.extraProps.changeKey(key, keyPath)
-    }
-    render() {
-        const {
-            className,
-            title,
-            extraProps = {},
-            itemKey,
-            ...rest
-        } = this.props
-        const { indentLevel, mode } = extraProps as extraProps
-        const { itemsVisible, isHighlighted } = this.state
-        const paddingLeftStyle =
-            mode === 'inline'
-                ? { paddingLeft: `${(indentLevel as number) * PADDING_BASE}px` }
-                : { paddingLeft: `${PADDING_BASE}px` }
 
-        const classes = classname(className, PREFIX, `${PREFIX}-${mode}`)
-        return (
-            <li
-                onMouseLeave={this.onMouseLeave}
-                onMouseEnter={this.onMouseEnter}
-            >
-                <ul
-                    className={classes}
-                    is-highlighted={isHighlighted ? 'yes' : 'no'}
-                    {...rest}
-                    onMouseEnter={this.onMouseEnter}
-                    item-key={itemKey}
+    return (
+        <li>
+            <ul className={classes}>
+                <span
+                    className={classname(PREFIX + '-label')}
+                    style={paddingLeftStyle}
+                    onClick={togglePopper}
+                    onMouseEnter={showPopper}
+                    onMouseLeave={hidePopper}
                 >
-                    <p
-                        className={classname(PREFIX + '-label')}
-                        style={paddingLeftStyle}
-                        onClick={this.toggle}
-                        data-visible={itemsVisible}
-                    >
-                        {title}
-                        <span>
-                            <Icon name="down"></Icon>
-                        </span>
-                    </p>
-                    <div
-                        className={classname(PREFIX + '-popup-wrapper')}
-                        data-visible={itemsVisible}
-                    >
-                        {itemsVisible &&
-                            renderChildren(
-                                itemKey as string,
-                                this.props.children,
-                                {
-                                    ...extraProps,
-                                    indentLevel: (indentLevel as number) + 1,
-                                    changeKey: this.changeKey,
-                                } as extraProps
-                            )}
-                    </div>
-                </ul>
-            </li>
-        )
-    }
+                    {title}
+                    <span className={classname(PREFIX + '-icon')}>
+                        <Icon name="down"></Icon>
+                    </span>
+                </span>
+                <div
+                    className={classname(PREFIX + '-popper', {
+                        [`${PREFIX}-popper-hide`]: popperHide,
+                    })}
+                    data-key={generateKey}
+                    onMouseEnter={showPopper}
+                    onMouseLeave={hidePopper}
+                >
+                    {renderMenu(props.children, {
+                        indentLevel: indentLevel + 1,
+                        type,
+                        generateKey,
+                        onSelect: handleSelect,
+                        multiple,
+                    })}
+                </div>
+            </ul>
+        </li>
+    )
 }
-export interface SubMenuProps extends HTMLAttributes<HTMLElement> {
-    title: string
-}
-class SubMenu extends Component<SubMenuProps> {
-    static isSubMenu = true
-    constructor(props: SubMenuProps) {
-        super(props)
-    }
-    render() {
-        return (
-            <SubMenuInternal {...(this.props as InternalMenuProps)}>
-                {this.props.children}
-            </SubMenuInternal>
-        )
-    }
-}
+
+export const ConnectedSubMenu = connect<
+    MenuStore,
+    MenuStore,
+    SubMenuInnerProps
+>((state) => state)(SubMenuInternal)
+
 export default SubMenu

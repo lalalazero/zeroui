@@ -1,79 +1,65 @@
-import React, { Component, HTMLAttributes } from 'react'
+import React, { useMemo } from 'react'
+import { CommonMenuProps } from '.'
 import { classname } from '../_util/classes'
-import { modeType } from './Menu'
-import { PADDING_BASE_GROUP, renderChildren } from './utils'
+import { renderMenu } from './util'
 
 const PREFIX = 'zeroUI-menu-group'
 
-export interface MenuGroupProps extends HTMLAttributes<HTMLElement> {
-    title: string
-    extraProps?: extraProps
-    itemKey?: string
+export const PADDING_BASE_GROUP = 8
+
+export interface MenuGroupProps {
+    title?: string
 }
 
-export interface extraProps {
-    indentLevel?: number
-    mode?: modeType
-    changeKey: (key: string, keyPath: string[]) => void
-    selectedKey: string
-    selectedKeys: string[]
+const MenuGroup: React.FC<MenuGroupProps> = (props) => {
+    return <MenuGroupInternal {...(props as any)} />
 }
 
-export interface MenuGroupState {
-    // subItemVisible: boolean
-    [key: string]: any
-}
+type MenuGroupInnerProps = CommonMenuProps & MenuGroupProps
 
-export default class MenuGroup extends Component<
-    MenuGroupProps,
-    MenuGroupState
-> {
-    static isMenuGroup = true
-    constructor(props: MenuGroupProps) {
-        super(props)
-        this.state = {
-            // subItemVisible: false
+const MenuGroupInternal: React.FC<MenuGroupInnerProps> = (props) => {
+    const {
+        indentLevel,
+        type,
+        title,
+        generateKey,
+        onSelect,
+        onOpenChange,
+        multiple,
+    } = props
+
+    const paddingLeftStyle = useMemo(() => {
+        if (type === 'inline') {
+            return {
+                paddingLeft: `${
+                    (indentLevel as number) * PADDING_BASE_GROUP
+                }px`,
+            }
         }
-    }
 
-    render() {
-        const {
-            className,
-            title,
-            itemKey,
-            extraProps: extraProps = {},
-            ...rest
-        } = this.props
-        const { indentLevel, mode } = extraProps as extraProps
+        return { paddingLeft: `${PADDING_BASE_GROUP}px` }
+    }, [type])
 
-        const paddingLeftStyle =
-            mode === 'inline'
-                ? {
-                      paddingLeft: `${
-                          (indentLevel as number) * PADDING_BASE_GROUP
-                      }px`,
-                  }
-                : { paddingLeft: `${PADDING_BASE_GROUP}px` }
-        return (
-            <div
-                className={classname(className, PREFIX)}
-                {...rest}
-                item-key={itemKey}
+    return (
+        <div className={classname(PREFIX)}>
+            <p
+                className={classname(PREFIX + '-label')}
+                style={paddingLeftStyle}
             >
-                <p
-                    className={classname(PREFIX + '-label')}
-                    style={paddingLeftStyle}
-                >
-                    {title}
-                </p>
-                <div className={classname(PREFIX + '-item-wrapper')}>
-                    {renderChildren(
-                        itemKey as string,
-                        this.props.children,
-                        extraProps as extraProps
-                    )}
-                </div>
+                {title}
+            </p>
+            <div className={classname(PREFIX + '-content-wrapper')}>
+                {renderMenu(props.children, {
+                    indentLevel,
+                    type,
+                    generateKey,
+                    onOpenChange,
+                    onSelect,
+                    multiple,
+                })}
             </div>
-        )
-    }
+        </div>
+    )
 }
+
+export default MenuGroup

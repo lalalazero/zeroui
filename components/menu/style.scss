@@ -56,16 +56,9 @@ $defalt-width: 168px;
     .zeroUI-menu-item {
         @include vertical-and-inline-menu-item-base-style();
     }
-    border: 1px solid red;
     &-inline {
         border-right: 1px solid $border-color-1;
-        // .zeroUI-submenu-selected {
-        //     &-label {
-        //         svg {
-        //             transform: rotate(180deg);
-        //         }
-        //     }
-        // }
+
         .zeroUI-menu-item {
             position: relative;
             margin-right: 4px;
@@ -87,9 +80,9 @@ $defalt-width: 168px;
     }
 
     &-horizontal {
-    }
-
-    &-ceilinged {
+        display: inline-flex;
+        justify-content: space-around;
+        align-items: center;
     }
 }
 
@@ -119,7 +112,6 @@ $defalt-width: 168px;
         color: $brand-color;
         .zeroUI-icon {
             fill: $brand-color;
-            // transform: rotate(180deg);
         }
     }
 
@@ -145,7 +137,6 @@ $defalt-width: 168px;
     }
 
     &-vertical &-popper {
-        border: 1px solid red;
         right: 10px;
         left: 100%;
         top: 0;
@@ -153,8 +144,7 @@ $defalt-width: 168px;
         @include submenu-popup-wrapper-base-style();
     }
 
-    &-horizontal,
-    &-ceilinged {
+    &-horizontal {
         .zeroUI-submenu-label > svg {
             display: none;
         }

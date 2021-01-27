@@ -10,7 +10,6 @@ import InputExample from './input'
 import InputNumberExample from './input-number'
 import LayoutExample from './layout'
 import MenuExample from './menu'
-import MenuFCExample from './menu-fc'
 import NotificationExample from './notification'
 import PaginationExample from './pagination'
 import RadioExample from './radio'
@@ -52,11 +51,6 @@ export const basicComponentsRoute = [
                 component: MenuExample,
             },
             {
-                title: 'MenuFC 导航菜单FC',
-                path: '/menu-fc',
-                component: MenuFCExample,
-            },
-            {
                 title: 'Pagination 分页',
                 path: '/pagination',
                 component: PaginationExample,
@@ -77,8 +71,8 @@ export const basicComponentsRoute = [
                 component: InputExample,
             },
             {
-                title: 'InputNumber 整数输入框',
-                path: '/input-number',
+                title: 'NumberInput 数字输入框',
+                path: '/number-input',
                 component: InputNumberExample,
             },
             {

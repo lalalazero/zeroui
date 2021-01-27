@@ -10,10 +10,23 @@ import { Menu } from 'zero-ui-react'
 const { MenuGroup, MenuItem, SubMenu } = Menu
 
 const App = () => {
+    const handleOpenChange = (openKeys) => {
+        console.log('open change..', openKeys)
+    }
+
+    const handleSelect = (selectedKeys) => {
+        console.log('handle select..', selectedKeys)
+    }
+
     return (
-        <div>
-            <Menu>
-                <SubMenu title="Navigation One">
+        <div style={{ width: 300 }}>
+            <Menu
+                defaultOpenKeys={['1-2', '1-2-1', '1-3']}
+                defaultSelectedKeys={['1-2-1']}
+                onOpenChange={handleOpenChange}
+                onSelect={handleSelect}
+            >
+                <SubMenu title="Navigation One" key="1-1">
                     <MenuGroup title="Item 1">
                         <MenuItem>Option 1</MenuItem>
                         <MenuItem>Option 2</MenuItem>
@@ -23,15 +36,15 @@ const App = () => {
                         <MenuItem>Option 4</MenuItem>
                     </MenuGroup>
                 </SubMenu>
-                <SubMenu title="Navigation Two">
+                <SubMenu title="Navigation Two" key="1-2">
                     <MenuItem>Option 5</MenuItem>
                     <MenuItem>Option 6</MenuItem>
-                    <SubMenu title="Submenu">
+                    <SubMenu title="Submenu" key="1-2-1">
                         <MenuItem>Option 7</MenuItem>
                         <MenuItem>Option 8</MenuItem>
                     </SubMenu>
                 </SubMenu>
-                <SubMenu title="Navigation Three Three Three">
+                <SubMenu title="Navigation Three" key="1-3">
                     <MenuItem>Option 9</MenuItem>
                     <MenuItem>Option 10</MenuItem>
                     <MenuItem>Option 11</MenuItem>
