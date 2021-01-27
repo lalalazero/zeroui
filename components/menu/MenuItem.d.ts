@@ -1,16 +1,7 @@
-import React, { Component, HTMLAttributes } from 'react';
-import { extraProps } from './MenuGroup';
-export interface MenuItemProps extends HTMLAttributes<HTMLElement> {
-    itemKey?: React.Key;
-    extraProps?: extraProps;
+import React from 'react';
+export interface MenuItemProps {
+    key?: React.Key;
+    className?: string;
 }
-export interface MenuItemState {
-    isSelectedKey: boolean;
-}
-declare class MenuItem extends Component<MenuItemProps, MenuItemState> {
-    static isMenuItem: boolean;
-    constructor(props: MenuItemProps);
-    onClick: () => void;
-    render(): JSX.Element;
-}
+declare const MenuItem: React.FC<MenuItemProps>;
 export default MenuItem;

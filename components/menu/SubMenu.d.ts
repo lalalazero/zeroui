@@ -1,32 +1,11 @@
-import { Component, HTMLAttributes } from 'react';
-import { extraProps } from './MenuGroup';
-interface InternalMenuProps extends SubMenuProps {
-    extraProps: extraProps;
-    itemKey: string;
+import React from 'react';
+import { CommonMenuProps, MenuStore } from '.';
+export declare const PADDING_BASE = 14;
+export interface SubMenuProps {
+    title?: string;
+    className?: string;
 }
-interface InternalMenuState {
-    itemsVisible: boolean;
-    isHighlighted: boolean;
-}
-export declare class SubMenuInternal extends Component<InternalMenuProps, InternalMenuState> {
-    static isSubMenuInternal: boolean;
-    private timerId;
-    constructor(props: InternalMenuProps);
-    static getDerivedStateFromProps(props: InternalMenuProps): Partial<InternalMenuState>;
-    toggle: () => void;
-    open: () => void;
-    close: () => void;
-    onMouseEnter: () => void;
-    onMouseLeave: () => void;
-    changeKey: (key: string, keyPath: string[]) => void;
-    render(): JSX.Element;
-}
-export interface SubMenuProps extends HTMLAttributes<HTMLElement> {
-    title: string;
-}
-declare class SubMenu extends Component<SubMenuProps> {
-    static isSubMenu: boolean;
-    constructor(props: SubMenuProps);
-    render(): JSX.Element;
-}
+declare type SubMenuInnerProps = CommonMenuProps & SubMenuProps;
+declare const SubMenu: React.FC<SubMenuProps>;
+export declare const ConnectedSubMenu: React.FunctionComponent<import("../_util/zero-store").ConnectedProps<MenuStore, MenuStore, SubMenuInnerProps>>;
 export default SubMenu;

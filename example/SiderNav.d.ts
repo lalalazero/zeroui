@@ -1,5 +1,3 @@
-import { Component } from 'react';
-export default class SiderNav extends Component {
-    constructor(props: any);
-    render(): JSX.Element;
-}
+import React from 'react';
+declare const SideNav: React.FC<{}>;
+export default SideNav;
