@@ -2,6 +2,7 @@ import React, { createContext, useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 import { HashRouter as Router, NavLink, Route } from 'react-router-dom'
 import { Content, Footer, Header, Layout, Sider } from '../components'
+import colorExample from './color/Color.example'
 import './Example.scss'
 import logo from './logo.png'
 import { basicComponentsRoute } from './route'
@@ -49,6 +50,11 @@ const ExampleApp = () => {
                                             component={item.component}
                                         ></Route>
                                     ))}
+
+                                <Route
+                                    path="/color"
+                                    component={colorExample}
+                                ></Route>
                             </div>
                         </Content>
                     </Layout>
