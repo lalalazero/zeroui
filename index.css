@@ -3346,19 +3346,18 @@
 .zeroUI-menu {
   border: 1px solid red;
 }
-.zeroUI-menu-inline {
-  border-right: 1px solid #ccc;
-}
-.zeroUI-menu-inline .zeroUI-submenu-selected-label svg {
-  transform: rotate(180deg);
-}
-.zeroUI-menu-inline .zeroUI-menu-item {
-  position: relative;
-  margin-right: 4px;
+.zeroUI-menu .zeroUI-menu-item {
   padding-top: 8px;
   padding-bottom: 8px;
   margin-top: 5px;
   margin-bottom: 5px;
+}
+.zeroUI-menu-inline {
+  border-right: 1px solid #ccc;
+}
+.zeroUI-menu-inline .zeroUI-menu-item {
+  position: relative;
+  margin-right: 4px;
 }
 .zeroUI-menu-inline .zeroUI-menu-item-selected:after {
   top: 0;
@@ -3378,6 +3377,9 @@
 .zeroUI-submenu-label {
   padding-top: 8px;
   padding-bottom: 8px;
+  display: inline-block;
+  width: 100%;
+  user-select: none;
   padding-right: 14px;
 }
 .zeroUI-submenu-selected > .zeroUI-submenu-label {
@@ -3385,7 +3387,6 @@
 }
 .zeroUI-submenu-selected > .zeroUI-submenu-label .zeroUI-icon {
   fill: #13c2c2;
-  transform: rotate(180deg);
 }
 .zeroUI-submenu-icon {
   float: right;
@@ -3396,6 +3397,9 @@
 }
 .zeroUI-submenu-popper-hide {
   display: none;
+}
+.zeroUI-submenu-vertical .zeroUI-submenu-label .zeroUI-icon {
+  transform: rotate(-90deg);
 }
 .zeroUI-submenu-vertical .zeroUI-submenu-popper {
   border: 1px solid red;
@@ -3427,6 +3431,10 @@
 .zeroUI-submenu-horizontal .zeroUI-menu-item, .zeroUI-submenu-ceilinged .zeroUI-menu-item {
   position: relative;
 }
+.zeroUI-submenu-inline.zeroUI-submenu-open > .zeroUI-submenu-label .zeroUI-icon {
+  transform: rotate(180deg);
+}
+
 .zeroUI-menu-item-selected {
   background-color: #e6fffb !important;
   color: #13c2c2;
