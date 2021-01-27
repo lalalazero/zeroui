@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo, useState } from 'react'
 import { CommonMenuProps, MenuStore, TSelectParam } from '.'
 import { Icon } from '../index'
 import { classname } from '../_util/classes'
@@ -9,6 +9,8 @@ import { renderMenu } from './util'
 const PREFIX = 'zeroUI-submenu'
 
 export const PADDING_BASE = 14
+
+const mouseEnterDelay = 200
 
 export interface SubMenuProps {
     title?: string
@@ -32,6 +34,8 @@ const SubMenu: ConnectedComponent<MenuStore, MenuStore, SubMenuInnerProps> = (
     } = props
 
     const itemsVisible = useVisible(props)
+    const [timer, setTimer] = useState<any>()
+    const [popperVisible, setPopperVisible] = useState(false)
 
     const isSelected = useChildSelected(props)
 
@@ -58,8 +62,17 @@ const SubMenu: ConnectedComponent<MenuStore, MenuStore, SubMenuInnerProps> = (
             ? { paddingLeft: `${(indentLevel as number) * PADDING_BASE}px` }
             : { paddingLeft: `${PADDING_BASE}px` }
 
+    const popperHide = useMemo(() => {
+        if (type === 'inline') {
+            return !itemsVisible
+        }
+
+        return !popperVisible
+    }, [itemsVisible, popperVisible, type])
+
     const classes = classname(className, PREFIX, `${PREFIX}-${type}`, {
         [`${PREFIX}-selected`]: isSelected,
+        [`${PREFIX}-open`]: !popperHide,
     })
 
     const handleSelect = (param: TSelectParam) => {
@@ -72,25 +85,55 @@ const SubMenu: ConnectedComponent<MenuStore, MenuStore, SubMenuInnerProps> = (
             })
     }
 
+    const showPopper = () => {
+        if (type === 'inline') {
+            return
+        }
+
+        timer && clearTimeout(timer)
+        setTimer(
+            setTimeout(() => {
+                setPopperVisible(true)
+            }, mouseEnterDelay)
+        )
+    }
+
+    const hidePopper = () => {
+        if (type === 'inline') {
+            return
+        }
+        if (popperVisible) {
+            timer && clearTimeout(timer)
+            setTimer(
+                setTimeout(() => {
+                    setPopperVisible(false)
+                }, mouseEnterDelay)
+            )
+        }
+    }
+
     return (
         <li>
             <ul className={classes}>
-                <p
+                <span
                     className={classname(PREFIX + '-label')}
                     style={paddingLeftStyle}
                     onClick={togglePopper}
+                    onMouseEnter={showPopper}
+                    onMouseLeave={hidePopper}
                 >
-                    <span>item-key={generateKey}</span>
                     {title}
                     <span className={classname(PREFIX + '-icon')}>
                         <Icon name="down"></Icon>
                     </span>
-                </p>
+                </span>
                 <div
                     className={classname(PREFIX + '-popper', {
-                        [`${PREFIX}-popper-hide`]: !itemsVisible,
+                        [`${PREFIX}-popper-hide`]: popperHide,
                     })}
                     data-key={generateKey}
+                    onMouseEnter={showPopper}
+                    onMouseLeave={hidePopper}
                 >
                     {renderMenu(props.children, {
                         indentLevel: indentLevel + 1,

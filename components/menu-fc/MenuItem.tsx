@@ -85,7 +85,6 @@ const MenuItem: ConnectedComponent<MenuStore, MenuStore, MenuItemInnerProps> = (
             onClick={toggleSelected}
         >
             {props.children}
-            <span style={{ marginLeft: 20 }}>{generateKey}</span>
         </li>
     )
 }
