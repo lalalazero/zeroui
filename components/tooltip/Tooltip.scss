@@ -1,76 +1,76 @@
-$tooltip-bg: rgba(0,0,0,0.75);
-.zeroUI-tooltip-wrapper {
-    position: relative;
-    display: inline-block;
-}
-.zeroUI-tooltip-content-wrapper {
-    position: absolute;
-    background: $tooltip-bg;
-    color: #fff;
-    border-radius: 4px;
-    z-index: 3;
-    word-break: break-word;
-    &::before {
-        content: '';
-        border: 5px solid transparent;
-        display: inline-block;
-        position: absolute;
-    }
-}
+// $tooltip-bg: rgba(0,0,0,0.75);
+// .zeroUI-tooltip-wrapper {
+//     position: relative;
+//     display: inline-block;
+// }
+// .zeroUI-tooltip-content-wrapper {
+//     position: absolute;
+//     background: $tooltip-bg;
+//     color: #fff;
+//     border-radius: 4px;
+//     z-index: 3;
+//     word-break: break-word;
+//     &::before {
+//         content: '';
+//         border: 5px solid transparent;
+//         display: inline-block;
+//         position: absolute;
+//     }
+// }
 
-.zeroUI-tooltip-content {
-    min-width: 30px;
-    display: inline-block;
-    padding: 6px 8px;
-}
+// .zeroUI-tooltip-content {
+//     min-width: 30px;
+//     display: inline-block;
+//     padding: 6px 8px;
+// }
 
-.zeroUI-tooltip-content-placement {
-    &-top {
-        &.zeroUI-tooltip-content-wrapper {
-            // color: red;
-            margin-top: -10px;
-            transform: translateY(-100%);;
-            &::before {
-                left: 10px;
-                bottom: 0px;
-                transform: translateY(100%);
-                border-top-color: $tooltip-bg;
-            }
-        }
-    }
-    &-bottom{
-        &.zeroUI-tooltip-content-wrapper {
-            // color: blue;
-            margin-top: 10px;
-            &::before {
-                transform: translateY(-100%);
-                border-bottom-color: $tooltip-bg;
-                left: 10px;
-            }
-        }
-    }
-    &-left {
-        &.zeroUI-tooltip-content-wrapper {
-            // color: yellow;
-            margin-left: -10px;
-            transform: translateX(-100%);
-            &::before {
-                right: 0px;
-                top: 10px;
-                border-left-color: $tooltip-bg;
-                transform: translateX(100%);
-            }
-        }
-    }
-    &-right {
-        &.zeroUI-tooltip-content-wrapper {
-            margin-left: 10px;
-            &::before {
-                left: 0px;
-                top: 10px;
-                border-right-color: $tooltip-bg;
-                transform: translateX(-100%);
-            }
-        }
-    }
-}
+// .zeroUI-tooltip-content-placement {
+//     &-top {
+//         &.zeroUI-tooltip-content-wrapper {
+//             // color: red;
+//             margin-top: -10px;
+//             transform: translateY(-100%);;
+//             &::before {
+//                 left: 10px;
+//                 bottom: 0px;
+//                 transform: translateY(100%);
+//                 border-top-color: $tooltip-bg;
+//             }
+//         }
+//     }
+//     &-bottom{
+//         &.zeroUI-tooltip-content-wrapper {
+//             // color: blue;
+//             margin-top: 10px;
+//             &::before {
+//                 transform: translateY(-100%);
+//                 border-bottom-color: $tooltip-bg;
+//                 left: 10px;
+//             }
+//         }
+//     }
+//     &-left {
+//         &.zeroUI-tooltip-content-wrapper {
+//             // color: yellow;
+//             margin-left: -10px;
+//             transform: translateX(-100%);
+//             &::before {
+//                 right: 0px;
+//                 top: 10px;
+//                 border-left-color: $tooltip-bg;
+//                 transform: translateX(100%);
+//             }
+//         }
+//     }
+//     &-right {
+//         &.zeroUI-tooltip-content-wrapper {
+//             margin-left: 10px;
+//             &::before {
+//                 left: 0px;
+//                 top: 10px;
+//                 border-right-color: $tooltip-bg;
+//                 transform: translateX(-100%);
+//             }
+//         }
+//     }
+// }

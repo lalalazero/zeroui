@@ -1,116 +1,157 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { CSSProperties, useMemo, useRef, useState } from 'react'
+import ReactDOM from 'react-dom'
 import { classname } from '../_util/classes'
-import { tuple } from '../_util/type'
-import './Tooltip.scss'
+import './style.scss'
 
-const PREFIX = 'zeroUI-tooltip-wrapper'
+const PREFIX = 'zeroUI-tooltip'
 
-const TooltipPlacements = tuple('top', 'bottom', 'left', 'right')
-export type TooltipPlacementType = typeof TooltipPlacements[number]
+export const TooltipPlacement = ['top', 'bottom', 'left', 'right'] as const
 
-export interface ToolTipProps
-    extends React.HTMLProps<HTMLDivElement | HTMLSpanElement> {
+export type TooltipPlacementType = typeof TooltipPlacement[number]
+
+export interface ToolTipProps {
     title?: string
     mouseLeaveDelay?: number
+    mouseEnteryDelay?: number
     placement?: TooltipPlacementType
+    getPopupContainer?: () => HTMLElement
+    triggerStyle?: CSSProperties
+    triggerClass?: string
+    popperStyle?: CSSProperties
+    popperClass?: string
+    trigger?: 'hover' | 'click'
 }
 
 const Tooltip: React.FC<ToolTipProps> = (props) => {
-    const { mouseLeaveDelay, placement, style, ...rest } = props
-    const [visible, setVisible] = useState(false)
-    const contentWrapperRef = useRef<HTMLSpanElement>(null)
-    const tooltipWrapperRef = useRef<HTMLDivElement>(null)
+    const { mouseLeaveDelay, placement, triggerClass, popperClass } = props
+    const [visible, setVisible] = useState(true)
+    const triggerRef = useRef<HTMLDivElement>(null)
+    const popperRef = useRef<HTMLDivElement>(null)
+    const [timerId, setTimerId] = useState<any>(null)
 
-    useEffect(() => {
-        if (
-            typeof window !== 'undefined' &&
-            contentWrapperRef &&
-            contentWrapperRef.current &&
-            tooltipWrapperRef &&
-            tooltipWrapperRef.current
-        ) {
-            document.body.appendChild(contentWrapperRef.current)
-            const tooltipDiv = tooltipWrapperRef.current
-            const propmtSpan = contentWrapperRef.current
-            const {
-                width,
-                height,
-                left,
-                top,
-            } = tooltipDiv.getBoundingClientRect()
-            const map = {
-                top: {
-                    left: window.scrollX + left,
-                    top: window.scrollY + top,
-                },
-                bottom: {
-                    left: window.scrollX + left,
-                    top: window.scrollY + top + height,
-                },
-                left: {
-                    left: window.scrollX + left,
-                    top: window.scrollY + top,
-                },
-                right: {
-                    left: window.scrollX + left + width,
-                    top: window.scrollY + top,
-                },
-            }
-            propmtSpan.style.left = map[placement!].left + 'px'
-            propmtSpan.style.top = map[placement!].top + 'px'
-        }
-        return () => {
-            window.clearTimeout(timerId)
-        }
-    }, [])
+    // useEffect(() => {
+    //     if (
+    //         typeof window !== 'undefined' &&
+    //         triggerRef &&
+    //         triggerRef.current &&
+    //         popperRef &&
+    //         popperRef.current
+    //     ) {
+    //         document.body.appendChild(triggerRef.current)
+    //         const tooltipDiv = popperRef.current
+    //         const propmtSpan = triggerRef.current
+    //         const {
+    //             width,
+    //             height,
+    //             left,
+    //             top,
+    //         } = tooltipDiv.getBoundingClientRect()
+    //         const map = {
+    //             top: {
+    //                 left: window.scrollX + left,
+    //                 top: window.scrollY + top,
+    //             },
+    //             bottom: {
+    //                 left: window.scrollX + left,
+    //                 top: window.scrollY + top + height,
+    //             },
+    //             left: {
+    //                 left: window.scrollX + left,
+    //                 top: window.scrollY + top,
+    //             },
+    //             right: {
+    //                 left: window.scrollX + left + width,
+    //                 top: window.scrollY + top,
+    //             },
+    //         }
+    //         propmtSpan.style.left = map[placement!].left + 'px'
+    //         propmtSpan.style.top = map[placement!].top + 'px'
+    //     }
+    //     return () => {
+    //         timerId && window.clearTimeout(timerId)
+    //     }
+    // }, [])
 
-    let timerId: any = null
     const onMouseEnter = () => {
-        if (!visible) {
-            setVisible(true)
-        }
-        if (timerId && typeof window !== 'undefined') {
-            window.clearTimeout(timerId)
-            timerId = null
-        }
+        // if (!visible) {
+        //     setVisible(true)
+        // }
+        // if (timerId && typeof window !== 'undefined') {
+        //     window.clearTimeout(timerId)
+        //     setTimerId(null)
+        // }
     }
     const onMouseLeave = () => {
-        if (
-            typeof mouseLeaveDelay === 'number' &&
-            !timerId &&
-            typeof window !== 'undefined'
-        ) {
-            timerId = window.setTimeout(() => {
-                setVisible(false)
-            }, mouseLeaveDelay * 1000)
-        }
+        // if (
+        //     typeof mouseLeaveDelay === 'number' &&
+        //     !timerId &&
+        //     typeof window !== 'undefined'
+        // ) {
+        //     setTimerId(
+        //         window.setTimeout(() => {
+        //             setVisible(false)
+        //         }, mouseLeaveDelay * 1000)
+        //     )
+        // }
     }
-    const classes = classname(PREFIX, `${PREFIX}-${placement}`)
-    const visibilityObj = visible ? {} : { display: 'none' }
-    return (
-        <div className={classes} ref={tooltipWrapperRef}>
-            <span
-                className={`zeroUI-tooltip-content-wrapper zeroUI-tooltip-content-placement-${placement}`}
-                ref={contentWrapperRef}
-                style={Object.assign({}, style, visibilityObj)}
-                {...rest}
-                onMouseEnter={onMouseEnter}
-                onMouseLeave={onMouseLeave}
-            >
-                <span className="zeroUI-tooltip-content">
-                    {props.title || ''}
-                </span>
-            </span>
 
-            <span
-                className="zeroUI-tooltip-trigger"
-                style={{ display: 'inline-block' }}
+    const popperClasses = useMemo(() => {
+        return classname(
+            popperClass,
+            `${PREFIX}-popper`,
+            `${PREFIX}-popper-${placement}`
+        )
+    }, [popperClass])
+
+    const triggerClasses = useMemo(() => {
+        return classname(triggerClass, `${PREFIX}-trigger`)
+    }, [triggerClass])
+
+    const triggerStyles: CSSProperties = useMemo(() => {
+        return {
+            ...props.triggerStyle,
+            display: 'inline-block',
+            position: 'relative',
+        }
+    }, [props.triggerStyle])
+
+    const popperStyles: CSSProperties = useMemo(() => {
+        return {
+            ...props.popperStyle,
+            visibility: visible ? 'visible' : 'hidden',
+            display: 'inline-block',
+        }
+    }, [props.popperStyle, visible])
+
+    const popperContainer = useMemo(() => {
+        if (props.getPopupContainer && props.getPopupContainer()) {
+            return props.getPopupContainer()
+        }
+
+        return triggerRef.current
+    }, [triggerRef.current, props.getPopupContainer])
+
+    const popperContent = useMemo(() => {
+        return (
+            <div className={popperClasses} ref={popperRef} style={popperStyles}>
+                {props.title}
+            </div>
+        )
+    }, [props.title, popperClasses, popperStyles])
+    return (
+        <>
+            <div
+                className={triggerClasses}
                 onMouseLeave={onMouseLeave}
                 onMouseEnter={onMouseEnter}
+                style={triggerStyles}
+                ref={triggerRef}
             >
                 {props.children}
-            </span>
-        </div>
+            </div>
+            {popperContainer &&
+                ReactDOM.createPortal(popperContent, popperContainer)}
+        </>
     )
 }
 
